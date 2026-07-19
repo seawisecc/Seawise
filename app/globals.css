@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --forest-dark: #132a22;
+  --near-black: #0a1712;
+  --off-white: #fafaf8;
+  --sea-foam: #5c8577;
+  --warm-neutral: #e8e4d9;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--off-white);
+  color: var(--forest-dark);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Tighter tracking for the geometric display face, matching the wordmark. */
+.font-display {
+  letter-spacing: -0.02em;
+}
+
+/* Small utility labels / tech-stack tags. */
+.eyebrow {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Respect users who prefer reduced motion: no whale swim, no reveals. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visible keyboard focus everywhere. */
+:focus-visible {
+  outline: 2px solid var(--sea-foam);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
