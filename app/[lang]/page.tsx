@@ -112,39 +112,51 @@ export default async function Home({
           </Reveal>
 
           <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {featured.map((p, i) => (
-              <Reveal key={p.id} delay={i * 0.08}>
-                <div className="flex h-full flex-col rounded-2xl border border-off-white/10 bg-off-white/[0.03] p-6">
-                  <p className="eyebrow text-sea-foam">{p.industry}</p>
-                  <h3 className="mt-2 font-display text-2xl font-bold">
-                    {p.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-off-white/70">
-                    {p.description}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {(p.tech_stack ?? []).map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-full border border-off-white/15 px-2.5 py-0.5 text-xs text-off-white/70"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+            {featured.map((p, i) => {
+              const tags = (p.tech_stack ?? []).slice(0, 4);
+              const extra = (p.tech_stack ?? []).length - tags.length;
+
+              return (
+                <Reveal key={p.id} delay={i * 0.08} className="h-full">
+                  <div className="flex h-full flex-col rounded-2xl border border-off-white/10 bg-off-white/[0.03] p-6">
+                    <p className="eyebrow text-sea-foam">{p.industry}</p>
+                    <h3 className="mt-2 line-clamp-2 font-display text-2xl font-bold leading-snug">
+                      {p.title}
+                    </h3>
+                    <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-off-white/70">
+                      {p.description}
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {tags.map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-full border border-off-white/15 px-2.5 py-0.5 text-xs text-off-white/70"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {extra > 0 && (
+                        <span className="px-2.5 py-0.5 text-xs text-off-white/40">
+                          +{extra}
+                        </span>
+                      )}
+                    </div>
+                    <div className="mt-auto pt-6">
+                      {p.live_url && p.live_url !== "#" && (
+                        <a
+                          href={p.live_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex w-fit items-center gap-1.5 rounded-full bg-sea-foam px-4 py-2 text-sm font-medium text-near-black transition-colors hover:bg-off-white"
+                        >
+                          {dict.portfolio.liveButton}
+                        </a>
+                      )}
+                    </div>
                   </div>
-                  {p.live_url && p.live_url !== "#" && (
-                    <a
-                      href={p.live_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-6 inline-flex w-fit items-center gap-1.5 rounded-full bg-sea-foam px-4 py-2 text-sm font-medium text-near-black transition-colors hover:bg-off-white"
-                    >
-                      {dict.portfolio.liveButton}
-                    </a>
-                  )}
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              );
+            })}
           </div>
 
           <Reveal delay={0.1}>

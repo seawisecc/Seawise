@@ -166,15 +166,44 @@ create policy "admin all leads"        on leads        for all to authenticated 
 
 ### 3. Storage untuk upload gambar
 
-Supabase Dashboard → Storage → **New bucket** → nama `media`, centang **Public**.
-Lalu izinkan user login untuk upload:
+Jalankan skrip di bawah pada SQL Editor. Skrip ini **aman dijalankan berulang**
+— membuat bucket `media` kalau belum ada, lalu membuat ulang semua policy.
+(Kalau muncul error `42710: policy already exists`, berarti kamu memakai versi
+lama tanpa `drop policy if exists` — pakai skrip ini saja.)
 
 ```sql
+-- Bucket 'media' (public)
+insert into storage.buckets (id, name, public)
+values ('media', 'media', true)
+on conflict (id) do update set public = true;
+
+-- Policy: hapus dulu, lalu buat ulang
+drop policy if exists "admin upload media" on storage.objects;
+drop policy if exists "public read media"  on storage.objects;
+drop policy if exists "admin update media" on storage.objects;
+drop policy if exists "admin delete media" on storage.objects;
+
 create policy "admin upload media"
   on storage.objects for insert to authenticated
   with check (bucket_id = 'media');
+
 create policy "public read media"
-  on storage.objects for select using (bucket_id = 'media');
+  on storage.objects for select
+  using (bucket_id = 'media');
+
+create policy "admin update media"
+  on storage.objects for update to authenticated
+  using (bucket_id = 'media') with check (bucket_id = 'media');
+
+create policy "admin delete media"
+  on storage.objects for delete to authenticated
+  using (bucket_id = 'media');
+```
+
+Verifikasi bucket sudah ada dan public:
+
+```sql
+select id, public from storage.buckets where id = 'media';
 ```
 
 Fitur admin: kelola Portfolio, Testimoni, Partner (tambah/edit/hapus, urutan,

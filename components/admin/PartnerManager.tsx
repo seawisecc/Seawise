@@ -50,8 +50,11 @@ export default function PartnerManager() {
     try {
       const url = await uploadImage(supabase, file, "partners");
       setEditing({ ...editing, logo_url: url });
-    } catch {
-      setMsg("Gagal upload. Pastikan bucket 'media' sudah dibuat (public).");
+    } catch (err) {
+      const detail = err instanceof Error ? err.message : String(err);
+      setMsg(
+        `Gagal upload — ${detail}. Cek bucket 'media' sudah dibuat (public) dan policy storage sudah dijalankan.`
+      );
     } finally {
       setBusy(false);
     }
