@@ -31,17 +31,34 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const lang: Locale = isLocale(params.lang) ? params.lang : i18n.defaultLocale;
   const dict = getDictionary(lang);
+
+  // Set NEXT_PUBLIC_SITE_URL once a custom domain is connected.
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://seawise.vercel.app";
+
   return {
-    metadataBase: new URL("https://seawise.example"),
+    metadataBase: new URL(siteUrl),
     title: {
       default: dict.meta.title,
       template: dict.meta.titleTemplate,
     },
     description: dict.meta.description,
+    alternates: {
+      canonical: `/${lang}`,
+      languages: { en: "/en", id: "/id" },
+    },
     openGraph: {
       title: dict.meta.title,
       description: dict.meta.description,
+      url: `${siteUrl}/${lang}`,
+      siteName: "Seawise",
+      locale: lang === "id" ? "id_ID" : "en_US",
       type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.meta.title,
+      description: dict.meta.description,
     },
   };
 }
