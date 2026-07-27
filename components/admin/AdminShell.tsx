@@ -5,10 +5,13 @@ import { usePathname, useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 import { createClient } from "@/lib/supabase/client";
 import Logo from "@/components/Logo";
+import Wordmark from "@/components/Wordmark";
 
 const sections = [
   { slug: "", label: "Dashboard" },
+  { slug: "keuangan", label: "Keuangan" },
   { slug: "portfolio", label: "Portfolio" },
+  { slug: "pricing", label: "Price List" },
   { slug: "testimonials", label: "Testimoni" },
   { slug: "partners", label: "Partner" },
   { slug: "leads", label: "Pesan Masuk" },
@@ -37,9 +40,7 @@ export default function AdminShell({
       <aside className="flex w-56 shrink-0 flex-col border-r border-warm-neutral bg-white/60 p-5">
         <Link href={base} className="mb-8 flex items-center gap-2.5 text-forest-dark">
           <Logo className="h-7 w-7" colorClass="text-forest-dark" />
-          <span className="font-display text-lg font-bold tracking-tight">
-            SEAWISE
-          </span>
+          <Wordmark className="text-lg" />
         </Link>
 
         <nav className="flex flex-1 flex-col gap-1">

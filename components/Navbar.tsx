@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import Logo from "./Logo";
+import Wordmark from "./Wordmark";
 import LanguageSwitcher from "./LanguageSwitcher";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
@@ -32,9 +33,7 @@ export default function Navbar({
           onClick={() => setOpen(false)}
         >
           <Logo className="h-8 w-8" colorClass="text-forest-dark" />
-          <span className="font-display text-xl font-bold tracking-tight">
-            SEAWISE
-          </span>
+          <Wordmark className="text-xl" />
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">

@@ -51,7 +51,7 @@ export async function generateMetadata({
       title: dict.meta.title,
       description: dict.meta.description,
       url: `${siteUrl}/${lang}`,
-      siteName: "Seawise",
+      siteName: "Seawise Studio",
       locale: lang === "id" ? "id_ID" : "en_US",
       type: "website",
     },

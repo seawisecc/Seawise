@@ -36,14 +36,26 @@ Systems & Software Studio. Next.js (App Router) + Tailwind + Framer Motion, siap
 - Lihat Leads dengan status baru/dibalas
 - Navbar/Footer publik otomatis disembunyikan di route admin
 
+**Fase 5 — selesai (Seawise Studio):**
+
+- Rebrand ke **Seawise Studio**; default bahasa diubah ke **Indonesia** (`/id`)
+- Portfolio: filter **Aplikasi / Website** (kolom `project_type`)
+- **Price list** paket website — dikelola di admin, tampil di halaman Layanan
+- **Keuangan (cash flow)** di admin: input masuk/keluar, kategori, saldo, grafik tren bulanan; saldo juga muncul di dashboard
+- OG image & favicon diperbarui ke Seawise Studio
+
+> ⚠️ Jalankan `supabase-migration-v2.sql` di Supabase SQL Editor untuk fitur
+> fase 5 (kolom `project_type`, tabel `pricing` & `transactions`, plus RLS).
+
 **Fase berikutnya (opsional):**
 
 - Konten Supabase dua bahasa penuh (kolom `_en`/`_id`)
-- Polish animasi tambahan, responsive check menyeluruh, deploy ke Vercel
+- Export CSV laporan keuangan
+- Polish animasi tambahan, responsive check menyeluruh
 
 ## Bahasa (i18n)
 
-- Default: **English** (`/en`). Bahasa Indonesia di `/id`.
+- Default: **Indonesia** (`/id`). English di `/en`.
 - Semua copy ada di `lib/i18n/dictionaries.ts` (objek `en` dan `id`). Ubah teks di sana.
 - Tambah bahasa baru: tambahkan ke `lib/i18n/config.ts` lalu lengkapi dictionary-nya.
 - Catatan: konten dari Supabase (portfolio/testimoni) tersimpan satu bahasa apa adanya.

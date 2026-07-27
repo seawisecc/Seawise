@@ -6,10 +6,10 @@ import type { Locale } from "./config";
  */
 const en = {
   meta: {
-    title: "Seawise — Systems & Software Studio",
-    titleTemplate: "%s — Seawise",
+    title: "Seawise Studio — App & Website Development",
+    titleTemplate: "%s — Seawise Studio",
     description:
-      "Specialists in custom ERP & application development across industries — from enterprise systems to apps for growing small businesses.",
+      "App & website development studio — from custom ERP and business apps to fast, modern websites, across industries.",
   },
   nav: {
     services: "Services",
@@ -55,6 +55,20 @@ const en = {
     title: "Four ways we help your business run cleaner.",
     intro:
       "Every service is built from your team's real workflow — not a forced template.",
+    pricingEyebrow: "Pricing",
+    pricingTitle: "Website development packages.",
+    pricingIntro:
+      "Transparent starting points. Final scope and price are confirmed after a short discovery call.",
+    webTitle: "Website",
+    webIntro:
+      "From Rp1.8M — four tiers, from a single landing page to fully custom.",
+    appTitle: "Applications",
+    appIntro:
+      "See the apps we've already built, or consult us to develop a custom one — ERP, SMB apps, system migration.",
+    appCtaWork: "See Our Apps",
+    appCtaConsult: "Consult Us",
+    perProject: "/ project",
+    popular: "Popular",
     ctaTitle: "Not sure which one fits your business?",
     ctaBody:
       "Tell us your process, and we'll help map your needs before you decide anything.",
@@ -87,12 +101,15 @@ const en = {
     ctaButton: "See Our Apps",
   },
   portfolio: {
-    eyebrow: "Our Apps",
-    title: "Not mockups — systems that are live and you can open.",
+    eyebrow: "Our Work",
+    title: "Not mockups — real apps and websites you can open.",
     intro:
-      "Every project below has a direct link to the deployed app. Give it a try.",
-    liveButton: "View Live App ↗",
+      "Every project below links straight to the live app or site. Give it a try.",
+    liveButton: "View Live ↗",
     comingSoon: "Coming soon",
+    filterAll: "All",
+    filterApp: "Apps",
+    filterWebsite: "Websites",
   },
   testimonials: {
     eyebrow: "Testimonials",
@@ -135,7 +152,7 @@ const en = {
     },
   },
   footer: {
-    tagline: "Systems & Software Studio. Custom ERP & applications across industries.",
+    tagline: "App & website development studio. Custom ERP, business apps, and modern websites.",
     navHeading: "Navigation",
     contactHeading: "Contact",
     contactForm: "Contact form",
@@ -175,21 +192,31 @@ const en = {
   fallbackPortfolio: [
     {
       title: "IC-ERP",
+      type: "app",
       industry: "Manufacturing / Distribution",
       summary: "A centralized ERP with inventory, purchasing, and real-time reporting.",
       techStack: ["Inventory", "Purchasing", "Reporting"],
     },
     {
       title: "ApotekERP",
+      type: "app",
       industry: "Pharmacy / Healthcare",
       summary: "A pharmacy system with batch, expiry, and prescription tracking.",
       techStack: ["Batch tracking", "Expiry", "Prescriptions"],
     },
     {
       title: "Resto ERP",
+      type: "app",
       industry: "F&B / Restaurant",
       summary: "An integrated restaurant system from POS to ingredient management.",
       techStack: ["POS", "Kitchen", "Inventory"],
+    },
+    {
+      title: "Company Profile Website",
+      type: "website",
+      industry: "Corporate / SME",
+      summary: "A fast, modern company profile site that's easy to update.",
+      techStack: ["Responsive", "CMS", "SEO"],
     },
   ],
   fallbackTestimonials: [
@@ -208,14 +235,48 @@ const en = {
         "What I love is that they didn't force a complicated system on us. It was built around how we work, and they kept supporting us after go-live.",
     },
   ],
+  fallbackPricing: [
+    {
+      name: "Shore",
+      tagline: "One product/event promo, simple personal branding",
+      price: "Rp1.8M",
+      priceNote: "/ project",
+      features: ["1 page (max 4–5 sections)", "1 fixed preset theme", "No admin panel (updates via us)", "Standard SEO metadata", "1× minor revision", "Optional maintenance Rp1.5M/yr"],
+      featured: false,
+    },
+    {
+      name: "Reef",
+      tagline: "SMBs needing a full company profile",
+      price: "Rp3.5–4M",
+      priceNote: "/ project",
+      features: ["Max 5–6 sections", "Choose from available presets", "Admin panel: edit text, price, photos", "SEO + auto structured data", "2× major revisions", "Maintenance Rp1.5M/yr"],
+      featured: true,
+    },
+    {
+      name: "Current",
+      tagline: "A more personal look, distinct from competitors",
+      price: "Rp4.5–5M",
+      priceNote: "/ project",
+      features: ["Max 8–10 sections, self reorder", "Preset + moderate customization", "Admin + reorder sections", "SEO like Reef", "Add 1 add-on (billed separately)", "2× major revisions"],
+      featured: false,
+    },
+    {
+      name: "Trench",
+      tagline: "Unique business models / full custom",
+      price: "Rp6–7M",
+      priceNote: "/ project",
+      features: ["Unlimited sections", "Full custom (new vertical/theme)", "Admin with broader access", "SEO + optional SEO Managed bundle discount", "1 add-on included", "2× major revisions + priority support"],
+      featured: false,
+    },
+  ],
 };
 
 const id: Dictionary = {
   meta: {
-    title: "Seawise — Systems & Software Studio",
-    titleTemplate: "%s — Seawise",
+    title: "Seawise Studio — Spesialis Aplikasi & Website",
+    titleTemplate: "%s — Seawise Studio",
     description:
-      "Spesialis pengembangan ERP & aplikasi custom lintas industri — dari sistem enterprise sampai aplikasi untuk UMKM yang baru berkembang.",
+      "Studio pengembangan aplikasi & website — dari ERP dan aplikasi bisnis custom sampai website modern, lintas industri.",
   },
   nav: {
     services: "Layanan",
@@ -261,6 +322,20 @@ const id: Dictionary = {
     title: "Empat cara kami bantu bisnis kamu jalan lebih rapi.",
     intro:
       "Setiap layanan dibangun dari alur kerja nyata tim kamu — bukan template yang dipaksakan.",
+    pricingEyebrow: "Harga",
+    pricingTitle: "Paket pengembangan website.",
+    pricingIntro:
+      "Titik awal yang transparan. Cakupan & harga final dikonfirmasi setelah diskusi singkat.",
+    webTitle: "Website",
+    webIntro:
+      "Mulai Rp1,8 juta — empat paket, dari satu halaman sampai custom penuh.",
+    appTitle: "Aplikasi",
+    appIntro:
+      "Lihat aplikasi yang sudah kami kembangkan, atau konsultasi untuk develop aplikasi custom — ERP, aplikasi UMKM, migrasi sistem.",
+    appCtaWork: "Lihat Aplikasi Kami",
+    appCtaConsult: "Konsultasi Develop",
+    perProject: "/ proyek",
+    popular: "Populer",
     ctaTitle: "Belum yakin mana yang cocok untuk bisnis kamu?",
     ctaBody:
       "Ceritakan prosesnya, kami bantu petakan kebutuhan sebelum kamu putuskan apa-apa.",
@@ -293,12 +368,15 @@ const id: Dictionary = {
     ctaButton: "Lihat Aplikasi Kami",
   },
   portfolio: {
-    eyebrow: "Aplikasi Kami",
-    title: "Bukan mockup — sistem yang sudah jalan dan bisa kamu buka.",
+    eyebrow: "Karya Kami",
+    title: "Bukan mockup — aplikasi & website yang sudah jalan dan bisa kamu buka.",
     intro:
-      "Setiap proyek di bawah punya link langsung ke aplikasi yang sudah di-deploy. Silakan dicoba.",
-    liveButton: "Lihat Aplikasi Live ↗",
+      "Setiap proyek punya link langsung ke aplikasi atau website live. Silakan dicoba.",
+    liveButton: "Lihat Live ↗",
     comingSoon: "Segera hadir",
+    filterAll: "Semua",
+    filterApp: "Aplikasi",
+    filterWebsite: "Website",
   },
   testimonials: {
     eyebrow: "Testimoni",
@@ -341,7 +419,7 @@ const id: Dictionary = {
     },
   },
   footer: {
-    tagline: "Systems & Software Studio. Spesialis ERP & aplikasi custom lintas industri.",
+    tagline: "Studio pengembangan aplikasi & website. ERP, aplikasi bisnis, dan website modern.",
     navHeading: "Navigasi",
     contactHeading: "Kontak",
     contactForm: "Form kontak",
@@ -381,21 +459,31 @@ const id: Dictionary = {
   fallbackPortfolio: [
     {
       title: "IC-ERP",
+      type: "app",
       industry: "Manufaktur / Distribusi",
       summary: "ERP terpusat dengan inventori, pembelian, dan laporan real-time.",
       techStack: ["Inventori", "Pembelian", "Laporan"],
     },
     {
       title: "ApotekERP",
+      type: "app",
       industry: "Apotek / Kesehatan",
       summary: "Sistem apotek dengan pelacakan batch, kadaluarsa, dan resep.",
       techStack: ["Batch", "Kadaluarsa", "Resep"],
     },
     {
       title: "Resto ERP",
+      type: "app",
       industry: "F&B / Restoran",
       summary: "Sistem resto terintegrasi dari kasir sampai manajemen bahan baku.",
       techStack: ["Kasir", "Dapur", "Stok"],
+    },
+    {
+      title: "Website Company Profile",
+      type: "website",
+      industry: "Korporat / UMKM",
+      summary: "Website company profile yang cepat, modern, dan mudah di-update.",
+      techStack: ["Responsif", "CMS", "SEO"],
     },
   ],
   fallbackTestimonials: [
@@ -412,6 +500,40 @@ const id: Dictionary = {
       role: "Pemilik",
       content:
         "Yang saya suka, mereka tidak memaksakan sistem yang rumit. Dibangun sesuai cara kerja kami, dan tetap didampingi setelah live.",
+    },
+  ],
+  fallbackPricing: [
+    {
+      name: "Shore",
+      tagline: "Promosi 1 produk/acara, personal branding sederhana",
+      price: "Rp1,8 juta",
+      priceNote: "/ proyek",
+      features: ["1 halaman (maks 4–5 section)", "1 preset tema (tanpa pilihan warna)", "Tanpa admin panel (update via kami)", "SEO metadata standar", "1× revisi minor", "Maintenance opsional Rp1,5jt/th"],
+      featured: false,
+    },
+    {
+      name: "Reef",
+      tagline: "UMKM yang butuh company profile utuh",
+      price: "Rp3,5–4 juta",
+      priceNote: "/ proyek",
+      features: ["Maks 5–6 section", "Pilih dari preset tersedia", "Admin panel: edit teks, harga, foto", "SEO + structured data otomatis", "2× revisi major", "Maintenance Rp1,5jt/th"],
+      featured: true,
+    },
+    {
+      name: "Current",
+      tagline: "Tampilan lebih personal, beda dari kompetitor",
+      price: "Rp4,5–5 juta",
+      priceNote: "/ proyek",
+      features: ["Maks 8–10 section, reorder sendiri", "Preset + kustomisasi moderat", "Admin + reorder section", "SEO seperti Reef", "Bisa +1 add-on (charge terpisah)", "2× revisi major"],
+      featured: false,
+    },
+    {
+      name: "Trench",
+      tagline: "Model bisnis unik / butuh custom penuh",
+      price: "Rp6–7 juta",
+      priceNote: "/ proyek",
+      features: ["Section tak terbatas", "Full custom (vertical/tema baru)", "Admin akses lebih luas", "SEO + bisa bundling SEO Managed diskon", "1 add-on termasuk", "2× revisi major + prioritas support"],
+      featured: false,
     },
   ],
 };

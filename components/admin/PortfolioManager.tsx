@@ -10,6 +10,7 @@ type Row = {
   title: string;
   description: string | null;
   industry: string | null;
+  project_type: string;
   live_url: string | null;
   screenshot_url: string | null;
   tech_stack: string[] | null;
@@ -22,6 +23,7 @@ const empty: Omit<Row, "id"> = {
   title: "",
   description: "",
   industry: "",
+  project_type: "app",
   live_url: "",
   screenshot_url: "",
   tech_stack: [],
@@ -89,6 +91,7 @@ export default function PortfolioManager() {
       title: editing.title,
       description: editing.description,
       industry: editing.industry,
+      project_type: editing.project_type,
       live_url: editing.live_url,
       screenshot_url: editing.screenshot_url,
       tech_stack: techInput
@@ -213,13 +216,26 @@ export default function PortfolioManager() {
                   onChange={(e) => setEditing({ ...editing, title: e.target.value })}
                 />
               </div>
-              <div>
-                <label className={label}>Industri</label>
-                <input
-                  className={field}
-                  value={editing.industry ?? ""}
-                  onChange={(e) => setEditing({ ...editing, industry: e.target.value })}
-                />
+              <div className="flex gap-4">
+                <div className="flex-1">
+                  <label className={label}>Industri</label>
+                  <input
+                    className={field}
+                    value={editing.industry ?? ""}
+                    onChange={(e) => setEditing({ ...editing, industry: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className={label}>Jenis</label>
+                  <select
+                    className={field}
+                    value={editing.project_type}
+                    onChange={(e) => setEditing({ ...editing, project_type: e.target.value })}
+                  >
+                    <option value="app">Aplikasi</option>
+                    <option value="website">Website</option>
+                  </select>
+                </div>
               </div>
               <div>
                 <label className={label}>Deskripsi (masalah → solusi singkat)</label>

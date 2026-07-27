@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Logo from "./Logo";
+import Wordmark from "./Wordmark";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 
@@ -16,10 +17,10 @@ export default function Footer({
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-2.5">
-              <Logo className="h-8 w-8" colorClass="text-off-white" />
-              <span className="font-display text-xl font-bold tracking-tight">
-                SEAWISE
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-off-white">
+                <Logo className="h-6 w-6" colorClass="text-forest-dark" />
               </span>
+              <Wordmark className="text-xl" />
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-off-white/70">
               {dict.footer.tagline}
@@ -54,7 +55,7 @@ export default function Footer({
         </div>
 
         <div className="mt-12 flex flex-col gap-2 border-t border-off-white/10 pt-6 text-xs text-off-white/50 md:flex-row md:items-center md:justify-between">
-          <p>&copy; {new Date().getFullYear()} Seawise. {dict.footer.rights}</p>
+          <p>&copy; {new Date().getFullYear()} Seawise Studio. {dict.footer.rights}</p>
         </div>
       </div>
     </footer>

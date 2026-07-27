@@ -9,7 +9,10 @@ type Counts = {
   testimonials: number;
   partners: number;
   newLeads: number;
+  balance: number;
 };
+
+const rp = (n: number) => "Rp" + Math.round(n).toLocaleString("id-ID");
 
 export default function DashboardOverview({ lang }: { lang: string }) {
   const [counts, setCounts] = useState<Counts | null>(null);
@@ -22,8 +25,7 @@ export default function DashboardOverview({ lang }: { lang: string }) {
       return;
     }
     (async () => {
-      const tables = ["portfolio", "testimonials", "partners"] as const;
-      const [p, t, pr, leads] = await Promise.all([
+      const [p, t, pr, leads, tx] = await Promise.all([
         supabase.from("portfolio").select("id", { count: "exact", head: true }),
         supabase.from("testimonials").select("id", { count: "exact", head: true }),
         supabase.from("partners").select("id", { count: "exact", head: true }),
@@ -31,13 +33,19 @@ export default function DashboardOverview({ lang }: { lang: string }) {
           .from("leads")
           .select("id", { count: "exact", head: true })
           .eq("status", "new"),
+        supabase.from("transactions").select("type, amount"),
       ]);
-      void tables;
+      const txRows = (tx.data as { type: string; amount: number }[] | null) ?? [];
+      const balance = txRows.reduce(
+        (acc, r) => acc + (r.type === "income" ? r.amount : -r.amount),
+        0
+      );
       setCounts({
         portfolio: p.count ?? 0,
         testimonials: t.count ?? 0,
         partners: pr.count ?? 0,
         newLeads: leads.count ?? 0,
+        balance,
       });
       setReady(true);
     })();
@@ -61,7 +69,18 @@ export default function DashboardOverview({ lang }: { lang: string }) {
         </p>
       )}
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <Link
+        href={`/${lang}/admin/keuangan`}
+        className="mt-8 block rounded-2xl bg-forest-dark p-6 text-off-white transition-colors hover:bg-forest-dark/90"
+      >
+        <p className="text-sm font-medium text-off-white/70">Saldo kas (cash flow)</p>
+        <p className="mt-2 font-display text-3xl font-bold">
+          {counts ? rp(counts.balance) : "—"}
+        </p>
+        <p className="mt-1 text-xs text-off-white/50">Klik untuk kelola keuangan →</p>
+      </Link>
+
+      <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {cards.map((c) => (
           <Link
             key={c.slug}

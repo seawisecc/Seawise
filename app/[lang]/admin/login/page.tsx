@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import Logo from "@/components/Logo";
+import Wordmark from "@/components/Wordmark";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -48,9 +49,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm">
         <div className="mb-8 flex items-center gap-2.5 text-forest-dark">
           <Logo className="h-8 w-8" colorClass="text-forest-dark" />
-          <span className="font-display text-xl font-bold tracking-tight">
-            SEAWISE
-          </span>
+          <Wordmark className="text-xl" />
         </div>
 
         <div className="rounded-2xl border border-warm-neutral bg-white/70 p-8">

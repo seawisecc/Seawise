@@ -8,9 +8,22 @@ export type PortfolioRow = {
   title: string;
   description: string | null;
   industry: string | null;
+  project_type: string; // 'app' | 'website'
   live_url: string | null;
   screenshot_url: string | null;
   tech_stack: string[] | null;
+  featured: boolean;
+  sort_order: number;
+  published: boolean;
+};
+
+export type PricingRow = {
+  id: string;
+  name: string;
+  tagline: string | null;
+  price: string | null;
+  price_note: string | null;
+  features: string[] | null;
   featured: boolean;
   sort_order: number;
   published: boolean;
@@ -46,6 +59,7 @@ function fallbackPortfolioRows(lang: Locale): PortfolioRow[] {
     title: p.title,
     description: p.summary,
     industry: p.industry,
+    project_type: p.type,
     live_url: "#",
     screenshot_url: null,
     tech_stack: p.techStack,
@@ -94,6 +108,34 @@ export async function getTestimonials(lang: Locale): Promise<TestimonialRow[]> {
 
   if (error || !data || data.length === 0) return fallbackTestimonialRows(lang);
   return data as TestimonialRow[];
+}
+
+function fallbackPricingRows(lang: Locale): PricingRow[] {
+  return getDictionary(lang).fallbackPricing.map((p, i) => ({
+    id: `fallback-${i}`,
+    name: p.name,
+    tagline: p.tagline,
+    price: p.price,
+    price_note: p.priceNote,
+    features: p.features,
+    featured: p.featured,
+    sort_order: i,
+    published: true,
+  }));
+}
+
+export async function getPricing(lang: Locale): Promise<PricingRow[]> {
+  const supabase = createClient();
+  if (!supabase) return fallbackPricingRows(lang);
+
+  const { data, error } = await supabase
+    .from("pricing")
+    .select("*")
+    .eq("published", true)
+    .order("sort_order", { ascending: true });
+
+  if (error || !data || data.length === 0) return fallbackPricingRows(lang);
+  return data as PricingRow[];
 }
 
 export async function getPartners(): Promise<PartnerRow[]> {
