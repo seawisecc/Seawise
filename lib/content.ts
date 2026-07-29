@@ -16,7 +16,7 @@ export const services: Service[] = [
     slug: "erp-custom",
     title: "ERP Custom",
     summary:
-      "Sistem enterprise yang dirancang mengikuti alur kerja nyata tim kamu — bukan memaksa tim menyesuaikan diri ke software.",
+      "Sistem enterprise yang dirancang mengikuti alur kerja nyata tim kamu, bukan memaksa tim menyesuaikan diri ke software.",
     points: ["Inventori & pembelian", "Keuangan & laporan", "Multi-cabang & hak akses"],
   },
   {
@@ -37,7 +37,7 @@ export const services: Service[] = [
     slug: "web-dev",
     title: "Web Development",
     summary:
-      "Website dan web app cepat, modern, dan mudah dikelola — company profile sampai portal internal.",
+      "Website dan web app cepat, modern, dan mudah dikelola, company profile sampai portal internal.",
     points: ["Next.js & Vercel", "Terhubung ke sistem", "SEO & performa"],
   },
 ];

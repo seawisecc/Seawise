@@ -124,7 +124,7 @@ export default function FinanceManager() {
   return (
     <div>
       <h1 className="font-display text-3xl font-bold text-forest-dark">Keuangan</h1>
-      <p className="mt-1.5 text-forest-dark/60">Catatan cash flow — uang masuk & keluar usaha.</p>
+      <p className="mt-1.5 text-forest-dark/60">Catatan cash flow, uang masuk & keluar usaha.</p>
 
       {!supabase && (
         <p className="mt-6 rounded-xl border border-warm-neutral bg-warm-neutral/40 p-4 text-sm text-forest-dark/70">

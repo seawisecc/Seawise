@@ -15,7 +15,7 @@ insert into pricing (name, tagline, price, price_note, features, featured, sort_
 values
   ('Shore',
    'Promosi 1 produk/acara, personal branding sederhana',
-   'Rp1,8 juta', '/ proyek',
+   'Rp2 juta', '/ proyek',
    array[
      '1 halaman (maks 4–5 section)',
      '1 preset tema (tanpa pilihan warna)',

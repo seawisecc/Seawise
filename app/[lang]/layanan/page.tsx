@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
-import WhaleDivider from "@/components/WhaleDivider";
 import { WebsiteIcon, AppIcon } from "@/components/ServiceIcons";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/config";
@@ -121,11 +120,9 @@ export default async function LayananPage({
         </div>
       </section>
 
-      <WhaleDivider from="var(--off-white)" to="var(--near-black)" />
-
-      {/* ── Application group ─────────────────────────────────────── */}
-      <section className="bg-near-black text-off-white">
-        <div className="mx-auto max-w-content px-5 py-16 md:px-8">
+      {/* ── Application group, inset dark panel ───────────────────── */}
+      <section className="mx-4 my-8 rounded-[2rem] bg-gradient-to-b from-forest-dark to-near-black text-off-white md:mx-6 md:my-12 md:rounded-[2.5rem]">
+        <div className="mx-auto max-w-content px-6 py-16 md:px-10">
           <Reveal>
             <div className="flex items-start gap-4">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-off-white/10 text-off-white">

@@ -21,7 +21,16 @@ export default function Hero({
 
   return (
     <section className="relative overflow-hidden bg-off-white">
-      <div className="mx-auto grid max-w-content items-center gap-10 px-5 py-20 md:grid-cols-[1.1fr_0.9fr] md:px-8 md:py-28">
+      {/* Soft ambient glow for a premium, airy feel */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-32 -top-24 h-[28rem] w-[28rem] rounded-full bg-sea-foam/10 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-40 top-40 h-96 w-96 rounded-full bg-warm-neutral/40 blur-3xl"
+      />
+      <div className="relative mx-auto grid max-w-content items-center gap-10 px-5 py-20 md:grid-cols-[1.1fr_0.9fr] md:px-8 md:py-28">
         <div>
           <motion.p
             className="eyebrow text-sea-foam"

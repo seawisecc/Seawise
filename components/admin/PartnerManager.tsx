@@ -53,7 +53,7 @@ export default function PartnerManager() {
     } catch (err) {
       const detail = err instanceof Error ? err.message : String(err);
       setMsg(
-        `Gagal upload — ${detail}. Cek bucket 'media' sudah dibuat (public) dan policy storage sudah dijalankan.`
+        `Gagal upload, ${detail}. Cek bucket 'media' sudah dibuat (public) dan policy storage sudah dijalankan.`
       );
     } finally {
       setBusy(false);

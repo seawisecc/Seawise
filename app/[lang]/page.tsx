@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
-import WhaleDivider from "@/components/WhaleDivider";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/config";
 import { getPortfolio, getTestimonials } from "@/lib/queries";
@@ -99,11 +98,9 @@ export default async function Home({
         </div>
       </section>
 
-      <WhaleDivider from="var(--off-white)" to="var(--near-black)" />
-
-      {/* Featured portfolio */}
-      <section className="bg-near-black text-off-white">
-        <div className="mx-auto max-w-content px-5 py-20 md:px-8">
+      {/* Featured portfolio — inset dark panel */}
+      <section className="mx-4 my-8 rounded-[2rem] bg-gradient-to-b from-forest-dark to-near-black text-off-white md:mx-6 md:my-12 md:rounded-[2.5rem]">
+        <div className="mx-auto max-w-content px-6 py-20 md:px-10 md:py-24">
           <Reveal>
             <p className="eyebrow text-sea-foam">{t.featuredEyebrow}</p>
             <h2 className="mt-3 max-w-2xl font-display text-3xl font-bold tracking-tight md:text-4xl">
@@ -170,8 +167,6 @@ export default async function Home({
         </div>
       </section>
 
-      <WhaleDivider from="var(--near-black)" to="var(--off-white)" flip />
-
       {/* Testimonial preview */}
       <section className="bg-off-white">
         <div className="mx-auto max-w-content px-5 py-20 md:px-8">
@@ -194,7 +189,7 @@ export default async function Home({
                       {tItem.client_name}
                     </span>
                     {[tItem.role, tItem.company].filter(Boolean).length > 0 &&
-                      ` — ${[tItem.role, tItem.company].filter(Boolean).join(", ")}`}
+                      `, ${[tItem.role, tItem.company].filter(Boolean).join(", ")}`}
                   </figcaption>
                 </figure>
               </Reveal>
@@ -207,7 +202,7 @@ export default async function Home({
       <section className="bg-off-white pb-24">
         <div className="mx-auto max-w-content px-5 md:px-8">
           <Reveal>
-            <div className="rounded-3xl bg-forest-dark px-8 py-14 text-center md:px-16">
+            <div className="rounded-[2rem] bg-gradient-to-b from-forest-dark to-near-black px-8 py-14 text-center md:px-16 md:rounded-[2.5rem]">
               <h2 className="mx-auto max-w-2xl font-display text-3xl font-bold tracking-tight text-off-white md:text-4xl">
                 {t.ctaTitle}
               </h2>

@@ -55,7 +55,7 @@ Systems & Software Studio. Next.js (App Router) + Tailwind + Framer Motion, siap
 
 ## Bahasa (i18n)
 
-- Default: **Indonesia** (`/id`). English di `/en`.
+- Default: **English** (`/en`). Bahasa Indonesia di `/id`.
 - Semua copy ada di `lib/i18n/dictionaries.ts` (objek `en` dan `id`). Ubah teks di sana.
 - Tambah bahasa baru: tambahkan ke `lib/i18n/config.ts` lalu lengkapi dictionary-nya.
 - Catatan: konten dari Supabase (portfolio/testimoni) tersimpan satu bahasa apa adanya.

@@ -6,10 +6,10 @@ import type { Locale } from "./config";
  */
 const en = {
   meta: {
-    title: "Seawise Studio — App & Website Development",
-    titleTemplate: "%s — Seawise Studio",
+    title: "Seawise Studio | App & Website Development",
+    titleTemplate: "%s | Seawise Studio",
     description:
-      "App & website development studio — from custom ERP and business apps to fast, modern websites, across industries.",
+      "App & website development studio, from custom ERP and business apps to fast, modern websites, across industries.",
   },
   nav: {
     services: "Services",
@@ -24,7 +24,7 @@ const en = {
     highlight: "use",
     titleAfter: ", not just deploy.",
     subtitle:
-      "We build ERP and custom applications across industries — from enterprise systems to apps for growing small businesses.",
+      "We build ERP and custom applications across industries, from enterprise systems to apps for growing small businesses.",
     ctaPrimary: "See Our Apps",
     ctaSecondary: "Discuss a Project",
   },
@@ -41,7 +41,7 @@ const en = {
     servicesTitle: "Four ways we help your business run cleaner.",
     servicesLink: "See service details →",
     featuredEyebrow: "Our Apps",
-    featuredTitle: "Not mockups — systems that are live and you can open.",
+    featuredTitle: "Not mockups, systems that are live and you can open.",
     featuredLink: "See all projects →",
     testimonialsEyebrow: "Testimonials",
     testimonialsTitle: "What clients say.",
@@ -54,17 +54,17 @@ const en = {
     eyebrow: "Services",
     title: "Four ways we help your business run cleaner.",
     intro:
-      "Every service is built from your team's real workflow — not a forced template.",
+      "Every service is built from your team's real workflow, not a forced template.",
     pricingEyebrow: "Pricing",
     pricingTitle: "Website development packages.",
     pricingIntro:
       "Transparent starting points. Final scope and price are confirmed after a short discovery call.",
     webTitle: "Website",
     webIntro:
-      "From Rp1.8M — four tiers, from a single landing page to fully custom.",
+      "From Rp2M. Four tiers, from a single landing page to fully custom.",
     appTitle: "Applications",
     appIntro:
-      "See the apps we've already built, or consult us to develop a custom one — ERP, SMB apps, system migration.",
+      "See the apps we've already built, or consult us to develop a custom one: ERP, SMB apps, and system migration.",
     appCtaWork: "See Our Apps",
     appCtaConsult: "Consult Us",
     perProject: "/ project",
@@ -76,7 +76,7 @@ const en = {
   },
   about: {
     eyebrow: "About",
-    title: "A studio that builds systems — and makes sure they get used.",
+    title: "A studio that builds systems, and makes sure they get used.",
     intro:
       "Seawise is a Systems & Software Studio. We build ERP and custom applications across industries, from enterprise systems to apps for growing small businesses.",
     principles: [
@@ -94,7 +94,7 @@ const en = {
       },
       {
         title: "One consistent foundation",
-        body: "We build on a single, proven technical foundation across every project — so your system stays clean, easy to maintain, and quick to grow.",
+        body: "We build on a single, proven technical foundation across every project, so your system stays clean, easy to maintain, and quick to grow.",
       },
     ],
     ctaTitle: "Want to see the results?",
@@ -102,7 +102,7 @@ const en = {
   },
   portfolio: {
     eyebrow: "Our Work",
-    title: "Not mockups — real apps and websites you can open.",
+    title: "Not mockups, real apps and websites you can open.",
     intro:
       "Every project below links straight to the live app or site. Give it a try.",
     liveButton: "View Live ↗",
@@ -148,7 +148,7 @@ const en = {
       notConfigured:
         "The database connection isn't configured yet. For now, email us directly at hello@seawise.id.",
       insertError: "Sorry, something went wrong. Please try again shortly.",
-      success: "Thanks! Your message is in — we'll reply as soon as we can.",
+      success: "Thanks! Your message is in, we'll reply as soon as we can.",
     },
   },
   footer: {
@@ -164,7 +164,7 @@ const en = {
       slug: "erp-custom",
       title: "Custom ERP",
       summary:
-        "Enterprise systems designed around your team's real workflow — instead of forcing the team to adapt to the software.",
+        "Enterprise systems designed around your team's real workflow, instead of forcing the team to adapt to the software.",
       points: ["Inventory & purchasing", "Finance & reporting", "Multi-branch & access control"],
     },
     {
@@ -185,7 +185,7 @@ const en = {
       slug: "web-dev",
       title: "Web Development",
       summary:
-        "Fast, modern, easy-to-manage websites and web apps — from company profiles to internal portals.",
+        "Fast, modern, easy-to-manage websites and web apps, from company profiles to internal portals.",
       points: ["Fast & modern", "Connected to your system", "SEO & performance"],
     },
   ],
@@ -239,7 +239,7 @@ const en = {
     {
       name: "Shore",
       tagline: "One product/event promo, simple personal branding",
-      price: "Rp1.8M",
+      price: "Rp2M",
       priceNote: "/ project",
       features: ["1 page (max 4–5 sections)", "1 fixed preset theme", "No admin panel (updates via us)", "Standard SEO metadata", "1× minor revision", "Optional maintenance Rp1.5M/yr"],
       featured: false,
@@ -273,10 +273,10 @@ const en = {
 
 const id: Dictionary = {
   meta: {
-    title: "Seawise Studio — Spesialis Aplikasi & Website",
-    titleTemplate: "%s — Seawise Studio",
+    title: "Seawise Studio | Spesialis Aplikasi & Website",
+    titleTemplate: "%s | Seawise Studio",
     description:
-      "Studio pengembangan aplikasi & website — dari ERP dan aplikasi bisnis custom sampai website modern, lintas industri.",
+      "Studio pengembangan aplikasi & website, dari ERP dan aplikasi bisnis custom sampai website modern, lintas industri.",
   },
   nav: {
     services: "Layanan",
@@ -291,7 +291,7 @@ const id: Dictionary = {
     highlight: "dipakai",
     titleAfter: ", bukan sekadar di-deploy.",
     subtitle:
-      "Kami membangun ERP dan aplikasi custom lintas industri — dari sistem enterprise sampai aplikasi untuk UMKM yang baru berkembang.",
+      "Kami membangun ERP dan aplikasi custom lintas industri, dari sistem enterprise sampai aplikasi untuk UMKM yang baru berkembang.",
     ctaPrimary: "Lihat Aplikasi Kami",
     ctaSecondary: "Diskusi Proyek",
   },
@@ -308,7 +308,7 @@ const id: Dictionary = {
     servicesTitle: "Empat cara kami bantu bisnis kamu jalan lebih rapi.",
     servicesLink: "Lihat detail layanan →",
     featuredEyebrow: "Aplikasi Kami",
-    featuredTitle: "Bukan mockup — sistem yang sudah jalan dan bisa kamu buka.",
+    featuredTitle: "Bukan mockup, sistem yang sudah jalan dan bisa kamu buka.",
     featuredLink: "Lihat semua proyek →",
     testimonialsEyebrow: "Testimoni",
     testimonialsTitle: "Kata mereka yang sudah pakai.",
@@ -321,17 +321,17 @@ const id: Dictionary = {
     eyebrow: "Layanan",
     title: "Empat cara kami bantu bisnis kamu jalan lebih rapi.",
     intro:
-      "Setiap layanan dibangun dari alur kerja nyata tim kamu — bukan template yang dipaksakan.",
+      "Setiap layanan dibangun dari alur kerja nyata tim kamu, bukan template yang dipaksakan.",
     pricingEyebrow: "Harga",
     pricingTitle: "Paket pengembangan website.",
     pricingIntro:
       "Titik awal yang transparan. Cakupan & harga final dikonfirmasi setelah diskusi singkat.",
     webTitle: "Website",
     webIntro:
-      "Mulai Rp1,8 juta — empat paket, dari satu halaman sampai custom penuh.",
+      "Mulai Rp2 juta. Empat paket, dari satu halaman sampai custom penuh.",
     appTitle: "Aplikasi",
     appIntro:
-      "Lihat aplikasi yang sudah kami kembangkan, atau konsultasi untuk develop aplikasi custom — ERP, aplikasi UMKM, migrasi sistem.",
+      "Lihat aplikasi yang sudah kami kembangkan, atau konsultasi untuk develop aplikasi custom: ERP, aplikasi UMKM, dan migrasi sistem.",
     appCtaWork: "Lihat Aplikasi Kami",
     appCtaConsult: "Konsultasi Develop",
     perProject: "/ proyek",
@@ -343,7 +343,7 @@ const id: Dictionary = {
   },
   about: {
     eyebrow: "Tentang",
-    title: "Studio yang bikin sistem — dan memastikan sistemnya dipakai.",
+    title: "Studio yang bikin sistem, dan memastikan sistemnya dipakai.",
     intro:
       "Seawise adalah Systems & Software Studio. Kami membangun ERP dan aplikasi custom lintas industri, dari sistem enterprise sampai aplikasi untuk UMKM yang baru berkembang.",
     principles: [
@@ -361,7 +361,7 @@ const id: Dictionary = {
       },
       {
         title: "Fondasi yang konsisten",
-        body: "Kami membangun di atas fondasi teknis yang sama dan teruji untuk setiap proyek — supaya sistem kamu tetap rapi, mudah dirawat, dan cepat berkembang.",
+        body: "Kami membangun di atas fondasi teknis yang sama dan teruji untuk setiap proyek, supaya sistem kamu tetap rapi, mudah dirawat, dan cepat berkembang.",
       },
     ],
     ctaTitle: "Mau lihat hasilnya langsung?",
@@ -369,7 +369,7 @@ const id: Dictionary = {
   },
   portfolio: {
     eyebrow: "Karya Kami",
-    title: "Bukan mockup — aplikasi & website yang sudah jalan dan bisa kamu buka.",
+    title: "Bukan mockup, aplikasi & website yang sudah jalan dan bisa kamu buka.",
     intro:
       "Setiap proyek punya link langsung ke aplikasi atau website live. Silakan dicoba.",
     liveButton: "Lihat Live ↗",
@@ -415,7 +415,7 @@ const id: Dictionary = {
       notConfigured:
         "Koneksi ke database belum dikonfigurasi. Sementara ini, email langsung ke hello@seawise.id.",
       insertError: "Maaf, ada kendala saat mengirim. Coba lagi sebentar lagi.",
-      success: "Terima kasih! Pesan kamu sudah masuk — kami balas secepatnya.",
+      success: "Terima kasih! Pesan kamu sudah masuk, kami balas secepatnya.",
     },
   },
   footer: {
@@ -431,7 +431,7 @@ const id: Dictionary = {
       slug: "erp-custom",
       title: "ERP Custom",
       summary:
-        "Sistem enterprise yang dirancang mengikuti alur kerja nyata tim kamu — bukan memaksa tim menyesuaikan diri ke software.",
+        "Sistem enterprise yang dirancang mengikuti alur kerja nyata tim kamu, bukan memaksa tim menyesuaikan diri ke software.",
       points: ["Inventori & pembelian", "Keuangan & laporan", "Multi-cabang & hak akses"],
     },
     {
@@ -452,7 +452,7 @@ const id: Dictionary = {
       slug: "web-dev",
       title: "Web Development",
       summary:
-        "Website dan web app cepat, modern, dan mudah dikelola — company profile sampai portal internal.",
+        "Website dan web app cepat, modern, dan mudah dikelola, company profile sampai portal internal.",
       points: ["Cepat & modern", "Terhubung ke sistem", "SEO & performa"],
     },
   ],
@@ -506,7 +506,7 @@ const id: Dictionary = {
     {
       name: "Shore",
       tagline: "Promosi 1 produk/acara, personal branding sederhana",
-      price: "Rp1,8 juta",
+      price: "Rp2 juta",
       priceNote: "/ proyek",
       features: ["1 halaman (maks 4–5 section)", "1 preset tema (tanpa pilihan warna)", "Tanpa admin panel (update via kami)", "SEO metadata standar", "1× revisi minor", "Maintenance opsional Rp1,5jt/th"],
       featured: false,
