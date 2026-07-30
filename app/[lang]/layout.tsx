@@ -4,9 +4,34 @@ import "../globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SiteChrome from "@/components/SiteChrome";
+import StructuredData from "@/components/StructuredData";
 import { i18n, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { SITE_URL } from "@/lib/siteUrl";
 import { notFound } from "next/navigation";
+
+const KEYWORDS: Record<Locale, string[]> = {
+  id: [
+    "jasa pembuatan website",
+    "jasa pembuatan aplikasi",
+    "jasa website Indonesia",
+    "jasa aplikasi custom",
+    "ERP custom",
+    "aplikasi UMKM",
+    "web developer Indonesia",
+    "company profile website",
+    "Seawise Studio",
+  ],
+  en: [
+    "web development",
+    "app development",
+    "custom software",
+    "custom ERP",
+    "business apps",
+    "website development Indonesia",
+    "Seawise Studio",
+  ],
+};
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -32,25 +57,29 @@ export async function generateMetadata({
   const lang: Locale = isLocale(params.lang) ? params.lang : i18n.defaultLocale;
   const dict = getDictionary(lang);
 
-  // Set NEXT_PUBLIC_SITE_URL once a custom domain is connected.
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://seawise.vercel.app";
-
   return {
-    metadataBase: new URL(siteUrl),
+    metadataBase: new URL(SITE_URL),
     title: {
       default: dict.meta.title,
       template: dict.meta.titleTemplate,
     },
     description: dict.meta.description,
+    keywords: KEYWORDS[lang],
+    applicationName: "Seawise Studio",
+    authors: [{ name: "Seawise Studio" }],
     alternates: {
       canonical: `/${lang}`,
-      languages: { en: "/en", id: "/id" },
+      languages: { en: "/en", id: "/id", "x-default": "/en" },
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-image-preview": "large" },
     },
     openGraph: {
       title: dict.meta.title,
       description: dict.meta.description,
-      url: `${siteUrl}/${lang}`,
+      url: `${SITE_URL}/${lang}`,
       siteName: "Seawise Studio",
       locale: lang === "id" ? "id_ID" : "en_US",
       type: "website",
@@ -77,6 +106,7 @@ export default function LangLayout({
   return (
     <html lang={lang} className={`${spaceGrotesk.variable} ${inter.variable}`}>
       <body className="font-sans">
+        <StructuredData lang={lang} />
         <SiteChrome
           navbar={<Navbar lang={lang} dict={dict} />}
           footer={<Footer lang={lang} dict={dict} />}
