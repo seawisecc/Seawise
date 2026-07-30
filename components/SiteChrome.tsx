@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import FloatingWhatsApp from "./FloatingWhatsApp";
 
 /**
  * Hides the marketing navbar/footer on admin routes (/{lang}/admin*), so the
@@ -26,6 +27,7 @@ export default function SiteChrome({
       {navbar}
       <main>{children}</main>
       {footer}
+      <FloatingWhatsApp />
     </>
   );
 }
