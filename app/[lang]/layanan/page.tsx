@@ -16,7 +16,7 @@ export async function generateMetadata({
   return { title: dict.nav.services, description: dict.services.intro };
 }
 
-export const dynamic = "force-dynamic";
+export const revalidate = 120;
 
 export default async function LayananPage({
   params,

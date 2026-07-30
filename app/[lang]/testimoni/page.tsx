@@ -15,7 +15,7 @@ export async function generateMetadata({
   return { title: dict.nav.testimonials, description: dict.testimonials.intro };
 }
 
-export const dynamic = "force-dynamic";
+export const revalidate = 120;
 
 export default async function TestimoniPage({
   params,

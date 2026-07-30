@@ -5,7 +5,7 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/config";
 import { getPortfolio, getTestimonials } from "@/lib/queries";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 120;
 
 export default async function Home({
   params,

@@ -14,7 +14,7 @@ export async function generateMetadata({
   return { title: dict.nav.portfolio, description: dict.portfolio.intro };
 }
 
-export const dynamic = "force-dynamic";
+export const revalidate = 120;
 
 export default async function PortfolioPage({
   params,

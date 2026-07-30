@@ -16,7 +16,7 @@ export async function generateMetadata({
   return { title: dict.blog.eyebrow, description: dict.blog.intro };
 }
 
-export const dynamic = "force-dynamic";
+export const revalidate = 120;
 
 function formatDate(value: string | null, lang: Locale) {
   if (!value) return "";
