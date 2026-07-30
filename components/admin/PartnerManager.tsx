@@ -164,8 +164,8 @@ export default function PartnerManager() {
       </div>
 
       {editing && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/40 p-4">
-          <div className="my-8 w-full max-w-lg rounded-2xl bg-off-white p-6">
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-forest-dark/50 p-4 backdrop-blur-sm">
+          <div className="my-8 w-full max-w-lg rounded-3xl bg-off-white p-6 shadow-2xl md:p-7">
             <h2 className="font-display text-xl font-bold text-forest-dark">
               {editing.id ? "Edit" : "Tambah"} Partner
             </h2>
