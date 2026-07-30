@@ -55,6 +55,15 @@ Systems & Software Studio. Next.js (App Router) + Tailwind + Framer Motion, siap
 > ⚠️ Jalankan `supabase-migration-v4.sql` untuk fitur blog (tabel `posts` + RLS).
 > Blog memakai `marked` untuk render Markdown — jalankan `npm install` setelah pull.
 
+**Fase 7 — selesai (studi kasus portfolio + polish admin):**
+
+- Halaman detail per proyek `/portfolio/[slug]` (hero, screenshot, studi kasus Markdown, galeri, tech, live, CTA, schema CreativeWork); kartu portfolio bisa diklik; detail masuk sitemap
+- Editor portfolio admin: slug otomatis, studi kasus (Markdown), galeri multi-upload
+- Tombol WhatsApp mengambang (set `NEXT_PUBLIC_WHATSAPP_NUMBER`)
+- Dashboard & Keuangan admin didesain ulang (kartu hero saldo + statistik ber-ikon)
+
+> ⚠️ Jalankan `supabase-migration-v5.sql` untuk fitur studi kasus (kolom slug/body/gallery + backfill slug).
+
 **Fase berikutnya (opsional):**
 
 - Konten Supabase dua bahasa penuh (kolom `_en`/`_id`)

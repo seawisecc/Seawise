@@ -120,6 +120,10 @@ const en = {
     filterAll: "All",
     filterApp: "Apps",
     filterWebsite: "Websites",
+    viewDetail: "View details",
+    detailBack: "← All work",
+    detailCtaTitle: "Want something like this for your business?",
+    detailCtaButton: "Discuss a Project",
   },
   testimonials: {
     eyebrow: "Testimonials",
@@ -202,6 +206,7 @@ const en = {
   fallbackPortfolio: [
     {
       title: "IC-ERP",
+      slug: "ic-erp",
       type: "app",
       industry: "Manufacturing / Distribution",
       summary: "A centralized ERP with inventory, purchasing, and real-time reporting.",
@@ -209,6 +214,7 @@ const en = {
     },
     {
       title: "ApotekERP",
+      slug: "apotekerp",
       type: "app",
       industry: "Pharmacy / Healthcare",
       summary: "A pharmacy system with batch, expiry, and prescription tracking.",
@@ -216,6 +222,7 @@ const en = {
     },
     {
       title: "Resto ERP",
+      slug: "resto-erp",
       type: "app",
       industry: "F&B / Restaurant",
       summary: "An integrated restaurant system from POS to ingredient management.",
@@ -223,6 +230,7 @@ const en = {
     },
     {
       title: "Company Profile Website",
+      slug: "company-profile-website",
       type: "website",
       industry: "Corporate / SME",
       summary: "A fast, modern company profile site that's easy to update.",
@@ -397,6 +405,10 @@ const id: Dictionary = {
     filterAll: "Semua",
     filterApp: "Aplikasi",
     filterWebsite: "Website",
+    viewDetail: "Lihat detail",
+    detailBack: "← Semua karya",
+    detailCtaTitle: "Mau yang seperti ini untuk bisnismu?",
+    detailCtaButton: "Diskusi Proyek",
   },
   testimonials: {
     eyebrow: "Testimoni",
@@ -479,6 +491,7 @@ const id: Dictionary = {
   fallbackPortfolio: [
     {
       title: "IC-ERP",
+      slug: "ic-erp",
       type: "app",
       industry: "Manufaktur / Distribusi",
       summary: "ERP terpusat dengan inventori, pembelian, dan laporan real-time.",
@@ -486,6 +499,7 @@ const id: Dictionary = {
     },
     {
       title: "ApotekERP",
+      slug: "apotekerp",
       type: "app",
       industry: "Apotek / Kesehatan",
       summary: "Sistem apotek dengan pelacakan batch, kadaluarsa, dan resep.",
@@ -493,6 +507,7 @@ const id: Dictionary = {
     },
     {
       title: "Resto ERP",
+      slug: "resto-erp",
       type: "app",
       industry: "F&B / Restoran",
       summary: "Sistem resto terintegrasi dari kasir sampai manajemen bahan baku.",
@@ -500,6 +515,7 @@ const id: Dictionary = {
     },
     {
       title: "Website Company Profile",
+      slug: "website-company-profile",
       type: "website",
       industry: "Korporat / UMKM",
       summary: "Website company profile yang cepat, modern, dan mudah di-update.",

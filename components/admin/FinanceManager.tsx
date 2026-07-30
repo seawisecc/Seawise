@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { WalletIcon, TrendUpIcon, TrendDownIcon } from "./AdminIcons";
 
 type Tx = {
   id: string;
@@ -135,16 +136,31 @@ export default function FinanceManager() {
       {/* Summary */}
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
         <div className="rounded-2xl border border-warm-neutral bg-white/70 p-6">
-          <p className="text-sm font-medium text-forest-dark/60">Uang masuk</p>
-          <p className="mt-2 font-display text-2xl font-bold text-sea-foam">{rp(income)}</p>
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-medium text-forest-dark/60">Uang masuk</p>
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-sea-foam/15 text-sea-foam">
+              <TrendUpIcon className="h-5 w-5" />
+            </span>
+          </div>
+          <p className="mt-3 font-display text-2xl font-bold text-sea-foam">{rp(income)}</p>
         </div>
         <div className="rounded-2xl border border-warm-neutral bg-white/70 p-6">
-          <p className="text-sm font-medium text-forest-dark/60">Uang keluar</p>
-          <p className="mt-2 font-display text-2xl font-bold text-red-700">{rp(expense)}</p>
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-medium text-forest-dark/60">Uang keluar</p>
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-red-100 text-red-700">
+              <TrendDownIcon className="h-5 w-5" />
+            </span>
+          </div>
+          <p className="mt-3 font-display text-2xl font-bold text-red-700">{rp(expense)}</p>
         </div>
-        <div className="rounded-2xl bg-forest-dark p-6 text-off-white">
-          <p className="text-sm font-medium text-off-white/70">Saldo</p>
-          <p className="mt-2 font-display text-2xl font-bold">{rp(balance)}</p>
+        <div className="rounded-2xl bg-gradient-to-br from-forest-dark to-near-black p-6 text-off-white">
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-medium text-off-white/70">Saldo</p>
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-off-white/10 text-off-white">
+              <WalletIcon className="h-5 w-5" />
+            </span>
+          </div>
+          <p className="mt-3 font-display text-2xl font-bold">{rp(balance)}</p>
         </div>
       </div>
 

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { i18n } from "@/lib/i18n/config";
 import { SITE_URL } from "@/lib/siteUrl";
-import { getPosts } from "@/lib/queries";
+import { getPosts, getPortfolio } from "@/lib/queries";
 
 const paths = ["", "/layanan", "/portfolio", "/testimoni", "/blog", "/tentang", "/kontak"];
 
@@ -22,6 +22,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             i18n.locales.map((l) => [l, `${SITE_URL}/${l}${path}`])
           ),
         },
+      });
+    }
+  }
+
+  // Portfolio case studies, per locale.
+  const portfolio = await getPortfolio(i18n.defaultLocale);
+  for (const item of portfolio) {
+    if (!item.slug) continue;
+    for (const locale of i18n.locales) {
+      entries.push({
+        url: `${SITE_URL}/${locale}/portfolio/${item.slug}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.6,
       });
     }
   }

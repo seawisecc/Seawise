@@ -8,7 +8,10 @@ import { uploadImage } from "@/lib/uploadImage";
 type Row = {
   id: string;
   title: string;
+  slug: string | null;
   description: string | null;
+  body: string | null;
+  gallery: string[] | null;
   industry: string | null;
   project_type: string;
   live_url: string | null;
@@ -21,7 +24,10 @@ type Row = {
 
 const empty: Omit<Row, "id"> = {
   title: "",
+  slug: "",
   description: "",
+  body: "",
+  gallery: [],
   industry: "",
   project_type: "app",
   live_url: "",
@@ -31,6 +37,15 @@ const empty: Omit<Row, "id"> = {
   sort_order: 0,
   published: true,
 };
+
+function slugify(s: string) {
+  return s
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
 
 export default function PortfolioManager() {
   const supabase = createClient();
@@ -83,13 +98,41 @@ export default function PortfolioManager() {
     }
   }
 
+  async function handleGallery(e: React.ChangeEvent<HTMLInputElement>) {
+    const files = Array.from(e.target.files ?? []);
+    if (files.length === 0 || !supabase || !editing) return;
+    setBusy(true);
+    try {
+      const urls: string[] = [];
+      for (const f of files) urls.push(await uploadImage(supabase, f, "portfolio"));
+      setEditing({ ...editing, gallery: [...(editing.gallery ?? []), ...urls] });
+    } catch (err) {
+      const detail = err instanceof Error ? err.message : String(err);
+      setMsg(`Gagal upload galeri: ${detail}. Cek bucket 'media' & policy storage.`);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function removeGalleryImage(url: string) {
+    if (!editing) return;
+    setEditing({ ...editing, gallery: (editing.gallery ?? []).filter((g) => g !== url) });
+  }
+
   async function save() {
     if (!supabase || !editing) return;
+    if (!editing.title.trim()) {
+      setMsg("Judul wajib diisi.");
+      return;
+    }
     setBusy(true);
     setMsg("");
     const payload = {
       title: editing.title,
+      slug: (editing.slug || slugify(editing.title)).trim(),
       description: editing.description,
+      body: editing.body,
+      gallery: editing.gallery ?? [],
       industry: editing.industry,
       project_type: editing.project_type,
       live_url: editing.live_url,
@@ -213,8 +256,31 @@ export default function PortfolioManager() {
                 <input
                   className={field}
                   value={editing.title}
-                  onChange={(e) => setEditing({ ...editing, title: e.target.value })}
+                  onChange={(e) => {
+                    const title = e.target.value;
+                    setEditing((prev) =>
+                      prev
+                        ? {
+                            ...prev,
+                            title,
+                            slug:
+                              !prev.id && (!prev.slug || prev.slug === slugify(prev.title))
+                                ? slugify(title)
+                                : prev.slug,
+                          }
+                        : prev
+                    );
+                  }}
                 />
+              </div>
+              <div>
+                <label className={label}>Slug (URL detail)</label>
+                <input
+                  className={field}
+                  value={editing.slug ?? ""}
+                  onChange={(e) => setEditing({ ...editing, slug: slugify(e.target.value) })}
+                />
+                <p className="mt-1 text-xs text-forest-dark/50">/portfolio/{editing.slug || "…"}</p>
               </div>
               <div className="flex gap-4">
                 <div className="flex-1">
@@ -247,6 +313,19 @@ export default function PortfolioManager() {
                 />
               </div>
               <div>
+                <label className={label}>Studi kasus (Markdown, opsional)</label>
+                <textarea
+                  className={`${field} resize-y font-mono text-sm`}
+                  rows={8}
+                  placeholder={"## Tantangan\n\nCerita masalah klien...\n\n## Solusi\n\nApa yang kami bangun...\n\n## Hasil\n\nDampaknya..."}
+                  value={editing.body ?? ""}
+                  onChange={(e) => setEditing({ ...editing, body: e.target.value })}
+                />
+                <p className="mt-1 text-xs text-forest-dark/50">
+                  Tampil di halaman detail. Kosongkan kalau cukup deskripsi singkat saja.
+                </p>
+              </div>
+              <div>
                 <label className={label}>URL Aplikasi Live</label>
                 <input
                   className={field}
@@ -265,11 +344,31 @@ export default function PortfolioManager() {
                 />
               </div>
               <div>
-                <label className={label}>Screenshot</label>
+                <label className={label}>Screenshot utama</label>
                 <input type="file" accept="image/*" onChange={handleFile} className="mt-1.5 block text-sm" />
                 {editing.screenshot_url && (
                   <div className="relative mt-2 h-32 w-full overflow-hidden rounded-lg">
                     <Image src={editing.screenshot_url} alt="" fill className="object-cover" />
+                  </div>
+                )}
+              </div>
+              <div>
+                <label className={label}>Galeri (opsional, bisa banyak)</label>
+                <input type="file" accept="image/*" multiple onChange={handleGallery} className="mt-1.5 block text-sm" />
+                {(editing.gallery ?? []).length > 0 && (
+                  <div className="mt-2 grid grid-cols-3 gap-2">
+                    {(editing.gallery ?? []).map((g) => (
+                      <div key={g} className="group relative aspect-[4/3] overflow-hidden rounded-lg">
+                        <Image src={g} alt="" fill className="object-cover" />
+                        <button
+                          type="button"
+                          onClick={() => removeGalleryImage(g)}
+                          className="absolute right-1 top-1 rounded-full bg-black/60 px-1.5 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>

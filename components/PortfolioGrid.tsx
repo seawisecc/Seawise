@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Reveal from "./Reveal";
 import WhaleMark from "./WhaleMark";
 import type { PortfolioRow } from "@/lib/queries";
@@ -14,14 +15,17 @@ type Labels = {
   filterAll: string;
   filterApp: string;
   filterWebsite: string;
+  viewDetail: string;
 };
 
 export default function PortfolioGrid({
   items,
   labels,
+  lang,
 }: {
   items: PortfolioRow[];
   labels: Labels;
+  lang: string;
 }) {
   const [filter, setFilter] = useState<"all" | "app" | "website">("all");
 
@@ -64,36 +68,47 @@ export default function PortfolioGrid({
           const tags = p.tech_stack ?? [];
           const shown = tags.slice(0, MAX_TAGS);
           const extra = tags.length - shown.length;
+          const detailHref = p.slug ? `/${lang}/portfolio/${p.slug}` : null;
 
           return (
             <Reveal key={p.id} delay={(i % 3) * 0.06} className="h-full">
               <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-warm-neutral bg-white/60 transition-colors hover:border-sea-foam">
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-forest-dark">
-                  {p.screenshot_url ? (
-                    <Image
-                      src={p.screenshot_url}
-                      alt={`Preview ${p.title}`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover"
-                    />
-                  ) : (
-                    <div className="flex h-full items-center justify-center">
-                      <WhaleMark className="h-14 w-14 text-off-white/20" />
-                    </div>
-                  )}
-                  <span className="absolute left-3 top-3 rounded-full bg-off-white/90 px-2.5 py-0.5 text-xs font-medium text-forest-dark">
-                    {p.project_type === "website" ? labels.filterWebsite : labels.filterApp}
-                  </span>
-                </div>
+                <PreviewWrap href={detailHref}>
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-forest-dark">
+                    {p.screenshot_url ? (
+                      <Image
+                        src={p.screenshot_url}
+                        alt={`Preview ${p.title}`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 hover:scale-[1.03]"
+                      />
+                    ) : (
+                      <div className="flex h-full items-center justify-center">
+                        <WhaleMark className="h-14 w-14 text-off-white/20" />
+                      </div>
+                    )}
+                    <span className="absolute left-3 top-3 rounded-full bg-off-white/90 px-2.5 py-0.5 text-xs font-medium text-forest-dark">
+                      {p.project_type === "website" ? labels.filterWebsite : labels.filterApp}
+                    </span>
+                  </div>
+                </PreviewWrap>
 
                 <div className="flex flex-1 flex-col p-6">
                   <p className="eyebrow text-sea-foam">{p.industry}</p>
-                  <h2 className="mt-1.5 line-clamp-2 font-display text-xl font-bold leading-snug text-forest-dark">
-                    {p.title}
-                  </h2>
+                  {detailHref ? (
+                    <Link href={detailHref} className="mt-1.5">
+                      <h2 className="line-clamp-2 font-display text-xl font-bold leading-snug text-forest-dark transition-colors hover:text-sea-foam">
+                        {p.title}
+                      </h2>
+                    </Link>
+                  ) : (
+                    <h2 className="mt-1.5 line-clamp-2 font-display text-xl font-bold leading-snug text-forest-dark">
+                      {p.title}
+                    </h2>
+                  )}
                   {p.description && (
-                    <p className="mt-2.5 line-clamp-4 text-sm leading-relaxed text-forest-dark/70">
+                    <p className="mt-2.5 line-clamp-3 text-sm leading-relaxed text-forest-dark/70">
                       {p.description}
                     </p>
                   )}
@@ -116,20 +131,30 @@ export default function PortfolioGrid({
                     </div>
                   )}
 
-                  <div className="mt-auto pt-6">
+                  <div className="mt-auto flex flex-wrap items-center gap-4 pt-6">
+                    {detailHref && (
+                      <Link
+                        href={detailHref}
+                        className="inline-flex items-center gap-1.5 rounded-full bg-forest-dark px-4 py-2 text-sm font-medium text-off-white transition-colors hover:bg-sea-foam"
+                      >
+                        {labels.viewDetail}
+                      </Link>
+                    )}
                     {hasLive ? (
                       <a
                         href={p.live_url!}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-full bg-forest-dark px-4 py-2 text-sm font-medium text-off-white transition-colors hover:bg-sea-foam"
+                        className="text-sm font-medium text-sea-foam hover:underline"
                       >
                         {labels.liveButton}
                       </a>
                     ) : (
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-warm-neutral px-4 py-2 text-sm font-medium text-forest-dark/50">
-                        {labels.comingSoon}
-                      </span>
+                      !detailHref && (
+                        <span className="text-sm font-medium text-forest-dark/40">
+                          {labels.comingSoon}
+                        </span>
+                      )
                     )}
                   </div>
                 </div>
@@ -139,5 +164,21 @@ export default function PortfolioGrid({
         })}
       </div>
     </>
+  );
+}
+
+/** Wraps the preview in a link to the detail page when a slug exists. */
+function PreviewWrap({
+  href,
+  children,
+}: {
+  href: string | null;
+  children: React.ReactNode;
+}) {
+  if (!href) return <>{children}</>;
+  return (
+    <Link href={href} className="block">
+      {children}
+    </Link>
   );
 }

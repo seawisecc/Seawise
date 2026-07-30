@@ -6,7 +6,10 @@ import type { Locale } from "@/lib/i18n/config";
 export type PortfolioRow = {
   id: string;
   title: string;
+  slug: string | null;
   description: string | null;
+  body: string | null;
+  gallery: string[] | null;
   industry: string | null;
   project_type: string; // 'app' | 'website'
   live_url: string | null;
@@ -57,7 +60,10 @@ function fallbackPortfolioRows(lang: Locale): PortfolioRow[] {
   return getDictionary(lang).fallbackPortfolio.map((p, i) => ({
     id: `fallback-${i}`,
     title: p.title,
+    slug: p.slug,
     description: p.summary,
+    body: null,
+    gallery: null,
     industry: p.industry,
     project_type: p.type,
     live_url: "#",
@@ -94,6 +100,21 @@ export async function getPortfolio(lang: Locale): Promise<PortfolioRow[]> {
 
   if (error || !data || data.length === 0) return fallbackPortfolioRows(lang);
   return data as PortfolioRow[];
+}
+
+export async function getPortfolioItem(slug: string): Promise<PortfolioRow | null> {
+  const supabase = createClient();
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from("portfolio")
+    .select("*")
+    .eq("slug", slug)
+    .eq("published", true)
+    .maybeSingle();
+
+  if (error || !data) return null;
+  return data as PortfolioRow;
 }
 
 export async function getTestimonials(lang: Locale): Promise<TestimonialRow[]> {

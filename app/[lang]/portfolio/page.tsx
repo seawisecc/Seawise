@@ -33,12 +33,14 @@ export default async function PortfolioPage({
         <div className="mx-auto max-w-content px-5 py-14 md:px-8">
           <PortfolioGrid
             items={items}
+            lang={lang}
             labels={{
               liveButton: t.liveButton,
               comingSoon: t.comingSoon,
               filterAll: t.filterAll,
               filterApp: t.filterApp,
               filterWebsite: t.filterWebsite,
+              viewDetail: t.viewDetail,
             }}
           />
         </div>
