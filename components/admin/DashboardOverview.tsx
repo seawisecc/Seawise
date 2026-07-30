@@ -135,7 +135,7 @@ export default function DashboardOverview({ lang }: { lang: string }) {
               </p>
             </div>
           </div>
-          <span className="ml-auto self-center text-sm font-medium text-off-white/70">
+          <span className="w-full text-sm font-medium text-off-white/70 md:ml-auto md:w-auto md:self-center">
             Kelola keuangan →
           </span>
         </div>

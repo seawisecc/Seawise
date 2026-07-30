@@ -189,8 +189,8 @@ export default function PortfolioManager() {
       )}
 
       {/* List */}
-      <div className="mt-6 overflow-hidden rounded-2xl border border-warm-neutral bg-white shadow-sm">
-        <table className="w-full text-left text-sm">
+      <div className="mt-6 overflow-x-auto rounded-2xl border border-warm-neutral bg-white shadow-sm">
+        <table className="w-full min-w-[640px] text-left text-sm">
           <thead className="bg-warm-neutral/40 text-xs font-semibold uppercase tracking-wider text-forest-dark/50">
             <tr>
               <th className="px-5 py-3 font-semibold">Urutan</th>
