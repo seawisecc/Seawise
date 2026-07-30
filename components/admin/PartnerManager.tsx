@@ -112,22 +112,22 @@ export default function PartnerManager() {
         </p>
       )}
 
-      <div className="mt-6 overflow-hidden rounded-2xl border border-warm-neutral">
+      <div className="mt-6 overflow-hidden rounded-2xl border border-warm-neutral bg-white shadow-sm">
         <table className="w-full text-left text-sm">
-          <thead className="bg-warm-neutral/50 text-forest-dark/70">
+          <thead className="bg-warm-neutral/40 text-xs font-semibold uppercase tracking-wider text-forest-dark/50">
             <tr>
-              <th className="px-4 py-3 font-medium">Urutan</th>
-              <th className="px-4 py-3 font-medium">Logo</th>
-              <th className="px-4 py-3 font-medium">Nama</th>
-              <th className="px-4 py-3 font-medium">Status</th>
-              <th className="px-4 py-3 font-medium">Aksi</th>
+              <th className="px-5 py-3 font-semibold">Urutan</th>
+              <th className="px-5 py-3 font-semibold">Logo</th>
+              <th className="px-5 py-3 font-semibold">Nama</th>
+              <th className="px-5 py-3 font-semibold">Status</th>
+              <th className="px-5 py-3 font-semibold">Aksi</th>
             </tr>
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.id} className="border-t border-warm-neutral">
-                <td className="px-4 py-3 text-forest-dark/60">{r.sort_order}</td>
-                <td className="px-4 py-3">
+              <tr key={r.id} className="border-t border-warm-neutral/60 transition-colors hover:bg-warm-neutral/20">
+                <td className="px-5 py-3.5 text-forest-dark/60">{r.sort_order}</td>
+                <td className="px-5 py-3.5">
                   {r.logo_url ? (
                     <div className="relative h-8 w-16">
                       <Image src={r.logo_url} alt={r.name} fill className="object-contain" />
@@ -136,17 +136,17 @@ export default function PartnerManager() {
                     <span className="text-forest-dark/40">—</span>
                   )}
                 </td>
-                <td className="px-4 py-3 font-medium text-forest-dark">{r.name}</td>
-                <td className="px-4 py-3">
-                  <span className={r.published ? "text-sea-foam" : "text-forest-dark/40"}>
+                <td className="px-5 py-3 font-semibold text-forest-dark">{r.name}</td>
+                <td className="px-5 py-3.5">
+                  <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${r.published ? "bg-sea-foam/15 text-sea-foam" : "bg-warm-neutral text-forest-dark/50"}`}>
                     {r.published ? "Published" : "Draft"}
                   </span>
                 </td>
-                <td className="px-4 py-3">
-                  <button onClick={() => { setEditing({ ...r }); setMsg(""); }} className="text-sea-foam hover:underline">
+                <td className="px-5 py-3.5">
+                  <button onClick={() => { setEditing({ ...r }); setMsg(""); }} className="rounded-lg px-2.5 py-1 text-sm font-medium text-sea-foam transition-colors hover:bg-sea-foam/10">
                     Edit
                   </button>
-                  <button onClick={() => remove(r.id)} className="ml-3 text-red-700 hover:underline">
+                  <button onClick={() => remove(r.id)} className="ml-1 rounded-lg px-2.5 py-1 text-sm font-medium text-red-700 transition-colors hover:bg-red-50">
                     Hapus
                   </button>
                 </td>
@@ -154,7 +154,7 @@ export default function PartnerManager() {
             ))}
             {rows.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-forest-dark/50">
+                <td colSpan={5} className="px-5 py-10 text-center text-forest-dark/50">
                   Belum ada data.
                 </td>
               </tr>

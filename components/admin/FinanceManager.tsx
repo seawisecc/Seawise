@@ -255,35 +255,35 @@ export default function FinanceManager() {
       </form>
 
       {/* Transaction list */}
-      <div className="mt-6 overflow-hidden rounded-2xl border border-warm-neutral">
+      <div className="mt-6 overflow-hidden rounded-2xl border border-warm-neutral bg-white shadow-sm">
         <table className="w-full text-left text-sm">
-          <thead className="bg-warm-neutral/50 text-forest-dark/70">
+          <thead className="bg-warm-neutral/40 text-xs font-semibold uppercase tracking-wider text-forest-dark/50">
             <tr>
-              <th className="px-4 py-3 font-medium">Tanggal</th>
-              <th className="px-4 py-3 font-medium">Keterangan</th>
-              <th className="px-4 py-3 font-medium">Kategori</th>
-              <th className="px-4 py-3 text-right font-medium">Jumlah</th>
-              <th className="px-4 py-3 font-medium"></th>
+              <th className="px-5 py-3 font-semibold">Tanggal</th>
+              <th className="px-5 py-3 font-semibold">Keterangan</th>
+              <th className="px-5 py-3 font-semibold">Kategori</th>
+              <th className="px-5 py-3.5 text-right font-medium">Jumlah</th>
+              <th className="px-5 py-3 font-semibold"></th>
             </tr>
           </thead>
           <tbody>
             {rows.map((t) => (
-              <tr key={t.id} className="border-t border-warm-neutral">
-                <td className="px-4 py-3 text-forest-dark/60">
+              <tr key={t.id} className="border-t border-warm-neutral/60 transition-colors hover:bg-warm-neutral/20">
+                <td className="px-5 py-3.5 text-forest-dark/60">
                   {new Date(t.occurred_on).toLocaleDateString("id-ID")}
                 </td>
-                <td className="px-4 py-3 font-medium text-forest-dark">{t.description}</td>
-                <td className="px-4 py-3 text-forest-dark/70">{t.category || "—"}</td>
+                <td className="px-5 py-3 font-semibold text-forest-dark">{t.description}</td>
+                <td className="px-5 py-3.5 text-forest-dark/70">{t.category || "—"}</td>
                 <td
-                  className={`px-4 py-3 text-right font-medium ${
+                  className={`px-5 py-3.5 text-right font-medium ${
                     t.type === "income" ? "text-sea-foam" : "text-red-700"
                   }`}
                 >
                   {t.type === "income" ? "+" : "−"}
                   {rp(t.amount)}
                 </td>
-                <td className="px-4 py-3 text-right">
-                  <button onClick={() => remove(t.id)} className="text-red-700 hover:underline">
+                <td className="px-5 py-3.5 text-right">
+                  <button onClick={() => remove(t.id)} className="rounded-lg px-2.5 py-1 text-sm font-medium text-red-700 transition-colors hover:bg-red-50">
                     Hapus
                   </button>
                 </td>
@@ -291,7 +291,7 @@ export default function FinanceManager() {
             ))}
             {rows.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-forest-dark/50">
+                <td colSpan={5} className="px-5 py-10 text-center text-forest-dark/50">
                   Belum ada transaksi.
                 </td>
               </tr>

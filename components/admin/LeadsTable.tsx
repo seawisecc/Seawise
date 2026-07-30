@@ -50,26 +50,26 @@ export default function LeadsTable() {
         </p>
       )}
 
-      <div className="mt-6 overflow-hidden rounded-2xl border border-warm-neutral">
+      <div className="mt-6 overflow-hidden rounded-2xl border border-warm-neutral bg-white shadow-sm">
         <table className="w-full text-left text-sm">
-          <thead className="bg-warm-neutral/50 text-forest-dark/70">
+          <thead className="bg-warm-neutral/40 text-xs font-semibold uppercase tracking-wider text-forest-dark/50">
             <tr>
-              <th className="px-4 py-3 font-medium">Tanggal</th>
-              <th className="px-4 py-3 font-medium">Nama</th>
-              <th className="px-4 py-3 font-medium">Email</th>
-              <th className="px-4 py-3 font-medium">Status</th>
-              <th className="px-4 py-3 font-medium">Aksi</th>
+              <th className="px-5 py-3 font-semibold">Tanggal</th>
+              <th className="px-5 py-3 font-semibold">Nama</th>
+              <th className="px-5 py-3 font-semibold">Email</th>
+              <th className="px-5 py-3 font-semibold">Status</th>
+              <th className="px-5 py-3 font-semibold">Aksi</th>
             </tr>
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.id} className="border-t border-warm-neutral">
-                <td className="px-4 py-3 text-forest-dark/60">
+              <tr key={r.id} className="border-t border-warm-neutral/60 transition-colors hover:bg-warm-neutral/20">
+                <td className="px-5 py-3.5 text-forest-dark/60">
                   {new Date(r.created_at).toLocaleDateString("id-ID")}
                 </td>
-                <td className="px-4 py-3 font-medium text-forest-dark">{r.name}</td>
-                <td className="px-4 py-3 text-forest-dark/70">{r.email}</td>
-                <td className="px-4 py-3">
+                <td className="px-5 py-3 font-semibold text-forest-dark">{r.name}</td>
+                <td className="px-5 py-3.5 text-forest-dark/70">{r.email}</td>
+                <td className="px-5 py-3.5">
                   <button
                     onClick={() => toggleStatus(r)}
                     className={`rounded-full px-3 py-1 text-xs font-medium ${
@@ -81,8 +81,8 @@ export default function LeadsTable() {
                     {r.status === "new" ? "Baru" : "Dibalas"}
                   </button>
                 </td>
-                <td className="px-4 py-3">
-                  <button onClick={() => setOpen(r)} className="text-sea-foam hover:underline">
+                <td className="px-5 py-3.5">
+                  <button onClick={() => setOpen(r)} className="rounded-lg px-2.5 py-1 text-sm font-medium text-sea-foam transition-colors hover:bg-sea-foam/10">
                     Lihat
                   </button>
                 </td>
@@ -90,7 +90,7 @@ export default function LeadsTable() {
             ))}
             {rows.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-forest-dark/50">
+                <td colSpan={5} className="px-5 py-10 text-center text-forest-dark/50">
                   Belum ada pesan.
                 </td>
               </tr>
