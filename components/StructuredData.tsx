@@ -20,7 +20,15 @@ export default function StructuredData({ lang }: { lang: Locale }) {
       description: dict.meta.description,
       email: "hello@seawise.id",
       slogan: "Systems & Software Studio",
-      areaServed: { "@type": "Country", name: "Indonesia" },
+      address: {
+        "@type": "PostalAddress",
+        addressRegion: "Bali",
+        addressCountry: "ID",
+      },
+      areaServed: [
+        { "@type": "AdministrativeArea", name: "Bali" },
+        { "@type": "Country", name: "Indonesia" },
+      ],
       knowsAbout: [
         "Web development",
         "Website development",

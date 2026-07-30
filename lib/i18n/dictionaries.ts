@@ -9,7 +9,7 @@ const en = {
     title: "Seawise Studio | App & Website Development",
     titleTemplate: "%s | Seawise Studio",
     description:
-      "App & website development studio, from custom ERP and business apps to fast, modern websites, across industries.",
+      "App & website development studio based in Bali, from custom ERP and business apps to fast, modern websites, serving clients across Indonesia.",
   },
   nav: {
     services: "Services",
@@ -167,6 +167,7 @@ const en = {
   },
   footer: {
     tagline: "App & website development studio. Custom ERP, business apps, and modern websites.",
+    location: "Based in Bali · Serving all of Indonesia",
     navHeading: "Navigation",
     contactHeading: "Contact",
     contactForm: "Contact form",
@@ -294,7 +295,7 @@ const id: Dictionary = {
     title: "Seawise Studio | Spesialis Aplikasi & Website",
     titleTemplate: "%s | Seawise Studio",
     description:
-      "Studio pengembangan aplikasi & website, dari ERP dan aplikasi bisnis custom sampai website modern, lintas industri.",
+      "Studio pengembangan aplikasi & website di Bali, dari ERP dan aplikasi bisnis custom sampai website modern, melayani klien seluruh Indonesia.",
   },
   nav: {
     services: "Layanan",
@@ -452,6 +453,7 @@ const id: Dictionary = {
   },
   footer: {
     tagline: "Studio pengembangan aplikasi & website. ERP, aplikasi bisnis, dan website modern.",
+    location: "Berbasis di Bali · Melayani seluruh Indonesia",
     navHeading: "Navigasi",
     contactHeading: "Kontak",
     contactForm: "Form kontak",

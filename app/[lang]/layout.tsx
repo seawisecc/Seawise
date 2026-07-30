@@ -12,19 +12,21 @@ import { notFound } from "next/navigation";
 
 const KEYWORDS: Record<Locale, string[]> = {
   id: [
+    "jasa pembuatan website Bali",
+    "jasa pembuatan aplikasi Bali",
+    "web developer Bali",
     "jasa pembuatan website",
     "jasa pembuatan aplikasi",
-    "jasa website Indonesia",
     "jasa aplikasi custom",
     "ERP custom",
     "aplikasi UMKM",
-    "web developer Indonesia",
     "company profile website",
-    "Seawise Studio",
+    "Seawise Studio Bali",
   ],
   en: [
-    "web development",
-    "app development",
+    "web development Bali",
+    "app development Bali",
+    "software developer Bali",
     "custom software",
     "custom ERP",
     "business apps",

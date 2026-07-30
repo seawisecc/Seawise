@@ -25,6 +25,9 @@ export default function Footer({
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-off-white/70">
               {dict.footer.tagline}
             </p>
+            <p className="mt-3 text-sm font-medium text-sea-foam">
+              {dict.footer.location}
+            </p>
           </div>
 
           <div>
