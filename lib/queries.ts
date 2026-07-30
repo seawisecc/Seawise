@@ -138,6 +138,47 @@ export async function getPricing(lang: Locale): Promise<PricingRow[]> {
   return data as PricingRow[];
 }
 
+export type PostRow = {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string | null;
+  content: string | null;
+  cover_url: string | null;
+  published: boolean;
+  published_at: string | null;
+  created_at: string;
+};
+
+export async function getPosts(): Promise<PostRow[]> {
+  const supabase = createClient();
+  if (!supabase) return [];
+
+  const { data, error } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("published", true)
+    .order("published_at", { ascending: false, nullsFirst: false });
+
+  if (error || !data) return [];
+  return data as PostRow[];
+}
+
+export async function getPost(slug: string): Promise<PostRow | null> {
+  const supabase = createClient();
+  if (!supabase) return null;
+
+  const { data, error } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("slug", slug)
+    .eq("published", true)
+    .maybeSingle();
+
+  if (error || !data) return null;
+  return data as PostRow;
+}
+
 export async function getPartners(): Promise<PartnerRow[]> {
   const supabase = createClient();
   if (!supabase) return [];

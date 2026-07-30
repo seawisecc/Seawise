@@ -47,6 +47,14 @@ Systems & Software Studio. Next.js (App Router) + Tailwind + Framer Motion, siap
 > ⚠️ Jalankan `supabase-migration-v2.sql` di Supabase SQL Editor untuk fitur
 > fase 5 (kolom `project_type`, tabel `pricing` & `transactions`, plus RLS).
 
+**Fase 6 — selesai (SEO + Blog):**
+
+- SEO teknis: `sitemap.xml`, `robots.txt`, structured data (schema.org), metadata + keyword, canonical/hreflang, OG image
+- **Blog/Artikel**: tabel `posts`, editor Markdown di admin (menu Blog), halaman `/blog` + `/blog/[slug]` dengan Article schema; artikel otomatis masuk sitemap
+
+> ⚠️ Jalankan `supabase-migration-v4.sql` untuk fitur blog (tabel `posts` + RLS).
+> Blog memakai `marked` untuk render Markdown — jalankan `npm install` setelah pull.
+
 **Fase berikutnya (opsional):**
 
 - Konten Supabase dua bahasa penuh (kolom `_en`/`_id`)

@@ -33,6 +33,7 @@ export default function Footer({
               <li><Link href={`/${lang}/layanan`} className="hover:text-sea-foam">{dict.nav.services}</Link></li>
               <li><Link href={`/${lang}/portfolio`} className="hover:text-sea-foam">{dict.nav.portfolio}</Link></li>
               <li><Link href={`/${lang}/testimoni`} className="hover:text-sea-foam">{dict.nav.testimonials}</Link></li>
+              <li><Link href={`/${lang}/blog`} className="hover:text-sea-foam">{dict.nav.blog}</Link></li>
               <li><Link href={`/${lang}/tentang`} className="hover:text-sea-foam">{dict.nav.about}</Link></li>
             </ul>
           </div>

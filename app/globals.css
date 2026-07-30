@@ -53,3 +53,66 @@ body {
   outline-offset: 3px;
   border-radius: 2px;
 }
+
+/* Article body — readable typography for blog posts rendered from Markdown. */
+.article {
+  color: rgba(19, 42, 34, 0.85);
+  line-height: 1.75;
+  font-size: 1.05rem;
+}
+.article > * + * {
+  margin-top: 1.15rem;
+}
+.article h2 {
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+  color: var(--forest-dark);
+  margin-top: 2.4rem;
+}
+.article h3 {
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--forest-dark);
+  margin-top: 1.8rem;
+}
+.article a {
+  color: var(--sea-foam);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.article ul,
+.article ol {
+  padding-left: 1.4rem;
+}
+.article ul {
+  list-style: disc;
+}
+.article ol {
+  list-style: decimal;
+}
+.article li + li {
+  margin-top: 0.4rem;
+}
+.article blockquote {
+  border-left: 3px solid var(--sea-foam);
+  padding-left: 1rem;
+  color: rgba(19, 42, 34, 0.65);
+  font-style: italic;
+}
+.article img {
+  border-radius: 1rem;
+  width: 100%;
+}
+.article code {
+  background: var(--warm-neutral);
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.3rem;
+  font-size: 0.9em;
+}
+.article strong {
+  color: var(--forest-dark);
+  font-weight: 600;
+}

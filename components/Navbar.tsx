@@ -29,6 +29,7 @@ export default function Navbar({
     { href: `/${lang}/layanan`, label: dict.nav.services },
     { href: `/${lang}/portfolio`, label: dict.nav.portfolio },
     { href: `/${lang}/testimoni`, label: dict.nav.testimonials },
+    { href: `/${lang}/blog`, label: dict.nav.blog },
     { href: `/${lang}/tentang`, label: dict.nav.about },
   ];
 

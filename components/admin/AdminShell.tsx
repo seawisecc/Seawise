@@ -14,6 +14,7 @@ const sections = [
   { slug: "pricing", label: "Price List" },
   { slug: "testimonials", label: "Testimoni" },
   { slug: "partners", label: "Partner" },
+  { slug: "blog", label: "Blog" },
   { slug: "leads", label: "Pesan Masuk" },
 ];
 
