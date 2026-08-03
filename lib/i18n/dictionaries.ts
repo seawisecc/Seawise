@@ -53,6 +53,32 @@ const en = {
     featuredEyebrow: "Our Apps",
     featuredTitle: "Not mockups, systems that are live and you can open.",
     featuredLink: "See all projects →",
+    showcaseEyebrow: "Product Showcase",
+    showcaseTitle: "A closer look at what we've shipped.",
+    showcaseIntro:
+      "Real screens from apps and websites we've built. Swipe through.",
+    showcaseApp: "App",
+    showcaseWebsite: "Website",
+    proofEyebrow: "Why trust us",
+    proofTitle: "Judge the work, not the sales pitch.",
+    proofItems: [
+      {
+        title: "Open the systems yourself",
+        body: "Every app in our portfolio is live and clickable. No mockups, no slide decks, no promises you can't verify.",
+      },
+      {
+        title: "Transparent pricing upfront",
+        body: "Website packages start at Rp2 million with the scope written out. You know the number before the first call ends.",
+      },
+      {
+        title: "Free discovery first",
+        body: "We map your workflow before quoting. If a custom system isn't the right answer, we'll say so.",
+      },
+      {
+        title: "Support after go-live",
+        body: "Launch isn't the finish line. We stay on until your team actually uses the system day to day.",
+      },
+    ],
     testimonialsEyebrow: "Testimonials",
     testimonialsTitle: "What clients say.",
     ctaTitle: "Got a messy process? Tell us about it.",
@@ -130,6 +156,10 @@ const en = {
     title: "What clients say.",
     intro:
       "Our work is judged most honestly by the teams who use it every day.",
+    emptyTitle: "We're collecting these properly.",
+    emptyBody:
+      "Rather than fill this page with quotes we can't back up, we'd rather you check the work itself. Every system in our portfolio is live and open to try.",
+    emptyCta: "See our work",
   },
   contact: {
     eyebrow: "Contact",
@@ -238,22 +268,6 @@ const en = {
       techStack: ["Responsive", "CMS", "SEO"],
     },
   ],
-  fallbackTestimonials: [
-    {
-      clientName: "Budi Santoso",
-      company: "CV Inti Cemerlang",
-      role: "Operations Director",
-      content:
-        "Since using Seawise's system, stock reports that used to take a whole day are now done in minutes. The team truly understands what happens on the floor.",
-    },
-    {
-      clientName: "Sari Wijaya",
-      company: "Apotek Sehat Bersama",
-      role: "Owner",
-      content:
-        "What I love is that they didn't force a complicated system on us. It was built around how we work, and they kept supporting us after go-live.",
-    },
-  ],
   fallbackPricing: [
     {
       name: "Shore",
@@ -339,6 +353,32 @@ const id: Dictionary = {
     featuredEyebrow: "Aplikasi Kami",
     featuredTitle: "Bukan mockup, sistem yang sudah jalan dan bisa kamu buka.",
     featuredLink: "Lihat semua proyek →",
+    showcaseEyebrow: "Cuplikan Layar",
+    showcaseTitle: "Lihat lebih dekat karya yang sudah kami rilis.",
+    showcaseIntro:
+      "Screenshot asli dari aplikasi dan website yang kami bangun. Geser untuk lihat.",
+    showcaseApp: "Aplikasi",
+    showcaseWebsite: "Website",
+    proofEyebrow: "Kenapa kami",
+    proofTitle: "Nilai hasil kerjanya, bukan janji penjualannya.",
+    proofItems: [
+      {
+        title: "Buka sendiri sistemnya",
+        body: "Semua aplikasi di portfolio kami sudah live dan bisa diklik. Bukan mockup, bukan slide, bukan janji yang tak bisa kamu cek.",
+      },
+      {
+        title: "Harga terbuka sejak awal",
+        body: "Paket website mulai Rp2 juta dengan cakupan tertulis. Kamu tahu angkanya sebelum obrolan pertama selesai.",
+      },
+      {
+        title: "Diskusi awal gratis",
+        body: "Kami petakan alur kerja dulu sebelum menawarkan harga. Kalau sistem custom bukan jawabannya, kami bilang apa adanya.",
+      },
+      {
+        title: "Didampingi setelah live",
+        body: "Peluncuran bukan garis akhir. Kami dampingi sampai tim kamu benar-benar memakainya sehari-hari.",
+      },
+    ],
     testimonialsEyebrow: "Testimoni",
     testimonialsTitle: "Kata mereka yang sudah pakai.",
     ctaTitle: "Punya proses yang masih berantakan? Ceritakan ke kami.",
@@ -416,6 +456,10 @@ const id: Dictionary = {
     title: "Kata mereka yang sudah pakai.",
     intro:
       "Hasil kerja kami paling jujur dinilai oleh tim yang memakainya setiap hari.",
+    emptyTitle: "Sedang kami kumpulkan dengan benar.",
+    emptyBody:
+      "Daripada mengisi halaman ini dengan kutipan yang tidak bisa kami pertanggungjawabkan, lebih baik kamu menilai langsung hasil kerjanya. Semua sistem di portfolio kami sudah live dan bisa dicoba.",
+    emptyCta: "Lihat karya kami",
   },
   contact: {
     eyebrow: "Kontak",
@@ -522,22 +566,6 @@ const id: Dictionary = {
       industry: "Korporat / UMKM",
       summary: "Website company profile yang cepat, modern, dan mudah di-update.",
       techStack: ["Responsif", "CMS", "SEO"],
-    },
-  ],
-  fallbackTestimonials: [
-    {
-      clientName: "Budi Santoso",
-      company: "CV Inti Cemerlang",
-      role: "Direktur Operasional",
-      content:
-        "Sejak pakai sistem dari Seawise, laporan stok yang dulu makan waktu seharian sekarang selesai dalam hitungan menit. Timnya paham betul kebutuhan lapangan.",
-    },
-    {
-      clientName: "Sari Wijaya",
-      company: "Apotek Sehat Bersama",
-      role: "Pemilik",
-      content:
-        "Yang saya suka, mereka tidak memaksakan sistem yang rumit. Dibangun sesuai cara kerja kami, dan tetap didampingi setelah live.",
     },
   ],
   fallbackPricing: [

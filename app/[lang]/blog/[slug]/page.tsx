@@ -6,6 +6,7 @@ import { getPost } from "@/lib/queries";
 import { renderMarkdown } from "@/lib/markdown";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { SITE_URL } from "@/lib/siteUrl";
+import { pageAlternates } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 
 export const revalidate = 120;
@@ -22,7 +23,7 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.excerpt ?? undefined,
-    alternates: { canonical: `/${params.lang}/blog/${post.slug}` },
+    alternates: pageAlternates(params.lang, `blog/${post.slug}`),
     openGraph: {
       title: post.title,
       description: post.excerpt ?? undefined,

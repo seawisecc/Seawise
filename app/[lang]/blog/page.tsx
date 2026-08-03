@@ -5,6 +5,7 @@ import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import { getPosts } from "@/lib/queries";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { pageSeo } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 
 export async function generateMetadata({
@@ -13,7 +14,10 @@ export async function generateMetadata({
   params: { lang: Locale };
 }): Promise<Metadata> {
   const dict = getDictionary(params.lang);
-  return { title: dict.blog.eyebrow, description: dict.blog.intro };
+  return pageSeo(params.lang, "blog", {
+    title: dict.blog.eyebrow,
+    description: dict.blog.intro,
+  });
 }
 
 export const revalidate = 120;

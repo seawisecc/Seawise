@@ -69,15 +69,16 @@ export default function PortfolioGrid({
           const shown = tags.slice(0, MAX_TAGS);
           const extra = tags.length - shown.length;
           const detailHref = p.slug ? `/${lang}/portfolio/${p.slug}` : null;
+          const cardImage = p.cover_url ?? p.screenshot_url;
 
           return (
             <Reveal key={p.id} delay={(i % 3) * 0.06} className="h-full">
               <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-warm-neutral bg-white/60 transition-colors hover:border-sea-foam">
                 <PreviewWrap href={detailHref}>
                   <div className="relative aspect-[16/10] w-full overflow-hidden bg-forest-dark">
-                    {p.screenshot_url ? (
+                    {cardImage ? (
                       <Image
-                        src={p.screenshot_url}
+                        src={cardImage}
                         alt={`Preview ${p.title}`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

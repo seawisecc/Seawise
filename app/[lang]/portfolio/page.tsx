@@ -3,6 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import PortfolioGrid from "@/components/PortfolioGrid";
 import { getPortfolio } from "@/lib/queries";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { pageSeo } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 
 export async function generateMetadata({
@@ -11,7 +12,10 @@ export async function generateMetadata({
   params: { lang: Locale };
 }): Promise<Metadata> {
   const dict = getDictionary(params.lang);
-  return { title: dict.nav.portfolio, description: dict.portfolio.intro };
+  return pageSeo(params.lang, "portfolio", {
+    title: dict.nav.portfolio,
+    description: dict.portfolio.intro,
+  });
 }
 
 export const revalidate = 120;

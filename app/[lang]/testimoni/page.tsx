@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import { getTestimonials } from "@/lib/queries";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { pageSeo } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 
 export async function generateMetadata({
@@ -12,7 +14,10 @@ export async function generateMetadata({
   params: { lang: Locale };
 }): Promise<Metadata> {
   const dict = getDictionary(params.lang);
-  return { title: dict.nav.testimonials, description: dict.testimonials.intro };
+  return pageSeo(params.lang, "testimoni", {
+    title: dict.nav.testimonials,
+    description: dict.testimonials.intro,
+  });
 }
 
 export const revalidate = 120;
@@ -65,6 +70,25 @@ export default async function TestimoniPage({
               </Reveal>
             ))}
           </div>
+
+          {items.length === 0 && (
+            <Reveal>
+              <div className="rounded-[2rem] border border-warm-neutral bg-warm-neutral/40 px-8 py-14 text-center">
+                <h2 className="mx-auto max-w-lg font-display text-2xl font-bold text-forest-dark">
+                  {t.emptyTitle}
+                </h2>
+                <p className="mx-auto mt-4 max-w-xl leading-relaxed text-forest-dark/70">
+                  {t.emptyBody}
+                </p>
+                <Link
+                  href={`/${lang}/portfolio`}
+                  className="mt-7 inline-block rounded-full bg-forest-dark px-7 py-3 text-sm font-medium text-off-white transition-colors hover:bg-sea-foam"
+                >
+                  {t.emptyCta}
+                </Link>
+              </div>
+            </Reveal>
+          )}
         </div>
       </section>
     </>

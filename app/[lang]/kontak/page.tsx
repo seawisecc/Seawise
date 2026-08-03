@@ -3,6 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { pageSeo } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 
 export async function generateMetadata({
@@ -11,7 +12,10 @@ export async function generateMetadata({
   params: { lang: Locale };
 }): Promise<Metadata> {
   const dict = getDictionary(params.lang);
-  return { title: dict.nav.contact, description: dict.contact.intro };
+  return pageSeo(params.lang, "kontak", {
+    title: dict.nav.contact,
+    description: dict.contact.intro,
+  });
 }
 
 export default function KontakPage({

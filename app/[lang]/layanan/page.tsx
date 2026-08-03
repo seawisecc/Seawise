@@ -4,6 +4,7 @@ import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import { WebsiteIcon, AppIcon } from "@/components/ServiceIcons";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { pageSeo } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 import { getPricing } from "@/lib/queries";
 
@@ -13,7 +14,10 @@ export async function generateMetadata({
   params: { lang: Locale };
 }): Promise<Metadata> {
   const dict = getDictionary(params.lang);
-  return { title: dict.nav.services, description: dict.services.intro };
+  return pageSeo(params.lang, "layanan", {
+    title: dict.nav.services,
+    description: dict.services.intro,
+  });
 }
 
 export const revalidate = 120;

@@ -16,7 +16,14 @@ type Row = {
   project_type: string;
   live_url: string | null;
   screenshot_url: string | null;
+  mobile_url: string | null;
+  cover_url: string | null;
   tech_stack: string[] | null;
+  title_en: string | null;
+  description_en: string | null;
+  body_en: string | null;
+  industry_en: string | null;
+  tech_stack_en: string[] | null;
   featured: boolean;
   sort_order: number;
   published: boolean;
@@ -32,7 +39,14 @@ const empty: Omit<Row, "id"> = {
   project_type: "app",
   live_url: "",
   screenshot_url: "",
+  mobile_url: "",
+  cover_url: "",
   tech_stack: [],
+  title_en: "",
+  description_en: "",
+  body_en: "",
+  industry_en: "",
+  tech_stack_en: [],
   featured: false,
   sort_order: 0,
   published: true,
@@ -52,6 +66,7 @@ export default function PortfolioManager() {
   const [rows, setRows] = useState<Row[]>([]);
   const [editing, setEditing] = useState<(Omit<Row, "id"> & { id?: string }) | null>(null);
   const [techInput, setTechInput] = useState("");
+  const [techInputEn, setTechInputEn] = useState("");
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
 
@@ -72,12 +87,14 @@ export default function PortfolioManager() {
   function startNew() {
     setEditing({ ...empty });
     setTechInput("");
+    setTechInputEn("");
     setMsg("");
   }
 
   function startEdit(r: Row) {
     setEditing({ ...r });
     setTechInput((r.tech_stack ?? []).join(", "));
+    setTechInputEn((r.tech_stack_en ?? []).join(", "));
     setMsg("");
   }
 
@@ -93,6 +110,36 @@ export default function PortfolioManager() {
       setMsg(
         `Gagal upload gambar, ${detail}. Cek bucket 'media' sudah dibuat (public) dan policy storage sudah dijalankan.`
       );
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleCover(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file || !supabase || !editing) return;
+    setBusy(true);
+    try {
+      const url = await uploadImage(supabase, file, "portfolio");
+      setEditing({ ...editing, cover_url: url });
+    } catch (err) {
+      const detail = err instanceof Error ? err.message : String(err);
+      setMsg(`Gagal upload cover: ${detail}. Cek bucket 'media' & policy storage.`);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleMobile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file || !supabase || !editing) return;
+    setBusy(true);
+    try {
+      const url = await uploadImage(supabase, file, "portfolio");
+      setEditing({ ...editing, mobile_url: url });
+    } catch (err) {
+      const detail = err instanceof Error ? err.message : String(err);
+      setMsg(`Gagal upload gambar mobile: ${detail}. Cek bucket 'media' & policy storage.`);
     } finally {
       setBusy(false);
     }
@@ -137,7 +184,17 @@ export default function PortfolioManager() {
       project_type: editing.project_type,
       live_url: editing.live_url,
       screenshot_url: editing.screenshot_url,
+      mobile_url: editing.mobile_url,
+      cover_url: editing.cover_url,
       tech_stack: techInput
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean),
+      title_en: editing.title_en,
+      description_en: editing.description_en,
+      body_en: editing.body_en,
+      industry_en: editing.industry_en,
+      tech_stack_en: techInputEn
         .split(",")
         .map((s) => s.trim())
         .filter(Boolean),
@@ -343,17 +400,130 @@ export default function PortfolioManager() {
                   onChange={(e) => setTechInput(e.target.value)}
                 />
               </div>
-              <div>
-                <label className={label}>Screenshot utama</label>
-                <input type="file" accept="image/*" onChange={handleFile} className="mt-1.5 block text-sm" />
-                {editing.screenshot_url && (
-                  <div className="relative mt-2 h-32 w-full overflow-hidden rounded-lg">
-                    <Image src={editing.screenshot_url} alt="" fill className="object-cover" />
+              <div className="rounded-2xl border border-warm-neutral bg-white/60 p-4">
+                <p className={label}>Versi Inggris (halaman /en)</p>
+                <p className="mt-0.5 text-xs text-forest-dark/50">
+                  Kosongkan kalau belum sempat. Yang kosong otomatis pakai teks Indonesia.
+                </p>
+                <div className="mt-3 space-y-3">
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">Judul (EN)</label>
+                    <input
+                      className={field}
+                      value={editing.title_en ?? ""}
+                      onChange={(e) => setEditing({ ...editing, title_en: e.target.value })}
+                    />
                   </div>
-                )}
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">Industri (EN)</label>
+                    <input
+                      className={field}
+                      placeholder="Manufacturing / Distribution"
+                      value={editing.industry_en ?? ""}
+                      onChange={(e) => setEditing({ ...editing, industry_en: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">Deskripsi (EN)</label>
+                    <textarea
+                      className={`${field} resize-y`}
+                      rows={3}
+                      value={editing.description_en ?? ""}
+                      onChange={(e) => setEditing({ ...editing, description_en: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">
+                      Tag fitur EN (pisahkan koma)
+                    </label>
+                    <input
+                      className={field}
+                      placeholder="Inventory, Purchasing, Reporting"
+                      value={techInputEn}
+                      onChange={(e) => setTechInputEn(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">
+                      Studi kasus EN (Markdown)
+                    </label>
+                    <textarea
+                      className={`${field} resize-y font-mono text-sm`}
+                      rows={6}
+                      value={editing.body_en ?? ""}
+                      onChange={(e) => setEditing({ ...editing, body_en: e.target.value })}
+                    />
+                  </div>
+                </div>
               </div>
               <div>
-                <label className={label}>Galeri (opsional, bisa banyak)</label>
+                <label className={label}>Foto cover (tampil di kartu portfolio)</label>
+                <input type="file" accept="image/*" onChange={handleCover} className="mt-1.5 block text-sm" />
+                {editing.cover_url && (
+                  <div className="relative mt-2 aspect-[16/10] w-full overflow-hidden rounded-lg border border-warm-neutral">
+                    <Image src={editing.cover_url} alt="" fill className="object-cover" />
+                    <button
+                      type="button"
+                      onClick={() => setEditing({ ...editing, cover_url: "" })}
+                      className="absolute right-1 top-1 rounded-full bg-black/60 px-1.5 text-xs text-white"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                )}
+                <p className="mt-1 text-xs text-forest-dark/50">
+                  Kalau kosong, kartu memakai screenshot desktop di bawah.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-warm-neutral bg-white/60 p-4">
+                <p className={label}>Gambar showcase</p>
+                <p className="mt-0.5 text-xs text-forest-dark/50">
+                  Desktop tampil di layar laptop, mobile tampil di HP pada slideshow homepage.
+                </p>
+                <div className="mt-3 grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">
+                      Screenshot Desktop (laptop)
+                    </label>
+                    <input type="file" accept="image/*" onChange={handleFile} className="mt-1.5 block w-full text-xs" />
+                    {editing.screenshot_url && (
+                      <div className="relative mt-2 aspect-[16/10] w-full overflow-hidden rounded-lg border border-warm-neutral">
+                        <Image src={editing.screenshot_url} alt="" fill className="object-cover object-top" />
+                        <button
+                          type="button"
+                          onClick={() => setEditing({ ...editing, screenshot_url: "" })}
+                          className="absolute right-1 top-1 rounded-full bg-black/60 px-1.5 text-xs text-white"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">
+                      Screenshot Mobile (HP)
+                    </label>
+                    <input type="file" accept="image/*" onChange={handleMobile} className="mt-1.5 block w-full text-xs" />
+                    {editing.mobile_url && (
+                      <div className="relative mx-auto mt-2 aspect-[9/19] w-20 overflow-hidden rounded-xl border border-warm-neutral">
+                        <Image src={editing.mobile_url} alt="" fill className="object-cover object-top" />
+                        <button
+                          type="button"
+                          onClick={() => setEditing({ ...editing, mobile_url: "" })}
+                          className="absolute right-1 top-1 rounded-full bg-black/60 px-1.5 text-xs text-white"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <p className="mt-3 text-xs text-forest-dark/45">
+                  Isi minimal Desktop. Kalau Mobile dikosongkan, HP ikut memakai gambar desktop.
+                </p>
+              </div>
+              <div>
+                <label className={label}>Galeri detail (opsional, bisa banyak)</label>
                 <input type="file" accept="image/*" multiple onChange={handleGallery} className="mt-1.5 block text-sm" />
                 {(editing.gallery ?? []).length > 0 && (
                   <div className="mt-2 grid grid-cols-3 gap-2">

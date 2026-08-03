@@ -2,6 +2,23 @@ import { createPublicClient as createClient } from "@/lib/supabase/public";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/config";
 
+/**
+ * Bilingual content lives in one row: Indonesian in the base column, English in
+ * a matching `*_en` column. When the English value is blank we fall back to the
+ * Indonesian one, so a half-translated row never renders as an empty page.
+ */
+type EnFields = Record<string, unknown>;
+
+function pickText(lang: Locale, base: string | null, en: unknown): string | null {
+  if (lang === "en" && typeof en === "string" && en.trim()) return en;
+  return base;
+}
+
+function pickList(lang: Locale, base: string[] | null, en: unknown): string[] | null {
+  if (lang === "en" && Array.isArray(en) && en.length > 0) return en as string[];
+  return base;
+}
+
 /** Row shapes mirror the Supabase tables (see README schema). */
 export type PortfolioRow = {
   id: string;
@@ -14,6 +31,8 @@ export type PortfolioRow = {
   project_type: string; // 'app' | 'website'
   live_url: string | null;
   screenshot_url: string | null;
+  mobile_url: string | null;
+  cover_url: string | null;
   tech_stack: string[] | null;
   featured: boolean;
   sort_order: number;
@@ -68,6 +87,8 @@ function fallbackPortfolioRows(lang: Locale): PortfolioRow[] {
     project_type: p.type,
     live_url: "#",
     screenshot_url: null,
+    mobile_url: null,
+    cover_url: null,
     tech_stack: p.techStack,
     featured: true,
     sort_order: i,
@@ -75,17 +96,20 @@ function fallbackPortfolioRows(lang: Locale): PortfolioRow[] {
   }));
 }
 
-function fallbackTestimonialRows(lang: Locale): TestimonialRow[] {
-  return getDictionary(lang).fallbackTestimonials.map((t, i) => ({
-    id: `fallback-${i}`,
-    client_name: t.clientName,
-    company: t.company,
-    role: t.role,
-    content: t.content,
-    avatar_url: null,
-    published: true,
-    sort_order: i,
-  }));
+/**
+ * Testimonials have no fallback on purpose: showing invented client quotes on a
+ * live site is misleading, so the section stays hidden until real ones exist.
+ */
+
+function localizePortfolio(row: PortfolioRow & EnFields, lang: Locale): PortfolioRow {
+  return {
+    ...row,
+    title: pickText(lang, row.title, row.title_en) ?? row.title,
+    description: pickText(lang, row.description, row.description_en),
+    body: pickText(lang, row.body, row.body_en),
+    industry: pickText(lang, row.industry, row.industry_en),
+    tech_stack: pickList(lang, row.tech_stack, row.tech_stack_en),
+  };
 }
 
 export async function getPortfolio(lang: Locale): Promise<PortfolioRow[]> {
@@ -99,10 +123,13 @@ export async function getPortfolio(lang: Locale): Promise<PortfolioRow[]> {
     .order("sort_order", { ascending: true });
 
   if (error || !data || data.length === 0) return fallbackPortfolioRows(lang);
-  return data as PortfolioRow[];
+  return (data as (PortfolioRow & EnFields)[]).map((r) => localizePortfolio(r, lang));
 }
 
-export async function getPortfolioItem(slug: string): Promise<PortfolioRow | null> {
+export async function getPortfolioItem(
+  slug: string,
+  lang: Locale
+): Promise<PortfolioRow | null> {
   const supabase = createClient();
   if (!supabase) return null;
 
@@ -114,12 +141,12 @@ export async function getPortfolioItem(slug: string): Promise<PortfolioRow | nul
     .maybeSingle();
 
   if (error || !data) return null;
-  return data as PortfolioRow;
+  return localizePortfolio(data as PortfolioRow & EnFields, lang);
 }
 
 export async function getTestimonials(lang: Locale): Promise<TestimonialRow[]> {
   const supabase = createClient();
-  if (!supabase) return fallbackTestimonialRows(lang);
+  if (!supabase) return [];
 
   const { data, error } = await supabase
     .from("testimonials")
@@ -127,8 +154,12 @@ export async function getTestimonials(lang: Locale): Promise<TestimonialRow[]> {
     .eq("published", true)
     .order("sort_order", { ascending: true });
 
-  if (error || !data || data.length === 0) return fallbackTestimonialRows(lang);
-  return data as TestimonialRow[];
+  if (error || !data) return [];
+  return (data as (TestimonialRow & EnFields)[]).map((r) => ({
+    ...r,
+    content: pickText(lang, r.content, r.content_en) ?? r.content,
+    role: pickText(lang, r.role, r.role_en),
+  }));
 }
 
 function fallbackPricingRows(lang: Locale): PricingRow[] {
@@ -156,7 +187,12 @@ export async function getPricing(lang: Locale): Promise<PricingRow[]> {
     .order("sort_order", { ascending: true });
 
   if (error || !data || data.length === 0) return fallbackPricingRows(lang);
-  return data as PricingRow[];
+  return (data as (PricingRow & EnFields)[]).map((r) => ({
+    ...r,
+    tagline: pickText(lang, r.tagline, r.tagline_en),
+    price_note: pickText(lang, r.price_note, r.price_note_en),
+    features: pickList(lang, r.features, r.features_en),
+  }));
 }
 
 export type PostRow = {

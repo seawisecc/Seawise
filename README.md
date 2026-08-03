@@ -97,6 +97,23 @@ npm run dev
 
 Buka http://localhost:3000 (otomatis diarahkan ke `/en`).
 
+## Environment variables
+
+| Variabel | Wajib | Keterangan |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | ya | Project Settings → API |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | ya | Project Settings → API |
+| `NEXT_PUBLIC_SITE_URL` | ya | `https://www.seawise.id` |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | tidak | Format `62…`, untuk tombol WhatsApp |
+
+Set semuanya juga di Vercel → Settings → Environment Variables, lalu redeploy.
+
+## Migrasi SQL
+
+Jalankan berurutan di Supabase SQL Editor. Semua aman diulang:
+
+`supabase-migration-v2.sql` → `v3` → `v4` → `v5` → `v6` (mobile_url) → `v7` (cover_url) → `v8` (kolom `*_en` bilingual).
+
 ## Supabase
 
 1. Copy `.env.local.example` → `.env.local`, isi dari Project Settings → API.

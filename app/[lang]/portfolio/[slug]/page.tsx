@@ -6,6 +6,7 @@ import { getPortfolioItem } from "@/lib/queries";
 import { renderMarkdown } from "@/lib/markdown";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { SITE_URL } from "@/lib/siteUrl";
+import { pageAlternates } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 
 export const revalidate = 120;
@@ -15,12 +16,12 @@ export async function generateMetadata({
 }: {
   params: { lang: Locale; slug: string };
 }): Promise<Metadata> {
-  const item = await getPortfolioItem(params.slug);
+  const item = await getPortfolioItem(params.slug, params.lang);
   if (!item) return { title: "404" };
   return {
-    title: `${item.title} — ${item.industry ?? "Portfolio"}`,
+    title: `${item.title} | ${item.industry ?? "Portfolio"}`,
     description: item.description ?? undefined,
-    alternates: { canonical: `/${params.lang}/portfolio/${item.slug}` },
+    alternates: pageAlternates(params.lang, `portfolio/${item.slug}`),
     openGraph: {
       title: item.title,
       description: item.description ?? undefined,
@@ -37,7 +38,7 @@ export default async function PortfolioDetail({
   params: { lang: Locale; slug: string };
 }) {
   const { lang, slug } = params;
-  const item = await getPortfolioItem(slug);
+  const item = await getPortfolioItem(slug, lang);
   if (!item) notFound();
 
   const t = getDictionary(lang).portfolio;

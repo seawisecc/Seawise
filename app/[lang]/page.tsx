@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
+import AppShowcase, { type ShowcaseSlide } from "@/components/AppShowcase";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/config";
 import { getPortfolio, getTestimonials } from "@/lib/queries";
@@ -16,8 +17,24 @@ export default async function Home({
   const dict = getDictionary(lang);
   const t = dict.home;
 
-  const featured = (await getPortfolio(lang)).filter((p) => p.featured).slice(0, 3);
+  const portfolio = await getPortfolio(lang);
+  const featured = portfolio.filter((p) => p.featured).slice(0, 3);
   const testimonials = (await getTestimonials(lang)).slice(0, 2);
+
+  const showcaseSlides: ShowcaseSlide[] = portfolio
+    .map((p) => {
+      const desktop = p.screenshot_url ?? p.mobile_url;
+      if (!desktop) return null;
+      return {
+        title: p.title,
+        type: p.project_type,
+        desktop,
+        mobile: p.mobile_url ?? desktop,
+        href: p.slug ? `/${lang}/portfolio/${p.slug}` : null,
+      };
+    })
+    .filter((s): s is ShowcaseSlide => s !== null)
+    .slice(0, 8);
 
   return (
     <>
@@ -167,7 +184,64 @@ export default async function Home({
         </div>
       </section>
 
+      {/* Product showcase — screenshot slideshow */}
+      {showcaseSlides.length > 0 && (
+        <section className="bg-off-white">
+          <div className="mx-auto max-w-content px-5 py-20 md:px-8">
+            <Reveal>
+              <p className="eyebrow text-sea-foam">{t.showcaseEyebrow}</p>
+              <h2 className="mt-3 max-w-2xl font-display text-3xl font-bold tracking-tight text-forest-dark md:text-4xl">
+                {t.showcaseTitle}
+              </h2>
+              <p className="mt-4 max-w-xl leading-relaxed text-forest-dark/70">
+                {t.showcaseIntro}
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.1} className="mt-10">
+              <AppShowcase
+                slides={showcaseSlides}
+                labels={{ app: t.showcaseApp, website: t.showcaseWebsite }}
+              />
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* Why trust us — verifiable proof points */}
+      <section className="bg-off-white">
+        <div className="mx-auto max-w-content px-5 py-20 md:px-8">
+          <Reveal>
+            <p className="eyebrow text-sea-foam">{t.proofEyebrow}</p>
+            <h2 className="mt-3 max-w-2xl font-display text-3xl font-bold tracking-tight text-forest-dark md:text-4xl">
+              {t.proofTitle}
+            </h2>
+          </Reveal>
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2">
+            {t.proofItems.map((item, i) => (
+              <Reveal key={item.title} delay={i * 0.08}>
+                <div className="flex h-full gap-4 rounded-2xl border border-warm-neutral bg-white/60 p-6">
+                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sea-foam/15 font-display text-sm font-bold text-sea-foam">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <h3 className="font-display text-lg font-bold text-forest-dark">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 leading-relaxed text-forest-dark/70">
+                      {item.body}
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Testimonial preview */}
+      {testimonials.length > 0 && (
       <section className="bg-off-white">
         <div className="mx-auto max-w-content px-5 py-20 md:px-8">
           <Reveal>
@@ -197,6 +271,7 @@ export default async function Home({
           </div>
         </div>
       </section>
+      )}
 
       {/* CTA */}
       <section className="bg-off-white pb-24">

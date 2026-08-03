@@ -14,6 +14,8 @@ type Row = {
   avatar_url: string | null;
   published: boolean;
   sort_order: number;
+  content_en: string | null;
+  role_en: string | null;
 };
 
 const empty: Omit<Row, "id"> = {
@@ -22,6 +24,8 @@ const empty: Omit<Row, "id"> = {
   role: "",
   content: "",
   avatar_url: "",
+  content_en: "",
+  role_en: "",
   published: false,
   sort_order: 0,
 };
@@ -73,6 +77,8 @@ export default function TestimonialManager() {
       company: editing.company,
       role: editing.role,
       content: editing.content,
+      content_en: editing.content_en,
+      role_en: editing.role_en,
       avatar_url: editing.avatar_url,
       published: editing.published,
       sort_order: Number(editing.sort_order) || 0,
@@ -189,6 +195,24 @@ export default function TestimonialManager() {
                 <label className={label}>Isi testimoni</label>
                 <textarea className={`${field} resize-y`} rows={4} value={editing.content}
                   onChange={(e) => setEditing({ ...editing, content: e.target.value })} />
+              </div>
+              <div className="rounded-2xl border border-warm-neutral bg-white/60 p-4">
+                <p className={label}>Versi Inggris (halaman /en)</p>
+                <p className="mt-0.5 text-xs text-forest-dark/50">
+                  Terjemahan kutipan klien. Kosongkan kalau mau tetap tampil apa adanya.
+                </p>
+                <div className="mt-3 space-y-3">
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">Jabatan (EN)</label>
+                    <input className={field} value={editing.role_en ?? ""}
+                      onChange={(e) => setEditing({ ...editing, role_en: e.target.value })} />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">Isi testimoni (EN)</label>
+                    <textarea className={`${field} resize-y`} rows={4} value={editing.content_en ?? ""}
+                      onChange={(e) => setEditing({ ...editing, content_en: e.target.value })} />
+                  </div>
+                </div>
               </div>
               <div>
                 <label className={label}>Foto / avatar (opsional)</label>

@@ -13,6 +13,9 @@ type Row = {
   featured: boolean;
   sort_order: number;
   published: boolean;
+  tagline_en: string | null;
+  price_note_en: string | null;
+  features_en: string[] | null;
 };
 
 const empty: Omit<Row, "id"> = {
@@ -21,6 +24,9 @@ const empty: Omit<Row, "id"> = {
   price: "",
   price_note: "",
   features: [],
+  tagline_en: "",
+  price_note_en: "",
+  features_en: [],
   featured: false,
   sort_order: 0,
   published: true,
@@ -31,6 +37,7 @@ export default function PricingManager() {
   const [rows, setRows] = useState<Row[]>([]);
   const [editing, setEditing] = useState<(Omit<Row, "id"> & { id?: string }) | null>(null);
   const [featInput, setFeatInput] = useState("");
+  const [featInputEn, setFeatInputEn] = useState("");
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
 
@@ -52,6 +59,7 @@ export default function PricingManager() {
     const base = row ?? { ...empty };
     setEditing(row ? { ...row } : base);
     setFeatInput(((row?.features ?? []) as string[]).join("\n"));
+    setFeatInputEn(((row?.features_en ?? []) as string[]).join("\n"));
     setMsg("");
   }
 
@@ -71,6 +79,12 @@ export default function PricingManager() {
       featured: editing.featured,
       sort_order: Number(editing.sort_order) || 0,
       published: editing.published,
+      tagline_en: editing.tagline_en,
+      price_note_en: editing.price_note_en,
+      features_en: featInputEn
+        .split("\n")
+        .map((s) => s.trim())
+        .filter(Boolean),
     };
     const { error } = editing.id
       ? await supabase.from("pricing").update(payload).eq("id", editing.id)
@@ -201,6 +215,32 @@ export default function PricingManager() {
                 <textarea className={`${field} resize-y`} rows={5} value={featInput}
                   placeholder={"Hingga 5 halaman\nDesain responsif\nForm kontak"}
                   onChange={(e) => setFeatInput(e.target.value)} />
+              </div>
+              <div className="rounded-2xl border border-warm-neutral bg-white/60 p-4">
+                <p className={label}>Versi Inggris (halaman /en)</p>
+                <p className="mt-0.5 text-xs text-forest-dark/50">
+                  Kosongkan kalau belum sempat, otomatis pakai teks Indonesia.
+                </p>
+                <div className="mt-3 space-y-3">
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">Tagline (EN)</label>
+                    <input className={field} value={editing.tagline_en ?? ""}
+                      onChange={(e) => setEditing({ ...editing, tagline_en: e.target.value })} />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">Catatan harga (EN)</label>
+                    <input className={field} placeholder="/ project" value={editing.price_note_en ?? ""}
+                      onChange={(e) => setEditing({ ...editing, price_note_en: e.target.value })} />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">
+                      Fitur EN (satu per baris)
+                    </label>
+                    <textarea className={`${field} resize-y`} rows={5} value={featInputEn}
+                      placeholder={"Up to 5 pages\nResponsive design\nContact form"}
+                      onChange={(e) => setFeatInputEn(e.target.value)} />
+                  </div>
+                </div>
               </div>
               <div className="flex gap-6">
                 <div>
