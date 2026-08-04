@@ -70,7 +70,7 @@ export default async function PortfolioDetail({
         </Link>
 
         <p className="eyebrow mt-8 text-sea-foam">
-          {item.industry} ·{" "}
+          {item.industry && <>{item.industry} ·{" "}</>}
           {item.project_type === "website" ? t.filterWebsite : t.filterApp}
         </p>
         <h1 className="mt-2 font-display text-4xl font-bold leading-[1.1] tracking-tight text-forest-dark md:text-5xl">

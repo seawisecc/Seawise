@@ -16,7 +16,7 @@ export async function generateMetadata({
 }: {
   params: { lang: Locale; slug: string };
 }): Promise<Metadata> {
-  const post = await getPost(params.slug);
+  const post = await getPost(params.slug, params.lang);
   if (!post) return { title: "404" };
 
   const url = `${SITE_URL}/${params.lang}/blog/${post.slug}`;
@@ -55,7 +55,7 @@ export default async function ArticlePage({
   params: { lang: Locale; slug: string };
 }) {
   const { lang, slug } = params;
-  const post = await getPost(slug);
+  const post = await getPost(slug, lang);
   if (!post) notFound();
 
   const t = getDictionary(lang).blog;

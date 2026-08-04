@@ -115,7 +115,8 @@ export default async function Home({
         </div>
       </section>
 
-      {/* Featured portfolio — inset dark panel */}
+      {/* Featured portfolio — inset dark panel. Hidden until real rows exist. */}
+      {featured.length > 0 && (
       <section className="mx-4 my-8 rounded-[2rem] bg-gradient-to-b from-forest-dark to-near-black text-off-white md:mx-6 md:my-12 md:rounded-[2.5rem]">
         <div className="mx-auto max-w-content px-6 py-20 md:px-10 md:py-24">
           <Reveal>
@@ -183,6 +184,7 @@ export default async function Home({
           </Reveal>
         </div>
       </section>
+      )}
 
       {/* Product showcase — screenshot slideshow */}
       {showcaseSlides.length > 0 && (

@@ -72,33 +72,11 @@ export type PartnerRow = {
 };
 
 /**
- * Map the localized fallback content into row shapes, so pages render real
- * design even before Supabase is populated or connected.
- */
-function fallbackPortfolioRows(lang: Locale): PortfolioRow[] {
-  return getDictionary(lang).fallbackPortfolio.map((p, i) => ({
-    id: `fallback-${i}`,
-    title: p.title,
-    slug: p.slug,
-    description: p.summary,
-    body: null,
-    gallery: null,
-    industry: p.industry,
-    project_type: p.type,
-    live_url: "#",
-    screenshot_url: null,
-    mobile_url: null,
-    cover_url: null,
-    tech_stack: p.techStack,
-    featured: true,
-    sort_order: i,
-    published: true,
-  }));
-}
-
-/**
- * Testimonials have no fallback on purpose: showing invented client quotes on a
- * live site is misleading, so the section stays hidden until real ones exist.
+ * Portfolio and testimonials have no fallback on purpose. Placeholder rows used
+ * to be rendered here, but they carried slugs whose detail pages do not exist,
+ * so every card linked to a 404 and those URLs leaked into sitemap.xml. Callers
+ * hide their section when the list comes back empty. Use `supabase-seed.sql` to
+ * populate a fresh database instead.
  */
 
 function localizePortfolio(row: PortfolioRow & EnFields, lang: Locale): PortfolioRow {
@@ -114,7 +92,7 @@ function localizePortfolio(row: PortfolioRow & EnFields, lang: Locale): Portfoli
 
 export async function getPortfolio(lang: Locale): Promise<PortfolioRow[]> {
   const supabase = createClient();
-  if (!supabase) return fallbackPortfolioRows(lang);
+  if (!supabase) return [];
 
   const { data, error } = await supabase
     .from("portfolio")
@@ -122,7 +100,7 @@ export async function getPortfolio(lang: Locale): Promise<PortfolioRow[]> {
     .eq("published", true)
     .order("sort_order", { ascending: true });
 
-  if (error || !data || data.length === 0) return fallbackPortfolioRows(lang);
+  if (error || !data) return [];
   return (data as (PortfolioRow & EnFields)[]).map((r) => localizePortfolio(r, lang));
 }
 
@@ -207,7 +185,16 @@ export type PostRow = {
   created_at: string;
 };
 
-export async function getPosts(): Promise<PostRow[]> {
+function localizePost(row: PostRow & EnFields, lang: Locale): PostRow {
+  return {
+    ...row,
+    title: pickText(lang, row.title, row.title_en) ?? row.title,
+    excerpt: pickText(lang, row.excerpt, row.excerpt_en),
+    content: pickText(lang, row.content, row.content_en),
+  };
+}
+
+export async function getPosts(lang: Locale): Promise<PostRow[]> {
   const supabase = createClient();
   if (!supabase) return [];
 
@@ -218,10 +205,10 @@ export async function getPosts(): Promise<PostRow[]> {
     .order("published_at", { ascending: false, nullsFirst: false });
 
   if (error || !data) return [];
-  return data as PostRow[];
+  return (data as (PostRow & EnFields)[]).map((r) => localizePost(r, lang));
 }
 
-export async function getPost(slug: string): Promise<PostRow | null> {
+export async function getPost(slug: string, lang: Locale): Promise<PostRow | null> {
   const supabase = createClient();
   if (!supabase) return null;
 
@@ -233,7 +220,7 @@ export async function getPost(slug: string): Promise<PostRow | null> {
     .maybeSingle();
 
   if (error || !data) return null;
-  return data as PostRow;
+  return localizePost(data as PostRow & EnFields, lang);
 }
 
 export async function getPartners(): Promise<PartnerRow[]> {

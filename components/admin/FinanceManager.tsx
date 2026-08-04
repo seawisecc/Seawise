@@ -134,42 +134,42 @@ export default function FinanceManager() {
       )}
 
       {/* Summary */}
-      <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl border border-warm-neutral bg-white/70 p-6">
-          <div className="flex items-center justify-between">
-            <p className="text-sm font-medium text-forest-dark/60">Uang masuk</p>
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-sea-foam/15 text-sea-foam">
-              <TrendUpIcon className="h-5 w-5" />
+      <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:grid-cols-3 sm:gap-4">
+        <div className="rounded-2xl border border-warm-neutral bg-white/70 p-4 sm:p-6">
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-xs font-medium text-forest-dark/60 sm:text-sm">Uang masuk</p>
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sea-foam/15 text-sea-foam sm:h-9 sm:w-9">
+              <TrendUpIcon className="h-4 w-4 sm:h-5 sm:w-5" />
             </span>
           </div>
-          <p className="mt-3 font-display text-2xl font-bold text-sea-foam">{rp(income)}</p>
+          <p className="mt-2 font-display text-xl font-bold text-sea-foam sm:mt-3 sm:text-2xl">{rp(income)}</p>
         </div>
-        <div className="rounded-2xl border border-warm-neutral bg-white/70 p-6">
-          <div className="flex items-center justify-between">
-            <p className="text-sm font-medium text-forest-dark/60">Uang keluar</p>
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-red-100 text-red-700">
-              <TrendDownIcon className="h-5 w-5" />
+        <div className="rounded-2xl border border-warm-neutral bg-white/70 p-4 sm:p-6">
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-xs font-medium text-forest-dark/60 sm:text-sm">Uang keluar</p>
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-100 text-red-700 sm:h-9 sm:w-9">
+              <TrendDownIcon className="h-4 w-4 sm:h-5 sm:w-5" />
             </span>
           </div>
-          <p className="mt-3 font-display text-2xl font-bold text-red-700">{rp(expense)}</p>
+          <p className="mt-2 font-display text-xl font-bold text-red-700 sm:mt-3 sm:text-2xl">{rp(expense)}</p>
         </div>
-        <div className="rounded-2xl bg-gradient-to-br from-forest-dark to-near-black p-6 text-off-white">
-          <div className="flex items-center justify-between">
-            <p className="text-sm font-medium text-off-white/70">Saldo</p>
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-off-white/10 text-off-white">
-              <WalletIcon className="h-5 w-5" />
+        <div className="col-span-2 rounded-2xl bg-gradient-to-br from-forest-dark to-near-black p-4 text-off-white sm:col-span-1 sm:p-6">
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-xs font-medium text-off-white/70 sm:text-sm">Saldo</p>
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-off-white/10 text-off-white sm:h-9 sm:w-9">
+              <WalletIcon className="h-4 w-4 sm:h-5 sm:w-5" />
             </span>
           </div>
-          <p className="mt-3 font-display text-2xl font-bold">{rp(balance)}</p>
+          <p className="mt-2 font-display text-2xl font-bold sm:mt-3">{rp(balance)}</p>
         </div>
       </div>
 
       {/* Monthly trend chart */}
       {months.length > 0 && (
-        <div className="mt-6 rounded-2xl border border-warm-neutral bg-white/70 p-6">
-          <div className="flex items-center justify-between">
-            <p className="font-display text-lg font-bold text-forest-dark">Tren bulanan</p>
-            <div className="flex items-center gap-4 text-xs text-forest-dark/60">
+        <div className="mt-4 rounded-2xl border border-warm-neutral bg-white/70 p-4 sm:mt-6 sm:p-6">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="font-display text-base font-bold text-forest-dark sm:text-lg">Tren bulanan</p>
+            <div className="flex items-center gap-3 text-xs text-forest-dark/60 sm:gap-4">
               <span className="flex items-center gap-1.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-sea-foam" /> Masuk
               </span>
@@ -178,13 +178,18 @@ export default function FinanceManager() {
               </span>
             </div>
           </div>
-          <div className="mt-6 flex items-end justify-between gap-3" style={{ height: 180 }}>
-            {months.map((m) => {
+          <div className="mt-4 flex h-[130px] items-end justify-between gap-1.5 sm:mt-6 sm:h-[180px] sm:gap-3">
+            {months.map((m, i) => {
               const inc = byMonth[m].income;
               const exp = byMonth[m].expense;
+              // Di HP hanya 5 bulan terakhir yang tampil supaya batang tidak gepeng.
+              const hideOnMobile = i < months.length - 5;
               return (
-                <div key={m} className="flex flex-1 flex-col items-center gap-2">
-                  <div className="flex h-[150px] w-full items-end justify-center gap-1">
+                <div
+                  key={m}
+                  className={`${hideOnMobile ? "hidden sm:flex" : "flex"} flex-1 flex-col items-center gap-1.5 sm:gap-2`}
+                >
+                  <div className="flex h-[100px] w-full items-end justify-center gap-1 sm:h-[150px]">
                     <div
                       className="w-1/2 rounded-t bg-sea-foam"
                       style={{ height: `${(inc / maxBar) * 100}%` }}
@@ -196,7 +201,9 @@ export default function FinanceManager() {
                       title={`Keluar: ${rp(exp)}`}
                     />
                   </div>
-                  <span className="text-xs text-forest-dark/50">{monthLabel(m)}</span>
+                  <span className="whitespace-nowrap text-[10px] leading-none text-forest-dark/50 sm:text-xs sm:leading-normal">
+                    {monthLabel(m)}
+                  </span>
                 </div>
               );
             })}
@@ -206,9 +213,9 @@ export default function FinanceManager() {
 
       {/* Category breakdown (expenses) */}
       {categories.length > 0 && (
-        <div className="mt-6 rounded-2xl border border-warm-neutral bg-white/70 p-6">
-          <p className="font-display text-lg font-bold text-forest-dark">Pengeluaran per kategori</p>
-          <div className="mt-4 space-y-3">
+        <div className="mt-4 rounded-2xl border border-warm-neutral bg-white/70 p-4 sm:mt-6 sm:p-6">
+          <p className="font-display text-base font-bold text-forest-dark sm:text-lg">Pengeluaran per kategori</p>
+          <div className="mt-3 space-y-3 sm:mt-4">
             {categories.map(([cat, total]) => (
               <div key={cat}>
                 <div className="flex justify-between text-sm">
@@ -228,9 +235,9 @@ export default function FinanceManager() {
       )}
 
       {/* Add transaction */}
-      <form onSubmit={add} className="mt-6 rounded-2xl border border-warm-neutral bg-white/70 p-6">
-        <p className="font-display text-lg font-bold text-forest-dark">Tambah transaksi</p>
-        <div className="mt-4 grid gap-3 md:grid-cols-6">
+      <form onSubmit={add} className="mt-4 rounded-2xl border border-warm-neutral bg-white/70 p-4 sm:mt-6 sm:p-6">
+        <p className="font-display text-base font-bold text-forest-dark sm:text-lg">Tambah transaksi</p>
+        <div className="mt-3 grid grid-cols-1 gap-2.5 sm:mt-4 sm:gap-3 md:grid-cols-6">
           <input type="date" className={`${field} md:col-span-1`} value={form.occurred_on}
             onChange={(e) => setForm({ ...form, occurred_on: e.target.value })} />
           <input className={`${field} md:col-span-2`} placeholder="Keterangan" value={form.description}
@@ -245,7 +252,7 @@ export default function FinanceManager() {
           <input className={field} inputMode="numeric" placeholder="Jumlah (Rp)" value={form.amount}
             onChange={(e) => setForm({ ...form, amount: e.target.value })} />
         </div>
-        <div className="mt-4 flex items-center gap-4">
+        <div className="mt-3 flex flex-wrap items-center gap-3 sm:mt-4 sm:gap-4">
           <button type="submit" disabled={busy}
             className="rounded-full bg-forest-dark px-6 py-2.5 text-sm font-medium text-off-white hover:bg-sea-foam disabled:opacity-60">
             {busy ? "Menyimpan…" : "Tambah"}
@@ -255,7 +262,7 @@ export default function FinanceManager() {
       </form>
 
       {/* Transaction list */}
-      <div className="mt-6 overflow-x-auto rounded-2xl border border-warm-neutral bg-white shadow-sm">
+      <div className="mt-4 overflow-x-auto rounded-2xl border border-warm-neutral bg-white shadow-sm sm:mt-6">
         <table className="w-full min-w-[640px] text-left text-sm">
           <thead className="bg-warm-neutral/40 text-xs font-semibold uppercase tracking-wider text-forest-dark/50">
             <tr>

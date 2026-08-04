@@ -38,7 +38,7 @@ export default async function BlogPage({
 }) {
   const { lang } = params;
   const t = getDictionary(lang).blog;
-  const posts = await getPosts();
+  const posts = await getPosts(lang);
 
   return (
     <>

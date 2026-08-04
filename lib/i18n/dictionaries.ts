@@ -234,40 +234,6 @@ const en = {
       points: ["Fast & modern", "Connected to your system", "SEO & performance"],
     },
   ],
-  fallbackPortfolio: [
-    {
-      title: "IC-ERP",
-      slug: "ic-erp",
-      type: "app",
-      industry: "Manufacturing / Distribution",
-      summary: "A centralized ERP with inventory, purchasing, and real-time reporting.",
-      techStack: ["Inventory", "Purchasing", "Reporting"],
-    },
-    {
-      title: "ApotekERP",
-      slug: "apotekerp",
-      type: "app",
-      industry: "Pharmacy / Healthcare",
-      summary: "A pharmacy system with batch, expiry, and prescription tracking.",
-      techStack: ["Batch tracking", "Expiry", "Prescriptions"],
-    },
-    {
-      title: "Resto ERP",
-      slug: "resto-erp",
-      type: "app",
-      industry: "F&B / Restaurant",
-      summary: "An integrated restaurant system from POS to ingredient management.",
-      techStack: ["POS", "Kitchen", "Inventory"],
-    },
-    {
-      title: "Company Profile Website",
-      slug: "company-profile-website",
-      type: "website",
-      industry: "Corporate / SME",
-      summary: "A fast, modern company profile site that's easy to update.",
-      techStack: ["Responsive", "CMS", "SEO"],
-    },
-  ],
   fallbackPricing: [
     {
       name: "Shore",
@@ -532,40 +498,6 @@ const id: Dictionary = {
       summary:
         "Website dan web app cepat, modern, dan mudah dikelola, company profile sampai portal internal.",
       points: ["Cepat & modern", "Terhubung ke sistem", "SEO & performa"],
-    },
-  ],
-  fallbackPortfolio: [
-    {
-      title: "IC-ERP",
-      slug: "ic-erp",
-      type: "app",
-      industry: "Manufaktur / Distribusi",
-      summary: "ERP terpusat dengan inventori, pembelian, dan laporan real-time.",
-      techStack: ["Inventori", "Pembelian", "Laporan"],
-    },
-    {
-      title: "ApotekERP",
-      slug: "apotekerp",
-      type: "app",
-      industry: "Apotek / Kesehatan",
-      summary: "Sistem apotek dengan pelacakan batch, kadaluarsa, dan resep.",
-      techStack: ["Batch", "Kadaluarsa", "Resep"],
-    },
-    {
-      title: "Resto ERP",
-      slug: "resto-erp",
-      type: "app",
-      industry: "F&B / Restoran",
-      summary: "Sistem resto terintegrasi dari kasir sampai manajemen bahan baku.",
-      techStack: ["Kasir", "Dapur", "Stok"],
-    },
-    {
-      title: "Website Company Profile",
-      slug: "website-company-profile",
-      type: "website",
-      industry: "Korporat / UMKM",
-      summary: "Website company profile yang cepat, modern, dan mudah di-update.",
-      techStack: ["Responsif", "CMS", "SEO"],
     },
   ],
   fallbackPricing: [

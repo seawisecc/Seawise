@@ -57,7 +57,8 @@ export default function TestimonialManager() {
     setBusy(true);
     try {
       const url = await uploadImage(supabase, file, "testimonials");
-      setEditing({ ...editing, avatar_url: url });
+      // Functional update: the modal may have been closed while the upload ran.
+      setEditing((prev) => (prev ? { ...prev, avatar_url: url } : prev));
     } catch (err) {
       const detail = err instanceof Error ? err.message : String(err);
       setMsg(
@@ -219,7 +220,7 @@ export default function TestimonialManager() {
                 <input type="file" accept="image/*" onChange={handleFile} className="mt-1.5 block text-sm" />
                 {editing.avatar_url && (
                   <div className="relative mt-2 h-16 w-16 overflow-hidden rounded-full">
-                    <Image src={editing.avatar_url} alt="" fill className="object-cover" />
+                    <Image src={editing.avatar_url} alt="" fill sizes="64px" className="object-cover" />
                   </div>
                 )}
               </div>

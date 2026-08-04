@@ -102,58 +102,58 @@ export default function DashboardOverview({ lang }: { lang: string }) {
       {/* Hero saldo */}
       <Link
         href={`/${lang}/admin/keuangan`}
-        className="mt-8 block overflow-hidden rounded-3xl bg-gradient-to-br from-forest-dark to-near-black p-7 text-off-white transition-shadow hover:shadow-[0_20px_50px_-20px_rgba(19,42,34,0.6)] md:p-8"
+        className="mt-6 block overflow-hidden rounded-3xl bg-gradient-to-br from-forest-dark to-near-black p-5 text-off-white transition-shadow hover:shadow-[0_20px_50px_-20px_rgba(19,42,34,0.6)] sm:mt-8 sm:p-7 md:p-8"
       >
         <div className="flex items-center gap-2 text-off-white/70">
           <WalletIcon className="h-5 w-5" />
           <span className="text-sm font-medium">Saldo kas</span>
         </div>
-        <p className="mt-3 font-display text-4xl font-bold md:text-5xl">
+        <p className="mt-2 font-display text-3xl font-bold sm:mt-3 sm:text-4xl md:text-5xl">
           {s ? rp(balance) : "—"}
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-6 border-t border-off-white/10 pt-5">
-          <div className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-sea-foam/20 text-sea-foam">
-              <TrendUpIcon className="h-5 w-5" />
+        <div className="mt-4 grid grid-cols-2 gap-3 border-t border-off-white/10 pt-4 sm:mt-6 sm:flex sm:flex-wrap sm:gap-6 sm:pt-5">
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sea-foam/20 text-sea-foam sm:h-9 sm:w-9">
+              <TrendUpIcon className="h-4 w-4 sm:h-5 sm:w-5" />
             </span>
-            <div>
+            <div className="min-w-0">
               <p className="text-xs text-off-white/60">Uang masuk</p>
-              <p className="font-display text-lg font-bold text-sea-foam">
+              <p className="font-display text-base font-bold text-sea-foam sm:text-lg">
                 {s ? rp(s.income) : "—"}
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-red-500/15 text-red-300">
-              <TrendDownIcon className="h-5 w-5" />
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-500/15 text-red-300 sm:h-9 sm:w-9">
+              <TrendDownIcon className="h-4 w-4 sm:h-5 sm:w-5" />
             </span>
-            <div>
+            <div className="min-w-0">
               <p className="text-xs text-off-white/60">Uang keluar</p>
-              <p className="font-display text-lg font-bold text-red-300">
+              <p className="font-display text-base font-bold text-red-300 sm:text-lg">
                 {s ? rp(s.expense) : "—"}
               </p>
             </div>
           </div>
-          <span className="w-full text-sm font-medium text-off-white/70 md:ml-auto md:w-auto md:self-center">
+          <span className="col-span-2 text-sm font-medium text-off-white/70 sm:w-full md:ml-auto md:w-auto md:self-center">
             Kelola keuangan →
           </span>
         </div>
       </Link>
 
       {/* Konten stats */}
-      <p className="eyebrow mt-8 text-forest-dark/50">Konten</p>
-      <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <p className="eyebrow mt-6 text-forest-dark/50 sm:mt-8">Konten</p>
+      <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-5">
         {cards.map(({ slug, label, value, Icon }) => (
           <Link
             key={slug}
             href={`/${lang}/admin/${slug}`}
-            className="group rounded-2xl border border-warm-neutral bg-white/70 p-5 transition-colors hover:border-sea-foam"
+            className="group rounded-2xl border border-warm-neutral bg-white/70 p-4 transition-colors hover:border-sea-foam sm:p-5"
           >
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-warm-neutral text-forest-dark transition-colors group-hover:bg-sea-foam group-hover:text-off-white">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-warm-neutral text-forest-dark transition-colors group-hover:bg-sea-foam group-hover:text-off-white sm:h-10 sm:w-10">
               <Icon className="h-5 w-5" />
             </span>
-            <p className="mt-4 font-display text-3xl font-bold text-forest-dark">
+            <p className="mt-3 font-display text-2xl font-bold text-forest-dark sm:mt-4 md:text-3xl">
               {value ?? "—"}
             </p>
             <p className="mt-0.5 text-sm text-forest-dark/60">{label}</p>

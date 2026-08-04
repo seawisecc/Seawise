@@ -14,6 +14,9 @@ type Row = {
   cover_url: string | null;
   published: boolean;
   published_at: string | null;
+  title_en: string | null;
+  excerpt_en: string | null;
+  content_en: string | null;
 };
 
 const empty: Omit<Row, "id"> = {
@@ -24,6 +27,9 @@ const empty: Omit<Row, "id"> = {
   cover_url: "",
   published: false,
   published_at: null,
+  title_en: "",
+  excerpt_en: "",
+  content_en: "",
 };
 
 function slugify(s: string) {
@@ -62,7 +68,8 @@ export default function PostManager() {
     setBusy(true);
     try {
       const url = await uploadImage(supabase, file, "blog");
-      setEditing({ ...editing, cover_url: url });
+      // Functional update: the modal may have been closed while the upload ran.
+      setEditing((prev) => (prev ? { ...prev, cover_url: url } : prev));
     } catch (err) {
       const detail = err instanceof Error ? err.message : String(err);
       setMsg(`Gagal upload cover: ${detail}. Cek bucket 'media' & policy storage.`);
@@ -93,6 +100,9 @@ export default function PostManager() {
       cover_url: editing.cover_url,
       published: editing.published,
       published_at: publishedAt,
+      title_en: editing.title_en,
+      excerpt_en: editing.excerpt_en,
+      content_en: editing.content_en,
     };
 
     const { error } = editing.id
@@ -237,12 +247,49 @@ export default function PostManager() {
                   onChange={(e) => setEditing({ ...editing, content: e.target.value })}
                 />
               </div>
+              <div className="rounded-2xl border border-warm-neutral bg-white/60 p-4">
+                <p className={label}>Versi Inggris (halaman /en)</p>
+                <p className="mt-0.5 text-xs text-forest-dark/50">
+                  Terjemahan artikel. Kosongkan kalau belum sempat, halaman /en
+                  otomatis memakai versi Indonesia.
+                </p>
+                <div className="mt-3 space-y-3">
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">Judul (EN)</label>
+                    <input
+                      className={field}
+                      value={editing.title_en ?? ""}
+                      onChange={(e) => setEditing({ ...editing, title_en: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">Ringkasan (EN)</label>
+                    <textarea
+                      className={`${field} resize-y`}
+                      rows={2}
+                      value={editing.excerpt_en ?? ""}
+                      onChange={(e) => setEditing({ ...editing, excerpt_en: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">
+                      Isi artikel (EN, Markdown)
+                    </label>
+                    <textarea
+                      className={`${field} resize-y font-mono text-sm`}
+                      rows={12}
+                      value={editing.content_en ?? ""}
+                      onChange={(e) => setEditing({ ...editing, content_en: e.target.value })}
+                    />
+                  </div>
+                </div>
+              </div>
               <div>
                 <label className={label}>Cover</label>
                 <input type="file" accept="image/*" onChange={handleCover} className="mt-1.5 block text-sm" />
                 {editing.cover_url && (
                   <div className="relative mt-2 aspect-[16/9] w-full max-w-xs overflow-hidden rounded-lg">
-                    <Image src={editing.cover_url} alt="" fill className="object-cover" />
+                    <Image src={editing.cover_url} alt="" fill sizes="320px" className="object-cover" />
                   </div>
                 )}
               </div>

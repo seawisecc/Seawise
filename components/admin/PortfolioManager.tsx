@@ -104,7 +104,8 @@ export default function PortfolioManager() {
     setBusy(true);
     try {
       const url = await uploadImage(supabase, file, "portfolio");
-      setEditing({ ...editing, screenshot_url: url });
+      // Functional update: the modal may have been closed while the upload ran.
+      setEditing((prev) => (prev ? { ...prev, screenshot_url: url } : prev));
     } catch (err) {
       const detail = err instanceof Error ? err.message : String(err);
       setMsg(
@@ -121,7 +122,7 @@ export default function PortfolioManager() {
     setBusy(true);
     try {
       const url = await uploadImage(supabase, file, "portfolio");
-      setEditing({ ...editing, cover_url: url });
+      setEditing((prev) => (prev ? { ...prev, cover_url: url } : prev));
     } catch (err) {
       const detail = err instanceof Error ? err.message : String(err);
       setMsg(`Gagal upload cover: ${detail}. Cek bucket 'media' & policy storage.`);
@@ -136,7 +137,7 @@ export default function PortfolioManager() {
     setBusy(true);
     try {
       const url = await uploadImage(supabase, file, "portfolio");
-      setEditing({ ...editing, mobile_url: url });
+      setEditing((prev) => (prev ? { ...prev, mobile_url: url } : prev));
     } catch (err) {
       const detail = err instanceof Error ? err.message : String(err);
       setMsg(`Gagal upload gambar mobile: ${detail}. Cek bucket 'media' & policy storage.`);
@@ -152,7 +153,10 @@ export default function PortfolioManager() {
     try {
       const urls: string[] = [];
       for (const f of files) urls.push(await uploadImage(supabase, f, "portfolio"));
-      setEditing({ ...editing, gallery: [...(editing.gallery ?? []), ...urls] });
+      // Reading `prev.gallery` also keeps a second batch from dropping the first.
+      setEditing((prev) =>
+        prev ? { ...prev, gallery: [...(prev.gallery ?? []), ...urls] } : prev
+      );
     } catch (err) {
       const detail = err instanceof Error ? err.message : String(err);
       setMsg(`Gagal upload galeri: ${detail}. Cek bucket 'media' & policy storage.`);
@@ -461,7 +465,7 @@ export default function PortfolioManager() {
                 <input type="file" accept="image/*" onChange={handleCover} className="mt-1.5 block text-sm" />
                 {editing.cover_url && (
                   <div className="relative mt-2 aspect-[16/10] w-full overflow-hidden rounded-lg border border-warm-neutral">
-                    <Image src={editing.cover_url} alt="" fill className="object-cover" />
+                    <Image src={editing.cover_url} alt="" fill sizes="464px" className="object-cover" />
                     <button
                       type="button"
                       onClick={() => setEditing({ ...editing, cover_url: "" })}
@@ -488,7 +492,7 @@ export default function PortfolioManager() {
                     <input type="file" accept="image/*" onChange={handleFile} className="mt-1.5 block w-full text-xs" />
                     {editing.screenshot_url && (
                       <div className="relative mt-2 aspect-[16/10] w-full overflow-hidden rounded-lg border border-warm-neutral">
-                        <Image src={editing.screenshot_url} alt="" fill className="object-cover object-top" />
+                        <Image src={editing.screenshot_url} alt="" fill sizes="224px" className="object-cover object-top" />
                         <button
                           type="button"
                           onClick={() => setEditing({ ...editing, screenshot_url: "" })}
@@ -506,7 +510,7 @@ export default function PortfolioManager() {
                     <input type="file" accept="image/*" onChange={handleMobile} className="mt-1.5 block w-full text-xs" />
                     {editing.mobile_url && (
                       <div className="relative mx-auto mt-2 aspect-[9/19] w-20 overflow-hidden rounded-xl border border-warm-neutral">
-                        <Image src={editing.mobile_url} alt="" fill className="object-cover object-top" />
+                        <Image src={editing.mobile_url} alt="" fill sizes="80px" className="object-cover object-top" />
                         <button
                           type="button"
                           onClick={() => setEditing({ ...editing, mobile_url: "" })}
@@ -529,7 +533,7 @@ export default function PortfolioManager() {
                   <div className="mt-2 grid grid-cols-3 gap-2">
                     {(editing.gallery ?? []).map((g) => (
                       <div key={g} className="group relative aspect-[4/3] overflow-hidden rounded-lg">
-                        <Image src={g} alt="" fill className="object-cover" />
+                        <Image src={g} alt="" fill sizes="150px" className="object-cover" />
                         <button
                           type="button"
                           onClick={() => removeGalleryImage(g)}

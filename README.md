@@ -112,63 +112,24 @@ Set semuanya juga di Vercel → Settings → Environment Variables, lalu redeplo
 
 Jalankan berurutan di Supabase SQL Editor. Semua aman diulang:
 
-`supabase-migration-v2.sql` → `v3` → `v4` → `v5` → `v6` (mobile_url) → `v7` (cover_url) → `v8` (kolom `*_en` bilingual).
+`supabase-migration-v1.sql` (skema dasar: portfolio, testimonials, partners,
+leads + RLS) → `v2` → `v3` → `v4` → `v5` → `v6` (mobile_url) → `v7` (cover_url)
+→ `v8` (kolom `*_en` bilingual) → `v9` (kolom `*_en` untuk blog).
+
+Di database yang masih kosong, **v1 wajib dijalankan lebih dulu**: v2 memakai
+`alter table portfolio`, jadi akan gagal kalau tabelnya belum ada.
 
 ## Supabase
 
 1. Copy `.env.local.example` → `.env.local`, isi dari Project Settings → API.
-2. Jalankan schema SQL di bawah pada SQL Editor Supabase.
+2. Jalankan `supabase-migration-v1.sql` di SQL Editor Supabase, lalu lanjutkan
+   `v2` sampai `v8` sesuai urutan di bagian **Migrasi SQL** di atas.
+3. (Opsional) jalankan `supabase-seed.sql` untuk mengisi contoh portfolio &
+   testimoni. Tanpa ini, section portfolio & testimoni otomatis tersembunyi
+   sampai kamu isi datanya lewat `/admin`.
 
-```sql
--- portfolio
-create table portfolio (
-  id uuid primary key default gen_random_uuid(),
-  title text not null,
-  description text,
-  industry text,
-  live_url text,
-  screenshot_url text,
-  tech_stack text[],
-  featured boolean default false,
-  sort_order int default 0,
-  published boolean default true,
-  created_at timestamptz default now()
-);
-
--- testimonials
-create table testimonials (
-  id uuid primary key default gen_random_uuid(),
-  client_name text not null,
-  company text,
-  role text,
-  content text not null,
-  avatar_url text,
-  published boolean default false,
-  sort_order int default 0,
-  created_at timestamptz default now()
-);
-
--- partners
-create table partners (
-  id uuid primary key default gen_random_uuid(),
-  name text not null,
-  logo_url text,
-  website_url text,
-  sort_order int default 0,
-  published boolean default true,
-  created_at timestamptz default now()
-);
-
--- leads (dari form kontak)
-create table leads (
-  id uuid primary key default gen_random_uuid(),
-  name text not null,
-  email text not null,
-  message text not null,
-  status text default 'new',
-  created_at timestamptz default now()
-);
-```
+Definisi tabel dan RLS ada di dalam file `supabase-migration-v1.sql` supaya
+skema hanya punya satu sumber kebenaran dan tidak bisa melenceng dari dokumen.
 
 ## Admin panel (`/admin`)
 
@@ -182,33 +143,17 @@ Login pakai kredensial itu di `/admin/login`.
 
 ### 2. Row Level Security (RLS)
 
-Aktifkan RLS lalu jalankan policy berikut — **publik hanya boleh baca yang
-published**, sedangkan **user login boleh baca/tulis semua**:
+RLS untuk `portfolio`, `testimonials`, `partners`, dan `leads` sudah ikut
+dijalankan oleh `supabase-migration-v1.sql`, begitu juga `pricing` &
+`transactions` oleh `v2` dan `posts` oleh `v4`. Tidak ada langkah manual.
 
-```sql
-alter table portfolio    enable row level security;
-alter table testimonials enable row level security;
-alter table partners     enable row level security;
-alter table leads        enable row level security;
+Aturannya: **publik hanya boleh baca baris yang `published = true`**, publik
+boleh insert ke `leads` saja (kirim pesan) tapi tidak boleh membacanya, dan
+**user login punya akses penuh** ke semua tabel. Tabel `transactions` tertutup
+sepenuhnya dari publik.
 
--- Publik: baca hanya yang published
-create policy "public read published portfolio"
-  on portfolio for select using (published = true);
-create policy "public read published testimonials"
-  on testimonials for select using (published = true);
-create policy "public read published partners"
-  on partners for select using (published = true);
-
--- Publik: boleh kirim pesan (insert lead) saja
-create policy "public insert leads"
-  on leads for insert with check (true);
-
--- Admin (user login): akses penuh ke semua tabel
-create policy "admin all portfolio"    on portfolio    for all to authenticated using (true) with check (true);
-create policy "admin all testimonials" on testimonials for all to authenticated using (true) with check (true);
-create policy "admin all partners"     on partners     for all to authenticated using (true) with check (true);
-create policy "admin all leads"        on leads        for all to authenticated using (true) with check (true);
-```
+Semua policy dibuat dengan `drop policy if exists` lebih dulu, jadi file-nya
+aman dijalankan berulang tanpa error `42710: policy already exists`.
 
 ### 3. Storage untuk upload gambar
 

@@ -49,7 +49,8 @@ export default function PartnerManager() {
     setBusy(true);
     try {
       const url = await uploadImage(supabase, file, "partners");
-      setEditing({ ...editing, logo_url: url });
+      // Functional update: the modal may have been closed while the upload ran.
+      setEditing((prev) => (prev ? { ...prev, logo_url: url } : prev));
     } catch (err) {
       const detail = err instanceof Error ? err.message : String(err);
       setMsg(
@@ -130,7 +131,7 @@ export default function PartnerManager() {
                 <td className="px-5 py-3.5">
                   {r.logo_url ? (
                     <div className="relative h-8 w-16">
-                      <Image src={r.logo_url} alt={r.name} fill className="object-contain" />
+                      <Image src={r.logo_url} alt={r.name} fill sizes="64px" className="object-contain" />
                     </div>
                   ) : (
                     <span className="text-forest-dark/40">—</span>
@@ -185,7 +186,7 @@ export default function PartnerManager() {
                 <input type="file" accept="image/*" onChange={handleFile} className="mt-1.5 block text-sm" />
                 {editing.logo_url && (
                   <div className="relative mt-2 h-12 w-32">
-                    <Image src={editing.logo_url} alt="" fill className="object-contain" />
+                    <Image src={editing.logo_url} alt="" fill sizes="128px" className="object-contain" />
                   </div>
                 )}
               </div>

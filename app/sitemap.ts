@@ -36,12 +36,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: now,
         changeFrequency: "monthly",
         priority: 0.6,
+        alternates: {
+          languages: Object.fromEntries(
+            i18n.locales.map((l) => [l, `${SITE_URL}/${l}/portfolio/${item.slug}`])
+          ),
+        },
       });
     }
   }
 
   // Blog articles, per locale.
-  const posts = await getPosts();
+  const posts = await getPosts(i18n.defaultLocale);
   for (const post of posts) {
     const lastMod = post.published_at ?? post.created_at;
     for (const locale of i18n.locales) {
@@ -50,6 +55,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: lastMod ? new Date(lastMod) : now,
         changeFrequency: "monthly",
         priority: 0.6,
+        alternates: {
+          languages: Object.fromEntries(
+            i18n.locales.map((l) => [l, `${SITE_URL}/${l}/blog/${post.slug}`])
+          ),
+        },
       });
     }
   }

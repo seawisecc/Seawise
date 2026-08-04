@@ -33,22 +33,25 @@ export default async function PortfolioPage({
     <>
       <PageHeader eyebrow={t.eyebrow} title={t.title} intro={t.intro} />
 
-      <section className="bg-off-white">
-        <div className="mx-auto max-w-content px-5 py-14 md:px-8">
-          <PortfolioGrid
-            items={items}
-            lang={lang}
-            labels={{
-              liveButton: t.liveButton,
-              comingSoon: t.comingSoon,
-              filterAll: t.filterAll,
-              filterApp: t.filterApp,
-              filterWebsite: t.filterWebsite,
-              viewDetail: t.viewDetail,
-            }}
-          />
-        </div>
-      </section>
+      {/* Hidden until real rows exist, rather than showing placeholder cards. */}
+      {items.length > 0 && (
+        <section className="bg-off-white">
+          <div className="mx-auto max-w-content px-5 py-14 md:px-8">
+            <PortfolioGrid
+              items={items}
+              lang={lang}
+              labels={{
+                liveButton: t.liveButton,
+                comingSoon: t.comingSoon,
+                filterAll: t.filterAll,
+                filterApp: t.filterApp,
+                filterWebsite: t.filterWebsite,
+                viewDetail: t.viewDetail,
+              }}
+            />
+          </div>
+        </section>
+      )}
     </>
   );
 }
