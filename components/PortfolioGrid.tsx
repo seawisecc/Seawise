@@ -82,6 +82,8 @@ export default function PortfolioGrid({
                         alt={`Preview ${p.title}`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        // First card is the LCP element on /portfolio.
+                        priority={i === 0}
                         className="object-cover transition-transform duration-500 hover:scale-[1.03]"
                       />
                     ) : (

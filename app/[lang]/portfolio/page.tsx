@@ -13,8 +13,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const dict = getDictionary(params.lang);
   return pageSeo(params.lang, "portfolio", {
-    title: dict.nav.portfolio,
-    description: dict.portfolio.intro,
+    title: dict.seo.portfolio.title,
+    description: dict.seo.portfolio.description,
   });
 }
 

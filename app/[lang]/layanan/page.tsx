@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import { WebsiteIcon, AppIcon } from "@/components/ServiceIcons";
+import FaqSection, { faqJsonLd } from "@/components/FaqSection";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { pageSeo } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
@@ -15,8 +16,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const dict = getDictionary(params.lang);
   return pageSeo(params.lang, "layanan", {
-    title: dict.nav.services,
-    description: dict.services.intro,
+    title: dict.seo.layanan.title,
+    description: dict.seo.layanan.description,
   });
 }
 
@@ -28,11 +29,17 @@ export default async function LayananPage({
   params: { lang: Locale };
 }) {
   const { lang } = params;
-  const t = getDictionary(lang).services;
+  const dict = getDictionary(lang);
+  const t = dict.services;
   const pricing = await getPricing(lang);
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(dict.faq.items)) }}
+      />
       <PageHeader eyebrow={t.eyebrow} title={t.title} intro={t.intro} />
 
       {/* ── Website group ─────────────────────────────────────────── */}
@@ -161,6 +168,8 @@ export default async function LayananPage({
           </Reveal>
         </div>
       </section>
+
+      <FaqSection title={dict.faq.title} items={dict.faq.items} />
     </>
   );
 }

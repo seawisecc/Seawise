@@ -11,6 +11,233 @@ const en = {
     description:
       "App & website development studio based in Bali, from custom ERP and business apps to fast, modern websites, serving clients across Indonesia.",
   },
+  /**
+   * Search-result copy, kept separate from the visible `intro` text. The visible
+   * intros read well on the page but run short for a meta description, and
+   * rewriting them would change the published design.
+   */
+  breadcrumb: {
+    home: "Home",
+  },
+  seo: {
+    layanan: {
+      title: "Website & App Development Services",
+      description:
+        "Custom website and application development from Seawise Studio in Bali. ERP, business apps, and company profile sites, built from how your team actually works.",
+    },
+    portfolio: {
+      title: "Website & App Project Portfolio",
+      description:
+        "See the websites and apps we have delivered, from manufacturing ERP to pharmacy and point of sale systems. Every project links straight to the live build.",
+    },
+    testimoni: {
+      title: "Client Testimonials",
+      description:
+        "Feedback from the teams who use our systems every day, covering how the project ran, what shipped, and the support they get after going live.",
+    },
+    blog: {
+      title: "Blog: Website & App Guides",
+      description:
+        "Practical guides on website cost, choosing business software, and running your own systems, written from the projects we actually deliver.",
+    },
+    tentang: {
+      title: "About Us",
+      description:
+        "Seawise Studio is a Systems & Software Studio based in Bali. We build ERP and custom applications across industries, from enterprise down to small business.",
+    },
+    kontak: {
+      title: "Free Consultation, Website & Apps",
+      description:
+        "The first conversation about your website or business app is free. Fill in the form on this page, or email us directly at hello@seawise.id.",
+    },
+    websiteBali: {
+      title: "Website Development in Bali",
+      description:
+        "Website development for businesses in Bali and across Indonesia. Company profiles, landing pages, and custom builds, with an admin panel you run yourself.",
+    },
+    appBali: {
+      title: "App Development in Bali",
+      description:
+        "Custom application development from Bali: ERP, point of sale, small business apps, and migration off spreadsheets, built around how your team already works.",
+    },
+  },
+  /** Shared FAQ shown on the services page, also emitted as FAQPage JSON-LD. */
+  faq: {
+    title: "Frequently asked questions",
+    items: [
+      {
+        q: "How much does a website from Seawise Studio cost?",
+        a: "Website packages start from Rp2M across four tiers, from a single landing page through to a fully custom build. The final figure is confirmed after a short discovery call, because it depends on how many sections and features you actually need.",
+      },
+      {
+        q: "How long does a project take?",
+        a: "It depends on scope. We give you a time estimate once the scope is agreed in the discovery call, rather than quoting a generic number that may not match your project.",
+      },
+      {
+        q: "Can I edit the content myself afterwards?",
+        a: "Yes, from the Reef tier upward. Those packages include an admin panel where you edit text, prices, and photos yourself, without having to come back to us for small changes.",
+      },
+      {
+        q: "Do you build applications, not just websites?",
+        a: "Yes. We build custom ERP and business applications, including migrations off older systems and spreadsheets. Several examples are on the portfolio page.",
+      },
+      {
+        q: "Do you work with clients outside Bali?",
+        a: "Yes. We are based in Bali and work with clients across Indonesia. The whole process can run online if that is easier for you.",
+      },
+    ],
+  },
+  /** Keyword-targeted local landing pages. */
+  landing: {
+    website: {
+      eyebrow: "Website Development",
+      title: "Website development in Bali, built to be run by your own team.",
+      intro:
+        "We build company profile sites, landing pages, and custom websites for businesses in Bali and across Indonesia, with an admin panel so you are not dependent on us for every edit.",
+      pointsTitle: "What you get",
+      points: [
+        {
+          title: "Built for your business, not a template",
+          body: "The structure follows how you actually sell, rather than forcing your content into a layout that was designed for someone else.",
+        },
+        {
+          title: "An admin panel you control",
+          body: "From the Reef tier upward you edit text, prices, and photos yourself. No monthly fee just to change a headline.",
+        },
+        {
+          title: "SEO and structured data from day one",
+          body: "Canonical URLs, sitemap, metadata, and schema.org markup are set up as part of the build, not sold back to you later.",
+        },
+        {
+          title: "Fast on the phone",
+          body: "Most of your visitors arrive on mobile data. Pages are built to load quickly there first, not only on a desk connection.",
+        },
+      ],
+      stepsTitle: "How it works",
+      steps: [
+        {
+          title: "Discovery call",
+          body: "We map what you sell, who buys it, and what the site has to do. This first conversation is free.",
+        },
+        {
+          title: "Scope and quote",
+          body: "You get a written scope and a price before anything is built, so there are no surprises later.",
+        },
+        {
+          title: "Build and review",
+          body: "We build, then you review on a live preview link and give feedback before it goes public.",
+        },
+        {
+          title: "Launch and handover",
+          body: "We launch, then walk you through the admin panel so your team can keep the site current.",
+        },
+      ],
+      faqTitle: "Frequently asked questions",
+      faq: [
+        {
+          q: "How much does website development in Bali cost?",
+          a: "Our website packages start from Rp2M and run across four tiers. Which one fits depends on how many sections you need, how much design customisation you want, and whether you need an admin panel.",
+        },
+        {
+          q: "Do I need to be in Bali to work with you?",
+          a: "No. We are based in Bali and work with clients throughout Indonesia. Discovery, review, and handover can all be done online.",
+        },
+        {
+          q: "Can I update the website without a developer?",
+          a: "Yes, from the Reef tier upward. The admin panel lets you edit text, prices, and images directly, and the changes appear on the live site.",
+        },
+        {
+          q: "Is hosting and domain included?",
+          a: "Domain and hosting are arranged as part of the project. The exact arrangement is confirmed during the discovery call, since it depends on what you already own.",
+        },
+        {
+          q: "What happens after the site goes live?",
+          a: "You get a walkthrough of the admin panel at handover. Ongoing maintenance is available as an optional add-on rather than something you are locked into.",
+        },
+      ],
+      relatedTitle: "Keep reading",
+      relatedPortfolio: "See websites we have built",
+      relatedServices: "Compare website packages",
+      ctaTitle: "Tell us what your business needs.",
+      ctaBody:
+        "Describe your process and we will help map the scope before you commit to anything.",
+      ctaButton: "Start a conversation",
+    },
+    app: {
+      eyebrow: "App Development",
+      title: "Custom app development in Bali, shaped around how your team works.",
+      intro:
+        "We build ERP systems, point of sale, and business applications for companies in Bali and across Indonesia, including migrations away from spreadsheets and ageing software.",
+      pointsTitle: "What you get",
+      points: [
+        {
+          title: "Built from your real workflow",
+          body: "We start from how your team already works, then remove the steps that only exist because the old system demanded them.",
+        },
+        {
+          title: "Proven across industries",
+          body: "Manufacturing and distribution, pharmacy, restaurants, and retail. The portfolio page links straight to working systems.",
+        },
+        {
+          title: "Migration without losing history",
+          body: "Moving off spreadsheets or an older system is planned as part of the project, so your existing records come with you.",
+        },
+        {
+          title: "Roles and access control",
+          body: "Staff see what they need for their job. Owners get the reporting view without giving everyone full access.",
+        },
+      ],
+      stepsTitle: "How it works",
+      steps: [
+        {
+          title: "Process mapping",
+          body: "We sit with your process end to end and write down where the time actually goes. This first session is free.",
+        },
+        {
+          title: "Scope and quote",
+          body: "You get a written scope covering modules, roles, and reporting, with a price, before development starts.",
+        },
+        {
+          title: "Build in stages",
+          body: "We deliver in stages so you can use and judge the core early, instead of waiting for one big reveal.",
+        },
+        {
+          title: "Rollout and support",
+          body: "We help move your data in, train the people who will use it daily, and stay available after go-live.",
+        },
+      ],
+      faqTitle: "Frequently asked questions",
+      faq: [
+        {
+          q: "How much does custom app development cost?",
+          a: "Custom applications are quoted per project, because scope varies far more than a website. We confirm the figure after mapping your process, and the mapping session itself is free.",
+        },
+        {
+          q: "Can you replace the spreadsheets we use now?",
+          a: "Yes. Migrating off spreadsheets is one of the most common reasons teams come to us, and moving your existing records is planned as part of the project.",
+        },
+        {
+          q: "What kinds of applications have you built?",
+          a: "ERP for manufacturing and distribution, pharmacy systems with batch and expiry tracking, restaurant systems from point of sale through to stock, and retail apps for smaller businesses.",
+        },
+        {
+          q: "Do you work with clients outside Bali?",
+          a: "Yes. We are based in Bali and work with clients across Indonesia, and the process can run online end to end.",
+        },
+        {
+          q: "What happens after the system goes live?",
+          a: "We help with data migration, train the team who will use it daily, and stay available afterwards. Ongoing support is agreed as part of the scope.",
+        },
+      ],
+      relatedTitle: "Keep reading",
+      relatedPortfolio: "See applications we have built",
+      relatedServices: "See all our services",
+      ctaTitle: "Tell us where the time goes.",
+      ctaBody:
+        "Walk us through your process and we will help map what a system should actually take off your plate.",
+      ctaButton: "Start a conversation",
+    },
+  },
   nav: {
     services: "Services",
     portfolio: "Portfolio",
@@ -276,6 +503,226 @@ const id: Dictionary = {
     titleTemplate: "%s | Seawise Studio",
     description:
       "Studio pengembangan aplikasi & website di Bali, dari ERP dan aplikasi bisnis custom sampai website modern, melayani klien seluruh Indonesia.",
+  },
+  breadcrumb: {
+    home: "Beranda",
+  },
+  seo: {
+    layanan: {
+      title: "Layanan Pembuatan Website & Aplikasi",
+      description:
+        "Jasa pembuatan website dan aplikasi custom dari Seawise Studio di Bali. ERP, aplikasi bisnis, dan company profile, dibangun dari alur kerja tim kamu.",
+    },
+    portfolio: {
+      title: "Portfolio Proyek Website & Aplikasi",
+      description:
+        "Lihat proyek website dan aplikasi yang sudah kami kerjakan, dari ERP manufaktur sampai sistem apotek dan kasir. Setiap proyek punya link demo langsung.",
+    },
+    testimoni: {
+      title: "Testimoni Klien",
+      description:
+        "Penilaian dari tim yang memakai sistem buatan kami setiap hari, soal jalannya proyek, hasil yang dipakai, dan pendampingan setelah aplikasi live.",
+    },
+    blog: {
+      title: "Blog: Panduan Website & Aplikasi",
+      description:
+        "Panduan praktis soal biaya pembuatan website, memilih aplikasi bisnis, dan mengelola sistem sendiri, ditulis dari proyek yang benar-benar kami kerjakan.",
+    },
+    tentang: {
+      title: "Tentang Kami",
+      description:
+        "Seawise Studio adalah Systems & Software Studio di Bali. Kami membangun ERP dan aplikasi custom lintas industri, dari sistem enterprise sampai UMKM.",
+    },
+    kontak: {
+      title: "Konsultasi Gratis Website & Aplikasi",
+      description:
+        "Diskusi awal soal pembuatan website atau aplikasi bisnis gratis. Isi form di halaman ini, atau kirim email langsung ke hello@seawise.id.",
+    },
+    websiteBali: {
+      title: "Jasa Pembuatan Website Bali",
+      description:
+        "Jasa pembuatan website untuk bisnis di Bali dan seluruh Indonesia. Company profile, landing page, dan custom, dengan admin panel yang kamu kelola sendiri.",
+    },
+    appBali: {
+      title: "Jasa Pembuatan Aplikasi Bali",
+      description:
+        "Jasa pembuatan aplikasi custom dari Bali: ERP, kasir, aplikasi UMKM, dan migrasi dari spreadsheet, dibangun mengikuti alur kerja tim kamu yang sekarang.",
+    },
+  },
+  faq: {
+    title: "Pertanyaan yang sering diajukan",
+    items: [
+      {
+        q: "Berapa biaya pembuatan website di Seawise Studio?",
+        a: "Paket website kami mulai dari Rp2 juta dengan empat tingkatan, dari satu halaman landing sampai custom penuh. Angka finalnya dikonfirmasi setelah sesi discovery singkat, karena tergantung berapa section dan fitur yang benar-benar kamu butuhkan.",
+      },
+      {
+        q: "Berapa lama proses pengerjaannya?",
+        a: "Tergantung cakupan. Estimasi waktu kami sampaikan setelah cakupan disepakati di sesi discovery, bukan angka umum yang belum tentu cocok dengan proyek kamu.",
+      },
+      {
+        q: "Apakah saya bisa mengubah isinya sendiri nanti?",
+        a: "Bisa, mulai paket Reef ke atas. Paket tersebut sudah termasuk admin panel untuk mengedit teks, harga, dan foto sendiri, tanpa perlu menghubungi kami untuk perubahan kecil.",
+      },
+      {
+        q: "Apakah bisa mengerjakan aplikasi, bukan cuma website?",
+        a: "Bisa. Kami membangun ERP dan aplikasi bisnis custom, termasuk migrasi dari sistem lama dan spreadsheet. Beberapa contohnya ada di halaman portfolio.",
+      },
+      {
+        q: "Apakah melayani klien di luar Bali?",
+        a: "Ya. Kami berbasis di Bali dan melayani klien di seluruh Indonesia. Prosesnya bisa berjalan sepenuhnya online kalau itu lebih praktis buat kamu.",
+      },
+    ],
+  },
+  landing: {
+    website: {
+      eyebrow: "Jasa Pembuatan Website",
+      title: "Jasa pembuatan website di Bali yang bisa kamu kelola sendiri.",
+      intro:
+        "Kami membuat company profile, landing page, dan website custom untuk bisnis di Bali dan seluruh Indonesia, lengkap dengan admin panel supaya kamu tidak bergantung ke kami untuk setiap perubahan kecil.",
+      pointsTitle: "Yang kamu dapat",
+      points: [
+        {
+          title: "Dibangun untuk bisnismu, bukan template",
+          body: "Strukturnya mengikuti cara kamu menjual, bukan memaksa isi kontenmu masuk ke layout yang dirancang untuk bisnis orang lain.",
+        },
+        {
+          title: "Admin panel yang kamu pegang",
+          body: "Mulai paket Reef ke atas, kamu mengedit teks, harga, dan foto sendiri. Tidak ada biaya bulanan hanya untuk mengganti satu judul.",
+        },
+        {
+          title: "SEO dan structured data sejak awal",
+          body: "Canonical, sitemap, metadata, dan markup schema.org sudah disiapkan sebagai bagian dari pengerjaan, bukan dijual terpisah belakangan.",
+        },
+        {
+          title: "Ringan dibuka di HP",
+          body: "Mayoritas pengunjungmu datang lewat kuota internet. Halaman dibuat supaya cepat di kondisi itu dulu, bukan cuma di koneksi kantor.",
+        },
+      ],
+      stepsTitle: "Cara kerjanya",
+      steps: [
+        {
+          title: "Sesi discovery",
+          body: "Kami petakan apa yang kamu jual, siapa pembelinya, dan website ini harus melakukan apa. Diskusi pertama ini gratis.",
+        },
+        {
+          title: "Cakupan dan penawaran",
+          body: "Kamu terima cakupan tertulis beserta harganya sebelum apa pun dikerjakan, jadi tidak ada kejutan di tengah jalan.",
+        },
+        {
+          title: "Pengerjaan dan review",
+          body: "Kami kerjakan, lalu kamu review lewat link preview yang bisa dibuka langsung dan memberi masukan sebelum dipublikasikan.",
+        },
+        {
+          title: "Live dan serah terima",
+          body: "Kami publikasikan, lalu memandu tim kamu memakai admin panel supaya isinya bisa terus diperbarui sendiri.",
+        },
+      ],
+      faqTitle: "Pertanyaan yang sering diajukan",
+      faq: [
+        {
+          q: "Berapa biaya jasa pembuatan website di Bali?",
+          a: "Paket website kami mulai dari Rp2 juta dengan empat tingkatan. Yang cocok yang mana tergantung berapa section yang kamu butuhkan, seberapa jauh kustomisasi desainnya, dan apakah kamu perlu admin panel.",
+        },
+        {
+          q: "Apakah harus berada di Bali untuk memakai jasa ini?",
+          a: "Tidak. Kami berbasis di Bali dan melayani klien di seluruh Indonesia. Discovery, review, sampai serah terima bisa dilakukan online.",
+        },
+        {
+          q: "Bisakah saya update website tanpa bantuan developer?",
+          a: "Bisa, mulai paket Reef ke atas. Admin panelnya memungkinkan kamu mengedit teks, harga, dan gambar langsung, dan perubahannya tampil di website.",
+        },
+        {
+          q: "Apakah sudah termasuk domain dan hosting?",
+          a: "Domain dan hosting diurus sebagai bagian dari proyek. Bentuk pastinya dikonfirmasi saat discovery, karena tergantung apa yang sudah kamu miliki.",
+        },
+        {
+          q: "Setelah website live, bagaimana?",
+          a: "Kamu dapat pemandu pemakaian admin panel saat serah terima. Maintenance lanjutan tersedia sebagai tambahan opsional, bukan sesuatu yang mengikat kamu.",
+        },
+      ],
+      relatedTitle: "Baca juga",
+      relatedPortfolio: "Lihat website yang sudah kami buat",
+      relatedServices: "Bandingkan paket website",
+      ctaTitle: "Ceritakan kebutuhan bisnismu.",
+      ctaBody:
+        "Jelaskan prosesmu, kami bantu memetakan cakupannya sebelum kamu memutuskan apa pun.",
+      ctaButton: "Mulai diskusi",
+    },
+    app: {
+      eyebrow: "Jasa Pembuatan Aplikasi",
+      title: "Jasa pembuatan aplikasi di Bali, mengikuti cara kerja tim kamu.",
+      intro:
+        "Kami membangun ERP, sistem kasir, dan aplikasi bisnis untuk perusahaan di Bali dan seluruh Indonesia, termasuk migrasi dari spreadsheet dan software lama yang sudah tidak memadai.",
+      pointsTitle: "Yang kamu dapat",
+      points: [
+        {
+          title: "Dibangun dari alur kerja nyata",
+          body: "Kami mulai dari cara tim kamu bekerja sekarang, lalu membuang langkah yang ada hanya karena dituntut sistem lama.",
+        },
+        {
+          title: "Sudah terbukti lintas industri",
+          body: "Manufaktur dan distribusi, apotek, restoran, dan retail. Halaman portfolio menautkan langsung ke sistem yang berjalan.",
+        },
+        {
+          title: "Migrasi tanpa kehilangan riwayat",
+          body: "Perpindahan dari spreadsheet atau sistem lama direncanakan sebagai bagian proyek, jadi data yang sudah ada ikut terbawa.",
+        },
+        {
+          title: "Hak akses per peran",
+          body: "Staf melihat yang mereka perlukan untuk pekerjaannya. Pemilik dapat tampilan laporan tanpa harus membuka akses penuh ke semua orang.",
+        },
+      ],
+      stepsTitle: "Cara kerjanya",
+      steps: [
+        {
+          title: "Pemetaan proses",
+          body: "Kami telusuri prosesmu dari ujung ke ujung dan mencatat ke mana waktu sebenarnya habis. Sesi pertama ini gratis.",
+        },
+        {
+          title: "Cakupan dan penawaran",
+          body: "Kamu terima cakupan tertulis mencakup modul, peran, dan laporan, beserta harganya, sebelum pengembangan dimulai.",
+        },
+        {
+          title: "Dikerjakan bertahap",
+          body: "Kami serahkan bertahap supaya kamu bisa memakai dan menilai bagian intinya lebih awal, bukan menunggu satu peluncuran besar.",
+        },
+        {
+          title: "Rollout dan pendampingan",
+          body: "Kami bantu memindahkan data, melatih orang yang memakainya setiap hari, dan tetap tersedia setelah sistem berjalan.",
+        },
+      ],
+      faqTitle: "Pertanyaan yang sering diajukan",
+      faq: [
+        {
+          q: "Berapa biaya jasa pembuatan aplikasi custom?",
+          a: "Aplikasi custom dihitung per proyek, karena cakupannya jauh lebih bervariasi dibanding website. Angkanya kami konfirmasi setelah memetakan prosesmu, dan sesi pemetaan itu sendiri gratis.",
+        },
+        {
+          q: "Bisakah menggantikan spreadsheet yang kami pakai sekarang?",
+          a: "Bisa. Beralih dari spreadsheet adalah salah satu alasan paling sering tim datang ke kami, dan pemindahan data yang sudah ada direncanakan sebagai bagian dari proyek.",
+        },
+        {
+          q: "Aplikasi seperti apa saja yang pernah dibuat?",
+          a: "ERP untuk manufaktur dan distribusi, sistem apotek dengan pelacakan batch dan kadaluarsa, sistem restoran dari kasir sampai stok bahan, dan aplikasi retail untuk usaha yang lebih kecil.",
+        },
+        {
+          q: "Apakah melayani klien di luar Bali?",
+          a: "Ya. Kami berbasis di Bali dan melayani klien di seluruh Indonesia, dan prosesnya bisa berjalan online dari awal sampai akhir.",
+        },
+        {
+          q: "Setelah sistemnya berjalan, bagaimana?",
+          a: "Kami bantu migrasi data, melatih tim yang memakainya setiap hari, dan tetap tersedia setelahnya. Bentuk pendampingan lanjutan disepakati sebagai bagian dari cakupan.",
+        },
+      ],
+      relatedTitle: "Baca juga",
+      relatedPortfolio: "Lihat aplikasi yang sudah kami buat",
+      relatedServices: "Lihat semua layanan kami",
+      ctaTitle: "Ceritakan ke mana waktumu habis.",
+      ctaBody:
+        "Jelaskan prosesmu, kami bantu memetakan apa yang seharusnya bisa diambil alih oleh sistem.",
+      ctaButton: "Mulai diskusi",
+    },
   },
   nav: {
     services: "Layanan",

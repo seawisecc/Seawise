@@ -15,8 +15,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const dict = getDictionary(params.lang);
   return pageSeo(params.lang, "testimoni", {
-    title: dict.nav.testimonials,
-    description: dict.testimonials.intro,
+    title: dict.seo.testimoni.title,
+    description: dict.seo.testimoni.description,
   });
 }
 

@@ -6,7 +6,7 @@ import { getPortfolioItem } from "@/lib/queries";
 import { renderMarkdown } from "@/lib/markdown";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { SITE_URL } from "@/lib/siteUrl";
-import { pageAlternates } from "@/lib/seo";
+import { pageAlternates, breadcrumbJsonLd, clampDescription, ogImageUrl } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 
 export const revalidate = 120;
@@ -18,16 +18,24 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const item = await getPortfolioItem(params.slug, params.lang);
   if (!item) return { title: "404" };
+  const description = clampDescription(item.description);
+  const image = ogImageUrl(item.cover_url ?? item.screenshot_url);
   return {
     title: `${item.title} | ${item.industry ?? "Portfolio"}`,
-    description: item.description ?? undefined,
+    description,
     alternates: pageAlternates(params.lang, `portfolio/${item.slug}`),
     openGraph: {
       title: item.title,
-      description: item.description ?? undefined,
+      description,
       url: `${SITE_URL}/${params.lang}/portfolio/${item.slug}`,
       type: "article",
-      images: item.screenshot_url ? [{ url: item.screenshot_url }] : undefined,
+      images: [{ url: image }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: item.title,
+      description,
+      images: [image],
     },
   };
 }
@@ -41,7 +49,8 @@ export default async function PortfolioDetail({
   const item = await getPortfolioItem(slug, lang);
   if (!item) notFound();
 
-  const t = getDictionary(lang).portfolio;
+  const dict = getDictionary(lang);
+  const t = dict.portfolio;
   const hasLive = item.live_url && item.live_url !== "#";
   const bodyHtml = renderMarkdown(item.body);
   const gallery = item.gallery ?? [];
@@ -57,12 +66,23 @@ export default async function PortfolioDetail({
     creator: { "@type": "Organization", name: "Seawise Studio" },
   };
 
+  const breadcrumb = breadcrumbJsonLd(lang, [
+    { name: dict.breadcrumb.home, path: "" },
+    { name: t.eyebrow, path: "portfolio" },
+    { name: item.title, path: `portfolio/${item.slug}` },
+  ]);
+
   return (
     <article className="bg-off-white">
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
       <div className="mx-auto max-w-3xl px-5 pb-20 pt-16 md:px-8 md:pt-24">
         <Link href={`/${lang}/portfolio`} className="text-sm font-medium text-sea-foam hover:underline">

@@ -6,7 +6,7 @@ import { getPost } from "@/lib/queries";
 import { renderMarkdown } from "@/lib/markdown";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { SITE_URL } from "@/lib/siteUrl";
-import { pageAlternates } from "@/lib/seo";
+import { pageAlternates, breadcrumbJsonLd, clampDescription, ogImageUrl } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 
 export const revalidate = 120;
@@ -20,22 +20,27 @@ export async function generateMetadata({
   if (!post) return { title: "404" };
 
   const url = `${SITE_URL}/${params.lang}/blog/${post.slug}`;
+  const description = clampDescription(post.excerpt);
+  const image = ogImageUrl(post.cover_url);
   return {
-    title: post.title,
-    description: post.excerpt ?? undefined,
+    // Absolute, so the "| Seawise Studio" template does not push an already
+    // long article headline further past what Google will display.
+    title: { absolute: post.title },
+    description,
     alternates: pageAlternates(params.lang, `blog/${post.slug}`),
     openGraph: {
       title: post.title,
-      description: post.excerpt ?? undefined,
+      description,
       url,
       type: "article",
       publishedTime: post.published_at ?? post.created_at,
-      images: post.cover_url ? [{ url: post.cover_url }] : undefined,
+      images: [{ url: image }],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
-      description: post.excerpt ?? undefined,
+      description,
+      images: [image],
     },
   };
 }
@@ -58,7 +63,8 @@ export default async function ArticlePage({
   const post = await getPost(slug, lang);
   if (!post) notFound();
 
-  const t = getDictionary(lang).blog;
+  const dict = getDictionary(lang);
+  const t = dict.blog;
   const html = renderMarkdown(post.content);
   const date = post.published_at ?? post.created_at;
 
@@ -71,9 +77,19 @@ export default async function ArticlePage({
     datePublished: date,
     dateModified: date,
     author: { "@type": "Organization", name: "Seawise Studio" },
-    publisher: { "@type": "Organization", name: "Seawise Studio" },
+    publisher: {
+      "@type": "Organization",
+      name: "Seawise Studio",
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/SeaWise.png` },
+    },
     mainEntityOfPage: `${SITE_URL}/${lang}/blog/${post.slug}`,
   };
+
+  const breadcrumb = breadcrumbJsonLd(lang, [
+    { name: dict.breadcrumb.home, path: "" },
+    { name: t.eyebrow, path: "blog" },
+    { name: post.title, path: `blog/${post.slug}` },
+  ]);
 
   return (
     <article className="bg-off-white">
@@ -81,6 +97,11 @@ export default async function ArticlePage({
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
       <div className="mx-auto max-w-3xl px-5 pb-20 pt-16 md:px-8 md:pt-24">
         <Link

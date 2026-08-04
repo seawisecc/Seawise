@@ -34,6 +34,8 @@ export default function Footer({
             <p className="eyebrow text-sea-foam">{dict.footer.navHeading}</p>
             <ul className="mt-4 space-y-2.5 text-sm text-off-white/80">
               <li><Link href={`/${lang}/layanan`} className="hover:text-sea-foam">{dict.nav.services}</Link></li>
+              <li><Link href={`/${lang}/jasa-pembuatan-website-bali`} className="hover:text-sea-foam">{dict.landing.website.eyebrow}</Link></li>
+              <li><Link href={`/${lang}/jasa-pembuatan-aplikasi-bali`} className="hover:text-sea-foam">{dict.landing.app.eyebrow}</Link></li>
               <li><Link href={`/${lang}/portfolio`} className="hover:text-sea-foam">{dict.nav.portfolio}</Link></li>
               <li><Link href={`/${lang}/testimoni`} className="hover:text-sea-foam">{dict.nav.testimonials}</Link></li>
               <li><Link href={`/${lang}/blog`} className="hover:text-sea-foam">{dict.nav.blog}</Link></li>

@@ -3,7 +3,17 @@ import { i18n } from "@/lib/i18n/config";
 import { SITE_URL } from "@/lib/siteUrl";
 import { getPosts, getPortfolio } from "@/lib/queries";
 
-const paths = ["", "/layanan", "/portfolio", "/testimoni", "/blog", "/tentang", "/kontak"];
+const paths = [
+  "",
+  "/layanan",
+  "/jasa-pembuatan-website-bali",
+  "/jasa-pembuatan-aplikasi-bali",
+  "/portfolio",
+  "/testimoni",
+  "/blog",
+  "/tentang",
+  "/kontak",
+];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
@@ -16,7 +26,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${SITE_URL}/${locale}${path}`,
         lastModified: now,
         changeFrequency: path === "" ? "weekly" : "monthly",
-        priority: path === "" ? 1 : path === "/kontak" ? 0.8 : 0.7,
+        priority:
+          path === ""
+            ? 1
+            : path === "/kontak" || path.includes("jasa-pembuatan")
+              ? 0.8
+              : 0.7,
         alternates: {
           languages: Object.fromEntries(
             i18n.locales.map((l) => [l, `${SITE_URL}/${l}${path}`])

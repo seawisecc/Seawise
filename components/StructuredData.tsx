@@ -20,6 +20,15 @@ export default function StructuredData({ lang }: { lang: Locale }) {
       description: dict.meta.description,
       email: "hello@seawise.id",
       slogan: "Systems & Software Studio",
+      // Not set on purpose: telephone, sameAs, priceRange. Google treats these
+      // as factual business claims, and the repo has no verified phone number
+      // or social profile URL to put here. Add them once they are known.
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        email: "hello@seawise.id",
+        availableLanguage: ["id", "en"],
+      },
       address: {
         "@type": "PostalAddress",
         addressRegion: "Bali",
