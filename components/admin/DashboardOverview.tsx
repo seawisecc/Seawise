@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { SkeletonBar } from "./AdminSkeleton";
 import {
   WalletIcon,
   TrendUpIcon,
@@ -109,7 +110,7 @@ export default function DashboardOverview({ lang }: { lang: string }) {
           <span className="text-sm font-medium">Saldo kas</span>
         </div>
         <p className="mt-2 font-display text-3xl font-bold sm:mt-3 sm:text-4xl md:text-5xl">
-          {s ? rp(balance) : "—"}
+          {s ? rp(balance) : <SkeletonBar className="h-9 w-48 bg-off-white/20" />}
         </p>
 
         <div className="mt-4 grid grid-cols-2 gap-3 border-t border-off-white/10 pt-4 sm:mt-6 sm:flex sm:flex-wrap sm:gap-6 sm:pt-5">
@@ -120,7 +121,7 @@ export default function DashboardOverview({ lang }: { lang: string }) {
             <div className="min-w-0">
               <p className="text-xs text-off-white/60">Uang masuk</p>
               <p className="font-display text-base font-bold text-sea-foam sm:text-lg">
-                {s ? rp(s.income) : "—"}
+                {s ? rp(s.income) : <SkeletonBar className="h-5 w-24 bg-off-white/20" />}
               </p>
             </div>
           </div>
@@ -131,7 +132,7 @@ export default function DashboardOverview({ lang }: { lang: string }) {
             <div className="min-w-0">
               <p className="text-xs text-off-white/60">Uang keluar</p>
               <p className="font-display text-base font-bold text-red-300 sm:text-lg">
-                {s ? rp(s.expense) : "—"}
+                {s ? rp(s.expense) : <SkeletonBar className="h-5 w-24 bg-off-white/20" />}
               </p>
             </div>
           </div>
@@ -154,7 +155,7 @@ export default function DashboardOverview({ lang }: { lang: string }) {
               <Icon className="h-5 w-5" />
             </span>
             <p className="mt-3 font-display text-2xl font-bold text-forest-dark sm:mt-4 md:text-3xl">
-              {value ?? "—"}
+              {value ?? (ready ? "0" : <SkeletonBar className="h-7 w-10" />)}
             </p>
             <p className="mt-0.5 text-sm text-forest-dark/60">{label}</p>
           </Link>

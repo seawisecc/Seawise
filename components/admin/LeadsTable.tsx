@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { SkeletonRows } from "./AdminSkeleton";
 
 type Lead = {
   id: string;
@@ -15,15 +16,20 @@ type Lead = {
 export default function LeadsTable() {
   const supabase = createClient();
   const [rows, setRows] = useState<Lead[]>([]);
+  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState<Lead | null>(null);
 
   async function load() {
-    if (!supabase) return;
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
     const { data } = await supabase
       .from("leads")
       .select("*")
       .order("created_at", { ascending: false });
     setRows((data as Lead[]) ?? []);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -88,7 +94,8 @@ export default function LeadsTable() {
                 </td>
               </tr>
             ))}
-            {rows.length === 0 && (
+            {loading && <SkeletonRows cols={5} />}
+            {!loading && rows.length === 0 && (
               <tr>
                 <td colSpan={5} className="px-5 py-10 text-center text-forest-dark/50">
                   Belum ada pesan.

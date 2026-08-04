@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
+import { SkeletonRows } from "./AdminSkeleton";
 import { uploadImage } from "@/lib/uploadImage";
 
 type Row = {
@@ -44,17 +45,22 @@ function slugify(s: string) {
 export default function PostManager() {
   const supabase = createClient();
   const [rows, setRows] = useState<Row[]>([]);
+  const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<(Omit<Row, "id"> & { id?: string }) | null>(null);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
 
   async function load() {
-    if (!supabase) return;
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
     const { data } = await supabase
       .from("posts")
       .select("*")
       .order("created_at", { ascending: false });
     setRows((data as Row[]) ?? []);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -178,7 +184,8 @@ export default function PostManager() {
                 </td>
               </tr>
             ))}
-            {rows.length === 0 && (
+            {loading && <SkeletonRows cols={4} />}
+            {!loading && rows.length === 0 && (
               <tr>
                 <td colSpan={4} className="px-5 py-10 text-center text-forest-dark/50">
                   Belum ada artikel.

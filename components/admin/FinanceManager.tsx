@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { SkeletonRows } from "./AdminSkeleton";
 import { WalletIcon, TrendUpIcon, TrendDownIcon } from "./AdminIcons";
 
 type Tx = {
@@ -25,6 +26,7 @@ const monthLabel = (k: string) => {
 export default function FinanceManager() {
   const supabase = createClient();
   const [rows, setRows] = useState<Tx[]>([]);
+  const [loading, setLoading] = useState(true);
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -37,12 +39,16 @@ export default function FinanceManager() {
   });
 
   async function load() {
-    if (!supabase) return;
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
     const { data } = await supabase
       .from("transactions")
       .select("*")
       .order("occurred_on", { ascending: false });
     setRows((data as Tx[]) ?? []);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -296,7 +302,8 @@ export default function FinanceManager() {
                 </td>
               </tr>
             ))}
-            {rows.length === 0 && (
+            {loading && <SkeletonRows cols={5} />}
+            {!loading && rows.length === 0 && (
               <tr>
                 <td colSpan={5} className="px-5 py-10 text-center text-forest-dark/50">
                   Belum ada transaksi.

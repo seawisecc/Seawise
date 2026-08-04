@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { SkeletonRows } from "./AdminSkeleton";
 
 type Row = {
   id: string;
@@ -35,6 +36,7 @@ const empty: Omit<Row, "id"> = {
 export default function PricingManager() {
   const supabase = createClient();
   const [rows, setRows] = useState<Row[]>([]);
+  const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<(Omit<Row, "id"> & { id?: string }) | null>(null);
   const [featInput, setFeatInput] = useState("");
   const [featInputEn, setFeatInputEn] = useState("");
@@ -42,12 +44,16 @@ export default function PricingManager() {
   const [msg, setMsg] = useState("");
 
   async function load() {
-    if (!supabase) return;
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
     const { data } = await supabase
       .from("pricing")
       .select("*")
       .order("sort_order", { ascending: true });
     setRows((data as Row[]) ?? []);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -169,7 +175,8 @@ export default function PricingManager() {
                 </td>
               </tr>
             ))}
-            {rows.length === 0 && (
+            {loading && <SkeletonRows cols={5} />}
+            {!loading && rows.length === 0 && (
               <tr>
                 <td colSpan={5} className="px-5 py-10 text-center text-forest-dark/50">
                   Belum ada paket.

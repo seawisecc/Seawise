@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
+import { SkeletonRows } from "./AdminSkeleton";
 import { uploadImage } from "@/lib/uploadImage";
 
 type Row = {
@@ -64,6 +65,7 @@ function slugify(s: string) {
 export default function PortfolioManager() {
   const supabase = createClient();
   const [rows, setRows] = useState<Row[]>([]);
+  const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<(Omit<Row, "id"> & { id?: string }) | null>(null);
   const [techInput, setTechInput] = useState("");
   const [techInputEn, setTechInputEn] = useState("");
@@ -71,12 +73,16 @@ export default function PortfolioManager() {
   const [msg, setMsg] = useState("");
 
   async function load() {
-    if (!supabase) return;
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
     const { data } = await supabase
       .from("portfolio")
       .select("*")
       .order("sort_order", { ascending: true });
     setRows((data as Row[]) ?? []);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -292,7 +298,8 @@ export default function PortfolioManager() {
                 </td>
               </tr>
             ))}
-            {rows.length === 0 && (
+            {loading && <SkeletonRows cols={5} />}
+            {!loading && rows.length === 0 && (
               <tr>
                 <td colSpan={5} className="px-5 py-10 text-center text-forest-dark/50">
                   Belum ada data.

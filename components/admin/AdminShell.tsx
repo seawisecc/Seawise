@@ -32,6 +32,11 @@ export default function AdminShell({
     router.refresh();
   }
 
+  // The login screen sits inside the admin segment but must not get the chrome.
+  // Same pattern SiteChrome already uses to opt the admin panel out of the
+  // marketing navbar and footer.
+  if (pathname.startsWith(`${base}/login`)) return <>{children}</>;
+
   return (
     <div className="min-h-screen bg-off-white md:flex">
       {/* Mobile top bar: brand + current page. Menu lives in the bottom bar. */}
