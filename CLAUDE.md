@@ -1,0 +1,219 @@
+# CLAUDE.md
+
+Panduan kerja untuk Claude Code di repo Seawise Studio.
+Next.js 14 App Router, TypeScript, Tailwind, Supabase. Studio pembuatan
+aplikasi & website di Bali.
+
+---
+
+## Aturan wajib
+
+1. **Situs bilingual.** Semua teks yang dilihat pengunjung ada di
+   `lib/i18n/dictionaries.ts`. Objek `en` adalah sumber kebenaran, `id` wajib
+   punya key yang sama. **Jangan hardcode teks di komponen publik.** Halaman
+   admin berbahasa Indonesia saja dan boleh hardcode.
+
+2. **Jangan pakai em-dash (—) di teks yang terlihat pengunjung**, termasuk alt
+   text, placeholder, dan metadata. Ganti dengan koma, titik dua, atau pipe.
+   Komentar kode dikecualikan. En-dash (–) untuk rentang angka boleh.
+
+3. **Jangan pernah membuat testimoni, rating, angka statistik, atau logo klien
+   fiktif.** Kalau data kosong, sembunyikan section-nya.
+
+4. **Halaman publik pakai ISR** `export const revalidate = 120` dan membaca
+   Supabase lewat client cookieless di `lib/supabase/public.ts`. Jangan diubah
+   ke `force-dynamic`, itu merusak kecepatan. Saat ini 11 dari 11 halaman
+   publik sudah patuh.
+
+5. **Canonical per halaman lewat helper di `lib/seo.ts`.** Halaman baru wajib
+   memakainya, kalau tidak dia mewarisi canonical homepage.
+
+6. **Verifikasi dengan `npx tsc --noEmit -p tsconfig.verify.json`.**
+   `next build` bisa gagal di lingkungan tanpa akses Google Fonts, itu wajar
+   dan bukan tanda kode rusak.
+
+7. **Jangan menambah dependensi berbayar atau layanan yang butuh kartu kredit**
+   tanpa memberi tahu dan menunggu persetujuan.
+
+8. **Tampilan situs publik sudah final.** Jangan mengubah layout, warna, atau
+   navigasi halaman publik kecuali diminta eksplisit. Admin bebas dikerjakan.
+
+**Sebelum mengubah apa pun, baca dulu file terkait dan jelaskan rencananya.**
+
+---
+
+## Jebakan yang sudah pernah menggigit
+
+Bagian ini bukan teori. Semuanya pernah jadi bug nyata di repo ini.
+
+### `pageSeo()` wajib menyertakan `images`
+
+Menyetel `openGraph` di sebuah halaman **menimpa** konvensi file
+`app/opengraph-image.png` milik Next. Dulu `pageSeo()` tidak menyebut `images`,
+akibatnya 12 halaman terkirim tanpa gambar preview sama sekali saat dibagikan
+di WhatsApp. Kalau menambah metadata OG di mana pun, pastikan `images` ikut.
+
+### `og:image` halaman detail: lebar 640, bukan 1200
+
+Scraper sosial mengirim `Accept: */*`, jadi optimizer mengembalikan format
+sumber. Screenshot di Supabase adalah PNG lossless, dan **parameter `q` tidak
+berpengaruh sama sekali pada PNG.** Hanya lebar yang menggerakkan ukuran file.
+640 menahan di bawah ambang preview WhatsApp (~300KB) sambil tetap melewati
+minimum 600x315 milik Facebook. Lihat `ogImageUrl()` di `lib/seo.ts`.
+
+### `seo.*` terpisah dari `intro` yang terlihat
+
+`dict.X.intro` dipakai ganda: sebagai paragraf pembuka yang tampil di halaman
+**dan** dulu sebagai meta description. Memperpanjang description untuk SEO akan
+mengubah tampilan publik, yang melanggar aturan 8. Karena itu ada objek
+`dict.seo.*` terpisah. **Jangan digabung kembali.**
+
+### Panjang array tidak diperiksa TypeScript
+
+`const id: Dictionary` memaksa `id` punya semua key `en`, tapi array di-infer
+sebagai `string[]`, jadi **jumlah elemen yang berbeda antar locale lolos
+typecheck**. Kalau menambah atau menghapus item array, cek kedua locale manual.
+
+### `AdminShell` ada di layout, bukan di halaman
+
+`app/[lang]/admin/layout.tsx` yang merender `AdminShell`. Dulu setiap halaman
+admin merender shell-nya sendiri, sehingga sidebar dan bottom bar dibongkar
+pasang di setiap perpindahan menu dan panel terasa seperti reload.
+**Jangan kembalikan `AdminShell` ke dalam file halaman.** Halaman admin
+idealnya cukup tiga baris:
+
+```tsx
+import FinanceManager from "@/components/admin/FinanceManager";
+
+export default function AdminFinancePage() {
+  return <FinanceManager />;
+}
+```
+
+Halaman login ikut dibungkus layout, jadi `AdminShell` punya pengecualian
+internal untuk `/admin/login`, pola yang sama dipakai `SiteChrome`.
+
+### Upload di admin harus pakai functional updater
+
+Handler upload menulis balik ke state setelah `await`. Kalau memakai `editing`
+dari closure, menutup modal saat upload berjalan akan **membuka modal itu
+kembali** dengan data basi, dan upload galeri batch kedua menghapus batch
+pertama. Selalu:
+
+```tsx
+setEditing((prev) => (prev ? { ...prev, cover_url: url } : prev));
+```
+
+### `env(safe-area-inset-*)` butuh `viewport-fit=cover`
+
+Tanpa itu nilainya selalu 0 dan padding safe area jadi mubazir. Diset di
+`app/[lang]/admin/layout.tsx`, **khusus segmen admin** supaya situs publik
+tetap memakai viewport default Next.
+
+### Tidak ada fallback portfolio atau testimoni
+
+Dulu ada baris placeholder untuk portfolio. Baris itu punya slug yang halaman
+detailnya tidak ada, jadi setiap kartu menautkan ke 404 **dan slug palsu itu
+masuk ke `sitemap.xml`**. Sekarang `getPortfolio()` mengembalikan array kosong
+dan pemanggilnya menyembunyikan section. Jangan tambahkan fallback lagi. Untuk
+mengisi database kosong, pakai `supabase-seed.sql`.
+
+---
+
+## Struktur
+
+```
+app/[lang]/              halaman publik, semua pakai revalidate = 120
+app/[lang]/admin/        panel admin
+  layout.tsx             AdminShell + viewport-fit=cover
+  loading.tsx            skeleton saat navigasi
+components/              komponen publik (20)
+components/admin/        komponen admin (12)
+lib/i18n/dictionaries.ts seluruh teks publik, en sumber kebenaran
+lib/seo.ts               canonical, hreflang, OG, breadcrumb
+lib/queries.ts           baca Supabase untuk halaman publik
+lib/supabase/public.ts   client cookieless, dipakai halaman publik
+lib/supabase/client.ts   client browser, dipakai admin
+middleware.ts            prefix locale + proteksi rute admin
+```
+
+### Menu admin
+
+`components/admin/adminSections.ts` adalah **sumber tunggal** daftar menu.
+Sidebar desktop dan bottom navigation mobile sama-sama membacanya. Tambah menu
+cukup di satu tempat itu.
+
+Bottom navigation mobile: 4 menu utama plus sheet "Lainnya" untuk sisanya,
+diatur lewat `PRIMARY_SLUGS`.
+
+### Lapisan z-index admin
+
+| Lapisan | z |
+|---|---|
+| Top bar mobile, bottom nav | 30 |
+| Sheet "Lainnya" | 40 |
+| Modal editor manager | 50 |
+
+Modal harus selalu di atas bottom nav supaya tombol Simpan tidak tertutup.
+
+---
+
+## Bilingual
+
+- `en` sumber kebenaran, `Dictionary` di-infer darinya.
+- Konten database bilingual lewat kolom `*_en`: bahasa Indonesia di kolom
+  dasar, Inggris di kolom `*_en`. Kalau `*_en` kosong, `pickText()` di
+  `lib/queries.ts` jatuh ke versi Indonesia, jadi terjemahan bisa bertahap.
+- Berlaku untuk `portfolio`, `pricing`, `testimonials` (v8) dan `posts` (v9).
+- Path route sama untuk kedua locale. `/en/layanan` dan `/id/layanan` memakai
+  path Indonesia yang sama. Ikuti konvensi ini untuk halaman baru.
+
+---
+
+## Migrasi SQL
+
+Jalankan berurutan, semua idempoten:
+
+```
+v1  tabel dasar: portfolio, testimonials, partners, leads + RLS
+v2  pricing, transactions, project_type
+v3  pricing.tagline
+v4  posts
+v5  portfolio: slug, body, gallery
+v6  portfolio.mobile_url
+v7  portfolio.cover_url
+v8  kolom *_en: portfolio, pricing, testimonials
+v9  kolom *_en: posts
+```
+
+**v1 wajib duluan di database kosong**, karena v2 memakai
+`alter table portfolio`.
+
+Kalau menambah kolom di kode, pastikan ada migrasinya. Ada script verifikasi
+di riwayat: bandingkan kolom di tipe TypeScript pada `lib/queries.ts` dengan
+seluruh file `.sql`.
+
+---
+
+## Yang butuh keputusan pemilik, jangan diisi sendiri
+
+- **`NEXT_PUBLIC_WHATSAPP_NUMBER`.** Nilai bawaan di `lib/contact.ts` adalah
+  `6281234567890`, nomor contoh. Harus diisi di environment Vercel.
+- **`telephone`, `sameAs`, `priceRange`** di `components/StructuredData.tsx`
+  sengaja dikosongkan. Itu klaim faktual tentang bisnis dan belum ada data
+  terverifikasi. Jangan dikarang.
+- **Isi artikel blog** ada di tabel `posts` di Supabase, hanya bisa diubah lewat
+  `/admin/blog` karena RLS. Lihat `KONTEN-SIAP-TEMPEL.md`.
+
+---
+
+## Dokumen lain
+
+| File | Isi |
+|---|---|
+| `README.md` | setup, Supabase, admin panel, RLS |
+| `DEPLOY.md` | deploy ke Vercel |
+| `SEO-AUDIT.md` | audit SEO teknis + status implementasi tiap temuan |
+| `KONTEN-SIAP-TEMPEL.md` | langkah mengisi konten yang butuh login admin |
+| `panduan-isi-portfolio-testimoni.md` | panduan mengisi portfolio & testimoni |
+| `artikel-*.md` | naskah artikel blog siap tempel |
