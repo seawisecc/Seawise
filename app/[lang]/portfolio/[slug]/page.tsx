@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getPortfolioItem } from "@/lib/queries";
 import { renderMarkdown } from "@/lib/markdown";
+import JsonLd from "@/components/JsonLd";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { SITE_URL } from "@/lib/siteUrl";
 import { pageAlternates, breadcrumbJsonLd, clampDescription, ogImageUrl } from "@/lib/seo";
@@ -74,16 +75,8 @@ export default async function PortfolioDetail({
 
   return (
     <article className="bg-off-white">
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
+      <JsonLd data={jsonLd} />
+      <JsonLd data={breadcrumb} />
       <div className="mx-auto max-w-3xl px-5 pb-20 pt-16 md:px-8 md:pt-24">
         <Link href={`/${lang}/portfolio`} className="text-sm font-medium text-sea-foam hover:underline">
           {t.detailBack}

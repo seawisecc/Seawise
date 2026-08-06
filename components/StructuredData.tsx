@@ -1,6 +1,8 @@
 import { SITE_URL } from "@/lib/siteUrl";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { AREA_SERVED, STUDIO_ID } from "@/lib/seo";
+import JsonLd from "./JsonLd";
 
 /**
  * JSON-LD structured data so Google understands the business (rich results,
@@ -12,7 +14,7 @@ export default function StructuredData({ lang }: { lang: Locale }) {
   const graph = [
     {
       "@type": "ProfessionalService",
-      "@id": `${SITE_URL}/#studio`,
+      "@id": STUDIO_ID,
       name: "Seawise Studio",
       url: SITE_URL,
       logo: `${SITE_URL}/SeaWise.png`,
@@ -34,10 +36,7 @@ export default function StructuredData({ lang }: { lang: Locale }) {
         addressRegion: "Bali",
         addressCountry: "ID",
       },
-      areaServed: [
-        { "@type": "AdministrativeArea", name: "Bali" },
-        { "@type": "Country", name: "Indonesia" },
-      ],
+      areaServed: AREA_SERVED,
       knowsAbout: [
         "Web development",
         "Website development",
@@ -58,17 +57,9 @@ export default function StructuredData({ lang }: { lang: Locale }) {
       url: SITE_URL,
       name: "Seawise Studio",
       inLanguage: lang === "id" ? "id-ID" : "en-US",
-      publisher: { "@id": `${SITE_URL}/#studio` },
+      publisher: { "@id": STUDIO_ID },
     },
   ];
 
-  const json = { "@context": "https://schema.org", "@graph": graph };
-
-  return (
-    <script
-      type="application/ld+json"
-      // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }}
-    />
-  );
+  return <JsonLd data={{ "@context": "https://schema.org", "@graph": graph }} />;
 }

@@ -183,6 +183,9 @@ export type PostRow = {
   published: boolean;
   published_at: string | null;
   created_at: string;
+  updated_at: string | null;
+  author_name: string | null;
+  author_title: string | null;
 };
 
 function localizePost(row: PostRow & EnFields, lang: Locale): PostRow {
@@ -191,6 +194,7 @@ function localizePost(row: PostRow & EnFields, lang: Locale): PostRow {
     title: pickText(lang, row.title, row.title_en) ?? row.title,
     excerpt: pickText(lang, row.excerpt, row.excerpt_en),
     content: pickText(lang, row.content, row.content_en),
+    author_title: pickText(lang, row.author_title, row.author_title_en),
   };
 }
 

@@ -114,7 +114,8 @@ Jalankan berurutan di Supabase SQL Editor. Semua aman diulang:
 
 `supabase-migration-v1.sql` (skema dasar: portfolio, testimonials, partners,
 leads + RLS) → `v2` → `v3` → `v4` → `v5` → `v6` (mobile_url) → `v7` (cover_url)
-→ `v8` (kolom `*_en` bilingual) → `v9` (kolom `*_en` untuk blog).
+→ `v8` (kolom `*_en` bilingual) → `v9` (kolom `*_en` untuk blog)
+→ `v10` (penulis artikel + tanggal pembaruan).
 
 Di database yang masih kosong, **v1 wajib dijalankan lebih dulu**: v2 memakai
 `alter table portfolio`, jadi akan gagal kalau tabelnya belum ada.
@@ -123,7 +124,7 @@ Di database yang masih kosong, **v1 wajib dijalankan lebih dulu**: v2 memakai
 
 1. Copy `.env.local.example` → `.env.local`, isi dari Project Settings → API.
 2. Jalankan `supabase-migration-v1.sql` di SQL Editor Supabase, lalu lanjutkan
-   `v2` sampai `v8` sesuai urutan di bagian **Migrasi SQL** di atas.
+   `v2` sampai `v10` sesuai urutan di bagian **Migrasi SQL** di atas.
 3. (Opsional) jalankan `supabase-seed.sql` untuk mengisi contoh portfolio &
    testimoni. Tanpa ini, section portfolio & testimoni otomatis tersembunyi
    sampai kamu isi datanya lewat `/admin`.

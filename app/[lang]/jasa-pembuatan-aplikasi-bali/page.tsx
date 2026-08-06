@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import LandingPage from "@/components/LandingPage";
 import { faqJsonLd } from "@/components/FaqSection";
+import JsonLd from "@/components/JsonLd";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { pageSeo, breadcrumbJsonLd } from "@/lib/seo";
+import { pageSeo, breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 
 const PATH = "jasa-pembuatan-aplikasi-bali";
@@ -30,22 +31,20 @@ export default function AppBaliPage({
   const dict = getDictionary(lang);
   const content = dict.landing.app;
 
-  const breadcrumb = breadcrumbJsonLd(lang, [
-    { name: dict.breadcrumb.home, path: "" },
-    { name: content.eyebrow, path: PATH },
-  ]);
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(content.faq)) }}
+      <JsonLd data={faqJsonLd(content.faq)} />
+      <JsonLd
+        data={serviceJsonLd(lang, PATH, {
+          name: content.eyebrow,
+          description: content.intro,
+        })}
       />
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      <JsonLd
+        data={breadcrumbJsonLd(lang, [
+          { name: dict.breadcrumb.home, path: "" },
+          { name: content.eyebrow, path: PATH },
+        ])}
       />
       <LandingPage lang={lang} content={content} />
     </>

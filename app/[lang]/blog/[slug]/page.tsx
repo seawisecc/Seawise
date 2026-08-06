@@ -4,9 +4,16 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getPost } from "@/lib/queries";
 import { renderMarkdown } from "@/lib/markdown";
+import JsonLd from "@/components/JsonLd";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { SITE_URL } from "@/lib/siteUrl";
-import { pageAlternates, breadcrumbJsonLd, clampDescription, ogImageUrl } from "@/lib/seo";
+import {
+  pageAlternates,
+  breadcrumbJsonLd,
+  clampDescription,
+  ogImageUrl,
+  STUDIO_ID,
+} from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 
 export const revalidate = 120;
@@ -67,6 +74,10 @@ export default async function ArticlePage({
   const t = dict.blog;
   const html = renderMarkdown(post.content);
   const date = post.published_at ?? post.created_at;
+  // Falls back to the publish date for articles written before `updated_at`
+  // existed. Claiming an article was revised when it was not is worse than
+  // showing no revision at all.
+  const modified = post.updated_at ?? date;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -75,8 +86,19 @@ export default async function ArticlePage({
     description: post.excerpt ?? undefined,
     image: post.cover_url ?? undefined,
     datePublished: date,
-    dateModified: date,
-    author: { "@type": "Organization", name: "Seawise Studio" },
+    dateModified: modified,
+    // A named Person carries the expertise signal that an Organization does
+    // not. Rows with no author fall back to the studio rather than inventing
+    // a name for an article nobody has claimed.
+    author: post.author_name
+      ? {
+          "@type": "Person",
+          name: post.author_name,
+          ...(post.author_title ? { jobTitle: post.author_title } : {}),
+          worksFor: { "@id": STUDIO_ID },
+          url: `${SITE_URL}/${lang}/tentang`,
+        }
+      : { "@type": "Organization", name: "Seawise Studio" },
     publisher: {
       "@type": "Organization",
       name: "Seawise Studio",
@@ -93,16 +115,8 @@ export default async function ArticlePage({
 
   return (
     <article className="bg-off-white">
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
+      <JsonLd data={jsonLd} />
+      <JsonLd data={breadcrumb} />
       <div className="mx-auto max-w-3xl px-5 pb-20 pt-16 md:px-8 md:pt-24">
         <Link
           href={`/${lang}/blog`}
@@ -111,8 +125,23 @@ export default async function ArticlePage({
           {t.back}
         </Link>
 
+        {/*
+          Byline. Google's guidance on E-E-A-T is that author information
+          should be visible to readers, not only present in the markup, so the
+          same name that goes into the Person node is shown here. Articles with
+          no author on the row simply keep the date on its own.
+        */}
         <p className="mt-8 text-sm text-forest-dark/50">
           {t.publishedOn} {formatDate(date, lang)}
+          {post.author_name && (
+            <>
+              {" · "}
+              <span className="font-medium text-forest-dark/70">
+                {post.author_name}
+              </span>
+              {post.author_title && `, ${post.author_title}`}
+            </>
+          )}
         </p>
         <h1 className="mt-2 font-display text-4xl font-bold leading-[1.1] tracking-tight text-forest-dark md:text-5xl">
           {post.title}

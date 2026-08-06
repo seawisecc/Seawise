@@ -116,3 +116,34 @@ body {
   color: var(--forest-dark);
   font-weight: 600;
 }
+/*
+ * Markdown tables. `renderMarkdown` has always had GFM enabled, so a table in
+ * an article was parsed into real <table> markup, but there was no styling for
+ * it and Tailwind's preflight strips the browser's default borders. The result
+ * was a comparison table rendering as an unreadable run of text, which is why
+ * no article used one. The wrapper scrolls on its own so a wide table never
+ * makes the whole page scroll sideways on a phone.
+ */
+.article .table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.article table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  text-align: left;
+}
+.article th,
+.article td {
+  border: 1px solid var(--warm-neutral);
+  padding: 0.6rem 0.85rem;
+  vertical-align: top;
+}
+.article th {
+  background: var(--warm-neutral);
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-weight: 700;
+  color: var(--forest-dark);
+  white-space: nowrap;
+}

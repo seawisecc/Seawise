@@ -5,6 +5,7 @@ import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
 import { SkeletonRows } from "./AdminSkeleton";
 import { uploadImage } from "@/lib/uploadImage";
+import { DEFAULT_AUTHOR } from "@/lib/author";
 
 type Row = {
   id: string;
@@ -15,6 +16,10 @@ type Row = {
   cover_url: string | null;
   published: boolean;
   published_at: string | null;
+  updated_at: string | null;
+  author_name: string | null;
+  author_title: string | null;
+  author_title_en: string | null;
   title_en: string | null;
   excerpt_en: string | null;
   content_en: string | null;
@@ -28,6 +33,12 @@ const empty: Omit<Row, "id"> = {
   cover_url: "",
   published: false,
   published_at: null,
+  updated_at: null,
+  // Diisi otomatis untuk artikel baru supaya tidak perlu diketik ulang tiap
+  // kali. Bisa diganti per artikel kalau ada penulis tamu.
+  author_name: DEFAULT_AUTHOR.name,
+  author_title: DEFAULT_AUTHOR.title,
+  author_title_en: DEFAULT_AUTHOR.titleEn,
   title_en: "",
   excerpt_en: "",
   content_en: "",
@@ -106,6 +117,13 @@ export default function PostManager() {
       cover_url: editing.cover_url,
       published: editing.published,
       published_at: publishedAt,
+      // Tanggal pembaruan untuk `dateModified` di JSON-LD. Ditulis di sini,
+      // bukan lewat trigger database, karena panel admin adalah satu-satunya
+      // yang menulis ke tabel ini, sama seperti published_at di atas.
+      updated_at: new Date().toISOString(),
+      author_name: editing.author_name,
+      author_title: editing.author_title,
+      author_title_en: editing.author_title_en,
       title_en: editing.title_en,
       excerpt_en: editing.excerpt_en,
       content_en: editing.content_en,
@@ -244,6 +262,26 @@ export default function PostManager() {
                   onChange={(e) => setEditing({ ...editing, excerpt: e.target.value })}
                 />
               </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div>
+                  <label className={label}>Penulis</label>
+                  <input
+                    className={field}
+                    placeholder="Nama yang tampil sebagai penulis"
+                    value={editing.author_name ?? ""}
+                    onChange={(e) => setEditing({ ...editing, author_name: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className={label}>Jabatan penulis</label>
+                  <input
+                    className={field}
+                    placeholder="mis. Founder Seawise Studio"
+                    value={editing.author_title ?? ""}
+                    onChange={(e) => setEditing({ ...editing, author_title: e.target.value })}
+                  />
+                </div>
+              </div>
               <div>
                 <label className={label}>Isi artikel (Markdown)</label>
                 <textarea
@@ -276,6 +314,18 @@ export default function PostManager() {
                       rows={2}
                       value={editing.excerpt_en ?? ""}
                       onChange={(e) => setEditing({ ...editing, excerpt_en: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-forest-dark/70">
+                      Jabatan penulis (EN)
+                    </label>
+                    <input
+                      className={field}
+                      value={editing.author_title_en ?? ""}
+                      onChange={(e) =>
+                        setEditing({ ...editing, author_title_en: e.target.value })
+                      }
                     />
                   </div>
                   <div>

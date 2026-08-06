@@ -4,8 +4,9 @@ import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import { WebsiteIcon, AppIcon } from "@/components/ServiceIcons";
 import FaqSection, { faqJsonLd } from "@/components/FaqSection";
+import JsonLd from "@/components/JsonLd";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { pageSeo } from "@/lib/seo";
+import { pageSeo, breadcrumbJsonLd, servicesJsonLd } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 import { getPricing } from "@/lib/queries";
 
@@ -35,10 +36,19 @@ export default async function LayananPage({
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(dict.faq.items)) }}
+      <JsonLd data={faqJsonLd(dict.faq.items)} />
+      <JsonLd
+        data={servicesJsonLd(lang, {
+          services: dict.servicesList,
+          pricing,
+          catalogName: t.pricingTitle,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd(lang, [
+          { name: dict.breadcrumb.home, path: "" },
+          { name: t.eyebrow, path: "layanan" },
+        ])}
       />
       <PageHeader eyebrow={t.eyebrow} title={t.title} intro={t.intro} />
 

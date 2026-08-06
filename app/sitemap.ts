@@ -63,7 +63,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Blog articles, per locale.
   const posts = await getPosts(i18n.defaultLocale);
   for (const post of posts) {
-    const lastMod = post.published_at ?? post.created_at;
+    // `updated_at` first: an article revised after publishing should tell
+    // crawlers to come back, and the publish date alone never would.
+    const lastMod = post.updated_at ?? post.published_at ?? post.created_at;
     for (const locale of i18n.locales) {
       entries.push({
         url: `${SITE_URL}/${locale}/blog/${post.slug}`,

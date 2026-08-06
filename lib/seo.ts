@@ -86,6 +86,186 @@ export function pageSeo(
   };
 }
 
+/**
+ * `@id` of the ProfessionalService node in `components/StructuredData.tsx`.
+ * Service nodes point at this instead of repeating the business details, so
+ * every page describes one studio rather than a new one per page.
+ */
+export const STUDIO_ID = `${SITE_URL}/#studio`;
+
+/** Where the studio works. Shared so the sitewide node and every Service agree. */
+export const AREA_SERVED = [
+  { "@type": "AdministrativeArea", name: "Bali" },
+  { "@type": "Country", name: "Indonesia" },
+];
+
+/**
+ * The one entry in `servicesList` that the website pricing packages belong to.
+ * The other three are quoted per project and have no published price list.
+ */
+const WEB_SERVICE_SLUG = "web-dev";
+
+type PriceSpec =
+  | { "@type": "PriceSpecification"; price: number; priceCurrency: "IDR" }
+  | {
+      "@type": "PriceSpecification";
+      minPrice: number;
+      maxPrice: number;
+      priceCurrency: "IDR";
+    };
+
+/**
+ * One end of a price, in rupiah. `scale` is 1_000_000 when the string carried a
+ * "juta"/"M" suffix, otherwise 1.
+ */
+function parseAmountIDR(raw: string, scale: number): number | null {
+  if (scale > 1) {
+    // Scaled by a suffix, so at most one decimal separator: "3,5", "3.5", "4".
+    if (!/^\d+(?:[.,]\d+)?$/.test(raw)) return null;
+    return Math.round(parseFloat(raw.replace(",", ".")) * scale);
+  }
+  // Plain rupiah. Either unseparated digits, or thousands grouped in threes by
+  // a single consistent separator: "2000000", "2.000.000", "2,000,000".
+  if (/^\d+$/.test(raw)) return Number(raw);
+  if (/^\d{1,3}(?:\.\d{3})+$/.test(raw) || /^\d{1,3}(?:,\d{3})+$/.test(raw)) {
+    return Number(raw.replace(/[.,]/g, ""));
+  }
+  return null;
+}
+
+/**
+ * Turn a human-written package price into IDR numbers for schema.org.
+ *
+ * Covers the shapes that actually occur. The `pricing` rows in Supabase are
+ * written out in full, `Rp 2.000.000`, while the dictionary fallback uses the
+ * short forms `Rp2M` and `Rp3,5–4 juta`. Ranges are supported on both.
+ *
+ * Strict on purpose: anything it does not recognise returns null and the caller
+ * leaves the price out of the JSON-LD entirely. Prices are edited freely in the
+ * admin panel, and a number invented by a loose parser is a false claim about
+ * the business, so no price is always the better failure. That is why a group
+ * of digits only counts as thousands when every group is exactly three long,
+ * and why a decimal is only allowed where a multiplier word explains it.
+ */
+export function parsePriceIDR(price: string | null | undefined) {
+  if (!price) return null;
+
+  const text = price.trim().replace(/^Rp\.?\s*/i, "");
+  const suffix = text.match(/\s*(?:juta|jt|M)$/i);
+  const scale = suffix ? 1_000_000 : 1;
+  const numbers = (suffix ? text.slice(0, suffix.index) : text).trim();
+
+  const parts = numbers.split(/\s*[–—-]\s*/);
+  if (parts.length > 2) return null;
+
+  const amounts = parts.map((part) => parseAmountIDR(part.trim(), scale));
+  if (amounts.some((n) => n === null)) return null;
+
+  const min = amounts[0] as number;
+  const max = (amounts[1] ?? min) as number;
+  if (min <= 0 || max < min) return null;
+
+  return { min, max };
+}
+
+function priceSpecification(price: string | null | undefined): PriceSpec | undefined {
+  const parsed = parsePriceIDR(price);
+  if (!parsed) return undefined;
+  return parsed.min === parsed.max
+    ? { "@type": "PriceSpecification", price: parsed.min, priceCurrency: "IDR" }
+    : {
+        "@type": "PriceSpecification",
+        minPrice: parsed.min,
+        maxPrice: parsed.max,
+        priceCurrency: "IDR",
+      };
+}
+
+/** A single Service offered by the studio, for pages about one service. */
+export function serviceJsonLd(
+  lang: Locale,
+  path: string,
+  { name, description }: { name: string; description: string }
+) {
+  const url = `${SITE_URL}/${lang}${path ? `/${path}` : ""}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${url}#service`,
+    name,
+    serviceType: name,
+    description,
+    url,
+    provider: { "@id": STUDIO_ID },
+    areaServed: AREA_SERVED,
+  };
+}
+
+/**
+ * Every main service as its own Service node, with the real website packages
+ * attached to the web development one as an OfferCatalog.
+ *
+ * Names, summaries, and prices all come from the dictionary and the `pricing`
+ * table. Nothing here is written by hand, so the markup cannot drift away from
+ * what the page itself says.
+ */
+export function servicesJsonLd(
+  lang: Locale,
+  {
+    services,
+    pricing,
+    catalogName,
+  }: {
+    services: readonly { slug: string; title: string; summary: string }[];
+    pricing: readonly { name: string; tagline: string | null; price: string | null }[];
+    catalogName: string;
+  }
+) {
+  const url = `${SITE_URL}/${lang}/layanan`;
+  const webService = services.find((s) => s.slug === WEB_SERVICE_SLUG);
+
+  const offerCatalog =
+    pricing.length > 0
+      ? {
+          "@type": "OfferCatalog",
+          name: catalogName,
+          itemListElement: pricing.map((p) => {
+            const spec = priceSpecification(p.price);
+            return {
+              "@type": "Offer",
+              name: p.name,
+              url,
+              ...(p.tagline ? { description: p.tagline } : {}),
+              ...(spec ? { priceSpecification: spec } : {}),
+              itemOffered: {
+                "@type": "Service",
+                name: p.name,
+                ...(webService ? { serviceType: webService.title } : {}),
+                provider: { "@id": STUDIO_ID },
+              },
+            };
+          }),
+        }
+      : undefined;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": services.map((s) => ({
+      "@type": "Service",
+      "@id": `${url}#${s.slug}`,
+      name: s.title,
+      serviceType: s.title,
+      description: s.summary,
+      url,
+      provider: { "@id": STUDIO_ID },
+      areaServed: AREA_SERVED,
+      ...(s.slug === WEB_SERVICE_SLUG && offerCatalog
+        ? { hasOfferCatalog: offerCatalog }
+        : {}),
+    })),
+  };
+}
+
 /** BreadcrumbList JSON-LD. Google still renders these in search results. */
 export function breadcrumbJsonLd(
   lang: Locale,

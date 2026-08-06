@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
+import JsonLd from "@/components/JsonLd";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { pageSeo } from "@/lib/seo";
+import { pageSeo, breadcrumbJsonLd } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 
 export async function generateMetadata({
@@ -31,6 +32,12 @@ export default function KontakPage({
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd(lang, [
+          { name: dict.breadcrumb.home, path: "" },
+          { name: t.eyebrow, path: "kontak" },
+        ])}
+      />
       <PageHeader eyebrow={t.eyebrow} title={t.title} intro={t.intro} />
 
       <section className="bg-off-white">

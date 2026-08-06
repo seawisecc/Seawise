@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
+import JsonLd from "@/components/JsonLd";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { pageSeo } from "@/lib/seo";
+import { pageSeo, breadcrumbJsonLd } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
 
 export async function generateMetadata({
@@ -31,6 +32,12 @@ export default function TentangPage({
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd(lang, [
+          { name: dict.breadcrumb.home, path: "" },
+          { name: t.eyebrow, path: "tentang" },
+        ])}
+      />
       <PageHeader eyebrow={t.eyebrow} title={t.title} intro={t.intro} />
 
       <section className="bg-off-white">

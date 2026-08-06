@@ -70,12 +70,20 @@ const en = {
         a: "Website packages start from Rp2M across four tiers, from a single landing page through to a fully custom build. The final figure is confirmed after a short discovery call, because it depends on how many sections and features you actually need.",
       },
       {
-        q: "How long does a project take?",
-        a: "It depends on scope. We give you a time estimate once the scope is agreed in the discovery call, rather than quoting a generic number that may not match your project.",
+        q: "How long does a website take to build?",
+        a: "Shore takes 3–5 days, Reef 5–10 days, and Current 10–14 days. Trench depends on how complex the request is, so that estimate comes with your written scope. Custom applications are estimated after we map your process.",
+      },
+      {
+        q: "Is hosting and domain included?",
+        a: "Domain and hosting are arranged as part of the project. The exact arrangement is confirmed during the discovery call, since it depends on what you already own.",
       },
       {
         q: "Can I edit the content myself afterwards?",
         a: "Yes, from the Reef tier upward. Those packages include an admin panel where you edit text, prices, and photos yourself, without having to come back to us for small changes.",
+      },
+      {
+        q: "What is the difference between a website and an application?",
+        a: "A website is your public shopfront: it presents what you sell and brings in enquiries. An application is the system your team runs the business on, such as point of sale, stock, or ERP. Websites have published packages from Rp2M and ship in days. Applications are quoted per project, because the scope follows your workflow.",
       },
       {
         q: "Do you build applications, not just websites?",
@@ -137,6 +145,10 @@ const en = {
         {
           q: "How much does website development in Bali cost?",
           a: "Our website packages start from Rp2M and run across four tiers. Which one fits depends on how many sections you need, how much design customisation you want, and whether you need an admin panel.",
+        },
+        {
+          q: "How long does a website take to build?",
+          a: "Shore takes 3–5 days, Reef 5–10 days, and Current 10–14 days. Trench depends on how complex the request is, so that estimate comes with your written scope.",
         },
         {
           q: "Do I need to be in Bali to work with you?",
@@ -211,6 +223,10 @@ const en = {
         {
           q: "How much does custom app development cost?",
           a: "Custom applications are quoted per project, because scope varies far more than a website. We confirm the figure after mapping your process, and the mapping session itself is free.",
+        },
+        {
+          q: "What is the difference between a website and an application?",
+          a: "A website is your public shopfront: it presents what you sell and brings in enquiries. An application is the system your team runs the business on, such as point of sale, stock, or ERP. Websites have published packages from Rp2M and ship in days. Applications are quoted per project, because the scope follows your workflow.",
         },
         {
           q: "Can you replace the spreadsheets we use now?",
@@ -557,12 +573,20 @@ const id: Dictionary = {
         a: "Paket website kami mulai dari Rp2 juta dengan empat tingkatan, dari satu halaman landing sampai custom penuh. Angka finalnya dikonfirmasi setelah sesi discovery singkat, karena tergantung berapa section dan fitur yang benar-benar kamu butuhkan.",
       },
       {
-        q: "Berapa lama proses pengerjaannya?",
-        a: "Tergantung cakupan. Estimasi waktu kami sampaikan setelah cakupan disepakati di sesi discovery, bukan angka umum yang belum tentu cocok dengan proyek kamu.",
+        q: "Berapa lama pengerjaan websitenya?",
+        a: "Shore 3–5 hari, Reef 5–10 hari, dan Current 10–14 hari. Trench tergantung kerumitan permintaannya, jadi estimasinya ikut di cakupan tertulis. Aplikasi custom diestimasi setelah pemetaan proses.",
+      },
+      {
+        q: "Apakah sudah termasuk domain dan hosting?",
+        a: "Domain dan hosting diurus sebagai bagian dari proyek. Bentuk pastinya dikonfirmasi saat discovery, karena tergantung apa yang sudah kamu miliki.",
       },
       {
         q: "Apakah saya bisa mengubah isinya sendiri nanti?",
         a: "Bisa, mulai paket Reef ke atas. Paket tersebut sudah termasuk admin panel untuk mengedit teks, harga, dan foto sendiri, tanpa perlu menghubungi kami untuk perubahan kecil.",
+      },
+      {
+        q: "Apa bedanya website dengan aplikasi?",
+        a: "Website adalah etalase publik bisnismu: memperkenalkan apa yang kamu jual dan mendatangkan calon pelanggan. Aplikasi adalah sistem yang dipakai timmu untuk menjalankan operasional, misalnya kasir, stok, atau ERP. Website punya paket dengan harga terbuka mulai Rp2 juta dan selesai dalam hitungan hari. Aplikasi dihitung per proyek, karena cakupannya mengikuti alur kerjamu.",
       },
       {
         q: "Apakah bisa mengerjakan aplikasi, bukan cuma website?",
@@ -623,6 +647,10 @@ const id: Dictionary = {
         {
           q: "Berapa biaya jasa pembuatan website di Bali?",
           a: "Paket website kami mulai dari Rp2 juta dengan empat tingkatan. Yang cocok yang mana tergantung berapa section yang kamu butuhkan, seberapa jauh kustomisasi desainnya, dan apakah kamu perlu admin panel.",
+        },
+        {
+          q: "Berapa lama pengerjaan websitenya?",
+          a: "Shore 3–5 hari, Reef 5–10 hari, dan Current 10–14 hari. Trench tergantung kerumitan permintaannya, jadi estimasinya ikut di cakupan tertulis.",
         },
         {
           q: "Apakah harus berada di Bali untuk memakai jasa ini?",
@@ -697,6 +725,10 @@ const id: Dictionary = {
         {
           q: "Berapa biaya jasa pembuatan aplikasi custom?",
           a: "Aplikasi custom dihitung per proyek, karena cakupannya jauh lebih bervariasi dibanding website. Angkanya kami konfirmasi setelah memetakan prosesmu, dan sesi pemetaan itu sendiri gratis.",
+        },
+        {
+          q: "Apa bedanya website dengan aplikasi?",
+          a: "Website adalah etalase publik bisnismu: memperkenalkan apa yang kamu jual dan mendatangkan calon pelanggan. Aplikasi adalah sistem yang dipakai timmu untuk menjalankan operasional, misalnya kasir, stok, atau ERP. Website punya paket dengan harga terbuka mulai Rp2 juta dan selesai dalam hitungan hari. Aplikasi dihitung per proyek, karena cakupannya mengikuti alur kerjamu.",
         },
         {
           q: "Bisakah menggantikan spreadsheet yang kami pakai sekarang?",

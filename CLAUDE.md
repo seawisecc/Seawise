@@ -184,6 +184,7 @@ v6  portfolio.mobile_url
 v7  portfolio.cover_url
 v8  kolom *_en: portfolio, pricing, testimonials
 v9  kolom *_en: posts
+v10 posts: author_name, author_title, author_title_en, updated_at
 ```
 
 **v1 wajib duluan di database kosong**, karena v2 memakai
@@ -214,6 +215,7 @@ seluruh file `.sql`.
 | `README.md` | setup, Supabase, admin panel, RLS |
 | `DEPLOY.md` | deploy ke Vercel |
 | `SEO-AUDIT.md` | audit SEO teknis + status implementasi tiap temuan |
+| `AEO-GEO.md` | sitasi mesin jawab: structured data, llms.txt, audit pembukaan halaman |
 | `KONTEN-SIAP-TEMPEL.md` | langkah mengisi konten yang butuh login admin |
 | `panduan-isi-portfolio-testimoni.md` | panduan mengisi portfolio & testimoni |
 | `artikel-*.md` | naskah artikel blog siap tempel |

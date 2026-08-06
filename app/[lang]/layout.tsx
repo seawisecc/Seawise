@@ -73,10 +73,22 @@ export async function generateMetadata({
       canonical: `/${lang}`,
       languages: { en: "/en", id: "/id", "x-default": "/en" },
     },
+    // `max-snippet: -1` lifts the default cap on how much of a page a crawler
+    // may quote. It used to sit only under `googleBot`, so every other crawler,
+    // including the answer engines, fell back to a truncated snippet.
     robots: {
       index: true,
       follow: true,
-      googleBot: { index: true, follow: true, "max-image-preview": "large" },
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-snippet": -1,
+        "max-image-preview": "large",
+        "max-video-preview": -1,
+      },
     },
     openGraph: {
       title: dict.meta.title,
