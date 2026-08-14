@@ -5,6 +5,10 @@ import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
 import { SkeletonRows } from "./AdminSkeleton";
 import { uploadImage } from "@/lib/uploadImage";
+import { revalidatePublicPages } from "@/lib/revalidate";
+
+/** Homepage renders only the first three featured rows (see app/[lang]/page.tsx). */
+const HOME_FEATURED_LIMIT = 3;
 
 type Row = {
   id: string;
@@ -71,6 +75,7 @@ export default function PortfolioManager() {
   const [techInputEn, setTechInputEn] = useState("");
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
+  const [notice, setNotice] = useState<string | null>(null);
 
   async function load() {
     if (!supabase) {
@@ -224,6 +229,7 @@ export default function PortfolioManager() {
     }
     setEditing(null);
     load();
+    setNotice(await revalidatePublicPages());
   }
 
   async function remove(id: string) {
@@ -231,7 +237,14 @@ export default function PortfolioManager() {
     if (!confirm("Hapus entry ini?")) return;
     await supabase.from("portfolio").delete().eq("id", id);
     load();
+    setNotice(await revalidatePublicPages());
   }
+
+  const featuredCount = rows.filter((r) => r.featured && r.published).length;
+  const overflowing = rows
+    .filter((r) => r.featured && r.published)
+    .sort((a, b) => a.sort_order - b.sort_order)
+    .slice(HOME_FEATURED_LIMIT);
 
   const label = "text-sm font-medium text-forest-dark";
   const field =
@@ -252,6 +265,24 @@ export default function PortfolioManager() {
       {!supabase && (
         <p className="mt-6 rounded-xl border border-warm-neutral bg-warm-neutral/40 p-4 text-sm text-forest-dark/70">
           Supabase belum terkoneksi.
+        </p>
+      )}
+
+      {notice && (
+        <p className="mt-6 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+          {notice} Data sudah tersimpan, halaman publik akan menyusul sendiri paling lama 2 menit.
+        </p>
+      )}
+
+      {featuredCount > HOME_FEATURED_LIMIT && (
+        <p className="mt-6 rounded-xl border border-warm-neutral bg-warm-neutral/40 p-4 text-sm text-forest-dark/70">
+          Halaman utama hanya memuat {HOME_FEATURED_LIMIT} entry featured dengan urutan
+          terkecil. Sekarang ada {featuredCount} yang featured, jadi{" "}
+          <strong className="font-semibold text-forest-dark">
+            {overflowing.map((r) => r.title).join(", ")}
+          </strong>{" "}
+          hanya tampil di halaman Portfolio, bukan di halaman utama. Turunkan angka Urutan
+          atau lepas centang Featured di entry lain kalau mau menggesernya naik.
         </p>
       )}
 

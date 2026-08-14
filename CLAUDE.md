@@ -61,6 +61,32 @@ berpengaruh sama sekali pada PNG.** Hanya lebar yang menggerakkan ukuran file.
 640 menahan di bawah ambang preview WhatsApp (~300KB) sambil tetap melewati
 minimum 600x315 milik Facebook. Lihat `ogImageUrl()` di `lib/seo.ts`.
 
+### Edit admin "tidak muncul" padahal tersimpan
+
+`revalidate = 120` berjalan dengan stale-while-revalidate. Setelah menyimpan di
+admin, kunjungan **pertama** tetap dilayani HTML lama sambil Next meregenerasi
+di latar belakang, baru kunjungan kedua yang segar. Di halaman sepi, header
+balasannya `x-vercel-cache: STALE` dengan `age` besar, dan itu terbaca seperti
+"edit saya hilang". Padahal datanya sudah masuk.
+
+Karena itu ada `app/api/revalidate/route.ts`. Manager admin memanggilnya lewat
+`revalidatePublicPages()` di `lib/revalidate.ts` sesudah setiap simpan dan
+hapus, jadi cache dibersihkan saat itu juga. Autentikasinya memakai cookie sesi
+Supabase yang sudah dipasang panel admin, **bukan** secret baru di environment.
+Kalau menambah manager konten publik baru, panggil helper itu juga.
+
+Route di `app/api/**` sengaja tidak kena middleware, lihat `matcher` di
+`middleware.ts` yang mengecualikan `api`. Jangan hapus pengecualian itu, kalau
+kena middleware route ini akan diredirect ke prefix locale dan mati.
+
+### Halaman utama cuma memuat 3 portfolio featured
+
+`app/[lang]/page.tsx` memakai `.slice(0, 3)`. Entry featured keempat dan
+seterusnya tidak akan pernah tampil di halaman utama, hanya di `/portfolio`.
+Ini sempat bikin bingung saat 4 entry ditandai featured. `PortfolioManager`
+sekarang menampilkan peringatan kalau jumlah featured melewati batas itu.
+Angkanya ada di `HOME_FEATURED_LIMIT`, samakan kalau `.slice()` diubah.
+
 ### `seo.*` terpisah dari `intro` yang terlihat
 
 `dict.X.intro` dipakai ganda: sebagai paragraf pembuka yang tampil di halaman
@@ -127,6 +153,8 @@ app/[lang]/              halaman publik, semua pakai revalidate = 120
 app/[lang]/admin/        panel admin
   layout.tsx             AdminShell + viewport-fit=cover
   loading.tsx            skeleton saat navigasi
+app/api/revalidate/      purge cache ISR on-demand, dipanggil manager admin
+lib/revalidate.ts        helper pemanggil route di atas
 components/              komponen publik (20)
 components/admin/        komponen admin (12)
 lib/i18n/dictionaries.ts seluruh teks publik, en sumber kebenaran

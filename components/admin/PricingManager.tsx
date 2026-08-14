@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { SkeletonRows } from "./AdminSkeleton";
+import { revalidatePublicPages } from "@/lib/revalidate";
 
 type Row = {
   id: string;
@@ -42,6 +43,7 @@ export default function PricingManager() {
   const [featInputEn, setFeatInputEn] = useState("");
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
+  const [notice, setNotice] = useState<string | null>(null);
 
   async function load() {
     if (!supabase) {
@@ -102,6 +104,7 @@ export default function PricingManager() {
     }
     setEditing(null);
     load();
+    setNotice(await revalidatePublicPages());
   }
 
   async function remove(id: string) {
@@ -109,6 +112,7 @@ export default function PricingManager() {
     if (!confirm("Hapus paket ini?")) return;
     await supabase.from("pricing").delete().eq("id", id);
     load();
+    setNotice(await revalidatePublicPages());
   }
 
   const label = "text-sm font-medium text-forest-dark";
@@ -131,6 +135,12 @@ export default function PricingManager() {
       {!supabase && (
         <p className="mt-6 rounded-xl border border-warm-neutral bg-warm-neutral/40 p-4 text-sm text-forest-dark/70">
           Supabase belum terkoneksi.
+        </p>
+      )}
+
+      {notice && (
+        <p className="mt-6 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+          {notice} Data sudah tersimpan, halaman publik akan menyusul sendiri paling lama 2 menit.
         </p>
       )}
 

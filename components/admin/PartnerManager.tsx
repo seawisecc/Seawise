@@ -5,6 +5,7 @@ import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
 import { SkeletonRows } from "./AdminSkeleton";
 import { uploadImage } from "@/lib/uploadImage";
+import { revalidatePublicPages } from "@/lib/revalidate";
 
 type Row = {
   id: string;
@@ -30,6 +31,7 @@ export default function PartnerManager() {
   const [editing, setEditing] = useState<(Omit<Row, "id"> & { id?: string }) | null>(null);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
+  const [notice, setNotice] = useState<string | null>(null);
 
   async function load() {
     if (!supabase) {
@@ -88,6 +90,7 @@ export default function PartnerManager() {
     }
     setEditing(null);
     load();
+    setNotice(await revalidatePublicPages());
   }
 
   async function remove(id: string) {
@@ -95,6 +98,7 @@ export default function PartnerManager() {
     if (!confirm("Hapus partner ini?")) return;
     await supabase.from("partners").delete().eq("id", id);
     load();
+    setNotice(await revalidatePublicPages());
   }
 
   const label = "text-sm font-medium text-forest-dark";
@@ -116,6 +120,12 @@ export default function PartnerManager() {
       {!supabase && (
         <p className="mt-6 rounded-xl border border-warm-neutral bg-warm-neutral/40 p-4 text-sm text-forest-dark/70">
           Supabase belum terkoneksi.
+        </p>
+      )}
+
+      {notice && (
+        <p className="mt-6 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+          {notice} Data sudah tersimpan, halaman publik akan menyusul sendiri paling lama 2 menit.
         </p>
       )}
 
