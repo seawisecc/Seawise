@@ -2,6 +2,7 @@ import { SITE_URL } from "@/lib/siteUrl";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { AREA_SERVED, STUDIO_ID } from "@/lib/seo";
+import { WHATSAPP_NUMBER, INSTAGRAM_URL } from "@/lib/contact";
 import JsonLd from "./JsonLd";
 
 /**
@@ -22,13 +23,17 @@ export default function StructuredData({ lang }: { lang: Locale }) {
       description: dict.meta.description,
       email: "hello@seawise.id",
       slogan: "Systems & Software Studio",
-      // Not set on purpose: telephone, sameAs, priceRange. Google treats these
-      // as factual business claims, and the repo has no verified phone number
-      // or social profile URL to put here. Add them once they are known.
+      // telephone and sameAs were confirmed by the owner on 20 Aug 2026: the
+      // WhatsApp business line and the studio's Instagram profile.
+      // Still not set on purpose: priceRange. It is a factual claim about the
+      // business and no verified band exists yet, so it stays out.
+      telephone: `+${WHATSAPP_NUMBER}`,
+      sameAs: [INSTAGRAM_URL],
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer service",
         email: "hello@seawise.id",
+        telephone: `+${WHATSAPP_NUMBER}`,
         availableLanguage: ["id", "en"],
       },
       address: {

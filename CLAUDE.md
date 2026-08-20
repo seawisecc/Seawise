@@ -23,7 +23,9 @@ aplikasi & website di Bali.
 4. **Halaman publik pakai ISR** `export const revalidate = 120` dan membaca
    Supabase lewat client cookieless di `lib/supabase/public.ts`. Jangan diubah
    ke `force-dynamic`, itu merusak kecepatan. Saat ini 11 dari 11 halaman
-   publik sudah patuh.
+   publik sudah patuh. Aturan ini **hanya untuk halaman**, bukan route handler:
+   `app/api/revalidate/route.ts` memang `force-dynamic` karena harus membaca
+   cookie sesi, dan itu benar.
 
 5. **Canonical per halaman lewat helper di `lib/seo.ts`.** Halaman baru wajib
    memakainya, kalau tidak dia mewarisi canonical homepage.
@@ -155,7 +157,7 @@ app/[lang]/admin/        panel admin
   loading.tsx            skeleton saat navigasi
 app/api/revalidate/      purge cache ISR on-demand, dipanggil manager admin
 lib/revalidate.ts        helper pemanggil route di atas
-components/              komponen publik (20)
+components/              komponen publik (21)
 components/admin/        komponen admin (12)
 lib/i18n/dictionaries.ts seluruh teks publik, en sumber kebenaran
 lib/seo.ts               canonical, hreflang, OG, breadcrumb
@@ -186,6 +188,25 @@ Modal harus selalu di atas bottom nav supaya tombol Simpan tidak tertutup.
 
 ---
 
+## Deploy
+
+Produksi berjalan di Vercel project `seawise` dengan domain `www.seawise.id`,
+terhubung ke GitHub `seawisecc/Seawise`. **Push ke `main` memicu deploy
+produksi otomatis**, build sekitar 40 detik.
+
+Jangan pakai `vercel --prod` dari lokal untuk alur harian. Perintah itu
+mengunggah isi folder lokal apa adanya, termasuk perubahan yang belum
+di-commit, sehingga kode di produksi bisa berbeda dari isi repo.
+
+`DEPLOY.md` adalah panduan setup pertama kali, bukan alur harian, dan sudah
+usang di satu titik berbahaya: dia menyuruh `rm -rf .git && git init`. **Jangan
+jalankan itu sekarang**, repo ini sudah punya riwayat dan remote.
+
+`vercel link` menaruh `VERCEL_OIDC_TOKEN` di `.env.local` dan menambah `.env*`
+ke `.gitignore`. Keduanya wajar, bukan tanda ada yang rusak.
+
+---
+
 ## Bilingual
 
 - `en` sumber kebenaran, `Dictionary` di-infer darinya.
@@ -213,6 +234,7 @@ v7  portfolio.cover_url
 v8  kolom *_en: portfolio, pricing, testimonials
 v9  kolom *_en: posts
 v10 posts: author_name, author_title, author_title_en, updated_at
+v11 leads: phone, source, landing_path + indeks created_at
 ```
 
 **v1 wajib duluan di database kosong**, karena v2 memakai
@@ -228,9 +250,16 @@ seluruh file `.sql`.
 
 - **`NEXT_PUBLIC_WHATSAPP_NUMBER`.** Nilai bawaan di `lib/contact.ts` adalah
   `6281234567890`, nomor contoh. Harus diisi di environment Vercel.
-- **`telephone`, `sameAs`, `priceRange`** di `components/StructuredData.tsx`
-  sengaja dikosongkan. Itu klaim faktual tentang bisnis dan belum ada data
-  terverifikasi. Jangan dikarang.
+- **`priceRange`** di `components/StructuredData.tsx` sengaja dikosongkan. Itu
+  klaim faktual tentang bisnis dan belum ada data terverifikasi. Jangan
+  dikarang. `telephone` dan `sameAs` sudah diisi 20 Agustus 2026 atas
+  konfirmasi pemilik: nomor WhatsApp bisnis dan Instagram `@seawise.id`,
+  keduanya bersumber dari `lib/contact.ts`.
+- **`RESEND_API_KEY`** di environment Vercel. Tanpa ini notifikasi lead di
+  `lib/notifyLead.ts` dilewati diam-diam, form tetap jalan dan lead tetap
+  tersimpan, cuma tidak ada email yang masuk. Opsional pendampingnya:
+  `LEAD_NOTIFY_TO` dan `LEAD_NOTIFY_FROM`. Pengirim wajib memakai domain yang
+  sudah terverifikasi di Resend, sekarang `send.seawise.id`.
 - **Isi artikel blog** ada di tabel `posts` di Supabase, hanya bisa diubah lewat
   `/admin/blog` karena RLS. Lihat `KONTEN-SIAP-TEMPEL.md`.
 
@@ -241,7 +270,7 @@ seluruh file `.sql`.
 | File | Isi |
 |---|---|
 | `README.md` | setup, Supabase, admin panel, RLS |
-| `DEPLOY.md` | deploy ke Vercel |
+| `DEPLOY.md` | setup Vercel pertama kali, bukan alur harian, lihat bagian Deploy |
 | `SEO-AUDIT.md` | audit SEO teknis + status implementasi tiap temuan |
 | `AEO-GEO.md` | sitasi mesin jawab: structured data, llms.txt, audit pembukaan halaman |
 | `KONTEN-SIAP-TEMPEL.md` | langkah mengisi konten yang butuh login admin |

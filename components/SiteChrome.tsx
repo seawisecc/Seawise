@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import { captureLeadSource } from "@/lib/leadSource";
 import FloatingWhatsApp from "./FloatingWhatsApp";
 
 /**
@@ -20,6 +22,12 @@ export default function SiteChrome({
   const pathname = usePathname() || "";
   const isAdmin = /^\/[^/]+\/admin(\/|$)/.test(pathname);
 
+  // Runs before the admin early return so the hook order stays stable. Records
+  // the channel on arrival, so it survives the walk to the contact page.
+  useEffect(() => {
+    captureLeadSource();
+  }, []);
+
   if (isAdmin) return <>{children}</>;
 
   return (
@@ -27,7 +35,7 @@ export default function SiteChrome({
       {navbar}
       <main>{children}</main>
       {footer}
-      <FloatingWhatsApp />
+      <FloatingWhatsApp pathname={pathname} />
     </>
   );
 }

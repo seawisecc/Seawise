@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { whatsappUrl, whatsappDisplay, INSTAGRAM_URL, INSTAGRAM_HANDLE } from "@/lib/contact";
 import Logo from "./Logo";
 import Wordmark from "./Wordmark";
 import type { Locale } from "@/lib/i18n/config";
@@ -49,6 +50,26 @@ export default function Footer({
               <li>
                 <a href="mailto:hello@seawise.id" className="hover:text-sea-foam">
                   hello@seawise.id
+                </a>
+              </li>
+              <li>
+                <a
+                  href={whatsappUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-sea-foam"
+                >
+                  WhatsApp {whatsappDisplay()}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-sea-foam"
+                >
+                  Instagram @{INSTAGRAM_HANDLE}
                 </a>
               </li>
               <li>

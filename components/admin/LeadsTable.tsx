@@ -11,6 +11,8 @@ type Lead = {
   message: string;
   status: string;
   created_at: string;
+  source: string | null;
+  landing_path: string | null;
 };
 
 export default function LeadsTable() {
@@ -63,6 +65,7 @@ export default function LeadsTable() {
               <th className="px-5 py-3 font-semibold">Tanggal</th>
               <th className="px-5 py-3 font-semibold">Nama</th>
               <th className="px-5 py-3 font-semibold">Email</th>
+              <th className="px-5 py-3 font-semibold">Sumber</th>
               <th className="px-5 py-3 font-semibold">Status</th>
               <th className="px-5 py-3 font-semibold">Aksi</th>
             </tr>
@@ -75,6 +78,7 @@ export default function LeadsTable() {
                 </td>
                 <td className="px-5 py-3 font-semibold text-forest-dark">{r.name}</td>
                 <td className="px-5 py-3.5 text-forest-dark/70">{r.email}</td>
+                <td className="px-5 py-3.5 text-forest-dark/60">{r.source ?? "-"}</td>
                 <td className="px-5 py-3.5">
                   <button
                     onClick={() => toggleStatus(r)}
@@ -94,10 +98,10 @@ export default function LeadsTable() {
                 </td>
               </tr>
             ))}
-            {loading && <SkeletonRows cols={5} />}
+            {loading && <SkeletonRows cols={6} />}
             {!loading && rows.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-5 py-10 text-center text-forest-dark/50">
+                <td colSpan={6} className="px-5 py-10 text-center text-forest-dark/50">
                   Belum ada pesan.
                 </td>
               </tr>
@@ -113,6 +117,10 @@ export default function LeadsTable() {
             <a href={`mailto:${open.email}`} className="text-sm text-sea-foam hover:underline">
               {open.email}
             </a>
+            <p className="mt-2 text-xs text-forest-dark/50">
+              Datang dari {open.source ?? "sumber tidak tercatat"}
+              {open.landing_path ? `, lewat halaman ${open.landing_path}` : ""}
+            </p>
             <p className="mt-4 whitespace-pre-wrap rounded-xl border border-warm-neutral bg-white/60 p-4 text-sm leading-relaxed text-forest-dark/80">
               {open.message}
             </p>

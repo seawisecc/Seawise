@@ -410,6 +410,8 @@ const en = {
     intro:
       "The first conversation is free. Fill in the form below, or email us directly at hello@seawise.id.",
     emailLabel: "Email",
+    whatsappLabel: "Chat on WhatsApp",
+    instagramLabel: "Follow us",
     helpLabel: "What we can help with",
     helpItems: [
       "Custom ERP & enterprise systems",
@@ -422,6 +424,8 @@ const en = {
       namePlaceholder: "Your name",
       email: "Email",
       emailPlaceholder: "you@company.com",
+      phone: "WhatsApp number (optional)",
+      phonePlaceholder: "08xx xxxx xxxx",
       message: "Message",
       messagePlaceholder:
         "Tell us the process or need you'd like to solve…",
@@ -432,6 +436,7 @@ const en = {
       nameRequired: "Please enter your name.",
       emailInvalid: "That email doesn't look valid.",
       messageShort: "Tell us a bit more (min. 10 characters).",
+      phoneInvalid: "That phone number doesn't look valid.",
       notConfigured:
         "The database connection isn't configured yet. For now, email us directly at hello@seawise.id.",
       insertError: "Sorry, something went wrong. Please try again shortly.",
@@ -912,6 +917,8 @@ const id: Dictionary = {
     intro:
       "Diskusi awal gratis. Isi form di bawah, atau kirim email langsung ke hello@seawise.id.",
     emailLabel: "Email",
+    whatsappLabel: "Chat via WhatsApp",
+    instagramLabel: "Ikuti kami",
     helpLabel: "Yang bisa kami bantu",
     helpItems: [
       "ERP custom & sistem enterprise",
@@ -924,6 +931,8 @@ const id: Dictionary = {
       namePlaceholder: "Nama kamu",
       email: "Email",
       emailPlaceholder: "nama@perusahaan.com",
+      phone: "Nomor WhatsApp (opsional)",
+      phonePlaceholder: "08xx xxxx xxxx",
       message: "Pesan",
       messagePlaceholder:
         "Ceritakan proses atau kebutuhan yang mau kamu selesaikan…",
@@ -934,6 +943,7 @@ const id: Dictionary = {
       nameRequired: "Mohon isi nama kamu.",
       emailInvalid: "Alamat email belum valid.",
       messageShort: "Ceritakan sedikit lebih detail (min. 10 karakter).",
+      phoneInvalid: "Nomor telepon belum valid.",
       notConfigured:
         "Koneksi ke database belum dikonfigurasi. Sementara ini, email langsung ke hello@seawise.id.",
       insertError: "Maaf, ada kendala saat mengirim. Coba lagi sebentar lagi.",

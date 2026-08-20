@@ -5,6 +5,7 @@ import ContactForm from "@/components/ContactForm";
 import JsonLd from "@/components/JsonLd";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { pageSeo, breadcrumbJsonLd } from "@/lib/seo";
+import { whatsappUrl, whatsappDisplay, INSTAGRAM_URL, INSTAGRAM_HANDLE } from "@/lib/contact";
 import type { Locale } from "@/lib/i18n/config";
 
 export async function generateMetadata({
@@ -52,6 +53,28 @@ export default function KontakPage({
                     className="mt-1.5 block font-display text-xl font-bold text-forest-dark hover:text-sea-foam"
                   >
                     hello@seawise.id
+                  </a>
+                </div>
+                <div>
+                  <p className="eyebrow text-sea-foam">{t.whatsappLabel}</p>
+                  <a
+                    href={whatsappUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1.5 block font-display text-xl font-bold text-forest-dark hover:text-sea-foam"
+                  >
+                    {whatsappDisplay()}
+                  </a>
+                </div>
+                <div>
+                  <p className="eyebrow text-sea-foam">{t.instagramLabel}</p>
+                  <a
+                    href={INSTAGRAM_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1.5 block font-display text-xl font-bold text-forest-dark hover:text-sea-foam"
+                  >
+                    @{INSTAGRAM_HANDLE}
                   </a>
                 </div>
                 <div>

@@ -1,9 +1,11 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { submitLead, type LeadState } from "@/app/[lang]/kontak/actions";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import { readLeadSource } from "@/lib/leadSource";
 
 const initialState: LeadState = { ok: false, message: "" };
 
@@ -32,11 +34,21 @@ export default function ContactForm({
   dict: Dictionary;
 }) {
   const [state, formAction] = useFormState(submitLead, initialState);
+  const [origin, setOrigin] = useState({ source: "", landingPath: "" });
   const f = dict.contact.form;
+
+  // The channel was captured when the visitor first arrived, see lib/leadSource.
+  // Reading it here means a walk from the landing page to this form keeps the
+  // credit with whoever actually sent them.
+  useEffect(() => {
+    setOrigin({ source: readLeadSource(), landingPath: window.location.pathname });
+  }, []);
 
   return (
     <form action={formAction} className="space-y-5" noValidate>
       <input type="hidden" name="locale" value={lang} />
+      <input type="hidden" name="source" value={origin.source} />
+      <input type="hidden" name="landing_path" value={origin.landingPath} />
 
       <div>
         <label htmlFor="name" className={labelClass}>
@@ -50,6 +62,21 @@ export default function ContactForm({
           {f.email}
         </label>
         <input id="email" name="email" type="email" required className={fieldClass} placeholder={f.emailPlaceholder} />
+      </div>
+
+      <div>
+        <label htmlFor="phone" className={labelClass}>
+          {f.phone}
+        </label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel"
+          className={fieldClass}
+          placeholder={f.phonePlaceholder}
+        />
       </div>
 
       <div>
