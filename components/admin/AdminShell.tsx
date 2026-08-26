@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import Logo from "@/components/Logo";
 import Wordmark from "@/components/Wordmark";
 import AdminBottomNav from "./AdminBottomNav";
+import InstallAppButton from "./InstallAppButton";
 import {
   ADMIN_SECTIONS,
   activeSectionLabel,
@@ -83,6 +84,9 @@ export default function AdminShell({
           >
             ← Lihat website
           </Link>
+          {/* Hilang sendiri kalau panel sudah terpasang atau browser tidak
+              mendukung. Sengaja hanya di admin, situs publik tidak disentuh. */}
+          <InstallAppButton />
           <button
             onClick={signOut}
             className="rounded-lg px-3 py-2 text-left text-xs font-medium text-red-700 hover:bg-red-50"

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MoreIcon } from "./AdminIcons";
+import InstallAppButton from "./InstallAppButton";
 import {
   PRIMARY_SECTIONS,
   SECONDARY_SECTIONS,
@@ -133,6 +134,9 @@ export default function AdminBottomNav({
                 >
                   ← Lihat website
                 </Link>
+                {/* Di ponsel inilah pemasangan paling berguna. Komponennya
+                    menyembunyikan diri kalau panel sudah terpasang. */}
+                <InstallAppButton className="text-[0.75rem]" />
                 <button
                   type="button"
                   onClick={() => {

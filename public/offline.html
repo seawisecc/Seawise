@@ -1,0 +1,65 @@
+<!doctype html>
+<!--
+  Offline fallback for the service worker.
+
+  This file is served by sw.js when a navigation fails and nothing matching is
+  in the cache. It cannot read lib/i18n/dictionaries.ts, because at that point
+  there is no network and no React, so both languages are printed side by side
+  rather than picking one. This is the only visitor facing text outside the
+  dictionary, and it exists for that reason.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Offline | Seawise Studio</title>
+    <style>
+      :root {
+        --forest-dark: #132a22;
+        --off-white: #fafaf8;
+        --warm-neutral: #e8e4d9;
+        --sea-foam: #5c8577;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1.5rem;
+        background: var(--off-white);
+        color: var(--forest-dark);
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+        text-align: center;
+      }
+      .kotak { max-width: 26rem; }
+      img { width: 72px; height: 72px; margin-bottom: 1.5rem; }
+      h1 { font-size: 1.375rem; margin: 0 0 0.75rem; letter-spacing: -0.01em; }
+      p { margin: 0 0 0.5rem; line-height: 1.6; color: rgba(19, 42, 34, 0.72); font-size: 0.9375rem; }
+      p.id { color: rgba(19, 42, 34, 0.5); }
+      button {
+        margin-top: 1.75rem;
+        padding: 0.7rem 1.4rem;
+        border: 0;
+        border-radius: 0.625rem;
+        background: var(--forest-dark);
+        color: var(--off-white);
+        font: inherit;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button:hover { background: var(--sea-foam); }
+    </style>
+  </head>
+  <body>
+    <div class="kotak">
+      <img src="/icons/icon-192.png" alt="Seawise Studio" />
+      <h1>You are offline</h1>
+      <p>This page has not been saved for offline use. Reconnect and try again.</p>
+      <p class="id">Halaman ini belum tersimpan untuk mode luring. Sambungkan kembali internetmu, lalu coba lagi.</p>
+      <button onclick="location.reload()">Reload / Muat ulang</button>
+    </div>
+  </body>
+</html>
