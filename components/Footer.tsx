@@ -1,5 +1,17 @@
 import Link from "next/link";
-import { whatsappUrl, whatsappDisplay, INSTAGRAM_URL, INSTAGRAM_HANDLE } from "@/lib/contact";
+import {
+  whatsappUrl,
+  whatsappDisplay,
+  INSTAGRAM_URL,
+  INSTAGRAM_HANDLE,
+  GOOGLE_BUSINESS_URL,
+} from "@/lib/contact";
+import {
+  WhatsAppIcon,
+  MailIcon,
+  InstagramIcon,
+  GoogleBusinessIcon,
+} from "./ContactIcons";
 import Logo from "./Logo";
 import Wordmark from "./Wordmark";
 import type { Locale } from "@/lib/i18n/config";
@@ -48,7 +60,8 @@ export default function Footer({
             <p className="eyebrow text-sea-foam">{dict.footer.contactHeading}</p>
             <ul className="mt-4 space-y-2.5 text-sm text-off-white/80">
               <li>
-                <a href="mailto:hello@seawise.id" className="hover:text-sea-foam">
+                <a href="mailto:hello@seawise.id" className="group flex items-center gap-2.5 hover:text-sea-foam">
+                  <MailIcon className="h-4 w-4 shrink-0 text-off-white/45 transition-colors group-hover:text-sea-foam" />
                   hello@seawise.id
                 </a>
               </li>
@@ -57,8 +70,9 @@ export default function Footer({
                   href={whatsappUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-sea-foam"
+                  className="group flex items-center gap-2.5 hover:text-sea-foam"
                 >
+                  <WhatsAppIcon className="h-4 w-4 shrink-0 text-off-white/45 transition-colors group-hover:text-[#25D366]" />
                   WhatsApp {whatsappDisplay()}
                 </a>
               </li>
@@ -67,11 +81,25 @@ export default function Footer({
                   href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-sea-foam"
+                  className="group flex items-center gap-2.5 hover:text-sea-foam"
                 >
+                  <InstagramIcon className="h-4 w-4 shrink-0 text-off-white/45 transition-colors group-hover:text-[#E1306C]" />
                   Instagram @{INSTAGRAM_HANDLE}
                 </a>
               </li>
+              {GOOGLE_BUSINESS_URL ? (
+                <li>
+                  <a
+                    href={GOOGLE_BUSINESS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-2.5 hover:text-sea-foam"
+                  >
+                    <GoogleBusinessIcon className="h-4 w-4 shrink-0 text-off-white/45 transition-colors group-hover:text-[#8AB4F8]" />
+                    {dict.footer.googleBusiness}
+                  </a>
+                </li>
+              ) : null}
               <li>
                 <Link href={`/${lang}/kontak`} className="hover:text-sea-foam">
                   {dict.footer.contactForm}

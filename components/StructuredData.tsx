@@ -2,7 +2,7 @@ import { SITE_URL } from "@/lib/siteUrl";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { AREA_SERVED, STUDIO_ID } from "@/lib/seo";
-import { WHATSAPP_NUMBER, INSTAGRAM_URL } from "@/lib/contact";
+import { WHATSAPP_NUMBER, INSTAGRAM_URL, GOOGLE_BUSINESS_URL } from "@/lib/contact";
 import JsonLd from "./JsonLd";
 
 /**
@@ -24,11 +24,17 @@ export default function StructuredData({ lang }: { lang: Locale }) {
       email: "hello@seawise.id",
       slogan: "Systems & Software Studio",
       // telephone and sameAs were confirmed by the owner on 20 Aug 2026: the
-      // WhatsApp business line and the studio's Instagram profile.
+      // WhatsApp business line and the studio's Instagram profile. The Google
+      // Business Profile joined sameAs on 27 Aug 2026, also owner confirmed.
+      // That one matters most here: it is what lets Google tie this site to
+      // the profile it already ranks, so filter it out rather than emit "" if
+      // the env override is ever blanked.
       // Still not set on purpose: priceRange. It is a factual claim about the
-      // business and no verified band exists yet, so it stays out.
+      // business and no verified band exists yet, so it stays out. Likewise
+      // aggregateRating: the profile's stars are real, but Google disallows
+      // self-serving review markup about your own organisation.
       telephone: `+${WHATSAPP_NUMBER}`,
-      sameAs: [INSTAGRAM_URL],
+      sameAs: [INSTAGRAM_URL, GOOGLE_BUSINESS_URL].filter(Boolean),
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer service",

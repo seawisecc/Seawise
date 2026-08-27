@@ -412,6 +412,8 @@ const en = {
     emailLabel: "Email",
     whatsappLabel: "Chat on WhatsApp",
     instagramLabel: "Follow us",
+    googleLabel: "Google Business Profile",
+    googleValue: "See our profile and reviews",
     helpLabel: "What we can help with",
     helpItems: [
       "Custom ERP & enterprise systems",
@@ -449,6 +451,7 @@ const en = {
     navHeading: "Navigation",
     contactHeading: "Contact",
     contactForm: "Contact form",
+    googleBusiness: "Google Business Profile",
     rights: "Systems & Software Studio.",
     builtWith: "Built with Next.js & Supabase.",
   },
@@ -919,6 +922,8 @@ const id: Dictionary = {
     emailLabel: "Email",
     whatsappLabel: "Chat via WhatsApp",
     instagramLabel: "Ikuti kami",
+    googleLabel: "Profil Bisnis Google",
+    googleValue: "Lihat profil dan ulasan kami",
     helpLabel: "Yang bisa kami bantu",
     helpItems: [
       "ERP custom & sistem enterprise",
@@ -956,6 +961,7 @@ const id: Dictionary = {
     navHeading: "Navigasi",
     contactHeading: "Kontak",
     contactForm: "Form kontak",
+    googleBusiness: "Profil Bisnis Google",
     rights: "Systems & Software Studio.",
     builtWith: "Dibangun dengan Next.js & Supabase.",
   },

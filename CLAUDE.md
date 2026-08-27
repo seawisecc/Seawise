@@ -254,7 +254,15 @@ seluruh file `.sql`.
   klaim faktual tentang bisnis dan belum ada data terverifikasi. Jangan
   dikarang. `telephone` dan `sameAs` sudah diisi 20 Agustus 2026 atas
   konfirmasi pemilik: nomor WhatsApp bisnis dan Instagram `@seawise.id`,
-  keduanya bersumber dari `lib/contact.ts`.
+  keduanya bersumber dari `lib/contact.ts`. Profil Bisnis Google menyusul ke
+  `sameAs` pada 27 Agustus 2026, lihat `GOOGLE_BUSINESS_URL`.
+- **`aggregateRating` tetap kosong.** Profil Google punya rating asli, tapi
+  Google melarang markup ulasan yang memuji organisasi sendiri. Jangan tergoda
+  memindahkan angka bintang dari GBP ke JSON-LD.
+- **Link Google Bisnis wajib bentuk `?cid=`.** URL `/search?q=...&ved=...`,
+  dan shortlink `share.google/...` bukan URL profil: yang pertama terikat sesi
+  browser, yang kedua cuma redirector yang diselesaikan JavaScript. Google
+  tidak membaca keduanya sebagai profil. Detailnya di komentar `lib/contact.ts`.
 - **`RESEND_API_KEY`** di environment Vercel. Tanpa ini notifikasi lead di
   `lib/notifyLead.ts` dilewati diam-diam, form tetap jalan dan lead tetap
   tersimpan, cuma tidak ada email yang masuk. Opsional pendampingnya:

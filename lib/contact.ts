@@ -15,6 +15,29 @@ export const INSTAGRAM_HANDLE = "seawise.id";
 export const INSTAGRAM_URL = `https://www.instagram.com/${INSTAGRAM_HANDLE}/`;
 
 /**
+ * Google Business Profile of the studio. Verified by the owner on 27 Aug 2026:
+ * the share link resolved to the profile the owner manages, "Seawise Studio",
+ * category Website designer, phone matching WHATSAPP_NUMBER.
+ *
+ * This is the `?cid=` form on purpose. It is the profile's stable numeric id,
+ * it carries no session parameters, and it survives a rename or a move, unlike
+ * the /maps/place/<Name>/@<coords>/... URL the browser shows you.
+ *
+ * NOT usable here, even though Google hands them out:
+ *   /search?q=...&ved=...&gs_lcrp=...  a result page tied to one session
+ *   share.google/<id>                  a redirector, resolved by JavaScript
+ * Neither is read by Google as a profile, so neither belongs in sameAs.
+ *
+ * NEXT_PUBLIC_GOOGLE_BUSINESS_URL overrides it without a code change. An empty
+ * value hides every place that shows the link, the same way an empty portfolio
+ * table hides its section.
+ */
+export const GOOGLE_BUSINESS_CID = "5879488443546439200";
+export const GOOGLE_BUSINESS_URL =
+  process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_URL?.trim() ||
+  `https://maps.google.com/?cid=${GOOGLE_BUSINESS_CID}`;
+
+/**
  * Human readable form of WHATSAPP_NUMBER, e.g. "+62 812-3759-7759".
  * Falls back to a plain "+<digits>" for any shape it does not recognise, so an
  * unusual number never renders as garbage.
