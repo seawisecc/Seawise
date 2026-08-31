@@ -191,6 +191,12 @@ meneruskannya ke Gmail studio lewat `lib/inboundEmail.ts`. Yang gampang salah:
   akan pernah cocok lagi. Karena itu `req.text()` dulu, `JSON.parse` belakangan.
 - Tanpa `RESEND_INBOUND_SECRET` route ini menolak jalan sama sekali. Endpoint
   tanpa autentikasi yang bisa menyuruh Resend mengirim email itu open relay.
+- **Membaca email masuk butuh API key ber-Full access.** Key dengan izin
+  "Sending access" ditolak `401 restricted_api_key`, karena membaca
+  `/emails/receiving` bukan operasi kirim. Ini sudah pernah terjadi: email
+  sampai ke Resend dengan benar, tapi penerusan gagal 503 berjam-jam sampai
+  lognya dibaca. Karena itu ada `RESEND_INBOUND_API_KEY` terpisah, supaya
+  `RESEND_API_KEY` yang dipakai `notifyLead` juga tetap boleh terbatas.
 - Webhook `email.received` **hanya membawa metadata**. Body dan lampiran harus
   ditarik lewat `/emails/receiving/{id}` dan endpoint attachments-nya.
 - Balasan 5xx berarti "kirim ulang webhooknya". Kegagalan sementara dijawab 503
@@ -407,6 +413,10 @@ seluruh file `.sql`.
   tersimpan, cuma tidak ada email yang masuk. Opsional pendampingnya:
   `LEAD_NOTIFY_TO` dan `LEAD_NOTIFY_FROM`. Pengirim wajib memakai domain yang
   sudah terverifikasi di Resend, sekarang `send.seawise.id`.
+- **`RESEND_INBOUND_API_KEY`** di environment Vercel. Harus key dengan **Full
+  access**, bukan "Sending access", karena dipakai membaca isi email masuk.
+  Kalau tidak ada, kodenya jatuh ke `RESEND_API_KEY` dan penerusan akan gagal
+  401 kalau key itu terbatas.
 - **`RESEND_INBOUND_SECRET`** di environment Vercel, diambil dari signing secret
   webhook di dashboard Resend. Tanpa ini `app/api/inbound` menolak semua request
   dan mail masuk tidak diteruskan. Perlu juga satu MX record `seawise.id` ke
