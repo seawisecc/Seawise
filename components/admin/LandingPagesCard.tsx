@@ -4,6 +4,7 @@ import { useState } from "react";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { SITE_URL } from "@/lib/siteUrl";
 import { i18n } from "@/lib/i18n/config";
+import PromoCopyEditor from "./PromoCopyEditor";
 
 /**
  * Reference card for the paid-ads landing pages.
@@ -24,8 +25,10 @@ const AD_SOURCE_PRESETS = [
   "instagram-bio",
 ];
 
-/** Admin is Indonesian only, so the reminder text is read from the id dictionary. */
+/** Admin is Indonesian only, so the reminder text is read from the id dictionary.
+ *  The English one is needed for the optional English boxes in the editor. */
 const dict = getDictionary("id");
+const dictEn = getDictionary("en");
 
 const LANDING_PAGES = [
   {
@@ -33,12 +36,24 @@ const LANDING_PAGES = [
     label: "Iklan Website",
     hook: dict.promo.title,
     note: "Membuka dengan harga dan waktu pengerjaan. Untuk orang yang sedang membandingkan penawaran website.",
+    defaults: {
+      title: dict.promo.title,
+      subtitle: dict.promo.subtitle,
+      titleEn: dictEn.promo.title,
+      subtitleEn: dictEn.promo.subtitle,
+    },
   },
   {
     path: "promo-aplikasi",
     label: "Iklan Aplikasi",
     hook: dict.promoApp.title,
     note: "Membuka dengan masalah, bukan harga. Untuk pemilik usaha yang sistemnya sudah ada tapi tidak dipakai.",
+    defaults: {
+      title: dict.promoApp.title,
+      subtitle: dict.promoApp.subtitle,
+      titleEn: dictEn.promoApp.title,
+      subtitleEn: dictEn.promoApp.subtitle,
+    },
   },
 ];
 
@@ -169,6 +184,14 @@ export default function LandingPagesCard() {
                 );
               })}
             </div>
+
+            {/* Path apa adanya, tanpa mengganti tanda hubung. `resolvePromoCopy`
+                mencari lewat path yang sama, jadi mengubahnya di sini membuat
+                simpan tampak berhasil tapi halamannya tidak pernah berubah. */}
+            <PromoCopyEditor
+              settingKey={`copy_${page.path}`}
+              defaults={page.defaults}
+            />
           </div>
         ))}
       </div>

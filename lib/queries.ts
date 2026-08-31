@@ -286,3 +286,79 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
   }
   return settings;
 });
+
+/**
+ * Per-page hook overrides for the paid-ads landing pages, edited in
+ * /admin/pengaturan. Stored in the same `site_settings` table under
+ * `copy_<page>` keys, so adding this needed no migration.
+ *
+ * Why overridable at all, when rule 1 says visitor text lives in the
+ * dictionary: the headline is the one line an operator changes while an ad is
+ * running, and going through a deploy for it makes testing hooks impractical.
+ * The dictionary stays the source of truth and the fallback; an override is a
+ * temporary pin on top of it, and clearing the field returns the page to code.
+ *
+ * Locale follows the same convention as the `*_en` columns elsewhere in the
+ * schema: the base field is Indonesian, `*_en` is optional, and an empty
+ * English value falls back to Indonesian rather than to the dictionary. That
+ * matches what an operator expects after editing only the Indonesian box.
+ */
+export type PromoCopyOverride = {
+  title?: string | null;
+  subtitle?: string | null;
+  title_en?: string | null;
+  subtitle_en?: string | null;
+};
+
+/** `copy_promo`, `copy_promo_aplikasi`, and any page added later. */
+const COPY_KEY_PREFIX = "copy_";
+
+const getPromoCopyOverrides = cache(
+  async (): Promise<Record<string, PromoCopyOverride>> => {
+    const supabase = createClient();
+    if (!supabase) return {};
+
+    const { data, error } = await supabase
+      .from("site_settings")
+      .select("key, value")
+      .like("key", `${COPY_KEY_PREFIX}%`);
+    if (error || !data) return {};
+
+    const out: Record<string, PromoCopyOverride> = {};
+    for (const row of data as { key: string; value: unknown }[]) {
+      // Anything that is not an object is ignored, so a hand-edited row cannot
+      // put the page into a shape the renderer does not expect.
+      if (row.value && typeof row.value === "object" && !Array.isArray(row.value)) {
+        out[row.key.slice(COPY_KEY_PREFIX.length)] = row.value as PromoCopyOverride;
+      }
+    }
+    return out;
+  }
+);
+
+/** Trimmed value, or null when the field is absent or blank. */
+function usable(value: unknown): string | null {
+  return typeof value === "string" && value.trim() ? value.trim() : null;
+}
+
+/**
+ * Effective hook for one landing page. `fallback` is the dictionary copy, which
+ * is what renders whenever no override is set, the table is unreachable, or the
+ * stored value is blank.
+ */
+export async function resolvePromoCopy(
+  lang: Locale,
+  page: string,
+  fallback: { title: string; subtitle: string }
+): Promise<{ title: string; subtitle: string }> {
+  const override = (await getPromoCopyOverrides())[page];
+  if (!override) return fallback;
+
+  const pick = (base: unknown, en: unknown) =>
+    lang === "en" ? usable(en) ?? usable(base) : usable(base);
+
+  return {
+    title: pick(override.title, override.title_en) ?? fallback.title,
+    subtitle: pick(override.subtitle, override.subtitle_en) ?? fallback.subtitle,
+  };
+}

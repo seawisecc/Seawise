@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PromoLanding from "@/components/PromoLanding";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { pageSeo } from "@/lib/seo";
-import { getPricing, getPortfolio } from "@/lib/queries";
+import { getPricing, getPortfolio, resolvePromoCopy } from "@/lib/queries";
 import type { Locale } from "@/lib/i18n/config";
 
 const PATH = "promo";
@@ -49,9 +49,15 @@ export default async function PromoPage({
   const { lang } = params;
   const dict = getDictionary(lang);
 
-  const [pricing, portfolio] = await Promise.all([
+  const [pricing, portfolio, copy] = await Promise.all([
     getPricing(lang),
     getPortfolio(lang),
+    // Hook aktif. Kalau tidak ada override di /admin/pengaturan, ini persis
+    // teks dictionary, jadi halaman tidak berubah sampai pemilik mengubahnya.
+    resolvePromoCopy(lang, PATH, {
+      title: dict.promo.title,
+      subtitle: dict.promo.subtitle,
+    }),
   ]);
 
   // Ordering matters more than it looks. This page sells websites, so a website
@@ -82,6 +88,7 @@ export default async function PromoPage({
       dict={dict}
       pricing={pricing}
       portfolio={proof}
+      copy={copy}
     />
   );
 }

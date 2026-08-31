@@ -34,11 +34,14 @@ export default function PromoAppLanding({
   dict,
   portfolio,
   services,
+  copy,
 }: {
   lang: Locale;
   dict: Dictionary;
   portfolio: PortfolioRow[];
   services: Dictionary["servicesList"];
+  /** Hook aktif: override dari /admin/pengaturan, atau teks dictionary. */
+  copy: { title: string; subtitle: string };
 }) {
   const t = dict.promoApp;
   const waUrl = whatsappUrlFor(`/${lang}/promo-aplikasi`);
@@ -54,10 +57,10 @@ export default function PromoAppLanding({
         <div className="mx-auto max-w-content px-5 py-16 md:px-8 md:py-24">
           <p className="eyebrow text-sea-foam">{t.eyebrow}</p>
           <h1 className="mt-4 max-w-4xl font-display text-4xl font-bold leading-[1.08] tracking-tight md:text-6xl">
-            {t.title}
+            {copy.title}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-off-white/75">
-            {t.subtitle}
+            {copy.subtitle}
           </p>
 
           <div className="mt-9 flex flex-wrap gap-3">

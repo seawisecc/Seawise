@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PromoAppLanding from "@/components/PromoAppLanding";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { pageSeo } from "@/lib/seo";
-import { getPortfolio } from "@/lib/queries";
+import { getPortfolio, resolvePromoCopy } from "@/lib/queries";
 import type { Locale } from "@/lib/i18n/config";
 
 const PATH = "promo-aplikasi";
@@ -49,7 +49,13 @@ export default async function PromoAppPage({
 }) {
   const { lang } = params;
   const dict = getDictionary(lang);
-  const portfolio = await getPortfolio(lang);
+  const [portfolio, copy] = await Promise.all([
+    getPortfolio(lang),
+    resolvePromoCopy(lang, PATH, {
+      title: dict.promoApp.title,
+      subtitle: dict.promoApp.subtitle,
+    }),
+  ]);
 
   // Mirror image of the website page's ordering. This one sells systems, so an
   // app has to speak first; a company profile site under "not mockups" would
@@ -78,6 +84,7 @@ export default async function PromoAppPage({
       dict={dict}
       portfolio={proof}
       services={services}
+      copy={copy}
     />
   );
 }

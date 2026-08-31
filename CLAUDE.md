@@ -241,6 +241,36 @@ dioper sebagai prop ke `SiteChrome` yang client component, dan itu pola yang
 didukung. Keduanya membaca lewat client cookieless, jadi halaman tetap statis
 dan `revalidate = 120` tidak terganggu.
 
+### Hook halaman iklan bisa ditimpa dari admin, dictionary tetap sumbernya
+
+`/admin/pengaturan` bisa mengubah judul dan subjudul kedua halaman iklan tanpa
+deploy. Ini pengecualian sempit terhadap aturan 1, dan sengaja dibatasi hanya di
+dua halaman itu: headline adalah satu-satunya baris yang diubah operator saat
+iklan sedang berjalan, dan harus lewat deploy untuk itu membuat pengujian hook
+jadi tidak praktis.
+
+Dictionary **tetap sumber kebenaran dan fallback**. Override cuma pin sementara
+di atasnya. `resolvePromoCopy()` di `lib/queries.ts` yang menyelesaikannya, dan
+dia jatuh ke dictionary kalau override kosong, tabelnya tak terbaca, atau
+nilainya bukan string.
+
+Disimpan di `site_settings` dengan kunci `copy_<path>`, jadi **tidak butuh
+migrasi baru**. Kuncinya memakai path apa adanya termasuk tanda hubung, jadi
+`copy_promo-aplikasi`, bukan garis bawah. Kalau diubah, menyimpan akan tampak
+berhasil tapi halamannya tidak pernah berubah.
+
+Dua aturan di editor yang menjaga halaman tidak pernah kosong atau beku tak
+sengaja:
+
+1. Kotak kosong disimpan sebagai null, dan null berarti pakai teks kode.
+   Mengosongkan kotak adalah cara membatalkan, bukan cara merusak halaman.
+2. Kotak yang dibiarkan sama persis dengan teks kode juga disimpan sebagai
+   null. Tanpa ini, membuka form lalu menekan Simpan akan diam-diam membekukan
+   teks hari ini selamanya, dan perubahan copy di repo tidak akan pernah muncul.
+
+Bahasa mengikuti konvensi kolom `*_en` di skema: dasar Indonesia, Inggris
+opsional, Inggris kosong jatuh ke Indonesia.
+
 ### Tidak ada fallback portfolio atau testimoni
 
 Dulu ada baris placeholder untuk portfolio. Baris itu punya slug yang halaman
