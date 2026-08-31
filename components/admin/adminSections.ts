@@ -8,6 +8,7 @@ import {
   UsersIcon,
   ArticleIcon,
   InboxIcon,
+  SettingsIcon,
 } from "./AdminIcons";
 
 /**
@@ -32,6 +33,7 @@ export const ADMIN_SECTIONS: AdminSection[] = [
   { slug: "partners", label: "Partner", Icon: UsersIcon },
   { slug: "blog", label: "Blog", Icon: ArticleIcon },
   { slug: "leads", label: "Pesan Masuk", short: "Pesan", Icon: InboxIcon },
+  { slug: "pengaturan", label: "Pengaturan", Icon: SettingsIcon },
 ];
 
 /** The four opened reactively (something happened), so they get a bottom slot. */

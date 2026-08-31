@@ -183,6 +183,51 @@ meneruskannya ke Gmail studio lewat `lib/inboundEmail.ts`. Yang gampang salah:
 - Balasan 5xx berarti "kirim ulang webhooknya". Kegagalan sementara dijawab 503
   supaya Resend mengulang, kegagalan permanen dijawab 200 supaya berhenti.
 
+### Ikon transparan hanya untuk tab, jangan untuk yang lain
+
+`app/icon.png` dan `app/favicon.ico` sengaja berlatar transparan, dibangun dari
+`public/SeaWise.png` yang memang sudah transparan. Yang **harus tetap buram**:
+
+- `app/apple-icon.png`. iOS tidak menghormati alpha di ikon home screen, area
+  transparan dirender **hitam**. Ikon Apple wajib punya latar solid.
+- `public/icons/icon-maskable-512.png`. Ikon maskable memang harus penuh satu
+  kanvas supaya Android bebas memotongnya jadi lingkaran atau squircle.
+  Transparan justru membatalkan gunanya.
+
+Kalau logonya diganti, bangun ulang dari sumber transparan lalu pasang kembali
+latar `#FAFAF8` khusus untuk dua file di atas.
+
+Catatan kontras: paus berwarna `#102820`, sangat gelap. Di tab browser bertema
+gelap ikon transparan jadi nyaris tak terlihat. Solusi sebenarnya adalah
+`app/icon.svg` dengan `prefers-color-scheme` supaya pausnya berganti terang,
+tapi itu butuh logo versi vektor yang belum ada di repo.
+
+### Pengaturan situs ada di tabel key/value
+
+`site_settings` (migrasi v12) menyimpan saklar yang dibalik pemilik di
+`/admin/pengaturan`. Sengaja key/value, jadi saklar baru cukup menambah satu
+baris, bukan migrasi baru. jsonb yang tak bertipe berhenti di
+`getSiteSettings()` di `lib/queries.ts`, yang memetakan key dikenal ke objek
+bertipe dan mengabaikan sisanya.
+
+**Setiap default harus sama dengan perilaku situs sebelum saklar itu ada.**
+Default juga yang dipakai saat tabelnya hilang atau tak terbaca, jadi masalah
+database tidak boleh diam-diam mencopot konten dari situs publik. Sudah diuji:
+tanpa tabel v12, footer dan JSON-LD tetap menampilkan induk perusahaan.
+
+`showParentOrg` mengendalikan dua hal sekaligus, baris "Part of" di footer dan
+`parentOrganization` di JSON-LD. Jangan dipisah: menyembunyikan barisnya tapi
+tetap mengirim datanya membuat halaman bercerita beda ke pengunjung dan ke
+mesin pencari.
+
+`getSiteSettings()` dibungkus `cache()` dari React karena footer dan
+`StructuredData` sama-sama memanggilnya dalam satu render.
+
+Konsekuensinya `Footer` dan `StructuredData` sekarang **async**. `Footer`
+dioper sebagai prop ke `SiteChrome` yang client component, dan itu pola yang
+didukung. Keduanya membaca lewat client cookieless, jadi halaman tetap statis
+dan `revalidate = 120` tidak terganggu.
+
 ### Tidak ada fallback portfolio atau testimoni
 
 Dulu ada baris placeholder untuk portfolio. Baris itu punya slug yang halaman
@@ -200,6 +245,7 @@ app/[lang]/              halaman publik, semua pakai revalidate = 120
 app/[lang]/admin/        panel admin
   layout.tsx             AdminShell + viewport-fit=cover
   loading.tsx            skeleton saat navigasi
+  pengaturan/            saklar situs, baca/tulis site_settings
 app/[lang]/promo/        landing page iklan, noindex, di luar sitemap
 app/api/revalidate/      purge cache ISR on-demand, dipanggil manager admin
 app/api/inbound/         webhook Resend Inbound untuk mail ke @seawise.id
@@ -283,6 +329,7 @@ v8  kolom *_en: portfolio, pricing, testimonials
 v9  kolom *_en: posts
 v10 posts: author_name, author_title, author_title_en, updated_at
 v11 leads: phone, source, landing_path + indeks created_at
+v12 site_settings: tabel key/value untuk saklar di /admin/pengaturan
 ```
 
 **v1 wajib duluan di database kosong**, karena v2 memakai

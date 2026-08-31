@@ -20,14 +20,20 @@ import Logo from "./Logo";
 import Wordmark from "./Wordmark";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import { getSiteSettings } from "@/lib/queries";
 
-export default function Footer({
+export default async function Footer({
   lang,
   dict,
 }: {
   lang: Locale;
   dict: Dictionary;
 }) {
+  // Async server component passed as a prop into SiteChrome, which is a client
+  // component. That is the supported shape, and it keeps the read local rather
+  // than threading a setting through the layout to get here.
+  const { showParentOrg } = await getSiteSettings();
+
   return (
     <footer className="bg-near-black text-off-white">
       <div className="mx-auto max-w-content px-5 py-14 md:px-8">
@@ -116,10 +122,12 @@ export default function Footer({
         <div className="mt-12 flex flex-col gap-5 border-t border-off-white/10 pt-6 text-xs text-off-white/50 md:flex-row md:items-center md:justify-between md:gap-2">
           <p>&copy; {new Date().getFullYear()} Seawise Studio. {dict.footer.rights}</p>
 
-          {/* Parent company. The logo is a wide lockup, so it is sized by
-              height and left to find its own width; `alt` is empty because the
-              adjacent text already names the company, and repeating it would
-              just make a screen reader say it twice. */}
+          {/* Parent company, switched from /admin/pengaturan. The logo is a
+              wide lockup, so it is sized by height and left to find its own
+              width; `alt` is empty because the adjacent text already names the
+              company, and repeating it would just make a screen reader say it
+              twice. */}
+          {showParentOrg && (
           <a
             href={MAYALOKA_URL}
             target="_blank"
@@ -138,6 +146,7 @@ export default function Footer({
             />
             <span className="sr-only">{MAYALOKA_NAME}</span>
           </a>
+          )}
         </div>
       </div>
     </footer>

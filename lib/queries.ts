@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { createPublicClient as createClient } from "@/lib/supabase/public";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/config";
@@ -240,3 +241,48 @@ export async function getPartners(): Promise<PartnerRow[]> {
   if (error || !data) return [];
   return data as PartnerRow[];
 }
+
+/**
+ * Site-wide switches the owner flips in /admin/pengaturan.
+ *
+ * Stored key/value in `site_settings` (migration v12) rather than a column per
+ * switch, so a new toggle costs a row instead of a migration. The untyped jsonb
+ * stops here: callers get this object, with a default for every field.
+ *
+ * Every default is the behaviour the site had before the switch existed. That
+ * matters because the defaults are also what gets returned when the table is
+ * missing or unreadable: a database problem must never silently strip content
+ * off the public site.
+ */
+export type SiteSettings = {
+  /** "Part of Mayaloka Digital" in the footer, and `parentOrganization` in JSON-LD. */
+  showParentOrg: boolean;
+};
+
+const SETTINGS_DEFAULTS: SiteSettings = { showParentOrg: true };
+
+/** Database key to field. A key that is not listed here is ignored. */
+const SETTING_FIELDS: Record<string, keyof SiteSettings> = {
+  show_parent_org: "showParentOrg",
+};
+
+/**
+ * `cache` dedupes this across one render: the footer and the JSON-LD both ask,
+ * and they must agree anyway, so they should not be two round trips.
+ */
+export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
+  const supabase = createClient();
+  if (!supabase) return SETTINGS_DEFAULTS;
+
+  const { data, error } = await supabase.from("site_settings").select("key, value");
+  if (error || !data) return SETTINGS_DEFAULTS;
+
+  const settings = { ...SETTINGS_DEFAULTS };
+  for (const row of data as { key: string; value: unknown }[]) {
+    const field = SETTING_FIELDS[row.key];
+    // Only a real boolean wins. Anything else leaves the default in place,
+    // so a hand-edited row cannot render the site in an undefined state.
+    if (field && typeof row.value === "boolean") settings[field] = row.value;
+  }
+  return settings;
+});

@@ -2,6 +2,7 @@ import { SITE_URL } from "@/lib/siteUrl";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { AREA_SERVED, STUDIO_ID } from "@/lib/seo";
+import { getSiteSettings } from "@/lib/queries";
 import {
   WHATSAPP_NUMBER,
   INSTAGRAM_URL,
@@ -15,8 +16,9 @@ import JsonLd from "./JsonLd";
  * JSON-LD structured data so Google understands the business (rich results,
  * knowledge panel eligibility). Rendered once in the root layout.
  */
-export default function StructuredData({ lang }: { lang: Locale }) {
+export default async function StructuredData({ lang }: { lang: Locale }) {
   const dict = getDictionary(lang);
+  const { showParentOrg } = await getSiteSettings();
 
   const graph = [
     {
@@ -45,11 +47,19 @@ export default function StructuredData({ lang }: { lang: Locale }) {
       // on 31 Aug 2026. Stated here as well as in the footer so the relation
       // is machine readable, which is what lets an answer engine describe the
       // studio and its parent as one group rather than two unrelated firms.
-      parentOrganization: {
-        "@type": "Organization",
-        name: MAYALOKA_NAME,
-        url: MAYALOKA_URL,
-      },
+      //
+      // Tied to the same switch as the footer lockup, deliberately. Hiding the
+      // line visually while still announcing the relation to Google would make
+      // the page say one thing to people and another to machines.
+      ...(showParentOrg
+        ? {
+            parentOrganization: {
+              "@type": "Organization",
+              name: MAYALOKA_NAME,
+              url: MAYALOKA_URL,
+            },
+          }
+        : {}),
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer service",
