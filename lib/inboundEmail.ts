@@ -18,10 +18,16 @@
  * about 20 lines rather than a package.
  *
  * Environment:
- *   RESEND_API_KEY         required, same key used for sending
- *   RESEND_INBOUND_SECRET  required, the webhook signing secret (whsec_...)
- *   INBOUND_FORWARD_TO     where to forward, falls back to LEAD_NOTIFY_TO
- *   INBOUND_FORWARD_FROM   sender, must stay on a domain verified in Resend
+ *   RESEND_API_KEY          required, used to send the forwarded copy
+ *   RESEND_INBOUND_API_KEY  needs FULL access, used to read the incoming
+ *                           message. A key with "Sending access" is rejected
+ *                           with 401 restricted_api_key, because reading
+ *                           /emails/receiving is not a send operation. Kept
+ *                           separate so the widely used sending key can stay
+ *                           restricted. Falls back to RESEND_API_KEY.
+ *   RESEND_INBOUND_SECRET   required, the webhook signing secret (whsec_...)
+ *   INBOUND_FORWARD_TO      where to forward, falls back to LEAD_NOTIFY_TO
+ *   INBOUND_FORWARD_FROM    sender, must stay on a domain verified in Resend
  */
 
 import { createHmac, timingSafeEqual } from "crypto";
@@ -118,7 +124,16 @@ async function resendGet<T>(path: string, apiKey: string): Promise<T | null> {
     headers: { Authorization: `Bearer ${apiKey}` },
   });
   if (!res.ok) {
-    console.error("inbound: GET gagal", path, res.status, await res.text());
+    const body = await res.text();
+    console.error("inbound: GET gagal", path, res.status, body);
+    // The one failure that looks like a bug but is a permission setting. Name it
+    // in the log so the next person does not go reading through this file.
+    if (res.status === 401 && body.includes("restricted_api_key")) {
+      console.error(
+        "inbound: API key ini hanya boleh mengirim. Membaca email masuk butuh " +
+          "key dengan Full access. Set RESEND_INBOUND_API_KEY di Vercel."
+      );
+    }
     return null;
   }
   return (await res.json()) as T;
@@ -222,8 +237,11 @@ export type ForwardResult = "forwarded" | "ignored" | "retry";
 export async function forwardInboundEmail(
   data: InboundEventData
 ): Promise<ForwardResult> {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
+  // Reading and sending use different keys on purpose: reading needs Full
+  // access, sending does not, and the sending key is used by notifyLead too.
+  const sendKey = process.env.RESEND_API_KEY;
+  const readKey = process.env.RESEND_INBOUND_API_KEY ?? sendKey;
+  if (!sendKey || !readKey) {
     console.error("inbound: RESEND_API_KEY belum diset");
     return "retry";
   }
@@ -238,13 +256,13 @@ export async function forwardInboundEmail(
 
   const full = await resendGet<ReceivedEmail>(
     `/emails/receiving/${data.email_id}`,
-    apiKey
+    readKey
   );
   if (!full) return "retry";
 
   const { attachments, skipped } = await collectAttachments(
     data.email_id,
-    apiKey
+    readKey
   );
 
   const sender = full.from ?? data.from;
@@ -260,7 +278,7 @@ export async function forwardInboundEmail(
     const res = await fetch(`${API}/emails`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${sendKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
