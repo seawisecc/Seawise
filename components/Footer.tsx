@@ -1,10 +1,14 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   whatsappUrl,
   whatsappDisplay,
   INSTAGRAM_URL,
   INSTAGRAM_HANDLE,
   GOOGLE_BUSINESS_URL,
+  MAYALOKA_NAME,
+  MAYALOKA_URL,
+  MAYALOKA_LOGO,
 } from "@/lib/contact";
 import {
   WhatsAppIcon,
@@ -109,8 +113,31 @@ export default function Footer({
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-off-white/10 pt-6 text-xs text-off-white/50 md:flex-row md:items-center md:justify-between">
+        <div className="mt-12 flex flex-col gap-5 border-t border-off-white/10 pt-6 text-xs text-off-white/50 md:flex-row md:items-center md:justify-between md:gap-2">
           <p>&copy; {new Date().getFullYear()} Seawise Studio. {dict.footer.rights}</p>
+
+          {/* Parent company. The logo is a wide lockup, so it is sized by
+              height and left to find its own width; `alt` is empty because the
+              adjacent text already names the company, and repeating it would
+              just make a screen reader say it twice. */}
+          <a
+            href={MAYALOKA_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-2.5 transition-opacity hover:opacity-100 md:opacity-80"
+          >
+            <span className="whitespace-nowrap group-hover:text-off-white/80">
+              {dict.footer.partOf}
+            </span>
+            <Image
+              src={MAYALOKA_LOGO}
+              alt=""
+              width={141}
+              height={24}
+              className="h-6 w-auto"
+            />
+            <span className="sr-only">{MAYALOKA_NAME}</span>
+          </a>
         </div>
       </div>
     </footer>

@@ -60,6 +60,11 @@ const en = {
       description:
         "Custom application development from Bali: ERP, point of sale, small business apps, and migration off spreadsheets, built around how your team already works.",
     },
+    promo: {
+      title: "Business Website from Rp2 Million",
+      description:
+        "Website development for businesses in Bali and across Indonesia, live in 3–5 working days, with an admin panel you run yourself. Free quote, no commitment.",
+    },
   },
   /** Shared FAQ shown on the services page, also emitted as FAQPage JSON-LD. */
   faq: {
@@ -253,6 +258,105 @@ const en = {
         "Walk us through your process and we will help map what a system should actually take off your plate.",
       ctaButton: "Start a conversation",
     },
+  },
+  /**
+   * Paid-ads landing page at /{lang}/promo. Deliberately separate from
+   * `landing.website`: that page is written for search and carries the site
+   * navigation, this one is written for cold ad traffic and strips every exit
+   * that is not the form. The route is noindex so the two never compete for
+   * the same query.
+   *
+   * Every number here is real. Rp2 juta and 3–5 hari are the Shore package,
+   * the admin panel claim starts at Reef, and the portfolio proof is whatever
+   * is actually live in Supabase. Nothing on this page is invented.
+   */
+  promo: {
+    eyebrow: "Website Development, Bali",
+    title: "Your business website, live in 3–5 working days, from Rp2 million.",
+    subtitle:
+      "The scope and the price are written down before anything is built. From the Reef package upward you hold the admin panel yourself, so changing a price or a photo never costs you another developer fee.",
+    ctaPrimary: "Request a free quote",
+    ctaSecondary: "Chat on WhatsApp",
+    ctaPackages: "See packages and prices",
+    trust: [
+      "Live portfolio you can open yourself",
+      "First conversation free, no commitment",
+      "Studio in Bali, clients across Indonesia",
+    ],
+    painEyebrow: "Sound familiar?",
+    painTitle: "A website you cannot maintain is out of date within a month.",
+    painItems: [
+      {
+        title: "Every small edit has a price",
+        body: "New price, new photo, new opening hours. If each one means waiting on someone else and paying for it, the site stops matching the business.",
+      },
+      {
+        title: "Slow on a phone",
+        body: "Most of your buyers arrive on mobile data. A heavy page loses them before they ever see what you sell.",
+      },
+      {
+        title: "Invisible on Google",
+        body: "Without proper metadata, a sitemap, and structured data, even a good looking site never surfaces when someone searches for what you do.",
+      },
+    ],
+    packagesEyebrow: "Packages and prices",
+    packagesTitle: "Pick the scope, know the number before we start.",
+    packagesNote:
+      "Prices are per project. The final figure is confirmed after a short discovery call, because it depends on how many sections and features you actually need.",
+    packagesCta: "Ask about this package",
+    proofEyebrow: "Proof",
+    proofTitle: "Not mockups. Open them yourself.",
+    proofBody:
+      "Every project below is live right now. Click through and judge the work before you talk to us.",
+    proofLive: "Open the live site",
+    stepsEyebrow: "How it works",
+    stepsTitle: "Four steps, no surprises.",
+    steps: [
+      {
+        title: "Free discovery call",
+        body: "We map what you sell, who buys it, and what the site has to do. This first conversation costs nothing.",
+      },
+      {
+        title: "Scope and quote in writing",
+        body: "You get the scope and the price before anything is built, so there is nothing to argue about later.",
+      },
+      {
+        title: "Build and review",
+        body: "We build, then you review on a live preview link and give feedback before it goes public.",
+      },
+      {
+        title: "Launch and handover",
+        body: "We launch, then walk you through the admin panel so your team can keep the site current.",
+      },
+    ],
+    faqTitle: "Before you ask",
+    faq: [
+      {
+        q: "How much does it actually cost?",
+        a: "Packages start at Rp2 million across four tiers. Which one fits depends on how many sections you need, how much design customisation you want, and whether you need an admin panel. The current price of each tier is in the list above, and the exact figure is confirmed after the discovery call.",
+      },
+      {
+        q: "How long does it take?",
+        a: "Shore takes 3–5 days, Reef 5–10 days, and Current 10–14 days. Trench depends on how complex the request is, so that estimate comes with your written scope.",
+      },
+      {
+        q: "Can I update the site myself afterwards?",
+        a: "Yes, from the Reef tier upward. The admin panel lets you edit text, prices, and images directly, and the changes appear on the live site. Shore has no admin panel, so updates go through us.",
+      },
+      {
+        q: "Is hosting and domain included?",
+        a: "Domain and hosting are arranged as part of the project. The exact arrangement is confirmed during the discovery call, since it depends on what you already own.",
+      },
+      {
+        q: "Do I need to be in Bali?",
+        a: "No. We are based in Bali and work with clients throughout Indonesia. Discovery, review, and handover can all be done online.",
+      },
+    ],
+    formEyebrow: "Free quote",
+    formTitle: "Tell us what your business needs.",
+    formBody:
+      "Describe your business and what the website has to do. We reply with a scope and a price, and you are not obliged to continue.",
+    formAside: "Prefer to talk directly",
   },
   nav: {
     services: "Services",
@@ -454,6 +558,7 @@ const en = {
     googleBusiness: "Google Business Profile",
     rights: "Systems & Software Studio.",
     builtWith: "Built with Next.js & Supabase.",
+    partOf: "Part of",
   },
   servicesList: [
     {
@@ -571,6 +676,11 @@ const id: Dictionary = {
       title: "Jasa Pembuatan Aplikasi Bali",
       description:
         "Jasa pembuatan aplikasi custom dari Bali: ERP, kasir, aplikasi UMKM, dan migrasi dari spreadsheet, dibangun mengikuti alur kerja tim kamu yang sekarang.",
+    },
+    promo: {
+      title: "Website Bisnis Mulai Rp2 Juta",
+      description:
+        "Jasa pembuatan website untuk bisnis di Bali dan seluruh Indonesia, online dalam 3–5 hari kerja, dengan panel admin yang kamu kelola sendiri. Penawaran gratis, tanpa ikatan.",
     },
   },
   faq: {
@@ -763,6 +873,94 @@ const id: Dictionary = {
         "Jelaskan prosesmu, kami bantu memetakan apa yang seharusnya bisa diambil alih oleh sistem.",
       ctaButton: "Mulai diskusi",
     },
+  },
+  promo: {
+    eyebrow: "Jasa Pembuatan Website, Bali",
+    title: "Website bisnis kamu online dalam 3–5 hari kerja, mulai Rp2 juta.",
+    subtitle:
+      "Scope dan harga ditulis di depan, sebelum ada yang dikerjakan. Dari paket Reef ke atas, panel adminnya kamu pegang sendiri, jadi ganti harga atau foto tidak perlu bayar developer lagi.",
+    ctaPrimary: "Minta penawaran gratis",
+    ctaSecondary: "Chat WhatsApp",
+    ctaPackages: "Lihat paket dan harga",
+    trust: [
+      "Portfolio live, bisa kamu buka sendiri",
+      "Diskusi awal gratis, tanpa ikatan",
+      "Studio di Bali, klien seluruh Indonesia",
+    ],
+    painEyebrow: "Kedengaran familiar?",
+    painTitle: "Website yang tidak bisa kamu urus sendiri akan basi dalam sebulan.",
+    painItems: [
+      {
+        title: "Ganti sedikit saja ada biayanya",
+        body: "Harga baru, foto baru, jam buka baru. Kalau setiap perubahan berarti menunggu orang lain dan membayar lagi, isinya berhenti mengikuti keadaan usaha kamu.",
+      },
+      {
+        title: "Berat dibuka di HP",
+        body: "Sebagian besar calon pembeli datang dari data seluler. Halaman yang berat kehilangan mereka sebelum sempat melihat apa yang kamu jual.",
+      },
+      {
+        title: "Tidak muncul di Google",
+        body: "Tanpa metadata, sitemap, dan structured data yang benar, website sebagus apa pun tidak akan muncul saat orang mencari layanan yang kamu tawarkan.",
+      },
+    ],
+    packagesEyebrow: "Paket dan harga",
+    packagesTitle: "Pilih scope-nya, angkanya sudah jelas sebelum mulai.",
+    packagesNote:
+      "Harga per proyek. Angka finalnya dikonfirmasi setelah sesi discovery singkat, karena tergantung berapa section dan fitur yang benar-benar kamu butuhkan.",
+    packagesCta: "Tanya paket ini",
+    proofEyebrow: "Bukti",
+    proofTitle: "Bukan mockup. Buka sendiri sekarang.",
+    proofBody:
+      "Semua proyek di bawah ini live saat ini juga. Klik, lihat hasilnya, baru nilai kami sebelum ngobrol.",
+    proofLive: "Buka situsnya",
+    stepsEyebrow: "Cara kerjanya",
+    stepsTitle: "Empat langkah, tanpa kejutan.",
+    steps: [
+      {
+        title: "Discovery call gratis",
+        body: "Kami petakan apa yang kamu jual, siapa pembelinya, dan website ini harus melakukan apa. Obrolan pertama ini tidak dipungut biaya.",
+      },
+      {
+        title: "Scope dan penawaran tertulis",
+        body: "Kamu terima scope dan harganya sebelum ada yang dikerjakan, jadi tidak ada yang bisa diperdebatkan belakangan.",
+      },
+      {
+        title: "Pengerjaan dan review",
+        body: "Kami kerjakan, lalu kamu review lewat link preview yang hidup dan beri masukan sebelum dipublikasikan.",
+      },
+      {
+        title: "Launch dan serah terima",
+        body: "Kami luncurkan, lalu memandu kamu memakai panel adminnya supaya timmu bisa menjaga isinya tetap segar.",
+      },
+    ],
+    faqTitle: "Sebelum kamu tanya",
+    faq: [
+      {
+        q: "Sebenarnya biayanya berapa?",
+        a: "Paketnya mulai Rp2 juta dalam empat tingkatan. Yang cocok yang mana tergantung berapa section yang kamu butuhkan, seberapa jauh kustomisasi desainnya, dan apakah kamu butuh panel admin. Harga tiap paket ada di daftar di atas, dan angka persisnya dikonfirmasi setelah discovery call.",
+      },
+      {
+        q: "Berapa lama pengerjaannya?",
+        a: "Shore 3–5 hari, Reef 5–10 hari, dan Current 10–14 hari. Trench tergantung serumit apa permintaannya, jadi estimasinya ikut di scope tertulis kamu.",
+      },
+      {
+        q: "Nanti bisa saya update sendiri?",
+        a: "Bisa, mulai paket Reef ke atas. Panel adminnya memungkinkan kamu mengubah teks, harga, dan gambar langsung, dan perubahannya tampil di situs. Shore belum punya panel admin, jadi perubahannya lewat kami.",
+      },
+      {
+        q: "Hosting dan domain termasuk?",
+        a: "Domain dan hosting diurus sebagai bagian dari proyek. Bentuk persisnya dikonfirmasi saat discovery call, karena tergantung apa yang sudah kamu punya.",
+      },
+      {
+        q: "Harus di Bali untuk kerja sama?",
+        a: "Tidak. Kami berbasis di Bali dan mengerjakan klien dari seluruh Indonesia. Discovery, review, dan serah terima semuanya bisa online.",
+      },
+    ],
+    formEyebrow: "Penawaran gratis",
+    formTitle: "Ceritakan kebutuhan bisnis kamu.",
+    formBody:
+      "Jelaskan usahamu dan website ini harus melakukan apa. Kami balas dengan scope dan harganya, dan kamu tidak wajib melanjutkan.",
+    formAside: "Lebih suka ngobrol langsung",
   },
   nav: {
     services: "Layanan",
@@ -964,6 +1162,7 @@ const id: Dictionary = {
     googleBusiness: "Profil Bisnis Google",
     rights: "Systems & Software Studio.",
     builtWith: "Dibangun dengan Next.js & Supabase.",
+    partOf: "Bagian dari",
   },
   servicesList: [
     {

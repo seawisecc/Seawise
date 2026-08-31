@@ -2,7 +2,13 @@ import { SITE_URL } from "@/lib/siteUrl";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { AREA_SERVED, STUDIO_ID } from "@/lib/seo";
-import { WHATSAPP_NUMBER, INSTAGRAM_URL, GOOGLE_BUSINESS_URL } from "@/lib/contact";
+import {
+  WHATSAPP_NUMBER,
+  INSTAGRAM_URL,
+  GOOGLE_BUSINESS_URL,
+  MAYALOKA_NAME,
+  MAYALOKA_URL,
+} from "@/lib/contact";
 import JsonLd from "./JsonLd";
 
 /**
@@ -35,6 +41,15 @@ export default function StructuredData({ lang }: { lang: Locale }) {
       // self-serving review markup about your own organisation.
       telephone: `+${WHATSAPP_NUMBER}`,
       sameAs: [INSTAGRAM_URL, GOOGLE_BUSINESS_URL].filter(Boolean),
+      // Seawise Studio operates as part of Mayaloka Digital. Owner confirmed
+      // on 31 Aug 2026. Stated here as well as in the footer so the relation
+      // is machine readable, which is what lets an answer engine describe the
+      // studio and its parent as one group rather than two unrelated firms.
+      parentOrganization: {
+        "@type": "Organization",
+        name: MAYALOKA_NAME,
+        url: MAYALOKA_URL,
+      },
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer service",

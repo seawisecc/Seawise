@@ -138,6 +138,51 @@ Tanpa itu nilainya selalu 0 dan padding safe area jadi mubazir. Diset di
 `app/[lang]/admin/layout.tsx`, **khusus segmen admin** supaya situs publik
 tetap memakai viewport default Next.
 
+### `/promo` sengaja `noindex`, jangan "diperbaiki"
+
+`app/[lang]/promo/page.tsx` adalah landing page iklan berbayar dan memasang
+`robots: { index: false, follow: true }` **dengan sengaja**. Halaman keyword
+`jasa-pembuatan-website-bali` sudah ditulis untuk query yang sama, jadi kalau
+halaman promo ikut diindeks keduanya berebut sinyal yang sama. Halaman ini cuma
+kebagian trafik dari iklan, jadi dia melepas pencarian sepenuhnya.
+
+Karena itu juga dia **tidak** ada di `app/sitemap.ts` dan **tidak** masuk
+`disallow` di `app/robots.ts`. Menambah disallow justru bikin crawler tidak bisa
+membaca `noindex`-nya sama sekali, dan itu cara klasik halaman tetap terindeks.
+
+Dua hal lain di halaman ini yang kelihatan seperti kelalaian tapi bukan:
+
+- **Hero-nya tidak dibungkus `Reveal`.** `Reveal` mulai dari `opacity: 0` dan
+  menunggu framer-motion hidrasi plus IntersectionObserver. Di bawah lipatan itu
+  tidak terasa, di layar pertama artinya headline dan CTA halaman yang dibayar
+  per klik kosong sampai JavaScript jalan. Sisa halaman tetap pakai `Reveal`.
+- **Tombol utamanya `bg-off-white`, bukan `bg-sea-foam`.** Di panel gelap,
+  teks near-black di atas sea-foam cuma sekitar 4,4:1 sementara tombol outline
+  di sebelahnya hampir 15:1, jadi pasangan brand-nya membuat CTA utama terbaca
+  lebih lemah dari CTA sekunder. Warnanya masih dari palet yang sama.
+
+Navbar disembunyikan lewat pengecualian `isPromo` di `SiteChrome`, pola yang
+sama dengan admin. Footer tetap ada.
+
+### Mail masuk `hello@seawise.id` lewat webhook, bukan mailbox
+
+Sampai 31 Agustus 2026 domain ini **tidak punya MX yang berfungsi**: satu-satunya
+record menunjuk balik ke A record-nya sendiri, yang isinya Vercel. Jadi setiap
+email ke alamat yang dipajang di footer hilang tanpa jejak.
+
+Sekarang Resend Inbound yang menerima, lalu `app/api/inbound/route.ts`
+meneruskannya ke Gmail studio lewat `lib/inboundEmail.ts`. Yang gampang salah:
+
+- Tanda tangan Svix diverifikasi terhadap **body mentah**. Kalau body dibaca
+  sebagai JSON lalu diserialisasi ulang, urutan key berubah dan HMAC-nya tidak
+  akan pernah cocok lagi. Karena itu `req.text()` dulu, `JSON.parse` belakangan.
+- Tanpa `RESEND_INBOUND_SECRET` route ini menolak jalan sama sekali. Endpoint
+  tanpa autentikasi yang bisa menyuruh Resend mengirim email itu open relay.
+- Webhook `email.received` **hanya membawa metadata**. Body dan lampiran harus
+  ditarik lewat `/emails/receiving/{id}` dan endpoint attachments-nya.
+- Balasan 5xx berarti "kirim ulang webhooknya". Kegagalan sementara dijawab 503
+  supaya Resend mengulang, kegagalan permanen dijawab 200 supaya berhenti.
+
 ### Tidak ada fallback portfolio atau testimoni
 
 Dulu ada baris placeholder untuk portfolio. Baris itu punya slug yang halaman
@@ -155,8 +200,11 @@ app/[lang]/              halaman publik, semua pakai revalidate = 120
 app/[lang]/admin/        panel admin
   layout.tsx             AdminShell + viewport-fit=cover
   loading.tsx            skeleton saat navigasi
+app/[lang]/promo/        landing page iklan, noindex, di luar sitemap
 app/api/revalidate/      purge cache ISR on-demand, dipanggil manager admin
+app/api/inbound/         webhook Resend Inbound untuk mail ke @seawise.id
 lib/revalidate.ts        helper pemanggil route di atas
+lib/inboundEmail.ts      verifikasi Svix + teruskan mail masuk ke Gmail
 components/              komponen publik (21)
 components/admin/        komponen admin (12)
 lib/i18n/dictionaries.ts seluruh teks publik, en sumber kebenaran
@@ -268,6 +316,12 @@ seluruh file `.sql`.
   tersimpan, cuma tidak ada email yang masuk. Opsional pendampingnya:
   `LEAD_NOTIFY_TO` dan `LEAD_NOTIFY_FROM`. Pengirim wajib memakai domain yang
   sudah terverifikasi di Resend, sekarang `send.seawise.id`.
+- **`RESEND_INBOUND_SECRET`** di environment Vercel, diambil dari signing secret
+  webhook di dashboard Resend. Tanpa ini `app/api/inbound` menolak semua request
+  dan mail masuk tidak diteruskan. Perlu juga satu MX record `seawise.id` ke
+  nilai yang diberikan Resend, dipasang di panel idcloudhost. Opsional
+  pendampingnya: `INBOUND_FORWARD_TO` (default ikut `LEAD_NOTIFY_TO`) dan
+  `INBOUND_FORWARD_FROM` (wajib domain terverifikasi di Resend).
 - **Isi artikel blog** ada di tabel `posts` di Supabase, hanya bisa diubah lewat
   `/admin/blog` karena RLS. Lihat `KONTEN-SIAP-TEMPEL.md`.
 

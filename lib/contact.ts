@@ -38,6 +38,20 @@ export const GOOGLE_BUSINESS_URL =
   `https://maps.google.com/?cid=${GOOGLE_BUSINESS_CID}`;
 
 /**
+ * Parent company. Seawise Studio operates as part of Mayaloka Digital, a web
+ * design and digital marketing agency in Denpasar. Confirmed by the owner on
+ * 31 Aug 2026, which is why it is also emitted as `parentOrganization` in the
+ * JSON-LD rather than living only as footer text.
+ *
+ * The logo is served from our own `public/` rather than hotlinked from
+ * mayaloka.com. Their file sits in a WordPress uploads folder, so a rename or
+ * a media library cleanup on their side would silently break our footer.
+ */
+export const MAYALOKA_NAME = "Mayaloka Digital";
+export const MAYALOKA_URL = "https://mayaloka.com/";
+export const MAYALOKA_LOGO = "/mayaloka-digital.png";
+
+/**
  * Human readable form of WHATSAPP_NUMBER, e.g. "+62 812-3759-7759".
  * Falls back to a plain "+<digits>" for any shape it does not recognise, so an
  * unusual number never renders as garbage.
@@ -100,6 +114,12 @@ const WHATSAPP_MESSAGES: Record<string, { en: string; id: string }> = {
   kontak: {
     en: "Hi Seawise Studio, I would like to ask about building an app or website.",
     id: "Halo Seawise Studio, saya mau tanya soal pembuatan aplikasi atau website.",
+  },
+  // The paid-ads landing page. Worded so an incoming chat identifies itself as
+  // coming from an ad, without any tracking parameter in the link.
+  promo: {
+    en: "Hi Seawise Studio, I saw your website offer and would like a quote.",
+    id: "Halo Seawise Studio, saya lihat penawaran website kalian dan mau minta penawaran.",
   },
 };
 
