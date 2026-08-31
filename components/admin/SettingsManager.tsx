@@ -5,6 +5,7 @@ import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
 import { revalidatePublicPages } from "@/lib/revalidate";
 import { MAYALOKA_LOGO, MAYALOKA_NAME } from "@/lib/contact";
+import LandingPagesCard from "./LandingPagesCard";
 
 /**
  * Site-wide switches. Reads and writes the `site_settings` key/value table
@@ -158,6 +159,8 @@ export default function SettingsManager() {
           </div>
         </div>
       </div>
+
+      <LandingPagesCard />
     </div>
   );
 }
