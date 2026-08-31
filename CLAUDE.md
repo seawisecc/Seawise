@@ -277,6 +277,41 @@ sengaja:
 Bahasa mengikuti konvensi kolom `*_en` di skema: dasar Indonesia, Inggris
 opsional, Inggris kosong jatuh ke Indonesia.
 
+### Mengirim dari `hello@seawise.id` terhalang, dan bukan karena kode
+
+Sudah dicoba dan gagal dengan `403 The seawise.id domain is not verified`.
+Resend memakai kata "verified" untuk berarti **verified untuk mengirim**, dan
+domain `seawise.id` sengaja Sending-nya dimatikan, cuma Receiving yang menyala.
+
+Menyalakan Sending di situ butuh dua CNAME, salah satunya bernama `send`,
+tepat di `send.seawise.id`. Di sana sudah ada MX, SPF, dan DKIM milik domain
+kirim yang dipakai TokoKu dan Hari Baik. DNS melarang CNAME berdampingan
+dengan record lain di nama yang sama, jadi memasangnya akan mematikan
+pengiriman dua aplikasi itu. **Jangan lakukan.**
+
+Return path bisa diganti supaya tidak menabrak, tapi **hanya bisa diatur saat
+domain dibuat**. API Update Domain hanya bisa menyalakan/mematikan sending dan
+receiving, tidak bisa mengubah return path.
+
+Kalau suatu saat memang mau mengirim dari `hello@seawise.id`, resepnya:
+
+1. Hapus domain `seawise.id` di Resend, lalu tambahkan lagi dengan Custom
+   Return-Path selain `send`, misalnya `rp`. Nama `rp` dan `rsend` dua-duanya
+   masih kosong di zone.
+2. Nyalakan Sending dan Receiving sekaligus di domain baru itu.
+3. Ganti TXT `resend._domainkey` dengan kunci baru, tambah dua CNAME baru,
+   MX-nya kemungkinan tetap sama.
+4. Tunggu verifikasi.
+
+**Harganya: email masuk mati selama verifikasi.** MX tetap mengarah ke SES,
+tapi Resend tidak lagi mengenali domainnya, jadi pengirim dapat bounce.
+Verifikasi pertama kali butuh sekitar 3 jam sejak DNS terpasang. Kerjakan saat
+sepi, jangan di jam kerja.
+
+Sampai itu dilakukan, balasan keluar dari Gmail studio. Bukan masalah besar:
+email yang diteruskan sudah membawa `reply_to` pengirim asli, jadi threading di
+sisi klien tetap benar.
+
 ### Tidak ada fallback portfolio atau testimoni
 
 Dulu ada baris placeholder untuk portfolio. Baris itu punya slug yang halaman
