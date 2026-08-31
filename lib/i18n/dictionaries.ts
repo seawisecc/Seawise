@@ -65,6 +65,11 @@ const en = {
       description:
         "Website development for businesses in Bali and across Indonesia, live in 3–5 working days, with an admin panel you run yourself. Free quote, no commitment.",
     },
+    promoApp: {
+      title: "Custom Business App Development",
+      description:
+        "Custom ERP, point of sale, and business apps built around how your team already works. Every system in our portfolio is live and clickable. Free workflow mapping.",
+    },
   },
   /** Shared FAQ shown on the services page, also emitted as FAQPage JSON-LD. */
   faq: {
@@ -356,6 +361,107 @@ const en = {
     formTitle: "Tell us what your business needs.",
     formBody:
       "Describe your business and what the website has to do. We reply with a scope and a price, and you are not obliged to continue.",
+    formAside: "Prefer to talk directly",
+  },
+  /**
+   * The second paid-ads landing page, this one for custom applications.
+   * Same shape as `promo` minus the pricing block: business apps are quoted per
+   * project, so there is no package table to show. The section that replaces it
+   * explains why, which turns a missing price into a reason to trust rather
+   * than a gap in the page.
+   */
+  promoApp: {
+    eyebrow: "App Development, Bali",
+    title: "Your team is back on spreadsheets, and the software is already paid for.",
+    subtitle:
+      "Most systems fail on the workflow, not the technology. They get built without anyone watching how the team actually works, so the team quietly returns to the old way. We map the process first, then talk code.",
+    ctaPrimary: "Tell us your process",
+    ctaSecondary: "Chat on WhatsApp",
+    ctaProof: "Open the systems we built",
+    trust: [
+      "Every system below is live and clickable",
+      "Workflow mapping is free, with no commitment",
+      "We stay on until your team actually uses it",
+    ],
+    painEyebrow: "Why it stalls",
+    painTitle: "Three reasons a system quietly stops being used.",
+    painItems: [
+      {
+        title: "The workflow is not yours",
+        body: "Software is bought off the shelf and the team is told to adapt. What happens is the opposite: they go back to the old way, and the system becomes decoration.",
+      },
+      {
+        title: "Only one person can drive it",
+        body: "A system nobody else understands ends up owned by one staff member. The week they take leave, the process stops with them.",
+      },
+      {
+        title: "Abandoned at go-live",
+        body: "The vendor disappears once the invoice clears. The first months after launch are exactly what decides whether a system gets used at all.",
+      },
+    ],
+    proofEyebrow: "Proof",
+    proofTitle: "Not mockups. Open them yourself.",
+    proofBody:
+      "Every system below is running today and used daily. Click through, look at the real screens, then judge us.",
+    proofLive: "Open the live system",
+    buildEyebrow: "What we build",
+    buildTitle: "From one messy process to a system your team runs.",
+    costEyebrow: "About cost",
+    costTitle: "Why there is no price on this page.",
+    costBody:
+      "Business applications have no shelf price. Two shops with the same number of branches can need very different systems. Naming a figure before we understand your process would simply be wrong, and it is usually wrong on the high side.",
+    costItems: [
+      "We map your workflow first, at no cost",
+      "You get the scope and the number in writing, before anything is built",
+      "If a custom system is not the right answer, we say so",
+    ],
+    stepsEyebrow: "How it works",
+    stepsTitle: "Four steps, no surprises.",
+    steps: [
+      {
+        title: "Process mapping",
+        body: "We sit with the people who run the process every day, not only with the owner. This part costs nothing.",
+      },
+      {
+        title: "Scope and quote in writing",
+        body: "You get the scope and the price before a line of code is written.",
+      },
+      {
+        title: "Built in stages, reviewed as we go",
+        body: "We build piece by piece and you review on a live link, so nothing is a surprise at the end.",
+      },
+      {
+        title: "Launch and hand holding",
+        body: "We train your team and stay on after go-live, until the system is genuinely part of the day.",
+      },
+    ],
+    faqTitle: "Before you ask",
+    faq: [
+      {
+        q: "How much does a custom system cost?",
+        a: "It is quoted per project, after we map your process. There is no package price because the work depends entirely on how many people, branches, and steps are involved. The packages published on our services page cover websites, not business applications.",
+      },
+      {
+        q: "How long does it take?",
+        a: "It depends on the scope. The estimate comes with your written quote after mapping, rather than as a guess on the first call.",
+      },
+      {
+        q: "What happens to our old data?",
+        a: "Spreadsheets and older software are audited first, then migrated in stages, so the team is never left without the numbers they use daily.",
+      },
+      {
+        q: "Our team is not very technical.",
+        a: "That is the normal case, and it is exactly why we map the existing workflow instead of imposing a new one. Training is part of handover, and we stay reachable afterwards.",
+      },
+      {
+        q: "Do we need to be in Bali?",
+        a: "No. We are based in Bali and work with clients throughout Indonesia. Mapping, review, and handover all work online.",
+      },
+    ],
+    formEyebrow: "Free consultation",
+    formTitle: "Tell us about the process that is still messy.",
+    formBody:
+      "Describe how the work runs today and where it breaks. We reply with what a system should be taking off your plate, and you are not obliged to continue.",
     formAside: "Prefer to talk directly",
   },
   nav: {
@@ -682,6 +788,11 @@ const id: Dictionary = {
       description:
         "Jasa pembuatan website untuk bisnis di Bali dan seluruh Indonesia, online dalam 3–5 hari kerja, dengan panel admin yang kamu kelola sendiri. Penawaran gratis, tanpa ikatan.",
     },
+    promoApp: {
+      title: "Jasa Pembuatan Aplikasi Bisnis Custom",
+      description:
+        "ERP, kasir, dan aplikasi bisnis custom yang dibangun mengikuti cara kerja tim kamu. Semua sistem di portfolio kami live dan bisa diklik. Pemetaan alur kerja gratis.",
+    },
   },
   faq: {
     title: "Pertanyaan yang sering diajukan",
@@ -960,6 +1071,100 @@ const id: Dictionary = {
     formTitle: "Ceritakan kebutuhan bisnis kamu.",
     formBody:
       "Jelaskan usahamu dan website ini harus melakukan apa. Kami balas dengan scope dan harganya, dan kamu tidak wajib melanjutkan.",
+    formAside: "Lebih suka ngobrol langsung",
+  },
+  promoApp: {
+    eyebrow: "Jasa Pembuatan Aplikasi, Bali",
+    title: "Timmu balik ke Excel, padahal sistemnya sudah dibeli.",
+    subtitle:
+      "Kebanyakan sistem gagal di alur kerjanya, bukan di teknologinya. Dibangun tanpa ada yang benar-benar melihat cara tim bekerja, jadi timnya diam-diam kembali ke cara lama. Kami petakan prosesnya dulu, baru bicara kode.",
+    ctaPrimary: "Ceritakan prosesmu",
+    ctaSecondary: "Chat WhatsApp",
+    ctaProof: "Buka sistem yang sudah kami bangun",
+    trust: [
+      "Semua sistem di bawah live dan bisa diklik",
+      "Pemetaan alur kerja gratis, tanpa ikatan",
+      "Didampingi sampai timmu benar-benar memakainya",
+    ],
+    painEyebrow: "Kenapa mandek",
+    painTitle: "Tiga alasan sistem diam-diam berhenti dipakai.",
+    painItems: [
+      {
+        title: "Alurnya bukan alur kamu",
+        body: "Software dibeli jadi, lalu tim disuruh menyesuaikan diri. Yang terjadi malah sebaliknya: mereka kembali ke cara lama, dan sistemnya jadi hiasan.",
+      },
+      {
+        title: "Cuma satu orang yang bisa",
+        body: "Sistem yang tidak dipahami orang lain akhirnya dikuasai satu staf saja. Begitu dia cuti seminggu, prosesnya ikut berhenti.",
+      },
+      {
+        title: "Ditinggal setelah go-live",
+        body: "Vendor menghilang begitu invoice lunas. Padahal bulan-bulan pertama setelah peluncuran itu justru yang menentukan sistemnya dipakai atau tidak.",
+      },
+    ],
+    proofEyebrow: "Bukti",
+    proofTitle: "Bukan mockup. Buka sendiri sekarang.",
+    proofBody:
+      "Semua sistem di bawah ini berjalan hari ini dan dipakai setiap hari. Klik, lihat layar aslinya, baru nilai kami.",
+    proofLive: "Buka sistemnya",
+    buildEyebrow: "Yang kami bangun",
+    buildTitle: "Dari satu proses yang berantakan, jadi sistem yang dijalankan timmu.",
+    costEyebrow: "Soal biaya",
+    costTitle: "Kenapa halaman ini tidak memasang harga.",
+    costBody:
+      "Aplikasi bisnis tidak punya harga rak. Dua toko dengan jumlah cabang sama bisa butuh sistem yang jauh berbeda. Menyebut angka sebelum kami paham prosesmu jelas akan salah, dan biasanya salahnya ke atas.",
+    costItems: [
+      "Kami petakan alur kerjamu dulu, tanpa biaya",
+      "Kamu terima cakupan dan angkanya tertulis, sebelum ada yang dikerjakan",
+      "Kalau aplikasi custom ternyata bukan jawabannya, kami bilang",
+    ],
+    stepsEyebrow: "Cara kerjanya",
+    stepsTitle: "Empat langkah, tanpa kejutan.",
+    steps: [
+      {
+        title: "Pemetaan proses",
+        body: "Kami duduk bareng orang yang menjalankan prosesnya setiap hari, bukan cuma dengan pemiliknya. Bagian ini tidak dipungut biaya.",
+      },
+      {
+        title: "Cakupan dan penawaran tertulis",
+        body: "Kamu terima ruang lingkup dan harganya sebelum satu baris kode ditulis.",
+      },
+      {
+        title: "Dibangun bertahap, direview sambil jalan",
+        body: "Dikerjakan per bagian dan kamu review lewat link yang hidup, jadi tidak ada kejutan di akhir.",
+      },
+      {
+        title: "Live dan pendampingan",
+        body: "Kami latih timmu dan tetap mendampingi setelah go-live, sampai sistemnya benar-benar jadi bagian dari hari kerja.",
+      },
+    ],
+    faqTitle: "Sebelum kamu tanya",
+    faq: [
+      {
+        q: "Biaya aplikasi custom berapa?",
+        a: "Dihitung per proyek, setelah kami petakan prosesmu. Tidak ada harga paket karena pekerjaannya sepenuhnya tergantung berapa orang, berapa cabang, dan berapa langkah yang terlibat. Paket yang kami pajang di halaman layanan itu untuk website, bukan aplikasi bisnis.",
+      },
+      {
+        q: "Berapa lama pengerjaannya?",
+        a: "Tergantung cakupannya. Estimasinya ikut di penawaran tertulis setelah pemetaan, bukan tebakan di obrolan pertama.",
+      },
+      {
+        q: "Data lama kami bagaimana?",
+        a: "Spreadsheet dan software lama diaudit dulu, lalu dipindahkan bertahap, jadi tim tidak pernah ditinggal tanpa angka yang mereka pakai harian.",
+      },
+      {
+        q: "Tim kami tidak terlalu paham teknologi.",
+        a: "Itu justru kasus yang normal, dan persis alasan kami memetakan alur kerja yang sudah ada, bukan memaksakan alur baru. Pelatihan bagian dari serah terima, dan kami tetap bisa dihubungi sesudahnya.",
+      },
+      {
+        q: "Harus di Bali untuk kerja sama?",
+        a: "Tidak. Kami berbasis di Bali dan mengerjakan klien dari seluruh Indonesia. Pemetaan, review, dan serah terima semuanya bisa online.",
+      },
+    ],
+    formEyebrow: "Konsultasi gratis",
+    formTitle: "Ceritakan proses yang masih berantakan.",
+    formBody:
+      "Jelaskan bagaimana pekerjaannya berjalan sekarang dan di mana macetnya. Kami balas dengan apa yang seharusnya bisa diambil alih sistem, dan kamu tidak wajib melanjutkan.",
     formAside: "Lebih suka ngobrol langsung",
   },
   nav: {

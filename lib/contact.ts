@@ -121,6 +121,10 @@ const WHATSAPP_MESSAGES: Record<string, { en: string; id: string }> = {
     en: "Hi Seawise Studio, I saw your website offer and would like a quote.",
     id: "Halo Seawise Studio, saya lihat penawaran website kalian dan mau minta penawaran.",
   },
+  "promo-aplikasi": {
+    en: "Hi Seawise Studio, I saw your app development page and would like to discuss a system for my business.",
+    id: "Halo Seawise Studio, saya lihat halaman pembuatan aplikasi dan mau diskusi soal sistem untuk usaha saya.",
+  },
 };
 
 /**

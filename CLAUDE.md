@@ -138,13 +138,26 @@ Tanpa itu nilainya selalu 0 dan padding safe area jadi mubazir. Diset di
 `app/[lang]/admin/layout.tsx`, **khusus segmen admin** supaya situs publik
 tetap memakai viewport default Next.
 
-### `/promo` sengaja `noindex`, jangan "diperbaiki"
+### Halaman `/promo*` sengaja `noindex`, jangan "diperbaiki"
 
-`app/[lang]/promo/page.tsx` adalah landing page iklan berbayar dan memasang
-`robots: { index: false, follow: true }` **dengan sengaja**. Halaman keyword
-`jasa-pembuatan-website-bali` sudah ditulis untuk query yang sama, jadi kalau
-halaman promo ikut diindeks keduanya berebut sinyal yang sama. Halaman ini cuma
-kebagian trafik dari iklan, jadi dia melepas pencarian sepenuhnya.
+Ada dua landing page iklan berbayar, `promo` untuk website dan `promo-aplikasi`
+untuk aplikasi custom. Keduanya memasang `robots: { index: false, follow: true }`
+**dengan sengaja**. Halaman keyword `jasa-pembuatan-website-bali` dan
+`jasa-pembuatan-aplikasi-bali` sudah ditulis untuk query yang sama, jadi kalau
+halaman promo ikut diindeks keduanya berebut sinyal yang sama. Halaman promo
+cuma kebagian trafik dari iklan, jadi dia melepas pencarian sepenuhnya.
+
+Bagian yang benar-benar sama antara keduanya ada di `components/PromoShell.tsx`
+(header, tombol centang, blok form). Tengah halamannya sengaja tidak disatukan:
+yang satu punya tabel harga, yang satu punya blok "kenapa tidak ada harga", dan
+memaksakan keduanya lewat satu union props cuma bikin tidak terbaca.
+
+Bedanya bukan cuma isi. Halaman website membuka dengan harga karena pembeli
+website membandingkan angka. Tidak ada yang membeli ERP begitu, jadi halaman
+aplikasi membuka dengan kegagalan yang sudah pernah mereka alami, lalu menaruh
+sistem yang benar-benar jalan tepat di bawahnya. Urutan bukti juga cermin satu
+sama lain: `promo` menaruh entri `website` dulu, `promo-aplikasi` menaruh `app`
+dulu, dan keduanya tanpa filter keras supaya section-nya tidak pernah kosong.
 
 Karena itu juga dia **tidak** ada di `app/sitemap.ts` dan **tidak** masuk
 `disallow` di `app/robots.ts`. Menambah disallow justru bikin crawler tidak bisa
@@ -246,7 +259,8 @@ app/[lang]/admin/        panel admin
   layout.tsx             AdminShell + viewport-fit=cover
   loading.tsx            skeleton saat navigasi
   pengaturan/            saklar situs, baca/tulis site_settings
-app/[lang]/promo/        landing page iklan, noindex, di luar sitemap
+app/[lang]/promo/        landing page iklan website, noindex, di luar sitemap
+app/[lang]/promo-aplikasi/ landing page iklan aplikasi, noindex, di luar sitemap
 app/api/revalidate/      purge cache ISR on-demand, dipanggil manager admin
 app/api/inbound/         webhook Resend Inbound untuk mail ke @seawise.id
 lib/revalidate.ts        helper pemanggil route di atas

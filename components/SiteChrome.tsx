@@ -10,7 +10,7 @@ import FloatingWhatsApp from "./FloatingWhatsApp";
  * Decides which chrome a route gets.
  *
  * Admin routes (/{lang}/admin*) get none, so the panel has a clean full-height
- * shell. The paid-ads landing page (/{lang}/promo) keeps the footer but loses
+ * shell. The paid-ads landing pages (/{lang}/promo*) keep the footer but lose
  * the navbar: it renders its own brand header with a single CTA, because on a
  * page paid for per click every nav link is just a cheaper way to leave. It
  * also skips the floating WhatsApp button, which would otherwise sit on top of
@@ -27,7 +27,9 @@ export default function SiteChrome({
 }) {
   const pathname = usePathname() || "";
   const isAdmin = /^\/[^/]+\/admin(\/|$)/.test(pathname);
-  const isPromo = /^\/[^/]+\/promo(\/|$)/.test(pathname);
+  // Cocok untuk /promo dan setiap /promo-<sesuatu>. Halaman iklan berikutnya
+  // ikut dapat perlakuan sama tanpa menyentuh berkas ini lagi.
+  const isPromo = /^\/[^/]+\/promo(-[a-z0-9-]+)?(\/|$)/.test(pathname);
 
   // Runs before the admin early return so the hook order stays stable. Records
   // the channel on arrival, so it survives the walk to the contact page.

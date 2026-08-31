@@ -186,9 +186,13 @@ function Switch({
         checked ? "bg-sea-foam" : "bg-warm-neutral"
       }`}
     >
+      {/* `left-1` wajib ada. Tanpa itu knob memakai static position, dan karena
+          <button> rata tengah, titik nolnya ikut ke tengah track lalu geserannya
+          melempar knob keluar dari pil. Track 48px, knob 20px, sisa 4px di tiap
+          sisi, jadi jarak tempuhnya tepat 20px = translate-x-5. */}
       <span
-        className={`absolute top-1 h-5 w-5 rounded-full bg-white shadow transition-transform ${
-          checked ? "translate-x-6" : "translate-x-1"
+        className={`absolute left-1 top-1 h-5 w-5 rounded-full bg-white shadow transition-transform ${
+          checked ? "translate-x-5" : "translate-x-0"
         }`}
       />
     </button>

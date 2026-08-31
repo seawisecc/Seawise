@@ -1,10 +1,12 @@
 import Link from "next/link";
 import Reveal from "./Reveal";
-import Logo from "./Logo";
-import Wordmark from "./Wordmark";
-import ContactForm from "./ContactForm";
 import FaqSection from "./FaqSection";
-import { WhatsAppIcon, MailIcon } from "./ContactIcons";
+import {
+  PromoHeader,
+  PromoQuoteSection,
+  CheckMark,
+  QUOTE_ANCHOR,
+} from "./PromoShell";
 import { whatsappUrlFor } from "@/lib/contact";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
@@ -26,7 +28,6 @@ import type { PricingRow, PortfolioRow } from "@/lib/queries";
  * figure on this page is written by hand.
  */
 
-const QUOTE_ANCHOR = "penawaran";
 const PACKAGES_ANCHOR = "paket";
 
 export default function PromoLanding({
@@ -45,27 +46,7 @@ export default function PromoLanding({
 
   return (
     <>
-      {/* Minimal header. Brand only, no navigation, plus a CTA that stays
-          reachable while the visitor scrolls. */}
-      <header className="sticky top-0 z-30 border-b border-off-white/10 bg-near-black/90 backdrop-blur">
-        <div className="mx-auto flex max-w-content items-center justify-between px-5 py-3 md:px-8">
-          <div className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-off-white">
-              <Logo className="h-5 w-5" colorClass="text-forest-dark" />
-            </span>
-            <Wordmark className="text-lg text-off-white" />
-          </div>
-          <a
-            href={waUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white transition-transform hover:scale-105"
-          >
-            <WhatsAppIcon className="h-4 w-4 shrink-0" />
-            <span className="hidden sm:inline">{t.ctaSecondary}</span>
-          </a>
-        </div>
-      </header>
+      <PromoHeader waUrl={waUrl} waLabel={t.ctaSecondary} />
 
       {/* Hero.
           No `Reveal` here, on purpose, and this is the one place on the page
@@ -313,84 +294,16 @@ export default function PromoLanding({
 
       <FaqSection title={t.faqTitle} items={t.faq} />
 
-      {/* The one exit this page wants you to take */}
-      <section id={QUOTE_ANCHOR} className="scroll-mt-20 bg-off-white pb-24">
-        <div className="mx-auto max-w-content px-5 md:px-8">
-          <div className="rounded-[2rem] border border-warm-neutral bg-warm-neutral/40 p-8 md:rounded-[2.5rem] md:p-12">
-            <div className="grid gap-10 md:grid-cols-[1.2fr_1fr]">
-              <div>
-                <p className="eyebrow text-sea-foam">{t.formEyebrow}</p>
-                <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-forest-dark md:text-4xl">
-                  {t.formTitle}
-                </h2>
-                <p className="mt-4 max-w-lg leading-relaxed text-forest-dark/70">
-                  {t.formBody}
-                </p>
-                <div className="mt-8">
-                  <ContactForm lang={lang} dict={dict} />
-                </div>
-              </div>
-
-              <div className="md:border-l md:border-warm-neutral md:pl-10">
-                <p className="eyebrow text-forest-dark/50">{t.formAside}</p>
-                <ul className="mt-4 space-y-3 text-sm">
-                  <li>
-                    <a
-                      href={waUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center gap-2.5 text-forest-dark/80 hover:text-sea-foam"
-                    >
-                      <WhatsAppIcon className="h-4 w-4 shrink-0 text-forest-dark/40 transition-colors group-hover:text-[#25D366]" />
-                      WhatsApp
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="mailto:hello@seawise.id"
-                      className="group flex items-center gap-2.5 text-forest-dark/80 hover:text-sea-foam"
-                    >
-                      <MailIcon className="h-4 w-4 shrink-0 text-forest-dark/40 transition-colors group-hover:text-sea-foam" />
-                      hello@seawise.id
-                    </a>
-                  </li>
-                </ul>
-                <ul className="mt-8 space-y-2.5 border-t border-warm-neutral pt-6">
-                  {t.trust.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-2.5 text-sm leading-relaxed text-forest-dark/70"
-                    >
-                      <CheckMark className="mt-1 shrink-0 text-sea-foam" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-}
-
-/** Small tick used in the trust strip and the feature lists. */
-function CheckMark({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      fill="none"
-      aria-hidden="true"
-      className={`h-4 w-4 text-sea-foam ${className}`}
-    >
-      <path
-        d="M4 10.5l4 4 8-9"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+      <PromoQuoteSection
+        lang={lang}
+        dict={dict}
+        waUrl={waUrl}
+        eyebrow={t.formEyebrow}
+        title={t.formTitle}
+        body={t.formBody}
+        aside={t.formAside}
+        trust={t.trust}
       />
-    </svg>
+    </>
   );
 }
