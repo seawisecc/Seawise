@@ -6,6 +6,8 @@ import { createClient } from "@/lib/supabase/client";
 import { SkeletonRows } from "./AdminSkeleton";
 import { uploadImage } from "@/lib/uploadImage";
 import { revalidatePublicPages } from "@/lib/revalidate";
+import { useRowReorder, nextSortOrder } from "./useRowReorder";
+import ReorderHandle from "./ReorderHandle";
 
 type Row = {
   id: string;
@@ -51,6 +53,26 @@ export default function PartnerManager() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const { dragId, registerRow, handleProps } = useRowReorder<Row>({
+    rows,
+    setRows,
+    persist: async (changed) => {
+      if (!supabase) return;
+      for (const r of changed) {
+        const { error } = await supabase
+          .from("partners")
+          .update({ sort_order: r.sort_order })
+          .eq("id", r.id);
+        if (error) {
+          setNotice(`Gagal menyimpan urutan: ${error.message}`);
+          load();
+          return;
+        }
+      }
+      setNotice(await revalidatePublicPages());
+    },
+  });
+
   async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file || !supabase || !editing) return;
@@ -77,7 +99,9 @@ export default function PartnerManager() {
       name: editing.name,
       logo_url: editing.logo_url,
       website_url: editing.website_url,
-      sort_order: Number(editing.sort_order) || 0,
+      // Baris baru selalu ditaruh paling bawah, urutannya diatur dengan
+      // menyeret barisnya, bukan dengan mengetik angka.
+      sort_order: editing.id ? editing.sort_order : nextSortOrder(rows),
       published: editing.published,
     };
     const { error } = editing.id
@@ -129,7 +153,12 @@ export default function PartnerManager() {
         </p>
       )}
 
-      <div className="mt-6 overflow-x-auto rounded-2xl border border-warm-neutral bg-white shadow-sm">
+      <p className="mt-6 text-sm text-forest-dark/50">
+        Seret ikon titik enam di kolom Urutan untuk mengubah posisi baris. Bisa juga
+        klik ikonnya lalu pakai panah atas dan bawah. Urutan langsung tersimpan.
+      </p>
+
+      <div className="mt-3 overflow-x-auto rounded-2xl border border-warm-neutral bg-white shadow-sm">
         <table className="w-full min-w-[640px] text-left text-sm">
           <thead className="bg-warm-neutral/40 text-xs font-semibold uppercase tracking-wider text-forest-dark/50">
             <tr>
@@ -141,9 +170,19 @@ export default function PartnerManager() {
             </tr>
           </thead>
           <tbody>
-            {rows.map((r) => (
-              <tr key={r.id} className="border-t border-warm-neutral/60 transition-colors hover:bg-warm-neutral/20">
-                <td className="px-5 py-3.5 text-forest-dark/60">{r.sort_order}</td>
+            {rows.map((r, i) => (
+              <tr
+                key={r.id}
+                ref={registerRow(r.id)}
+                className={`border-t border-warm-neutral/60 transition-colors ${dragId === r.id ? "bg-warm-neutral/50" : "hover:bg-warm-neutral/20"}`}
+              >
+                <td className="px-3 py-3.5">
+                  <ReorderHandle
+                    position={i + 1}
+                    dragging={dragId === r.id}
+                    {...handleProps(r.id)}
+                  />
+                </td>
                 <td className="px-5 py-3.5">
                   {r.logo_url ? (
                     <div className="relative h-8 w-16">
@@ -207,18 +246,11 @@ export default function PartnerManager() {
                   </div>
                 )}
               </div>
-              <div className="flex gap-6">
-                <div>
-                  <label className={label}>Urutan</label>
-                  <input type="number" className={`${field} w-24`} value={editing.sort_order}
-                    onChange={(e) => setEditing({ ...editing, sort_order: Number(e.target.value) })} />
-                </div>
-                <label className="flex items-center gap-2 pt-7 text-sm text-forest-dark">
-                  <input type="checkbox" checked={editing.published}
-                    onChange={(e) => setEditing({ ...editing, published: e.target.checked })} />
-                  Published
-                </label>
-              </div>
+              <label className="flex items-center gap-2 text-sm text-forest-dark">
+                <input type="checkbox" checked={editing.published}
+                  onChange={(e) => setEditing({ ...editing, published: e.target.checked })} />
+                Published
+              </label>
             </div>
 
             {msg && <p className="mt-4 text-sm text-red-700">{msg}</p>}

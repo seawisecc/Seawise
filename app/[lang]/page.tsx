@@ -2,9 +2,10 @@ import Link from "next/link";
 import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
 import AppShowcase, { type ShowcaseSlide } from "@/components/AppShowcase";
+import PartnerMarquee from "@/components/PartnerMarquee";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/config";
-import { getPortfolio, getTestimonials } from "@/lib/queries";
+import { getPortfolio, getTestimonials, getPartners } from "@/lib/queries";
 
 export const revalidate = 120;
 
@@ -20,6 +21,7 @@ export default async function Home({
   const portfolio = await getPortfolio(lang);
   const featured = portfolio.filter((p) => p.featured).slice(0, 3);
   const testimonials = (await getTestimonials(lang)).slice(0, 2);
+  const partners = await getPartners();
 
   const showcaseSlides: ShowcaseSlide[] = portfolio
     .map((p) => {
@@ -205,6 +207,25 @@ export default async function Home({
                 slides={showcaseSlides}
                 labels={{ app: t.showcaseApp, website: t.showcaseWebsite }}
               />
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* Partner logos. Hidden while the table is empty, same rule as the
+          portfolio and testimonial sections above. */}
+      {partners.length > 0 && (
+        <section className="bg-off-white">
+          <div className="mx-auto max-w-content px-5 py-16 md:px-8">
+            <Reveal>
+              <p className="eyebrow text-center text-sea-foam">{t.partnersEyebrow}</p>
+              <h2 className="mt-3 text-center font-display text-2xl font-bold tracking-tight text-forest-dark md:text-3xl">
+                {t.partnersTitle}
+              </h2>
+            </Reveal>
+
+            <Reveal delay={0.1} className="mt-10">
+              <PartnerMarquee partners={partners} />
             </Reveal>
           </div>
         </section>

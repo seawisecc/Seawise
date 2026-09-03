@@ -27,9 +27,19 @@ const config: Config = {
           "0%": { opacity: "0", transform: "translateY(16px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        // Deret logo partner. -50% karena isinya dua salinan daftar yang sama
+        // dan tiap salinan sudah membawa satu jarak di kanannya, jadi titik
+        // ulangnya jatuh persis di logo pertama. Lihat PartnerMarquee.
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.6s ease-out forwards",
+        // Durasinya ditimpa per komponen supaya lajunya tidak berubah
+        // mengikuti jumlah logo.
+        marquee: "marquee 30s linear infinite",
       },
     },
   },

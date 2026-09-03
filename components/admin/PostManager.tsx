@@ -7,6 +7,8 @@ import { SkeletonRows } from "./AdminSkeleton";
 import { uploadImage } from "@/lib/uploadImage";
 import { DEFAULT_AUTHOR } from "@/lib/author";
 import { revalidatePublicPages } from "@/lib/revalidate";
+import { useRowReorder, nextSortOrder } from "./useRowReorder";
+import ReorderHandle from "./ReorderHandle";
 
 type Row = {
   id: string;
@@ -18,6 +20,7 @@ type Row = {
   published: boolean;
   published_at: string | null;
   updated_at: string | null;
+  sort_order: number;
   author_name: string | null;
   author_title: string | null;
   author_title_en: string | null;
@@ -35,6 +38,7 @@ const empty: Omit<Row, "id"> = {
   published: false,
   published_at: null,
   updated_at: null,
+  sort_order: 0,
   // Diisi otomatis untuk artikel baru supaya tidak perlu diketik ulang tiap
   // kali. Bisa diganti per artikel kalau ada penulis tamu.
   author_name: DEFAULT_AUTHOR.name,
@@ -62,17 +66,41 @@ export default function PostManager() {
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
   const [notice, setNotice] = useState<string | null>(null);
+  // Terpisah dari `notice` karena notice selalu ditutup kalimat "Data sudah
+  // tersimpan", yang tidak nyambung untuk masalah skema.
+  const [schemaWarning, setSchemaWarning] = useState<string | null>(null);
 
   async function load() {
     if (!supabase) {
       setLoading(false);
       return;
     }
-    const { data } = await supabase
+    // Urutan tabel admin saja. Halaman /blog publik tetap urut tanggal
+    // terbit, lihat getPosts() di lib/queries.ts.
+    const ordered = await supabase
       .from("posts")
       .select("*")
+      .order("sort_order", { ascending: true })
       .order("created_at", { ascending: false });
-    setRows((data as Row[]) ?? []);
+
+    // Kolom sort_order baru ada sesudah migrasi v13. Kalau deploy mendarat
+    // lebih dulu, query di atas gagal dan tabelnya akan terlihat kosong
+    // seolah semua artikel hilang. Jatuh ke urutan lama supaya daftarnya
+    // tetap terbaca, dan beri tahu apa yang sebenarnya kurang.
+    if (ordered.error) {
+      const fallback = await supabase
+        .from("posts")
+        .select("*")
+        .order("created_at", { ascending: false });
+      setRows((fallback.data as Row[]) ?? []);
+      setSchemaWarning(
+        "Urutan belum bisa diatur. Jalankan supabase-migration-v13.sql di Supabase SQL Editor, lalu muat ulang halaman ini. Sementara itu daftar di bawah urut tanggal dibuat."
+      );
+      setLoading(false);
+      return;
+    }
+
+    setRows((ordered.data as Row[]) ?? []);
     setLoading(false);
   }
 
@@ -80,6 +108,26 @@ export default function PostManager() {
     load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const { dragId, registerRow, handleProps } = useRowReorder<Row>({
+    rows,
+    setRows,
+    persist: async (changed) => {
+      if (!supabase) return;
+      for (const r of changed) {
+        const { error } = await supabase
+          .from("posts")
+          .update({ sort_order: r.sort_order })
+          .eq("id", r.id);
+        if (error) {
+          setNotice(`Gagal menyimpan urutan: ${error.message}`);
+          load();
+          return;
+        }
+      }
+      // Sengaja tanpa revalidate: urutan ini tidak mengubah halaman publik.
+    },
+  });
 
   async function handleCover(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -119,6 +167,8 @@ export default function PostManager() {
       cover_url: editing.cover_url,
       published: editing.published,
       published_at: publishedAt,
+      // Artikel baru masuk ke bawah daftar admin, lalu digeser dengan drag.
+      sort_order: editing.id ? editing.sort_order : nextSortOrder(rows),
       // Tanggal pembaruan untuk `dateModified` di JSON-LD. Ditulis di sini,
       // bukan lewat trigger database, karena panel admin adalah satu-satunya
       // yang menulis ke tabel ini, sama seperti published_at di atas.
@@ -182,10 +232,22 @@ export default function PostManager() {
         </p>
       )}
 
-      <div className="mt-6 overflow-x-auto rounded-2xl border border-warm-neutral bg-white shadow-sm">
+      {schemaWarning && (
+        <p className="mt-6 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+          {schemaWarning}
+        </p>
+      )}
+
+      <p className="mt-6 text-sm text-forest-dark/50">
+        Seret ikon titik enam di kolom Urutan untuk mengubah posisi baris. Bisa juga
+        klik ikonnya lalu pakai panah atas dan bawah. Urutan langsung tersimpan.
+      </p>
+
+      <div className="mt-3 overflow-x-auto rounded-2xl border border-warm-neutral bg-white shadow-sm">
         <table className="w-full min-w-[640px] text-left text-sm">
           <thead className="bg-warm-neutral/40 text-xs font-semibold uppercase tracking-wider text-forest-dark/50">
             <tr>
+              <th className="px-5 py-3 font-semibold">Urutan</th>
               <th className="px-5 py-3 font-semibold">Judul</th>
               <th className="px-5 py-3 font-semibold">Slug</th>
               <th className="px-5 py-3 font-semibold">Status</th>
@@ -193,8 +255,19 @@ export default function PostManager() {
             </tr>
           </thead>
           <tbody>
-            {rows.map((r) => (
-              <tr key={r.id} className="border-t border-warm-neutral/60 transition-colors hover:bg-warm-neutral/20">
+            {rows.map((r, i) => (
+              <tr
+                key={r.id}
+                ref={registerRow(r.id)}
+                className={`border-t border-warm-neutral/60 transition-colors ${dragId === r.id ? "bg-warm-neutral/50" : "hover:bg-warm-neutral/20"}`}
+              >
+                <td className="px-3 py-3.5">
+                  <ReorderHandle
+                    position={i + 1}
+                    dragging={dragId === r.id}
+                    {...handleProps(r.id)}
+                  />
+                </td>
                 <td className="px-5 py-3 font-semibold text-forest-dark">{r.title}</td>
                 <td className="px-5 py-3.5 text-forest-dark/60">/{r.slug}</td>
                 <td className="px-5 py-3.5">
@@ -212,10 +285,10 @@ export default function PostManager() {
                 </td>
               </tr>
             ))}
-            {loading && <SkeletonRows cols={4} />}
+            {loading && <SkeletonRows cols={5} />}
             {!loading && rows.length === 0 && (
               <tr>
-                <td colSpan={4} className="px-5 py-10 text-center text-forest-dark/50">
+                <td colSpan={5} className="px-5 py-10 text-center text-forest-dark/50">
                   Belum ada artikel.
                 </td>
               </tr>

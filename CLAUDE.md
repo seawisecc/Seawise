@@ -312,6 +312,66 @@ Sampai itu dilakukan, balasan keluar dari Gmail studio. Bukan masalah besar:
 email yang diteruskan sudah membawa `reply_to` pengirim asli, jadi threading di
 sisi klien tetap benar.
 
+### Urutan tabel admin diseret, bukan diketik
+
+Portfolio, testimoni, partner, dan blog urutannya diatur dengan menyeret baris
+di `/admin`. Kotak isian angka "Urutan" di modal editor **sudah dihapus**, jangan
+dikembalikan: dua cara mengatur satu nilai membuat angkanya bertabrakan, karena
+setiap gerakan menomori ulang seluruh daftar jadi 0..n-1. Baris baru otomatis
+masuk paling bawah lewat `nextSortOrder()`.
+
+Mekanismenya ada di `components/admin/useRowReorder.ts`, dipakai keempat manager
+lewat `ReorderHandle`. Tiga hal yang kelihatan berlebihan tapi masing-masing
+menutup bug yang sudah pernah terjadi dan terukur:
+
+1. **Pointer Events, bukan HTML5 drag and drop.** HTML5 DnD tidak jalan sama
+   sekali di layar sentuh, dan panel ini dipakai dari HP.
+2. **`touch-action: none` di gagangnya.** Tanpa itu jari yang menyeret dibaca
+   browser sebagai scroll halaman dan drag tidak pernah mulai.
+3. **Listener gerakan di `window`, dipasang langsung di dalam `pointerdown`.**
+   Versi pertama mengunci pointer ke tombol dengan `setPointerCapture`. Begitu
+   React memindahkan `<tr>`-nya, elemen pemegang capture ikut pindah di DOM,
+   Chrome melepas capture-nya, dan `pointerup` mendarat di tempat lain:
+   **barisnya bergeser di layar tapi tidak pernah tersimpan.** Versi kedua
+   memindahkan listener ke `window` tapi memasangnya lewat `useEffect`, jadi
+   listener baru hidup satu render sesudah tombol ditekan dan gerakan cepat
+   lolos tanpa tercatat. Memasangnya di handler menutup dua-duanya.
+
+Yang ditulis ke database cuma baris yang angkanya berubah, dan gerakan yang
+berakhir di tempat semula tidak menulis apa-apa. Panah atas dan bawah saat
+gagang sedang fokus melakukan hal yang sama, itu jalan keluar untuk keyboard.
+
+`posts` sengaja berbeda: `sort_order`-nya (migrasi v13) **hanya** mengurutkan
+tabel admin. Halaman `/blog` publik tetap urut tanggal terbit, jadi
+`PostManager` juga tidak memanggil `revalidatePublicPages()` sesudah menggeser.
+
+### `AppShowcase` butuh padding atas, jangan dirapikan
+
+Track slideshow-nya menggeser horizontal, dan CSS tidak mengizinkan satu sumbu
+`visible` berdampingan dengan sumbu lain yang `auto`, jadi sumbu vertikalnya
+terpaksa `hidden`. Kartunya naik 4px saat hover (`hover:-translate-y-1`), dan
+dulu track-nya tidak punya padding atas sama sekali: diukur langsung di
+produksi, ujung atas kartu berada 4px **di luar** kotak track, jadi bibir atas
+layar laptop terpotong rata persis saat kursor menyentuhnya. `pt-6 -mt-6`
+memberi ruangnya lalu menarik jaraknya balik. Menghapus padding itu akan
+memunculkan lagi potongan yang sama.
+
+### Deret logo partner: dua salinan, dan ambang batas
+
+`PartnerMarquee` di halaman utama. Di bawah 6 logo dia berdiri diam dan rata
+tengah, karena marquee dengan tiga logo cuma bikin halaman terasa gelisah.
+
+Animasinya menggeser `-50%` dan isinya **dua salinan daftar yang sama**. Tiap
+salinan membawa satu jarak di kanannya (`pr-12`) dan wadahnya tidak punya
+`gap`, jadi titik ulangnya jatuh persis di logo pertama. Kalau `pr-12` diganti
+`gap` di wadahnya, jahitannya akan meleset setengah jarak dan terlihat kedutan
+tiap putaran. Salinan kedua `aria-hidden` dan tautannya dilepas supaya tidak
+kembar di pembaca layar maupun urutan Tab.
+
+Durasi animasi dihitung dari jumlah logo supaya lajunya tidak berubah saat
+partner bertambah. Section-nya hilang sendiri kalau tabelnya kosong, sama
+seperti portfolio dan testimoni.
+
 ### Tidak ada fallback portfolio atau testimoni
 
 Dulu ada baris placeholder untuk portfolio. Baris itu punya slug yang halaman
@@ -336,8 +396,11 @@ app/api/revalidate/      purge cache ISR on-demand, dipanggil manager admin
 app/api/inbound/         webhook Resend Inbound untuk mail ke @seawise.id
 lib/revalidate.ts        helper pemanggil route di atas
 lib/inboundEmail.ts      verifikasi Svix + teruskan mail masuk ke Gmail
-components/              komponen publik (21)
-components/admin/        komponen admin (12)
+components/              komponen publik (22)
+components/PartnerMarquee.tsx  deret logo partner, auto slide kalau banyak
+components/admin/        komponen admin (14)
+components/admin/useRowReorder.ts  drag urutan baris, dipakai 4 manager
+components/admin/ReorderHandle.tsx gagang seret di kolom Urutan
 lib/i18n/dictionaries.ts seluruh teks publik, en sumber kebenaran
 lib/seo.ts               canonical, hreflang, OG, breadcrumb
 lib/queries.ts           baca Supabase untuk halaman publik
@@ -415,6 +478,7 @@ v9  kolom *_en: posts
 v10 posts: author_name, author_title, author_title_en, updated_at
 v11 leads: phone, source, landing_path + indeks created_at
 v12 site_settings: tabel key/value untuk saklar di /admin/pengaturan
+v13 posts.sort_order: urutan tabel admin blog, TIDAK dipakai halaman publik
 ```
 
 **v1 wajib duluan di database kosong**, karena v2 memakai

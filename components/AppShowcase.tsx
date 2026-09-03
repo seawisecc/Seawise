@@ -34,10 +34,20 @@ export default function AppShowcase({
 
   return (
     <div className="relative">
-      {/* Track */}
+      {/*
+        Track.
+
+        `pt-6 -mt-6` bukan hiasan. CSS tidak mengizinkan satu sumbu `visible`
+        berdampingan dengan sumbu lain yang `auto`, jadi track yang menggeser
+        horizontal terpaksa memotong vertikal. Kartunya naik 4px saat hover
+        (`hover:-translate-y-1`) plus bayangan, dan tanpa ruang di atas, bibir
+        atas layar laptop terpotong rata persis saat kursor menyentuhnya.
+        Padding memberi ruangnya, margin negatif menariknya balik supaya jarak
+        ke judul section tidak berubah.
+      */}
       <div
         ref={trackRef}
-        className="flex snap-x snap-mandatory gap-8 overflow-x-auto overflow-y-hidden scroll-smooth px-1 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="-mt-6 flex snap-x snap-mandatory gap-8 overflow-x-auto overflow-y-hidden scroll-smooth px-1 pb-4 pt-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {slides.map((s, i) => {
           const inner = (
