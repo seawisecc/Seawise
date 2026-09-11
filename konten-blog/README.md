@@ -55,37 +55,111 @@ gambar akan tampil beda dari kartu lain. Unggah cover 16:9 lewat
 
 ### Prompt cover
 
-Cover yang sudah ada punya dua keluarga. Artikel topik industri (apotek, kasir)
-memakai **foto sejajar mata**: meja marmer putih dengan panel depan kayu hijau
-bergaris vertikal, tablet di stand hijau gelap, tanaman kecil di pot putih
-bergaris, rak hijau hutan dengan lampu LED hangat, bayangan daun dari jendela.
-Artikel topik umum (biaya website, aplikasi custom) memakai flat lay laptop di
-meja krem. Artikel 05 dan 06 masuk keluarga pertama.
+**Cover menggambarkan masalah yang dibahas artikel, bukan aplikasinya.**
 
-Tulis prompt dalam bahasa Inggris, generator gambar lebih patuh begitu.
+Empat cover pertama semuanya layar aplikasi di atas meja rapi. Hasilnya
+kartu-kartu di `/blog` sulit dibedakan, dan gambarnya tidak memberi alasan
+untuk diklik. Orang mengklik karena mengenali masalahnya sendiri: kertas order
+yang menumpuk saat ramai, rekap tutup yang tidak cocok, bahan kedaluwarsa di
+belakang rak. Aplikasinya sudah muncul di dalam artikel lewat studi kasus.
 
-**05, aplikasi kasir restoran:**
+Aturan supaya kartunya tetap terasa satu keluarga:
+
+- **Satu momen masalah yang spesifik**, bukan suasana umum. "Kertas order
+  menumpuk di rel dapur" lebih kuat daripada "dapur restoran sibuk".
+- **Warna tetap dari palet brand**: off-white hangat, netral, aksen hijau hutan,
+  cahaya hangat alami. Masalahnya boleh terasa tegang, warnanya jangan suram
+  atau kebiruan.
+- **Orang hanya tangan, dari belakang, atau buram karena gerak.** Wajah buatan
+  AI gampang terlihat janggal, dan cover yang terasa seperti foto stok lebih
+  buruk daripada cover tanpa orang.
+- **Tanpa tulisan yang terbaca.** Nota dan label dibuat coretan tak terbaca atau
+  kosong. Teks rusak buatan AI langsung terlihat palsu.
+- **Tidak ada layar aplikasi.**
+
+Tulis prompt dalam bahasa Inggris, generator gambar lebih patuh begitu. Setiap
+artikel punya dua konsep, pilih yang hasilnya paling kuat. Tempelkan blok gaya
+di akhir setiap prompt.
+
+**Blok gaya, sama untuk semua cover:**
 
 ```
-Eye-level editorial photograph of a modern cafe counter. A white marble countertop with a fluted dark forest-green wood panel front. On the counter, a sleek tablet on a dark green stand shows a minimal point-of-sale screen: a clean grid of table tiles and a short order list, soft green accents, no readable text. Beside it a small white ribbed ceramic pot with a green plant and two matte off-white ceramic coffee cups. In the softly blurred background, a dark green tiled wall with a warm-lit kitchen pass window and a small kitchen display screen, an espresso machine and wooden shelves with glass jars under warm LED strip lighting. Soft morning sunlight with gentle leaf shadows on the wall. Off-white, warm neutral and deep forest-green palette, calm premium mood, shallow depth of field, lots of empty space on the left side, no people, no text, no logos, no brand names. 16:9.
+Cinematic editorial photography, 35mm lens, natural warm light, muted color grade with warm off-white, soft neutrals and deep forest-green accents, shallow depth of field, realistic textures, no faces visible, no readable text, no logos, no brand names, 16:9 landscape.
 ```
 
-**06, ERP manufaktur pabrik kecil:**
+**05, aplikasi kasir restoran. Konsep A, rel dapur saat jam ramai:**
 
 ```
-Eye-level editorial photograph of a small, clean production room of a boutique cosmetics and fragrance manufacturer. A white marble workbench with a fluted dark forest-green wood panel front. On the bench, a sleek tablet on a dark green stand shows a minimal inventory dashboard: a simple bar chart, a donut chart and a tidy table of stock lots with soft green accents, no readable text. Next to it a small white ribbed ceramic pot with a green plant, a digital scale and a few amber glass bottles. In the softly blurred background, dark forest-green metal shelving holds neatly arranged white ingredient containers and amber bottles with small blank lot tags, lit by warm LED strip lighting. Soft daylight from a side window casting gentle leaf shadows. Off-white, warm neutral and deep forest-green palette, calm premium mood, shallow depth of field, lots of empty space on the left side, no people, no text, no logos, no brand names. 16:9.
+Close-up of a stainless steel kitchen pass rail in a busy restaurant during dinner rush, crowded with dozens of handwritten paper order tickets clipped in a messy overlapping row, a few tickets curled and one fallen onto the counter next to a plate of food waiting under a warm heat lamp. A cook's hand reaches in from the edge of the frame to grab a ticket. Behind, kitchen staff in dark green aprons move in motion blur, steam rising, copper pans. Scribbled tickets are illegible.
 ```
+
+**05, konsep B, rekap tutup yang tidak cocok:**
+
+```
+A small cafe after closing time, late evening. On a wooden table under a single warm pendant light: an open cash drawer with banknotes, a long crumpled receipt roll, a calculator, a notebook with messy handwritten tallies and crossed-out numbers, a cold half-finished coffee in an off-white ceramic cup. A hand holds a pen, paused over the notebook. In the soft background, chairs stacked on tables and a dark green tiled wall. Quiet, tired mood. All writing illegible.
+```
+
+**06, ERP manufaktur. Konsep A, spreadsheet di lantai produksi:**
+
+```
+A workbench in a small cosmetics and fragrance production room covered with printed spreadsheet pages, some with coffee rings and handwritten corrections, colorful sticky notes, a clipboard with a stock count sheet, a pencil, and a digital scale. Amber glass bottles and white ingredient containers sit among the papers. A hand flips through the pages searching for a number. In the soft background, a stainless steel mixing tank and dark forest-green metal shelving. All printed and handwritten text illegible.
+```
+
+**06, konsep B, lot kedaluwarsa yang terlewat:**
+
+```
+Close-up of a dark forest-green metal shelf in a small production warehouse lined with white ingredient containers and amber glass jars. A hand pulls out one dusty container from the very back row, its small blank lot tag yellowed with age, while newer containers stand neatly in front. Soft daylight from a side window, fine dust in the light beam. Tags and labels blank or illegible.
+```
+
+**02, aplikasi apotek. Konsep A, stok opname di laci obat:**
+
+```
+Inside a small community pharmacy, a tall wall of pull-out medicine drawers, several drawers left open showing jumbled blister packs and small medicine boxes. In the foreground a pharmacist's hand holds a clipboard with a handwritten stock count sheet full of tally marks and corrections, while the other hand counts boxes inside an open drawer. White coat sleeve visible, face out of frame. Soft daylight from the pharmacy front window, dark forest-green drawer fronts with brass handles. All labels and handwriting illegible.
+```
+
+**02, konsep B, resep dan laporan manual, flat lay:**
+
+```
+Top-down flat lay of a white pharmacy back-office counter at the end of the day: a thick stack of paper prescription slips held with a black binder clip, an open hardcover ledger with dense handwritten columns, a rubber stamp and ink pad, a few loose blister packs and small medicine boxes, a pen, reading glasses and a dark green pharmacy tray. One hand rests on the ledger turning a page. Warm late-afternoon light casting long soft shadows. All handwriting, labels and prescriptions illegible.
+```
+
+**03, aplikasi kasir UMKM. Konsep A, nota tulis tangan:**
+
+```
+Close-up at the counter of a small Indonesian retail shop. A shopkeeper's hand writes a sale by hand in a small carbon-copy receipt book, next to a metal receipt spike stacked with torn handwritten receipts and a worn calculator. On the other side, a customer's hand waits holding folded banknotes. Behind, softly blurred shelves of neatly stacked goods, dark green painted wooden shelving, warm afternoon light through the shop front. All handwriting illegible.
+```
+
+**03, konsep B, kaleng biskuit jadi kas:**
+
+```
+Eye-level still life on a glass display counter of a small shop: an old round metal biscuit tin used as a cash box, lid off, stuffed with crumpled banknotes, coins and rubber-banded handwritten receipts. Next to it a school exercise book open to hand-ruled columns of sales figures with crossed-out totals, a pencil and a calculator. Warm daylight, softly blurred shelves of goods and a dark green wall behind. Nostalgic, honest mood. No brand markings on the tin, all writing illegible.
+```
+
+**Kombinasi yang disarankan.** Semua masalah di artikel ini pada dasarnya
+"catatan manual", jadi kalau konsepnya dipilih sembarangan, keempat kartu bisa
+sama-sama tangan memegang kertas. Kombinasi ini memberi empat komposisi yang
+berbeda:
+
+| Artikel | Konsep | Komposisi |
+|---|---|---|
+| 02 apotek | B | flat lay dari atas |
+| 03 kasir UMKM | B | still life sejajar mata, satu objek ikonik |
+| 05 kasir restoran | A | close-up penuh gerak |
+| 06 ERP manufaktur | B | detail rak dengan berkas cahaya |
+
+Artikel 01 dan 04 topiknya umum, bukan satu industri, jadi flat lay laptopnya
+boleh dipertahankan.
 
 **Negative prompt**, kalau generatornya menyediakan kolom ini:
 
 ```
-text, letters, numbers, watermark, logo, brand name, people, hands, clutter, neon colors, blue tones, harsh flash, cartoon, illustration, 3d render look, distorted screen, warped tablet
+readable text, letters, numbers, watermark, logo, brand name, faces, smiling people, stock photo pose, laptop screen, tablet screen, app interface, neon colors, blue color cast, harsh flash, cartoon, illustration, 3d render, extra fingers, deformed hands
 ```
 
 - Midjourney: tambahkan `--ar 16:9 --style raw` di akhir prompt.
-- ChatGPT atau Gemini: tempel prompt apa adanya, lalu minta "landscape 16:9".
-- Tulisan di layar yang tampil acak, ulangi generate saja. Jangan dibiarkan,
-  karena teks rusak di mockup langsung terlihat palsu.
+- ChatGPT atau Gemini: tempel prompt beserta blok gaya, lalu minta "landscape 16:9".
+- Kalau jari atau tangan tampil janggal, generate ulang. Tangan adalah titik
+  lemah generator gambar, dan di cover ukurannya cukup besar untuk kelihatan.
 
 **Ekspor sebagai JPG, jangan PNG**, di lebar sekitar 1600px dan ukuran di bawah
 300KB. Cover dipakai juga sebagai `og:image`, dan PNG lossless tidak ikut
