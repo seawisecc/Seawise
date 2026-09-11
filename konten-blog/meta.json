@@ -1,0 +1,52 @@
+[
+  {
+    "file": "01-biaya-bikin-website",
+    "slug": "biaya-bikin-website",
+    "title": "Biaya Bikin Website 2026: Panduan Harga & Cara Memilih",
+    "excerpt": "Berapa biaya bikin website di 2026? Rincian harga landing page, company profile, sampai web app custom, faktor yang memengaruhi, dan cara memilih paket.",
+    "title_en": "Website Development Cost in 2026: Pricing Guide",
+    "excerpt_en": "How much does a website cost in 2026? Price ranges for landing pages, company profiles, and custom web apps, what drives the cost, and how to choose."
+  },
+  {
+    "file": "02-aplikasi-apotek",
+    "slug": "aplikasi-apotek",
+    "title": "Aplikasi Apotek: Fitur Wajib & Cara Memilihnya",
+    "excerpt": "Fitur wajib aplikasi apotek, dari pelacakan batch dan kadaluarsa, stok real time, resep, sampai laporan SIPNAP otomatis, plus cara memilih yang tepat.",
+    "title_en": "Pharmacy Management Software: Must-Have Features",
+    "excerpt_en": "The must-have features of pharmacy software, from batch and expiry tracking to real-time stock, prescriptions, and automatic reports, and how to choose."
+  },
+  {
+    "file": "03-aplikasi-kasir-umkm",
+    "slug": "aplikasi-kasir-umkm",
+    "title": "Aplikasi Kasir UMKM: Kapan Harus Pindah dari Excel",
+    "excerpt": "Masih catat penjualan di Excel atau buku? Kenali tanda UMKM perlu aplikasi kasir, bedanya dengan Excel, fitur wajib, dan cara memilih yang pas.",
+    "title_en": "POS Software for Small Businesses: When to Leave Excel",
+    "excerpt_en": "Still recording sales in Excel or a notebook? Signs your business needs POS software, how it compares to Excel, essential features, and how to choose."
+  },
+  {
+    "file": "04-jasa-pembuatan-aplikasi-custom",
+    "slug": "jasa-pembuatan-aplikasi-custom",
+    "title": "Jasa Pembuatan Aplikasi Custom: Tahapan & Cara Memilih",
+    "excerpt": "Kapan bisnis butuh aplikasi custom, tahapan pembuatannya, apa yang menentukan biaya, dan cara memilih jasa pembuatan aplikasi yang tepat.",
+    "title_en": "Custom App Development: Process & How to Choose",
+    "excerpt_en": "When a business needs a custom application, how it gets built, what drives the cost, and how to choose the right app development service."
+  },
+  {
+    "file": "05-aplikasi-kasir-restoran",
+    "slug": "aplikasi-kasir-restoran",
+    "new": true,
+    "title": "Aplikasi Kasir Restoran & Kafe: 7 Fitur Wajib",
+    "excerpt": "Pesanan tercecer ke dapur dan modal per porsi tak terpantau? Ini 7 fitur wajib aplikasi kasir restoran dan kafe, contoh hitung HPP, dan cara memilih.",
+    "title_en": "Restaurant POS Software: 7 Essential Features",
+    "excerpt_en": "Orders lost on the way to the kitchen and no idea of cost per portion? The 7 essential features of restaurant POS software, with a costing example."
+  },
+  {
+    "file": "06-erp-manufaktur-pabrik-kecil",
+    "slug": "erp-manufaktur-pabrik-kecil",
+    "new": true,
+    "title": "ERP Manufaktur untuk Pabrik Kecil: Tanda & Fitur Wajibnya",
+    "excerpt": "Stok tak cocok, HPP cuma perkiraan, bahan kedaluwarsa lolos? Tanda pabrik kecil butuh ERP manufaktur, fitur wajibnya, dan contoh hitung HPP per batch.",
+    "title_en": "Manufacturing ERP for Small Factories: Signs & Features",
+    "excerpt_en": "Stock that never matches and costs that are only estimates? When a small factory needs manufacturing ERP, essential features, and cost per batch."
+  }
+]

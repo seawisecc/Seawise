@@ -1,0 +1,86 @@
+Running a pharmacy means juggling two things at once: stock that changes all day and medicines with expiry dates. **Pharmacy management software** is a system that brings the point of sale, prescription records, and batch-level stock tracking with expiry dates into one place. As long as everything is recorded by hand or spread across several files, margin leaks quietly and the risk of stock errors grows. This guide helps you understand which features really matter and how to choose the right software.
+
+## Signs your pharmacy needs software
+
+A few signs it is time to move beyond manual records:
+
+- Expired medicines regularly slip past unnoticed.
+- Physical stock does not match the records.
+- Sales and purchasing reports take hours to compile.
+- It is hard to answer customers who ask whether an item is in stock.
+- Regulatory reports are prepared by hand and prone to mistakes.
+
+If even one of these sounds familiar, the right system will make a difference straight away.
+
+## Essential features of pharmacy software
+
+### Batch and expiry date tracking
+
+This is the most critical feature. Good software records the batch number and expiry date of every medicine, then warns you before anything expires. That prevents losses and protects patient safety at the same time.
+
+### Real-time stock management
+
+Every sale and purchase updates stock automatically. You always know what is left without counting by hand, and you are alerted when stock runs low so reorders to suppliers are never late.
+
+### Prescription records
+
+For pharmacies that fill doctors' prescriptions, prescription records linked to the point of sale make service faster and history easy to trace.
+
+### Fast point of sale
+
+Checkout should be quick, simple, and connected directly to stock, so queues do not build up and every item sold is deducted from inventory immediately.
+
+### Automatic reports
+
+Sales, purchasing, stock, and margin reports should take seconds, not hours. For Indonesian pharmacies that must report narcotics and psychotropics through SIPNAP, a report generated from transaction data replaces a manual recap that often takes hours.
+
+In short:
+
+| Feature | Problem it prevents |
+|---|---|
+| Batch and expiry tracking | Expired stock slipping through, losses, patient safety risks |
+| Real-time stock | Stock not matching records, late reorders |
+| Prescription records | Prescription history that is hard to trace |
+| Point of sale linked to stock | Long queues, stock that is not deducted |
+| Automatic reports | Hours of manual recaps and regulatory reports |
+
+## Off-the-shelf or custom?
+
+| Aspect | Off-the-shelf software | Custom software |
+|---|---|---|
+| Upfront cost | Lower, usually a subscription | Higher, quoted per project |
+| Time to start | Ready to use | Needs mapping and development |
+| Workflow | You adapt to the software | The system follows your workflow |
+| Multiple branches and integrations | Limited to available features | Designed around your needs |
+
+Off-the-shelf software suits standard needs. If your pharmacy has a specific workflow, several branches, or needs to integrate with other systems, custom software is usually a better fit because it is built around the way you work. Our [guide to custom app development](/en/blog/jasa-pembuatan-aplikasi-custom) covers when custom makes sense.
+
+## A pharmacy system already in use
+
+[Sehatera](/en/portfolio/pharmacy-store-management-psm) is a pharmacy system we built. Its point of sale is linked to prescription records, every medicine is tracked by batch with early expiry warnings, supplier orders are guided by remaining stock, and SIPNAP reports are generated automatically. It supports multiple pharmacies and two languages, and you can open the live version from the portfolio page.
+
+## How to choose the right software
+
+1. **Match it to your real workflow.** The best software follows the way your team works instead of forcing the team to adapt.
+2. **Make sure support is included.** Moving away from manual records needs guidance. Choose a provider that stays with you until the team is comfortable.
+3. **Plan for growth.** If you plan to open more branches, choose a system that supports multiple pharmacies from the start.
+
+## Frequently asked questions
+
+### Can existing data be moved to the new software?
+
+Yes. Existing stock, medicine, and customer data can usually be imported through a migration, so you do not have to start from scratch.
+
+### How long does implementation take?
+
+It depends on complexity and the amount of data. A standard system can be running within days, while custom software takes longer depending on the requirements.
+
+### Does it need a constant internet connection?
+
+Most modern software is cloud-based and needs internet, but some also support offline mode. Discuss this early, especially if the signal at your pharmacy is unreliable.
+
+## Conclusion
+
+The right pharmacy software is more than a cash register. It keeps stock under control, prevents losses from expired medicines, and speeds up reporting. When choosing, focus on batch tracking, real-time stock, automatic reports, and good support.
+
+**Want a pharmacy system that follows the way your pharmacy works?** See Seawise's [app development in Bali](/en/jasa-pembuatan-aplikasi-bali), or [tell us what you need](/en/kontak). The first discussion is free.

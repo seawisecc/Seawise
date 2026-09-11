@@ -380,6 +380,24 @@ masuk ke `sitemap.xml`**. Sekarang `getPortfolio()` mengembalikan array kosong
 dan pemanggilnya menyembunyikan section. Jangan tambahkan fallback lagi. Untuk
 mengisi database kosong, pakai `supabase-seed.sql`.
 
+### Artikel blog tersimpan tanpa Markdown, dan tidak ada yang sadar
+
+Keempat artikel pertama tayang dari Juli sampai September 2026 dengan **nol
+`<h2>`**. Teksnya disalin dari tampilan preview Markdown, yang membuang `##`,
+`-`, dan `**`. Form tersimpan normal dan halamannya tetap terbuka, jadi masalah
+ini baru ketahuan saat HTML live diperiksa. Audit SEO sebelumnya bahkan sudah
+mencatatnya untuk satu artikel, dan tiga artikel berikutnya tetap kena.
+
+Karena itu naskah artikel ada di `konten-blog/` sebagai **`.txt`**, satu file
+per kotak isian, supaya tidak ada preview yang bisa menelan tandanya. Jangan
+diubah kembali ke `.md`. Editor di `/admin/blog` juga memberi peringatan lewat
+`postContentWarnings()`: artikel panjang tanpa subjudul, `# ` yang membuat H1
+kedua, em-dash, dan tautan internal yang hilang atau salah locale. Sifatnya
+peringatan saja, simpan tidak diblokir.
+
+Memeriksa artikel harus dari HTML live, bukan dari file di repo. File dan
+database bisa berbeda, dan yang dibaca Google adalah database.
+
 ---
 
 ## Struktur
@@ -401,6 +419,8 @@ components/PartnerMarquee.tsx  deret logo partner, auto slide kalau banyak
 components/admin/        komponen admin (14)
 components/admin/useRowReorder.ts  drag urutan baris, dipakai 4 manager
 components/admin/ReorderHandle.tsx gagang seret di kolom Urutan
+components/admin/postContentWarnings.ts peringatan isi artikel di editor blog
+konten-blog/             naskah artikel .txt + meta.json, lihat README-nya
 lib/i18n/dictionaries.ts seluruh teks publik, en sumber kebenaran
 lib/seo.ts               canonical, hreflang, OG, breadcrumb
 lib/queries.ts           baca Supabase untuk halaman publik
@@ -522,8 +542,12 @@ seluruh file `.sql`.
   nilai yang diberikan Resend, dipasang di panel idcloudhost. Opsional
   pendampingnya: `INBOUND_FORWARD_TO` (default ikut `LEAD_NOTIFY_TO`) dan
   `INBOUND_FORWARD_FROM` (wajib domain terverifikasi di Resend).
-- **Isi artikel blog** ada di tabel `posts` di Supabase, hanya bisa diubah lewat
-  `/admin/blog` karena RLS. Lihat `KONTEN-SIAP-TEMPEL.md`.
+- **Isi artikel blog** ada di tabel `posts` di Supabase. Pemilik mengubahnya
+  lewat `/admin/blog`. `SUPABASE_SERVICE_ROLE_KEY` di `.env.local` bisa menulis
+  langsung melewati RLS, dan itu dipakai 11 September 2026 atas permintaan
+  pemilik. Kalau dipakai lagi: minta izin dulu, backup barisnya sebelum
+  menimpa, isi `updated_at`, dan ingat route revalidate butuh cookie sesi
+  admin, jadi halaman baru segar setelah siklus ISR 120 detik.
 
 ---
 
@@ -537,4 +561,4 @@ seluruh file `.sql`.
 | `AEO-GEO.md` | sitasi mesin jawab: structured data, llms.txt, audit pembukaan halaman |
 | `KONTEN-SIAP-TEMPEL.md` | langkah mengisi konten yang butuh login admin |
 | `panduan-isi-portfolio-testimoni.md` | panduan mengisi portfolio & testimoni |
-| `artikel-*.md` | naskah artikel blog siap tempel |
+| `konten-blog/` | naskah artikel blog `.txt` dua bahasa, metadata, dan urutan artikel berikutnya |

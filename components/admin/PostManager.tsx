@@ -9,6 +9,7 @@ import { DEFAULT_AUTHOR } from "@/lib/author";
 import { revalidatePublicPages } from "@/lib/revalidate";
 import { useRowReorder, nextSortOrder } from "./useRowReorder";
 import ReorderHandle from "./ReorderHandle";
+import { postContentWarnings } from "./postContentWarnings";
 
 type Row = {
   id: string;
@@ -48,6 +49,17 @@ const empty: Omit<Row, "id"> = {
   excerpt_en: "",
   content_en: "",
 };
+
+function ContentWarnings({ warnings }: { warnings: string[] }) {
+  if (warnings.length === 0) return null;
+  return (
+    <ul className="mt-2 space-y-1 rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900">
+      {warnings.map((w) => (
+        <li key={w}>{w}</li>
+      ))}
+    </ul>
+  );
+}
 
 function slugify(s: string) {
   return s
@@ -274,6 +286,13 @@ export default function PostManager() {
                   <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${r.published ? "bg-sea-foam/15 text-sea-foam" : "bg-warm-neutral text-forest-dark/50"}`}>
                     {r.published ? "Published" : "Draft"}
                   </span>
+                  {postContentWarnings(r.content, "id").length +
+                    postContentWarnings(r.content_en, "en").length >
+                    0 && (
+                    <span className="ml-1.5 inline-flex rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-900">
+                      Cek isi
+                    </span>
+                  )}
                 </td>
                 <td className="px-5 py-3.5">
                   <button onClick={() => { setEditing({ ...r }); setMsg(""); }} className="rounded-lg px-2.5 py-1 text-sm font-medium text-sea-foam transition-colors hover:bg-sea-foam/10">
@@ -374,6 +393,7 @@ export default function PostManager() {
                   value={editing.content ?? ""}
                   onChange={(e) => setEditing({ ...editing, content: e.target.value })}
                 />
+                <ContentWarnings warnings={postContentWarnings(editing.content, "id")} />
               </div>
               <div className="rounded-2xl border border-warm-neutral bg-white/60 p-4">
                 <p className={label}>Versi Inggris (halaman /en)</p>
@@ -421,6 +441,7 @@ export default function PostManager() {
                       value={editing.content_en ?? ""}
                       onChange={(e) => setEditing({ ...editing, content_en: e.target.value })}
                     />
+                    <ContentWarnings warnings={postContentWarnings(editing.content_en, "en")} />
                   </div>
                 </div>
               </div>

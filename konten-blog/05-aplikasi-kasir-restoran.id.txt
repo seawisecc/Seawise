@@ -1,0 +1,100 @@
+Restoran dan kafe punya masalah yang tidak dimiliki toko biasa: pesanan harus berpindah dari kasir ke dapur dengan cepat, satu menu terdiri dari banyak bahan, dan jam ramai datang serentak. **Aplikasi kasir restoran** adalah sistem POS yang tidak hanya mencatat pembayaran, tapi juga meneruskan pesanan ke dapur, menghitung modal per porsi dari resep, dan menyusun laporan setiap tutup. Artikel ini membahas tujuh fitur yang benar-benar terpakai sehari-hari dan cara memilih aplikasinya.
+
+## Tanda restoranmu sudah butuh sistem
+
+- Pesanan salah atau terlewat saat ramai karena dicatat di kertas lalu dioper lisan ke dapur.
+- Kamu tidak tahu pasti modal per porsi, apalagi setelah harga bahan naik.
+- Rekap penjualan tiap tutup makan waktu dan angkanya sering tidak cocok dengan uang di laci.
+- Tamu menunggu lama hanya untuk memesan atau meminta tagihan.
+- Kamu punya lebih dari satu outlet dan tidak bisa melihat angkanya di satu tempat.
+
+Kalau dua atau lebih terasa familier, kasir biasa sudah tidak cukup untuk usahamu.
+
+## 7 fitur wajib aplikasi kasir restoran
+
+### 1. Kasir per meja
+
+Pesanan dicatat per nomor meja, bisa ditambah kapan saja selama tamu masih duduk, lalu ditagih sekaligus di akhir. Tanpa fitur ini, pesanan tambahan gampang tercecer dan tagihan sering kurang.
+
+### 2. Layar dapur (Kitchen Display System)
+
+Kitchen Display System (KDS) menampilkan pesanan di layar dapur begitu kasir menginputnya. Dapur melihat urutan pesanan, catatan khusus seperti "tidak pedas", dan mana yang sudah selesai. Kertas order yang hilang atau tulisan yang tidak terbaca berhenti jadi sumber salah masak.
+
+### 3. QR order dari meja
+
+Tamu memindai kode QR di meja, melihat menu, lalu memesan dari HP-nya sendiri. Pesanan langsung masuk ke sistem tanpa pelayan harus bolak-balik mencatat. Di daerah wisata seperti Bali, menu digital juga lebih mudah disiapkan dalam dua bahasa untuk tamu mancanegara.
+
+### 4. Take away
+
+Pesanan bawa pulang punya alur yang berbeda: tanpa meja dan biasanya dibayar di depan. Pastikan aplikasinya membedakan keduanya supaya penjualan dine in dan take away bisa dibaca terpisah di laporan.
+
+### 5. HPP per porsi yang mengikuti harga bahan
+
+Ini fitur yang paling sering dilewatkan, padahal paling menentukan untung. HPP (harga pokok penjualan) per porsi adalah total biaya bahan untuk membuat satu menu. Aplikasi menghitungnya dari resep: takaran tiap bahan dikalikan harga bahan terbaru.
+
+Contoh perhitungan untuk segelas es kopi susu (angka ilustrasi):
+
+| Bahan | Takaran | Harga bahan | Biaya |
+|---|---|---|---|
+| Biji kopi | 18 g | Rp250.000 / kg | Rp4.500 |
+| Susu segar | 150 ml | Rp22.000 / liter | Rp3.300 |
+| Gula aren cair | 20 ml | Rp40.000 / liter | Rp800 |
+| Es batu dan cup | 1 set | | Rp1.500 |
+| **HPP per porsi** | | | **Rp10.100** |
+
+Kalau dijual Rp25.000, biaya bahannya sekitar 40% dari harga jual. Sekarang bayangkan harga susu naik jadi Rp26.000 per liter. HPP ikut naik jadi Rp10.700 per gelas. Kalau hitungannya masih di spreadsheet lama, kamu tidak sadar margin setiap gelas sudah turun, dan dengan puluhan menu selisih kecil ini menumpuk jadi angka besar tiap bulan.
+
+### 6. Multi-outlet
+
+Kalau punya lebih dari satu cabang, semua outlet sebaiknya berjalan di satu sistem. Penjualan tiap outlet bisa dilihat terpisah maupun digabung, jadi kamu tidak perlu menunggu kiriman rekap dari setiap cabang.
+
+### 7. Laporan dan hak akses per modul
+
+Rekap harian sebaiknya tersusun otomatis saat tutup. Hak akses per modul memastikan kasir hanya membuka kasir, dapur hanya melihat pesanan, dan laporan keuangan hanya bisa dibuka pemilik atau manajer.
+
+## Ringkasan fitur dan masalah yang diselesaikan
+
+| Fitur | Masalah yang diselesaikan |
+|---|---|
+| Kasir per meja | Pesanan tambahan tercecer, tagihan kurang |
+| Layar dapur (KDS) | Kertas order hilang, salah masak |
+| QR order | Tamu menunggu lama untuk memesan |
+| Take away | Laporan dine in dan bawa pulang tercampur |
+| HPP per porsi | Margin turun diam-diam saat harga bahan naik |
+| Multi-outlet | Angka cabang tersebar dan terlambat |
+| Laporan dan hak akses | Rekap tutup lama, data keuangan terbuka untuk semua |
+
+## Aplikasi kasir siap pakai atau dibuat khusus?
+
+Aplikasi kasir siap pakai sudah cukup untuk kafe kecil dengan satu outlet dan menu sederhana. Aplikasi yang dibuat khusus lebih masuk akal kalau kamu butuh HPP per porsi yang benar-benar mengikuti harga bahan, punya beberapa outlet dengan alur berbeda, atau punya kebutuhan khusus seperti titip jual kue dari pemasok atau paket katering. Pertimbangan lengkapnya ada di [panduan jasa pembuatan aplikasi custom](/id/blog/jasa-pembuatan-aplikasi-custom). Untuk toko ritel yang bukan F&B, baca [panduan aplikasi kasir UMKM](/id/blog/aplikasi-kasir-umkm).
+
+## Contoh sistem restoran yang sudah berjalan
+
+[Resto & Cafe Management](/id/portfolio/resto-cafe-management-rcm) adalah sistem F&B yang kami bangun. Kasir per meja terhubung langsung ke layar dapur real time, tamu bisa memesan lewat QR dari meja, take away punya alurnya sendiri, dan HPP per porsi mengikuti harga bahan terbaru. Semua outlet berjalan di satu sistem dengan hak akses per modul, dan versi live-nya bisa kamu buka dari halaman portfolio.
+
+## Cara memilih aplikasi kasir restoran
+
+1. **Uji dengan skenario jam ramai, bukan hanya demo.** Minta disimulasikan: beberapa meja memesan bersamaan, satu tamu menambah pesanan, dan satu meja minta tagihan dipisah.
+2. **Libatkan kasir dan dapur.** Merekalah yang memakainya setiap hari. Kalau mereka kesulitan, sistemnya akan ditinggalkan.
+3. **Pastikan resep bisa diinput per bahan.** Tanpa resep, HPP per porsi hanya perkiraan.
+4. **Tanyakan pendampingan setelah live.** Minggu pertama selalu memunculkan pertanyaan yang tidak terpikir saat demo.
+
+## Pertanyaan yang sering diajukan
+
+### Apakah aplikasi kasir restoran bisa dipakai di tablet atau HP?
+
+Sebagian besar aplikasi modern berbasis web sehingga bisa dibuka di tablet, laptop, maupun HP. Pastikan tampilannya nyaman di perangkat yang benar-benar ada di outletmu.
+
+### Bagaimana kalau internet mati?
+
+Tanyakan sejak awal. Ada aplikasi yang tetap bisa mencatat pesanan saat offline lalu menyinkronkan data setelah koneksi kembali, ada juga yang sepenuhnya butuh internet. Untuk lokasi dengan sinyal kurang stabil, ini pertanyaan wajib.
+
+### Berapa lama menerapkan aplikasi kasir di restoran?
+
+Sistem siap pakai bisa mulai dalam hitungan hari. Yang biasanya makan waktu justru menginput menu beserta resep per bahan, lalu melatih kasir dan dapur. Sistem yang dibuat khusus butuh waktu tambahan untuk pemetaan alur dan pengembangan.
+
+## Kesimpulan
+
+Aplikasi kasir restoran yang tepat menyelesaikan tiga hal sekaligus: pesanan sampai ke dapur tanpa salah, modal per porsi terlihat jelas, dan rekap harian selesai otomatis. Fokus pada kasir per meja, layar dapur, dan HPP per porsi dari resep, lalu pastikan tim kasir dan dapur nyaman memakainya.
+
+**Ingin sistem yang mengikuti alur restoran atau kafemu?** Lihat [jasa pembuatan aplikasi di Bali](/id/jasa-pembuatan-aplikasi-bali) dari Seawise, atau [ceritakan kebutuhanmu lewat halaman kontak](/id/kontak). Diskusi pertama gratis.

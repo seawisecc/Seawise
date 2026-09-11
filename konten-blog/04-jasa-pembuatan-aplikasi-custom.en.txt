@@ -1,0 +1,97 @@
+When business processes grow more complex and off-the-shelf apps are no longer enough, many owners start looking for **custom app development services**. A custom application is software built around one business's workflow, rather than general software that forces the business to adapt. This guide covers when you need one, how it gets built, what drives the cost, and how to choose the right developer.
+
+## When does a business need a custom application?
+
+Consider a custom application if:
+
+- Your processes are unique and not covered by apps on the market.
+- You use several separate apps that do not talk to each other.
+- Your team still relies on spreadsheets for work that should be automatic.
+- You need full control over your data and workflows.
+- You want a system that can grow and be adjusted over time.
+
+If an off-the-shelf app already does the job, there is no need to force a custom build. But once your unique processes become the bottleneck, custom software actually saves time and money in the long run.
+
+| Aspect | Off-the-shelf app | Custom app |
+|---|---|---|
+| Workflow | The business adapts to the software | The software follows the business |
+| Cost | Subscription, low upfront cost | Quoted per project based on scope |
+| Time to start | Ready to use | Needs mapping and development |
+| Features | Same for every user | Only what you actually need |
+| Integration across teams | Limited to what is provided | Designed around the systems you use |
+
+## How a custom application is built
+
+### 1. Requirements mapping
+
+Everything starts with understanding how the work is really done. This stage decides which features are truly needed, not just the ones that look impressive. At Seawise, mapping is done with the people who run the process every day, not only the owner, and it is free of charge.
+
+### 2. Written scope and quote
+
+The mapping becomes a written scope and price before development starts, so there are no surprises halfway through.
+
+### 3. Design
+
+User flows and screens are designed to be easy to use. Good design makes an application feel light rather than confusing.
+
+### 4. Development and testing
+
+Features are built in stages and tested part by part. Ideally you can see progress and give feedback along the way, not only at the end.
+
+### 5. Launch and support
+
+After go-live, existing data is migrated and the team is trained until they are comfortable. Launch is the beginning, not the end.
+
+## What determines the cost of a custom application?
+
+Custom applications have no shelf price, because two businesses of the same size can need very different systems. The cost depends on:
+
+- The number of modules and how complex the features are.
+- The number of users, roles, and branches.
+- Integrations with other systems.
+- How much existing data needs to be migrated, and its condition.
+
+A simple application with a few core features is clearly more affordable than a large system with many modules and integrations. That is why a good developer maps your needs before naming a number, so you never pay for features you do not need.
+
+By comparison, websites can have published package prices because their scope is more uniform. If what you actually need is an online shopfront rather than an operational system, read our [website cost guide](/en/blog/biaya-bikin-website) first.
+
+## Custom applications already in use
+
+Every industry works differently, and it shows in the systems we have built:
+
+- **Manufacturing:** [Industry Management](/en/portfolio/industry-management-ims) brings purchasing, FEFO stock, formulas, production, and sales together, with cost of goods calculated per batch.
+- **Pharmacy:** [Sehatera](/en/portfolio/pharmacy-store-management-psm) combines point of sale with prescriptions, batch and expiry tracking, and automatic SIPNAP reports.
+- **Restaurants and cafes:** [Resto & Cafe Management](/en/portfolio/resto-cafe-management-rcm) connects table-based ordering to the kitchen display, QR ordering, and cost per portion.
+- **Retail and small business:** [TokoKu](/en/portfolio/retail-service-umkm-edition) is a point of sale that also keeps the books, so net profit appears automatically.
+
+## How to choose an app development service
+
+1. **Choose a team that understands before it codes.** A good developer studies your business process before proposing a solution.
+2. **Ask to see their work.** Applications that are live and can be opened show real capability, more than mockups do.
+3. **Ask for a written scope.** The scope and price should be clear before development begins.
+4. **Make sure support continues after launch.** Applications without support are often abandoned.
+5. **Pay attention to communication.** Projects go smoothly when discussion is easy and progress updates arrive regularly.
+
+## Frequently asked questions
+
+### How long does it take to build a custom application?
+
+It depends on complexity. An application with core features can be ready in a few weeks, while a large system with many modules takes longer. Mapping the requirements first makes the estimate accurate.
+
+### Can I add features later?
+
+Yes, and it is actually recommended. A well-built custom application lets you add features step by step as your needs grow.
+
+### What happens to our existing data?
+
+Spreadsheets and old software are audited first, then migrated in stages, so the team is never left without the numbers they use every day.
+
+### Who owns the code and the data?
+
+This should be agreed at the start. Ideally your data belongs entirely to you, and ownership of the code and infrastructure is also agreed in writing.
+
+## Conclusion
+
+A custom application is an investment for businesses with unique processes that want to grow without being limited by someone else's software. The key is choosing a developer who understands your needs first, has applications that genuinely run, gives you a written scope, and supports you until the system is part of daily work.
+
+**Have a process that ordinary apps cannot handle?** See Seawise's [app development in Bali](/en/jasa-pembuatan-aplikasi-bali), or [tell us what you need](/en/kontak). We will help you map it out before you decide.

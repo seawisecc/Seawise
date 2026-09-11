@@ -1,0 +1,101 @@
+Banyak pabrik skala kecil dan menengah berjalan dengan tumpukan spreadsheet: satu untuk pembelian, satu untuk stok, satu untuk produksi, satu lagi untuk penjualan. Selama volumenya kecil, cara ini bertahan. Begitu produk dan bahan bertambah, angkanya mulai tidak saling cocok. **ERP manufaktur** adalah sistem yang menyatukan pembelian, stok bahan, formula produk, produksi, dan penjualan dalam satu database, sehingga setiap angka cukup dicatat sekali lalu dipakai semua bagian. Artikel ini membahas kapan pabrik kecil perlu beralih, fitur yang wajib ada, dan kenapa HPP per batch lebih jujur daripada HPP rata-rata.
+
+## Tanda pabrikmu sudah melampaui spreadsheet
+
+- Stok fisik di gudang sering tidak cocok dengan catatan.
+- HPP dihitung sebulan sekali, dan angkanya lebih mirip perkiraan.
+- Bahan mendekati kedaluwarsa baru ketahuan saat sudah tidak bisa dipakai.
+- Pembelian bahan tidak lewat persetujuan yang jelas, jadi sulit dilacak siapa memesan apa.
+- Formula produk hanya ada di satu file, atau di kepala satu orang.
+- Tim produksi, gudang, dan pembelian bekerja dari angka yang berbeda.
+
+Kalau tiga atau lebih terasa familier, masalahnya bukan lagi disiplin mengisi spreadsheet, tapi alatnya yang sudah tidak cukup.
+
+## Fitur wajib ERP manufaktur untuk pabrik kecil
+
+### 1. Pembelian dengan alur persetujuan
+
+Setiap permintaan pembelian melewati persetujuan sebelum jadi pesanan ke supplier. Kamu tahu siapa yang meminta, siapa yang menyetujui, dan berapa harga lot yang diterima. Harga lot inilah yang nanti dipakai untuk menghitung HPP.
+
+### 2. Stok bahan dengan metode FEFO
+
+FEFO (First Expired, First Out) berarti bahan yang paling dekat tanggal kedaluwarsanya dipakai lebih dulu. Ini berbeda dari FIFO yang mengikuti urutan barang masuk. Untuk bahan yang punya masa pakai, seperti bahan pangan, bahan kimia, atau bahan kosmetik, FEFO mencegah bahan terbuang karena lolos pantauan.
+
+### 3. Kontrol kedaluwarsa
+
+Sistem memberi peringatan sebelum bahan kedaluwarsa, bukan sesudahnya. Bagian pembelian bisa menahan pesanan bahan yang stoknya masih banyak, dan produksi bisa mendahulukan lot yang hampir habis masa pakainya.
+
+### 4. Formula produk dan komposisi bahan
+
+Formula menyimpan takaran setiap bahan untuk setiap produk. Untuk pabrik kosmetik, formula juga bisa memuat daftar INCI (International Nomenclature of Cosmetic Ingredients), yaitu nama standar bahan yang tercantum di label. Formula yang tersimpan di sistem tidak hilang saat satu orang keluar dari tim.
+
+### 5. HPP real per batch
+
+Setiap kali batch diproduksi, sistem menghitung biayanya dari harga lot bahan yang benar-benar terpakai di batch itu. Contoh perhitungannya ada di bagian berikutnya.
+
+### 6. Konsinyasi dan POS
+
+Kalau produkmu juga dijual lewat titip jual di toko lain atau di toko sendiri, stok konsinyasi dan penjualan kasir sebaiknya tercatat di sistem yang sama, supaya stok barang jadi tidak dihitung dua kali.
+
+### 7. Multi-user dengan hak akses
+
+Gudang, produksi, pembelian, dan pemilik melihat menu yang berbeda. Setiap orang hanya mengubah bagian yang menjadi tanggung jawabnya, dan setiap perubahan tercatat.
+
+## HPP per batch dan HPP rata-rata: contoh perhitungan
+
+HPP (harga pokok produksi) adalah total biaya untuk menghasilkan produk: bahan baku, tenaga kerja langsung, dan biaya overhead pabrik. Bagian yang paling sering meleset di pabrik kecil adalah biaya bahan, karena harga bahan yang sama bisa berbeda di setiap pembelian.
+
+Misalnya sebuah pabrik membeli bahan A dua kali (angka ilustrasi):
+
+| Lot | Kedaluwarsa | Jumlah | Harga |
+|---|---|---|---|
+| Lot 1 | lebih awal | 40 kg | Rp50.000 / kg |
+| Lot 2 | lebih akhir | 60 kg | Rp62.000 / kg |
+
+Harga rata-rata tertimbangnya (40 × Rp50.000 + 60 × Rp62.000) ÷ 100 kg = Rp57.200 per kg.
+
+Satu batch produksi memakai 30 kg bahan A. Dengan FEFO, bahan diambil dari Lot 1:
+
+| Metode | Perhitungan | Biaya bahan A |
+|---|---|---|
+| HPP rata-rata | 30 kg × Rp57.200 | Rp1.716.000 |
+| HPP per batch | 30 kg × Rp50.000 (Lot 1) | Rp1.500.000 |
+
+Selisihnya Rp216.000 untuk satu bahan di satu batch. Batch berikutnya yang mulai memakai Lot 2 justru lebih mahal dari angka rata-rata. HPP rata-rata tidak salah secara akuntansi, tapi dia menyamarkan batch mana yang sebenarnya memangkas margin. Dengan puluhan bahan dan banyak batch sebulan, menghitung ini manual di spreadsheet sangat melelahkan dan rawan salah, sementara sistem bisa menghitungnya otomatis setiap kali batch selesai diproduksi.
+
+## ERP siap pakai atau custom untuk pabrik kecil?
+
+ERP besar yang siap pakai umumnya dirancang untuk perusahaan besar: modulnya banyak, penerapannya panjang, dan tim kecil sering hanya memakai sebagian kecil fiturnya. Di sisi lain, aplikasi akuntansi umum sering tidak punya formula produk, FEFO, atau HPP per batch. Pabrik kecil biasanya berada di tengah keduanya.
+
+ERP custom dibangun hanya untuk alur yang benar-benar dipakai, jadi tim tidak dibebani menu yang tidak relevan. Pertimbangan lengkap soal kapan custom masuk akal ada di [panduan jasa pembuatan aplikasi custom](/id/blog/jasa-pembuatan-aplikasi-custom).
+
+## Contoh ERP manufaktur yang sudah berjalan
+
+[Industry Management](/id/portfolio/industry-management-ims) adalah sistem manufaktur yang kami bangun. Pembelian dengan alur persetujuan, stok FEFO, kontrol kedaluwarsa, formula dan INCI, produksi, sampai konsinyasi dan POS berjalan di satu sistem multi-user. HPP dihitung per batch dari harga lot yang benar-benar terpakai, jadi biaya produksi terlihat apa adanya. Versi live-nya bisa kamu buka dari halaman portfolio.
+
+## Cara beralih tanpa menghentikan produksi
+
+1. **Petakan alur yang berjalan sekarang**, termasuk pengecualian yang hanya diketahui orang gudang atau produksi.
+2. **Audit dan rapikan data spreadsheet** seperti daftar bahan, stok awal per lot, dan formula, sebelum dipindahkan.
+3. **Pindahkan bertahap**, misalnya mulai dari pembelian dan stok, lalu produksi dan HPP. Tim tidak pernah ditinggal tanpa angka yang mereka pakai sehari-hari.
+4. **Latih orang yang memakainya setiap hari**, bukan hanya pemilik atau manajer.
+
+## Pertanyaan yang sering diajukan
+
+### Apakah ERP hanya untuk pabrik besar?
+
+Tidak. Yang menentukan bukan ukuran pabrik, tapi seberapa sering angka antarbagian tidak cocok. Pabrik kecil dengan banyak bahan dan produk sering merasakan manfaat besar, karena satu orang biasanya merangkap beberapa pekerjaan sekaligus.
+
+### Apa bedanya FIFO dan FEFO?
+
+FIFO mengeluarkan barang yang paling dulu masuk, sedangkan FEFO mengeluarkan barang yang paling dulu kedaluwarsa. Hasilnya sering sama, tapi tidak selalu: lot yang datang belakangan bisa punya masa pakai lebih pendek. Untuk bahan yang punya tanggal kedaluwarsa, FEFO lebih aman.
+
+### Berapa biaya ERP manufaktur custom?
+
+Dihitung per proyek, karena cakupannya mengikuti jumlah modul, pengguna, dan alur yang perlu dipetakan. Pemetaan proses di awal membuat angkanya akurat, dan di Seawise pemetaan ini tidak dipungut biaya.
+
+## Kesimpulan
+
+Pabrik kecil perlu ERP manufaktur saat angka stok, pembelian, dan produksi mulai tidak saling cocok. Fitur yang paling menentukan adalah stok FEFO dengan kontrol kedaluwarsa, formula yang tersimpan rapi, dan HPP per batch dari harga lot yang benar-benar terpakai. Beralihlah bertahap, mulai dari data yang paling sering salah.
+
+**Pabrikmu masih berjalan di tumpukan spreadsheet?** Lihat [jasa pembuatan aplikasi di Bali](/id/jasa-pembuatan-aplikasi-bali) dari Seawise, atau [ceritakan alur produksimu lewat halaman kontak](/id/kontak). Kami petakan dulu, tanpa biaya.

@@ -1,0 +1,78 @@
+One of the first questions people ask before building a website is: **how much does a website cost?** The honest answer is "it depends", but the number can still be estimated. In Indonesia in 2026, a website typically costs from around IDR 2 million for a single landing page, IDR 3.5–5 million for a company profile, and IDR 6 million and up for a custom web app. This guide explains what moves the price up or down and how to choose a package without wasting your budget.
+
+## Website development costs in 2026
+
+In general, website development in Indonesia falls into a few tiers based on complexity:
+
+| Website type | Typical cost | Best for |
+|---|---|---|
+| Landing page (1 page) | from around IDR 2 million | Promoting one product, one event, or a personal brand |
+| Company profile (5–6 pages) | around IDR 3.5–4 million | Small businesses that need a complete, professional presence |
+| Customised website | around IDR 4.5–5 million | Businesses that want to stand out and manage their own content |
+| Custom web app | from IDR 6 million | Special features such as logins, dashboards, or system integrations |
+
+These figures are market ranges for professional developers. Prices far below them usually mean a generic template with no support, while prices far above them usually include complex application features. Seawise's current package prices are listed on our [services page](/en/layanan).
+
+## What affects the cost?
+
+The final price of a website comes down to five main factors.
+
+### 1. Number of pages and sections
+
+The more pages and sections that need to be designed, the more work is involved. A single landing page is naturally cheaper than a full company profile with product pages, a gallery, and a blog.
+
+### 2. Level of design customisation
+
+Using an existing design preset costs less. A fully custom design, from colours, layout, and animation to a visual identity made just for you, takes more time and therefore costs more.
+
+### 3. Managing content yourself (admin panel)
+
+A website with an admin panel lets you change text, prices, and photos yourself without contacting a developer every time. It adds to the upfront cost, but saves money over the long run.
+
+### 4. Additional features
+
+Payment integration, automatic WhatsApp notifications, online booking, or multiple languages are extra features that affect the price. Once the features start to look like an operational system, such as stock or point of sale, it is usually better scoped as a [custom application](/en/blog/jasa-pembuatan-aplikasi-custom) rather than a website.
+
+### 5. Maintenance and hosting
+
+After launch there are recurring costs for the domain, hosting, and maintenance that keep the website secure and up to date. For reference, maintenance on Seawise packages is currently IDR 1.8 million per year. Put this yearly cost in your budget from the start, not just the build cost.
+
+## Why a cheap website often ends up costing more
+
+Very cheap websites usually rely on a generic template, with no speed optimisation, no basic SEO, and no support after launch. As a result they often need to be rebuilt within months, and rebuilding costs far more than doing it properly the first time.
+
+The right investment is not the cheapest one. It is the one that fits your needs and can grow with your business.
+
+## How to choose the right package
+
+Before you decide, answer these three questions:
+
+1. **What is the main purpose of the website?** A simple profile, selling products, or an internal operations tool? The purpose determines how complex it needs to be.
+2. **How often will the content change?** If often, an admin panel will save a lot of time and money.
+3. **Will your business grow?** Choose a foundation that can be upgraded step by step, so you do not have to rebuild when the business gets bigger.
+
+If you are still unsure, start with a smaller package and upgrade as you go. What matters is a clean foundation from day one. For example, the [Leuca de Perfume website](/en/portfolio/leuca-de-perfume) was built as a concise company profile that loads fast on mobile and is easy to update.
+
+## Frequently asked questions
+
+### How long does it take to build a website?
+
+It depends on the package and how ready your materials are, such as text, photos, and logo. At Seawise, a one-page landing page takes 3–5 days, a company profile 5–10 days, and a customised website 10–14 days. A custom web app takes longer because the features have to be designed first.
+
+### Does the price include domain and hosting?
+
+It varies between providers, so ask early whether the domain, hosting, and SSL are included or billed separately. At Seawise, domain and hosting are arranged as part of the project. The exact arrangement is confirmed during the first discussion, since it depends on what you already own.
+
+### Can I update the website content myself?
+
+Yes, if your package includes an admin panel. You can update text, prices, and photos without a developer's help.
+
+### Will my website appear on Google straight away?
+
+Not straight away. A new website has to be crawled and indexed by Google, which usually takes a few weeks. A website built with proper SEO fundamentals is easier for Google to understand from the start.
+
+## Conclusion
+
+Website costs in 2026 range from IDR 2 million for a landing page to tens of millions for a custom web app. What matters is not just the number, but how well it fits your business goals and how solid the foundation is. Choose a developer who takes the time to understand your needs first, not one who jumps straight to the cheapest template.
+
+**Not sure which package fits your business?** See Seawise's [website development in Bali](/en/jasa-pembuatan-website-bali), compare [our website packages](/en/layanan), or [book a free consultation](/en/kontak). We will help map out what you need before you commit to anything.

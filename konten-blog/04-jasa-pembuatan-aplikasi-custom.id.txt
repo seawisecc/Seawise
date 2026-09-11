@@ -1,0 +1,97 @@
+Ketika proses bisnis makin rumit dan aplikasi siap pakai tidak lagi cukup, banyak pemilik usaha mulai mencari **jasa pembuatan aplikasi custom**. Aplikasi custom adalah software yang dibangun khusus mengikuti alur kerja satu bisnis, bukan software umum yang memaksa bisnis menyesuaikan diri. Artikel ini membahas kapan kamu membutuhkannya, tahapan pembuatannya, apa yang menentukan biayanya, dan cara memilih jasa yang tepat.
+
+## Kapan bisnis butuh aplikasi custom?
+
+Pertimbangkan aplikasi custom kalau:
+
+- Proses bisnismu unik dan tidak terwadahi aplikasi yang ada di pasaran.
+- Kamu memakai banyak aplikasi terpisah yang tidak saling terhubung.
+- Tim masih mengandalkan spreadsheet untuk pekerjaan yang seharusnya otomatis.
+- Kamu butuh kontrol penuh atas data dan alur kerja.
+- Kamu ingin sistem yang bisa tumbuh dan disesuaikan seiring waktu.
+
+Kalau aplikasi jadi sudah cukup, tidak perlu memaksakan custom. Tapi saat keunikan proses jadi penghambat, custom justru menghemat waktu dan biaya jangka panjang.
+
+| Aspek | Aplikasi siap pakai | Aplikasi custom |
+|---|---|---|
+| Alur kerja | Bisnis menyesuaikan diri ke software | Software mengikuti alur bisnis |
+| Biaya | Berlangganan, biaya awal rendah | Dihitung per proyek sesuai cakupan |
+| Waktu mulai | Langsung dipakai | Perlu pemetaan dan pengembangan |
+| Fitur | Sama untuk semua pengguna | Hanya yang benar-benar dibutuhkan |
+| Integrasi antarbagian | Terbatas pada yang disediakan | Dirancang sesuai sistem yang kamu pakai |
+
+## Tahapan pembuatan aplikasi custom
+
+### 1. Pemetaan kebutuhan
+
+Semua dimulai dari memahami proses nyata di lapangan. Tahap ini menentukan fitur apa yang benar-benar dibutuhkan, bukan sekadar yang terlihat menarik. Di Seawise, pemetaan dilakukan bersama orang yang menjalankan prosesnya setiap hari, bukan hanya dengan pemiliknya, dan tidak dipungut biaya.
+
+### 2. Cakupan dan penawaran tertulis
+
+Hasil pemetaan dituangkan jadi ruang lingkup dan harga tertulis sebelum pengembangan dimulai, supaya tidak ada kejutan di tengah jalan.
+
+### 3. Perancangan (desain)
+
+Alur pengguna dan tampilan dirancang agar mudah dipakai. Desain yang baik membuat aplikasi terasa ringan, bukan membingungkan.
+
+### 4. Pengembangan dan uji coba
+
+Fitur dibangun bertahap dan diuji di setiap bagian. Idealnya kamu bisa melihat progres dan memberi masukan sepanjang jalan, bukan hanya di akhir.
+
+### 5. Peluncuran dan pendampingan
+
+Setelah live, data lama dipindahkan dan tim dilatih sampai benar-benar terbiasa. Peluncuran adalah awal, bukan akhir.
+
+## Apa yang menentukan biaya aplikasi custom?
+
+Aplikasi custom tidak punya harga rak, karena dua bisnis dengan ukuran yang sama bisa butuh sistem yang jauh berbeda. Biayanya ditentukan oleh:
+
+- Jumlah modul dan kerumitan fiturnya.
+- Jumlah pengguna, peran, dan cabang.
+- Integrasi dengan sistem lain.
+- Jumlah dan kondisi data lama yang perlu dipindahkan.
+
+Aplikasi sederhana dengan beberapa fitur inti jelas lebih terjangkau daripada sistem besar dengan banyak modul dan integrasi. Karena itu penyedia yang baik memetakan kebutuhan dulu sebelum menyebut angka, supaya kamu tidak membayar fitur yang tidak perlu.
+
+Sebagai pembanding, website punya paket harga terbuka karena cakupannya lebih seragam. Kalau yang kamu butuhkan sebenarnya etalase online, bukan sistem operasional, baca dulu [panduan biaya bikin website](/id/blog/biaya-bikin-website).
+
+## Contoh aplikasi custom yang sudah berjalan
+
+Setiap industri punya alur yang berbeda, dan itu terlihat dari sistem yang kami bangun:
+
+- **Manufaktur:** [Industry Management](/id/portfolio/industry-management-ims) menyatukan pembelian, stok FEFO, formula, produksi, dan penjualan, dengan HPP dihitung per batch.
+- **Apotek:** [Sehatera](/id/portfolio/pharmacy-store-management-psm) menggabungkan kasir dan resep, pelacakan batch dan kedaluwarsa, serta laporan SIPNAP otomatis.
+- **Restoran dan kafe:** [Resto & Cafe Management](/id/portfolio/resto-cafe-management-rcm) menghubungkan kasir per meja ke layar dapur, QR order, dan HPP per porsi.
+- **Ritel dan UMKM:** [TokoKu](/id/portfolio/retail-service-umkm-edition) adalah kasir yang sekaligus membukukan, sehingga laba bersih muncul otomatis.
+
+## Cara memilih jasa pembuatan aplikasi
+
+1. **Pilih yang memahami dulu, baru bicara kode.** Penyedia yang baik mempelajari proses bisnismu sebelum menawarkan solusi.
+2. **Minta lihat hasil kerja mereka.** Aplikasi yang sudah berjalan dan bisa dibuka menunjukkan kemampuan nyata, lebih dari sekadar mockup.
+3. **Minta cakupan tertulis.** Ruang lingkup dan harga sebaiknya jelas sebelum pengembangan dimulai.
+4. **Pastikan ada pendampingan setelah live.** Aplikasi tanpa dukungan sering terbengkalai.
+5. **Perhatikan komunikasi.** Proyek berjalan lancar kalau kamu mudah berdiskusi dan mendapat kabar progres secara berkala.
+
+## Pertanyaan yang sering diajukan
+
+### Berapa lama membuat aplikasi custom?
+
+Tergantung kompleksitasnya. Aplikasi dengan fitur inti bisa selesai dalam beberapa minggu, sedangkan sistem besar dengan banyak modul butuh waktu lebih lama. Pemetaan kebutuhan di awal membantu memberi estimasi yang akurat.
+
+### Apakah saya bisa menambah fitur nanti?
+
+Bisa, dan justru dianjurkan. Aplikasi custom yang dibangun rapi memungkinkan penambahan fitur secara bertahap seiring kebutuhan.
+
+### Data lama kami bagaimana?
+
+Spreadsheet dan software lama diaudit dulu, lalu dipindahkan bertahap, supaya tim tidak pernah ditinggal tanpa angka yang mereka pakai sehari-hari.
+
+### Siapa pemilik kode dan datanya?
+
+Sebaiknya diperjelas sejak awal dalam kesepakatan. Idealnya data adalah milik kamu sepenuhnya, dan kepemilikan kode serta infrastrukturnya juga disepakati secara tertulis.
+
+## Kesimpulan
+
+Aplikasi custom adalah investasi untuk bisnis yang prosesnya unik dan ingin tumbuh tanpa dibatasi software orang lain. Kuncinya memilih penyedia yang memahami kebutuhanmu lebih dulu, punya aplikasi yang benar-benar berjalan, memberi cakupan tertulis, dan mendampingi sampai aplikasinya dipakai sehari-hari.
+
+**Punya proses yang belum terwadahi aplikasi biasa?** Lihat [jasa pembuatan aplikasi di Bali](/id/jasa-pembuatan-aplikasi-bali) dari Seawise, atau [ceritakan kebutuhanmu lewat halaman kontak](/id/kontak). Kami bantu petakan sebelum kamu memutuskan.

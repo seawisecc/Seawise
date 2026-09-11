@@ -1,0 +1,101 @@
+Many small and mid-sized factories run on a pile of spreadsheets: one for purchasing, one for stock, one for production, and another for sales. While volumes are small, this holds up. Once products and materials multiply, the numbers stop matching. **Manufacturing ERP** is a system that brings purchasing, material stock, product formulas, production, and sales into one database, so every number is recorded once and used by every team. This guide covers when a small factory should switch, which features are essential, and why cost per batch is more honest than average cost.
+
+## Signs your factory has outgrown spreadsheets
+
+- Physical stock in the warehouse often does not match the records.
+- Cost of goods is calculated once a month and looks more like an estimate.
+- Materials close to expiry are only noticed when they can no longer be used.
+- Material purchases skip a clear approval step, so it is hard to trace who ordered what.
+- Product formulas live in a single file, or in one person's head.
+- Production, warehouse, and purchasing teams work from different numbers.
+
+If three or more sound familiar, the problem is no longer spreadsheet discipline. The tool itself is no longer enough.
+
+## Essential ERP features for a small factory
+
+### 1. Purchasing with approval
+
+Every purchase request is approved before it becomes a supplier order. You know who asked, who approved, and what price each lot arrived at. That lot price is what later feeds the cost calculation.
+
+### 2. FEFO material stock
+
+FEFO (First Expired, First Out) means the material closest to its expiry date is used first. It differs from FIFO, which follows the order goods arrived in. For materials with a shelf life, such as food ingredients, chemicals, or cosmetic ingredients, FEFO prevents waste from stock that slipped past unnoticed.
+
+### 3. Expiry control
+
+The system warns you before materials expire, not after. Purchasing can hold orders for materials that are still well stocked, and production can prioritise lots that are close to the end of their shelf life.
+
+### 4. Product formulas and composition
+
+Formulas store the quantity of each material for every product. For cosmetics manufacturers, a formula can also hold the INCI list (International Nomenclature of Cosmetic Ingredients), the standard ingredient names printed on labels. Formulas stored in the system are not lost when someone leaves the team.
+
+### 5. Real cost per batch
+
+Each time a batch is produced, the system calculates its cost from the price of the material lots actually used in that batch. A worked example follows in the next section.
+
+### 6. Consignment and POS
+
+If your products are also sold on consignment in other shops or in your own store, consignment stock and point of sale sales should be recorded in the same system, so finished goods are never counted twice.
+
+### 7. Multi-user access
+
+Warehouse, production, purchasing, and the owner each see different menus. Everyone only changes what they are responsible for, and every change is logged.
+
+## Cost per batch versus average cost: a worked example
+
+Cost of goods manufactured is the total cost of making a product: raw materials, direct labour, and factory overhead. The part that most often goes wrong in small factories is material cost, because the same material can be bought at a different price every time.
+
+Say a factory buys material A twice (illustrative figures):
+
+| Lot | Expiry | Quantity | Price |
+|---|---|---|---|
+| Lot 1 | earlier | 40 kg | IDR 50,000 / kg |
+| Lot 2 | later | 60 kg | IDR 62,000 / kg |
+
+The weighted average price is (40 × IDR 50,000 + 60 × IDR 62,000) ÷ 100 kg = IDR 57,200 per kg.
+
+One production batch uses 30 kg of material A. Under FEFO, it is taken from Lot 1:
+
+| Method | Calculation | Cost of material A |
+|---|---|---|
+| Average cost | 30 kg × IDR 57,200 | IDR 1,716,000 |
+| Cost per batch | 30 kg × IDR 50,000 (Lot 1) | IDR 1,500,000 |
+
+That is a difference of IDR 216,000 for one material in one batch. The next batch that starts drawing on Lot 2 will cost more than the average suggests. Average cost is not wrong from an accounting point of view, but it hides which batches are really eating into your margin. With dozens of materials and many batches a month, tracking this by hand in a spreadsheet is exhausting and error-prone, while a system can calculate it automatically every time a batch is finished.
+
+## Off-the-shelf or custom ERP for a small factory?
+
+Large off-the-shelf ERP suites are generally designed for large companies: many modules, long implementations, and small teams often use only a fraction of the features. On the other hand, general accounting software often lacks product formulas, FEFO, or cost per batch. Small factories usually sit somewhere in between.
+
+A custom ERP is built only for the workflows you actually use, so your team is not buried in irrelevant menus. Our [guide to custom app development](/en/blog/jasa-pembuatan-aplikasi-custom) covers when custom makes sense.
+
+## A manufacturing ERP already in use
+
+[Industry Management](/en/portfolio/industry-management-ims) is a manufacturing system we built. Purchasing with approval, FEFO stock, expiry control, formulas and INCI, production, and consignment with POS all run in one multi-user system. Cost is calculated per batch from the lot prices actually used, so production cost is shown as it really is. You can open the live version from the portfolio page.
+
+## How to switch without stopping production
+
+1. **Map the current workflow**, including the exceptions only the warehouse or production staff know about.
+2. **Audit and clean the spreadsheet data**, such as material lists, opening stock per lot, and formulas, before migrating it.
+3. **Migrate in stages**, for example purchasing and stock first, then production and costing. The team is never left without the numbers they use every day.
+4. **Train the people who use it daily**, not only the owner or manager.
+
+## Frequently asked questions
+
+### Is ERP only for large factories?
+
+No. What matters is not factory size but how often the numbers between teams fail to match. Small factories with many materials and products often benefit a great deal, because one person usually covers several jobs at once.
+
+### What is the difference between FIFO and FEFO?
+
+FIFO issues the goods that arrived first, while FEFO issues the goods that expire first. The result is often the same, but not always: a lot that arrives later can have a shorter shelf life. For materials with an expiry date, FEFO is safer.
+
+### How much does a custom manufacturing ERP cost?
+
+It is quoted per project, because the scope depends on the number of modules, users, and workflows to be mapped. Mapping the process first makes the figure accurate, and at Seawise that mapping is free of charge.
+
+## Conclusion
+
+A small factory needs manufacturing ERP when stock, purchasing, and production numbers stop matching. The features that matter most are FEFO stock with expiry control, well-kept formulas, and cost per batch based on the lots actually used. Switch in stages, starting with the data that goes wrong most often.
+
+**Is your factory still running on spreadsheets?** See Seawise's [app development in Bali](/en/jasa-pembuatan-aplikasi-bali), or [tell us about your production workflow](/en/kontak). We map it first, free of charge.

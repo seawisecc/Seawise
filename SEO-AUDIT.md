@@ -415,18 +415,18 @@ build produksi.
 | Temuan | Status | Bukti |
 |---|---|---|
 | T-1 `og:image` hilang | **Selesai** | `og:image` dan `twitter:image` kini ada di 9/9 halaman, kedua locale |
-| T-2 artikel tanpa subjudul | **Perlu kamu** | Konten di database, butuh login admin. Langkah ada di `KONTEN-SIAP-TEMPEL.md` |
+| T-2 artikel tanpa subjudul | **Selesai** (11 Sep 2026) | Ternyata keempat artikel kena, bukan satu. Ditulis ulang langsung di tabel `posts`, 6–8 `<h2>` per artikel. Editor admin kini memperingatkan isi tanpa subjudul |
 | T-3 `og:image` PNG raksasa | **Selesai** | 1622 KB turun ke 289 KB, terbesar kini 382 KB |
 | S-1 description terlalu pendek | **Selesai** | 18/18 halaman kini di rentang 120-160 |
 | S-2 description detail kelewat panjang | **Selesai** | 305 turun ke 147, 170 turun ke 152 |
-| S-3 title artikel 89 karakter | **Sebagian** | Kode: 89 turun ke 72. Sisanya butuh judul di database dipendekkan |
+| S-3 title artikel 89 karakter | **Selesai** (11 Sep 2026) | Judul di database kini 45–57 karakter (`id`) dan 45–55 (`en`) |
 | S-4 title tanpa kata kunci | **Selesai** | Kunci `seo.*` baru, teks yang terlihat tidak berubah |
-| S-5 tiga artikel belum tayang | **Perlu kamu** | Butuh login admin |
+| S-5 tiga artikel belum tayang | **Selesai** | Keempatnya tayang. Naskah kini di `konten-blog/` |
 | R-1 LCP tanpa `priority` | **Selesai** | `PortfolioGrid.tsx`, kartu pertama |
 | R-2 AVIF belum aktif | **Selesai** | `next.config.mjs` |
 | R-3 `ProfessionalService` tipis | **Sebagian** | `contactPoint` ditambah. `telephone` dan `sameAs` sengaja dikosongkan, tidak ada data terverifikasi |
 | R-4 `publisher.logo` | **Selesai** | `BlogPosting` |
-| R-5 tautan internal ke artikel | **Sebagian** | Landing page menautkan ke portfolio dan layanan |
+| R-5 tautan internal ke artikel | **Sebagian** | Arah artikel → halaman jualan selesai: tiap artikel menaut ke landing page Bali dan studi kasus. Arah sebaliknya, landing page → artikel, belum, karena mengubah tampilan publik |
 | R-6 direktif `Host:` | **Selesai** | Dihapus dari `robots.ts` |
 | Landing page lokal | **Selesai** | 4 halaman baru, 8 tautan masuk masing-masing, nol yatim |
 | FAQ + `FAQPage` | **Selesai** | `/layanan` dan kedua landing page, 5 pertanyaan per halaman |
