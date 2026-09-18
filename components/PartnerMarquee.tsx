@@ -19,7 +19,7 @@ export default function PartnerMarquee({ partners }: { partners: PartnerRow[] })
 
   if (partners.length < MARQUEE_MIN) {
     return (
-      <ul className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
+      <ul className="flex flex-wrap items-center justify-center gap-x-16 gap-y-10">
         {partners.map((p) => (
           <li key={p.id}>
             <PartnerLogo partner={p} />
@@ -45,7 +45,7 @@ export default function PartnerMarquee({ partners }: { partners: PartnerRow[] })
         className="flex w-max animate-marquee hover:[animation-play-state:paused] motion-reduce:animate-none"
         style={{ animationDuration: `${partners.length * SECONDS_PER_LOGO}s` }}
       >
-        <ul className="flex shrink-0 items-center gap-12 pr-12">
+        <ul className="flex shrink-0 items-center gap-16 pr-16">
           {partners.map((p) => (
             <li key={p.id}>
               <PartnerLogo partner={p} />
@@ -54,11 +54,11 @@ export default function PartnerMarquee({ partners }: { partners: PartnerRow[] })
         </ul>
         {/*
           Salinan kedua yang menutup jahitan saat animasi berulang. Lebar tiap
-          grup sudah termasuk satu jarak di kanannya (`pr-12`), jadi geseran
+          grup sudah termasuk satu jarak di kanannya (`pr-16`), jadi geseran
           -50% mendarat tepat di logo pertama salinan ini, tanpa kedutan.
           Disembunyikan dari pembaca layar karena isinya persis sama.
         */}
-        <ul aria-hidden className="flex shrink-0 items-center gap-12 pr-12">
+        <ul aria-hidden className="flex shrink-0 items-center gap-16 pr-16">
           {partners.map((p) => (
             <li key={p.id}>
               <PartnerLogo partner={p} decorative />
@@ -78,12 +78,12 @@ function PartnerLogo({
   decorative?: boolean;
 }) {
   const mark = partner.logo_url ? (
-    <span className="relative block h-10 w-32">
+    <span className="relative block h-14 w-40 sm:h-16 sm:w-44">
       <Image
         src={partner.logo_url}
         alt={decorative ? "" : partner.name}
         fill
-        sizes="128px"
+        sizes="(min-width: 640px) 176px, 160px"
         className="object-contain"
       />
     </span>
@@ -95,7 +95,7 @@ function PartnerLogo({
   );
 
   const shell =
-    "block opacity-70 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0";
+    "block opacity-80 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0";
 
   // Salinan hias tidak boleh bisa diklik atau di-Tab, karena tautannya kembar.
   if (partner.website_url && !decorative) {

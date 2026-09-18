@@ -362,8 +362,8 @@ memunculkan lagi potongan yang sama.
 tengah, karena marquee dengan tiga logo cuma bikin halaman terasa gelisah.
 
 Animasinya menggeser `-50%` dan isinya **dua salinan daftar yang sama**. Tiap
-salinan membawa satu jarak di kanannya (`pr-12`) dan wadahnya tidak punya
-`gap`, jadi titik ulangnya jatuh persis di logo pertama. Kalau `pr-12` diganti
+salinan membawa satu jarak di kanannya (`pr-16`) dan wadahnya tidak punya
+`gap`, jadi titik ulangnya jatuh persis di logo pertama. Kalau `pr-16` diganti
 `gap` di wadahnya, jahitannya akan meleset setengah jarak dan terlihat kedutan
 tiap putaran. Salinan kedua `aria-hidden` dan tautannya dilepas supaya tidak
 kembar di pembaca layar maupun urutan Tab.
