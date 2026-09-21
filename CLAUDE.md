@@ -398,6 +398,47 @@ peringatan saja, simpan tidak diblokir.
 Memeriksa artikel harus dari HTML live, bukan dari file di repo. File dan
 database bisa berbeda, dan yang dibaca Google adalah database.
 
+### Harga cadangan di dictionary harus sama dengan tabel `pricing`
+
+`fallbackPricing` di `lib/i18n/dictionaries.ts` hanya tampil kalau tabel
+`pricing` gagal dibaca, jadi tidak ada yang melihatnya sehari-hari. Akibatnya
+isinya basi berbulan-bulan (Trench Rp6–7 juta, maintenance Rp1,5 juta) padahal
+database sudah Rp12 juta dan Rp1,8 juta, dan artikel "biaya bikin website"
+ikut menyalin angka basi itu. Dibetulkan 21 September 2026.
+
+Kalau harga di `/admin/pricing` berubah, tiga tempat ikut diubah:
+`fallbackPricing` (en dan id), artikel `01-biaya-bikin-website` (file dan
+database), dan post harga di `konten-instagram/` yang belum tayang.
+
+### Instagram `@seawise.id` lewat Zernio
+
+Carousel dibuat di `konten-instagram/` dan dijadwalkan lewat MCP Zernio (akun
+IG `6ab0df208d284ffb21252deb`), Senin, Rabu, dan Jumat pukul 19.00 WITA.
+Aturan teks publik tetap berlaku di slide dan caption: tanpa em-dash, tanpa
+angka atau testimoni karangan, angka contoh diberi label "Angka ilustrasi",
+screenshot diberi label "Tampilan dengan data demo". Caption santai, tapi
+tetap rapi karena pembacanya pemilik bisnis.
+
+Yang gampang salah:
+
+- **Zernio tidak bisa mengganti gambar post yang sudah terjadwal.**
+  `posts_update` hanya mengubah teks dan jadwal. Untuk mengganti slide: unggah
+  gambar ke folder periode baru, buat post baru, **baru** hapus yang lama,
+  supaya jadwalnya tidak pernah kosong.
+- Gambar carousel di-hosting di bucket Supabase `media/instagram/<periode>/`.
+  Jangan hapus folder periode yang post-nya belum tayang semua.
+- Caption ada di `captions.json`, terpisah dari `posts.py`, supaya mengubah
+  slide tidak menyentuh caption yang sudah terjadwal.
+- Prioritas cover saat render: foto asli di `foto-asli/`, lalu foto AI di
+  `foto-ai/`, lalu cover blog atau mockup screenshot. Post edukasi memakai
+  cover artikel blog yang topiknya sama, jadi feed dan blog terlihat satu
+  keluarga.
+- **Claude tidak punya alat pembuat gambar.** Foto AI dibuat pemilik dari
+  prompt di `konten-instagram/prompt-gambar.md`. Jangan menjanjikan generate
+  foto sendiri.
+- Brand kit satu-satunya di Canva milik Damar Indonesia, bukan Seawise.
+  Jangan dipakai untuk konten Seawise.
+
 ---
 
 ## Struktur
@@ -421,6 +462,9 @@ components/admin/useRowReorder.ts  drag urutan baris, dipakai 4 manager
 components/admin/ReorderHandle.tsx gagang seret di kolom Urutan
 components/admin/postContentWarnings.ts peringatan isi artikel di editor blog
 konten-blog/             naskah artikel .txt + meta.json, lihat README-nya
+konten-instagram/        template carousel IG, jadwal, caption, prompt foto
+  foto-asli/             foto asli dari pemilik, otomatis jadi cover
+  foto-ai/               hasil generate dari prompt-gambar.md
 lib/i18n/dictionaries.ts seluruh teks publik, en sumber kebenaran
 lib/seo.ts               canonical, hreflang, OG, breadcrumb
 lib/queries.ts           baca Supabase untuk halaman publik
@@ -545,7 +589,8 @@ seluruh file `.sql`.
 - **Isi artikel blog** ada di tabel `posts` di Supabase. Pemilik mengubahnya
   lewat `/admin/blog`. `SUPABASE_SERVICE_ROLE_KEY` di `.env.local` bisa menulis
   langsung melewati RLS, dan itu dipakai 11 September 2026 atas permintaan
-  pemilik. Kalau dipakai lagi: minta izin dulu, backup barisnya sebelum
+  pemilik, lalu 21 September 2026 untuk memasukkan artikel 07 sebagai draft
+  dan membetulkan harga di artikel 01. Kalau dipakai lagi: minta izin dulu, backup barisnya sebelum
   menimpa, isi `updated_at`, dan ingat route revalidate butuh cookie sesi
   admin, jadi halaman baru segar setelah siklus ISR 120 detik.
 
@@ -562,3 +607,4 @@ seluruh file `.sql`.
 | `KONTEN-SIAP-TEMPEL.md` | langkah mengisi konten yang butuh login admin |
 | `panduan-isi-portfolio-testimoni.md` | panduan mengisi portfolio & testimoni |
 | `konten-blog/` | naskah artikel blog `.txt` dua bahasa, metadata, dan urutan artikel berikutnya |
+| `konten-instagram/` | carousel Instagram: cara render, jadwal per periode, folder foto, prompt gambar |
