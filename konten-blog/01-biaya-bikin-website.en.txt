@@ -1,17 +1,17 @@
-One of the first questions people ask before building a website is: **how much does a website cost?** The honest answer is "it depends", but the number can still be estimated. In Indonesia in 2026, a website typically costs from around IDR 2 million for a single landing page, IDR 3.5–5 million for a company profile, and IDR 6 million and up for a custom web app. This guide explains what moves the price up or down and how to choose a package without wasting your budget.
+One of the first questions people ask before building a website is: **how much does a website cost?** The honest answer is "it depends", but the number can still be estimated. At Seawise in 2026, a website costs IDR 2 million for a single landing page, IDR 3.5 million for a company profile, IDR 4.5 million for a customised website, and IDR 12 million for a fully custom website. Web apps and applications are quoted per project. This guide explains what moves the price up or down and how to choose a package without wasting your budget.
 
 ## Website development costs in 2026
 
-In general, website development in Indonesia falls into a few tiers based on complexity:
+Website development falls into a few tiers based on complexity. These are Seawise's package prices per project:
 
-| Website type | Typical cost | Best for |
+| Website type | Price | Best for |
 |---|---|---|
-| Landing page (1 page) | from around IDR 2 million | Promoting one product, one event, or a personal brand |
-| Company profile (5–6 pages) | around IDR 3.5–4 million | Small businesses that need a complete, professional presence |
-| Customised website | around IDR 4.5–5 million | Businesses that want to stand out and manage their own content |
-| Custom web app | from IDR 6 million | Special features such as logins, dashboards, or system integrations |
+| Landing page (1 page), Shore package | IDR 2 million | Promoting one product, one event, or a personal brand |
+| Company profile (5–6 sections), Reef package | IDR 3.5 million | Small businesses that need a complete, professional presence |
+| Customised website (8–10 sections), Current package | IDR 4.5 million | Businesses that want to stand out and manage their own content |
+| Fully custom website, Trench package | IDR 12 million | Unusual business models that need fully custom design and features |
 
-These figures are market ranges for professional developers. Prices far below them usually mean a generic template with no support, while prices far above them usually include complex application features. Seawise's current package prices are listed on our [services page](/en/layanan).
+The features in each package are listed on our [services page](/en/layanan). Web apps with features such as customer logins, dashboards, or system integrations are not part of the website packages, because their scope follows your workflow, so they are quoted per project. Prices far below this range usually mean a generic template with no support.
 
 ## What affects the cost?
 
@@ -57,7 +57,7 @@ If you are still unsure, start with a smaller package and upgrade as you go. Wha
 
 ### How long does it take to build a website?
 
-It depends on the package and how ready your materials are, such as text, photos, and logo. At Seawise, a one-page landing page takes 3–5 days, a company profile 5–10 days, and a customised website 10–14 days. A custom web app takes longer because the features have to be designed first.
+It depends on the package and how ready your materials are, such as text, photos, and logo. At Seawise, a one-page landing page takes 3–5 days, a company profile 5–10 days, and a customised website 10–14 days. A fully custom website depends on how complex it is, so that estimate comes with your written scope. A custom web app takes longer because the features have to be designed first.
 
 ### Does the price include domain and hosting?
 
@@ -73,6 +73,6 @@ Not straight away. A new website has to be crawled and indexed by Google, which 
 
 ## Conclusion
 
-Website costs in 2026 range from IDR 2 million for a landing page to tens of millions for a custom web app. What matters is not just the number, but how well it fits your business goals and how solid the foundation is. Choose a developer who takes the time to understand your needs first, not one who jumps straight to the cheapest template.
+At Seawise, a website costs from IDR 2 million for a landing page to IDR 12 million for a fully custom website, while web apps and applications are quoted per project. What matters is not just the number, but how well it fits your business goals and how solid the foundation is. Choose a developer who takes the time to understand your needs first, not one who jumps straight to the cheapest template.
 
 **Not sure which package fits your business?** See Seawise's [website development in Bali](/en/jasa-pembuatan-website-bali), compare [our website packages](/en/layanan), or [book a free consultation](/en/kontak). We will help map out what you need before you commit to anything.

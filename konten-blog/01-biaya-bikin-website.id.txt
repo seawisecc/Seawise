@@ -1,17 +1,17 @@
-Salah satu pertanyaan pertama saat mau punya website adalah: **berapa biaya bikin website?** Jawaban jujurnya "tergantung", tapi angkanya tetap bisa diperkirakan. Di Indonesia pada 2026, biaya bikin website umumnya mulai sekitar Rp2 juta untuk landing page satu halaman, Rp3,5–5 juta untuk company profile, dan Rp6 juta ke atas untuk web app custom. Artikel ini menguraikan apa yang membuat angkanya naik-turun dan cara memilih paket supaya anggaranmu tidak terbuang.
+Salah satu pertanyaan pertama saat mau punya website adalah: **berapa biaya bikin website?** Jawaban jujurnya "tergantung", tapi angkanya tetap bisa diperkirakan. Di Seawise pada 2026, biaya bikin website mulai Rp2 juta untuk landing page satu halaman, Rp3,5 juta untuk company profile, Rp4,5 juta untuk website dengan kustomisasi, dan Rp12 juta untuk website full custom. Web app dan aplikasi dihitung per proyek. Artikel ini menguraikan apa yang membuat angkanya naik-turun dan cara memilih paket supaya anggaranmu tidak terbuang.
 
-## Kisaran biaya bikin website di 2026
+## Biaya bikin website di 2026
 
-Secara umum, biaya pembuatan website di Indonesia terbagi jadi beberapa tingkat sesuai kompleksitasnya:
+Biaya pembuatan website terbagi jadi beberapa tingkat sesuai kompleksitasnya. Ini harga paket Seawise per proyek:
 
-| Jenis website | Kisaran biaya | Cocok untuk |
+| Jenis website | Harga | Cocok untuk |
 |---|---|---|
-| Landing page (1 halaman) | mulai sekitar Rp2 juta | Promosi satu produk, satu acara, atau personal branding |
-| Company profile (5–6 halaman) | sekitar Rp3,5–4 juta | UMKM yang butuh kehadiran online yang rapi dan lengkap |
-| Website dengan kustomisasi | sekitar Rp4,5–5 juta | Bisnis yang ingin tampil beda dan mengatur isinya sendiri |
-| Web app custom | mulai Rp6 juta ke atas | Fitur khusus seperti login, dashboard, atau integrasi sistem |
+| Landing page (1 halaman), paket Shore | Rp2 juta | Promosi satu produk, satu acara, atau personal branding |
+| Company profile (5–6 section), paket Reef | Rp3,5 juta | UMKM yang butuh kehadiran online yang rapi dan lengkap |
+| Website dengan kustomisasi (8–10 section), paket Current | Rp4,5 juta | Bisnis yang ingin tampil beda dan mengatur isinya sendiri |
+| Website full custom, paket Trench | Rp12 juta | Model bisnis unik yang butuh desain dan fitur custom penuh |
 
-Angka di atas adalah kisaran pasar untuk pengembang profesional. Harga jauh di bawahnya biasanya memakai template seragam tanpa pendampingan, sedangkan harga jauh di atasnya umumnya mencakup fitur aplikasi yang kompleks. Harga paket Seawise yang berlaku saat ini bisa kamu lihat di [halaman layanan](/id/layanan).
+Rincian fitur tiap paket ada di [halaman layanan](/id/layanan). Web app dengan fitur seperti login pelanggan, dashboard, atau integrasi sistem tidak masuk paket website, karena cakupannya mengikuti alur kerjamu, jadi harganya dihitung per proyek. Harga jauh di bawah kisaran di atas biasanya berarti template seragam tanpa pendampingan.
 
 ## Apa saja yang memengaruhi biaya?
 
@@ -57,7 +57,7 @@ Kalau masih ragu, mulai dari paket yang lebih kecil lalu tingkatkan sesuai kebut
 
 ### Berapa lama proses pembuatan website?
 
-Tergantung paket dan kesiapan materi dari kamu, seperti teks, foto, dan logo. Di Seawise, landing page satu halaman selesai dalam 3–5 hari, company profile 5–10 hari, dan website dengan kustomisasi 10–14 hari. Web app custom butuh waktu lebih lama karena melibatkan perancangan fitur.
+Tergantung paket dan kesiapan materi dari kamu, seperti teks, foto, dan logo. Di Seawise, landing page satu halaman selesai dalam 3–5 hari, company profile 5–10 hari, dan website dengan kustomisasi 10–14 hari. Website full custom tergantung kerumitannya, jadi estimasinya ikut di cakupan tertulis. Web app custom butuh waktu lebih lama karena melibatkan perancangan fitur.
 
 ### Apakah harga sudah termasuk domain dan hosting?
 
@@ -73,6 +73,6 @@ Tidak langsung. Website baru perlu dirayapi dan diindeks Google, dan biasanya bu
 
 ## Kesimpulan
 
-Biaya bikin website di 2026 berkisar dari Rp2 juta untuk landing page sampai puluhan juta untuk web app custom. Yang menentukan bukan sekadar angka, tapi kesesuaian dengan tujuan bisnismu dan kualitas fondasinya. Pilih pengembang yang mau memahami kebutuhanmu lebih dulu, bukan yang langsung menawarkan template termurah.
+Di Seawise, biaya bikin website mulai Rp2 juta untuk landing page sampai Rp12 juta untuk website full custom, sedangkan web app dan aplikasi dihitung per proyek. Yang menentukan bukan sekadar angka, tapi kesesuaian dengan tujuan bisnismu dan kualitas fondasinya. Pilih pengembang yang mau memahami kebutuhanmu lebih dulu, bukan yang langsung menawarkan template termurah.
 
 **Ingin tahu paket mana yang paling pas untuk bisnismu?** Lihat [jasa pembuatan website di Bali](/id/jasa-pembuatan-website-bali) dari Seawise, bandingkan [paket website kami](/id/layanan), atau [konsultasi gratis lewat halaman kontak](/id/kontak). Kami bantu petakan kebutuhanmu sebelum kamu memutuskan apa pun.
