@@ -1,0 +1,111 @@
+Almost every shop owner has been there: the records say there are 12 left, but the shelf holds 5. Or the opposite, stock you thought had run out turns up in the back room, gathering dust. **Inventory management software** records every item that comes in, goes out, or moves, so the number on screen always matches what is on the shelf. This article covers where stock discrepancies come from, the features that matter, and how to work out when to reorder.
+
+## Why your records never match the shelf
+
+Stock discrepancies rarely come from one big mistake. They build up from many small leaks that never get written down:
+
+- **Sales that slip through.** A transaction during a rush never gets written down, or a handwritten receipt is lost before it is tallied.
+- **Deliveries that never get entered.** A supplier delivery goes straight onto the shelf and only gets recorded days later, or not at all.
+- **Returns and damaged goods.** Items sent back to the supplier or thrown away as damaged are never deducted from the records.
+- **Internal use.** Items taken for samples, gifts, or store use without being recorded.
+- **Miscounts during stocktake.** The monthly count is rushed, and the result simply overwrites the records without anyone looking for the cause of the gap.
+
+A notebook or Excel is not wrong, but both depend on someone remembering to record every event. The more items you carry and the busier the store, the more likely something gets missed.
+
+## Signs your store needs inventory software
+
+- You have to walk to the shelf or storeroom to answer "do we still have this?"
+- Every monthly stocktake finds a gap, and nobody knows why.
+- Customers have walked away because the item they wanted was out of stock.
+- Some items have not sold in months but keep getting reordered.
+- You order from suppliers on gut feeling, not sales data.
+- You have more than one cashier, storeroom, or branch.
+
+## Must-have features
+
+### Stock that drops automatically with each sale
+
+This is the foundation. Every transaction at the counter should reduce stock immediately, with no re-entry. If your inventory app and your POS are separate and have to be reconciled by hand, the old problem comes right back. That is why many stores choose a POS that manages stock too, covered in more detail in our [guide to POS software for small businesses](/en/blog/aplikasi-kasir-umkm).
+
+### Recording supplier deliveries
+
+Incoming goods are recorded once, on arrival: quantity, purchase price, and date. Stock goes up at the right moment, and the cost of each item is saved along with it.
+
+### Movement history per item
+
+Good software shows not just the remaining count but the trail behind it: when an item came in, sold, was returned or adjusted, and by whom. When there is a gap, you can trace exactly when the number started to drift.
+
+### Stocktake with adjustment reasons
+
+When a physical count differs from the system, the difference is recorded as an adjustment with a reason: damaged, lost, entry error, or internal use. After a few months, the pattern of leaks becomes visible.
+
+### Low stock alerts
+
+Every item has a minimum level. Once stock reaches it, the software alerts you, so you reorder before the shelf is actually empty.
+
+### Best sellers and dead stock reports
+
+Fast movers need their stock protected. Items that have not moved in months are capital sitting on a shelf. These reports are what turn supplier orders into data-driven decisions.
+
+### Product variants and barcodes
+
+If your goods come in different sizes, colours, or scents, each variant needs its own stock count. Barcodes help once you carry hundreds of items, because typing product names one by one invites picking the wrong one.
+
+### Per-staff access
+
+Cashiers only need to sell. Changing stock, purchase prices, and stocktake adjustments should be limited to the owner or a designated person. This is not about suspicion, it is about every change having someone responsible for it.
+
+## How to work out when to reorder
+
+Minimum stock levels should be calculated, not guessed. A simple and widely used formula is the reorder point:
+
+**Reorder point = average daily sales × supplier lead time + safety stock**
+
+An example with illustrative numbers: a store sells an average of 4 bottles of a 50 ml perfume per day. The supplier needs 5 days from order to delivery. To cover busy days or a late shipment, the store keeps safety stock equal to 3 days of sales, which is 12 bottles.
+
+- Needed while waiting for delivery: 4 × 5 = 20 bottles
+- Plus safety stock: 20 + 12 = 32 bottles
+
+So when stock drops to 32 bottles, it is time to order. Order at 10, and the shelf sits empty for two to three days before the delivery arrives. The average daily sales figure is the hard part to get from a notebook, and the easy part to get from software that records every transaction.
+
+## Example: a perfume store with stock it can finally trust
+
+Leuca de Perfume used to record sales by hand. Receipts were handwritten, and some purchases were never recorded at all. As a result, neither the stock records nor the cash flow could be relied on when deciding the next stock purchase.
+
+Today the store's daily operations run on [TokoKu](/en/portfolio/retail-service-umkm-edition), the point of sale and inventory app we built. Every transaction reduces stock immediately, receipts go to the buyer from the same app, and expenses are recorded too. The owner knows how much money is safe to spend on the next stock order, and that decision has stopped being a guess.
+
+## Off the shelf or custom built?
+
+Off-the-shelf inventory software suits stores with a standard flow: buy from suppliers, display, sell. Custom software makes more sense when your flow has something specific, such as consignment goods, items with expiry dates, bundles or assembled products, or a need to connect with systems you already run. If your business also makes its own products, the requirements usually move into [manufacturing ERP](/en/blog/erp-manufaktur-pabrik-kecil) territory.
+
+## How to choose
+
+1. **Make sure POS and stock are one system.** Two apps that have to be reconciled by hand only move the problem.
+2. **Test the stocktake flow.** Ask for a demo of the physical count and adjustment process, because that is where inventory software gets tested.
+3. **Check the reports.** Best sellers, dead stock, and per-item history should open without exporting to Excel.
+4. **Ask about importing data.** Your existing product list in Excel should move over without retyping.
+5. **Make sure there is someone to call.** When the numbers look off, you need someone who knows the system.
+
+## Frequently asked questions
+
+### What is the difference between inventory software and a POS?
+
+A POS focuses on recording sales, inventory software focuses on recording the movement of goods. For a retail store they should ideally be one system, because every sale is a movement of goods.
+
+### How often should we do a stocktake?
+
+Small stores usually do a full count once a month. Expensive items, or the ones that most often go missing, can be counted more often, say weekly, without counting the whole store.
+
+### Do we need barcodes from day one?
+
+Not necessarily. With a few dozen items, picking from a list is still fast. Barcodes start to pay off once you carry hundreds of items or many variants.
+
+### Can it be used from a phone?
+
+Yes, as long as the software is web based or has a mobile version. That lets the owner check stock and reports without being in the store.
+
+## Conclusion
+
+Stock that does not match is not a sign of dishonest staff or a careless owner. Usually it is a sign that the record keeping depends on memory. Inventory software moves that burden onto the system: every item in and out is recorded, gaps can be traced, and supplier orders are based on numbers.
+
+**Want inventory and POS software that fits the way your store works?** See Seawise's [app development services in Bali](/en/jasa-pembuatan-aplikasi-bali), or [book a free consultation on our contact page](/en/kontak).

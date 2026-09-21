@@ -1,0 +1,111 @@
+Hampir setiap pemilik toko pernah mengalaminya: catatan bilang barang masih ada 12, tapi di rak tinggal 5. Atau sebaliknya, barang yang dikira habis ternyata menumpuk di gudang belakang dan sudah berdebu. **Aplikasi stok barang** adalah sistem yang mencatat setiap barang masuk, keluar, dan berpindah, sehingga angka di layar selalu sama dengan isi rak. Artikel ini membahas dari mana selisih stok berasal, fitur yang wajib ada, dan cara menghitung kapan harus restock.
+
+## Kenapa stok di catatan tidak pernah sama dengan di rak
+
+Selisih stok jarang muncul karena satu kesalahan besar. Biasanya ia menumpuk dari banyak kebocoran kecil yang tidak tercatat:
+
+- **Penjualan yang lolos.** Transaksi saat ramai tidak sempat ditulis, atau nota tulis tangan hilang sebelum direkap.
+- **Barang masuk yang tidak diinput.** Kiriman supplier diterima dan langsung dipajang, tapi baru dicatat beberapa hari kemudian, atau lupa sama sekali.
+- **Retur dan barang rusak.** Barang yang dikembalikan ke supplier atau dibuang karena rusak tidak dikurangi dari catatan.
+- **Pemakaian sendiri.** Barang diambil untuk sampel, hadiah, atau keperluan toko tanpa dicatat.
+- **Salah hitung saat opname.** Stok opname dikerjakan terburu-buru di akhir bulan, hasilnya langsung ditimpa ke catatan tanpa dicari penyebab selisihnya.
+
+Buku atau Excel tidak salah, tapi keduanya bergantung pada orang yang harus ingat mencatat setiap kejadian. Semakin banyak barang dan semakin ramai toko, semakin besar peluang ada yang terlewat.
+
+## Tanda toko kamu perlu aplikasi stok barang
+
+- Kamu harus ke rak atau gudang dulu untuk menjawab "barang ini masih ada?"
+- Stok opname bulanan selalu menemukan selisih, dan tidak ada yang tahu penyebabnya.
+- Pelanggan pernah batal beli karena barang yang dicari ternyata kosong.
+- Ada barang yang tidak laku berbulan-bulan tapi terus ikut dibelanjakan.
+- Belanja ke supplier berdasarkan perasaan, bukan data penjualan.
+- Kamu punya lebih dari satu kasir, rak gudang, atau cabang.
+
+## Fitur yang wajib ada
+
+### Stok berkurang otomatis dari penjualan
+
+Ini fondasinya. Setiap transaksi di kasir harus langsung mengurangi stok, tanpa input ulang. Kalau aplikasi stok dan aplikasi kasir terpisah dan harus disamakan manual, masalah lama akan kembali. Karena itu banyak toko memilih aplikasi kasir yang sekaligus mengelola stok, dibahas lebih lengkap di [panduan aplikasi kasir UMKM](/id/blog/aplikasi-kasir-umkm).
+
+### Pencatatan barang masuk dari supplier
+
+Barang yang datang dicatat sekali saat diterima: jumlah, harga beli, dan tanggal. Dengan begitu stok bertambah tepat waktu dan harga modal setiap barang ikut tersimpan.
+
+### Riwayat pergerakan per barang
+
+Aplikasi yang baik tidak hanya menampilkan angka sisa, tapi juga jejaknya: kapan barang masuk, terjual, diretur, atau disesuaikan, dan oleh siapa. Saat ada selisih, kamu bisa menelusuri kapan angkanya mulai melenceng.
+
+### Stok opname dengan alasan penyesuaian
+
+Saat hitung fisik berbeda dengan sistem, selisihnya dicatat sebagai penyesuaian beserta alasannya: rusak, hilang, salah input, atau pemakaian sendiri. Setelah beberapa bulan, pola kebocorannya akan kelihatan.
+
+### Peringatan stok menipis
+
+Setiap barang punya batas minimum. Begitu stok menyentuh batas itu, aplikasi mengingatkan, jadi kamu belanja sebelum barang benar-benar kosong.
+
+### Laporan barang laris dan barang mati
+
+Barang yang laku keras perlu dijaga stoknya. Barang yang tidak bergerak berbulan-bulan adalah modal yang tertahan di rak. Laporan ini yang membuat belanja ke supplier berbasis data.
+
+### Varian produk dan barcode
+
+Kalau barangmu punya ukuran, warna, atau aroma berbeda, setiap varian harus punya stok sendiri. Barcode membantu kalau jumlah barang sudah ratusan, karena mengetik nama barang satu per satu rawan salah pilih.
+
+### Hak akses per pegawai
+
+Kasir cukup bisa berjualan. Mengubah stok, harga beli, dan penyesuaian opname sebaiknya hanya bisa dilakukan pemilik atau orang yang ditunjuk. Ini bukan soal curiga, tapi supaya setiap perubahan punya penanggung jawab.
+
+## Cara menghitung kapan harus restock
+
+Batas minimum stok sebaiknya dihitung, bukan ditebak. Rumus sederhana yang umum dipakai disebut titik pesan ulang (reorder point):
+
+**Titik pesan ulang = rata-rata terjual per hari × waktu tunggu supplier + stok pengaman**
+
+Contoh dengan angka ilustrasi: sebuah toko menjual rata-rata 4 botol parfum ukuran 50 ml per hari. Supplier butuh 5 hari sejak dipesan sampai barang tiba. Untuk berjaga-jaga kalau penjualan sedang ramai atau kiriman terlambat, toko menyimpan stok pengaman 3 hari penjualan, yaitu 12 botol.
+
+- Kebutuhan selama menunggu kiriman: 4 × 5 = 20 botol
+- Ditambah stok pengaman: 20 + 12 = 32 botol
+
+Jadi saat stok tinggal 32 botol, itu tandanya harus pesan. Kalau baru pesan saat stok tinggal 10, rak akan kosong dua sampai tiga hari sebelum kiriman datang. Angka rata-rata penjualan ini yang sulit didapat dari buku, dan mudah didapat dari aplikasi yang mencatat setiap transaksi.
+
+## Contoh: toko parfum dengan stok yang akhirnya bisa dipercaya
+
+Leuca de Perfume dulu mencatat penjualan secara manual. Nota ditulis tangan, dan kadang ada pembelian yang lolos tidak tercatat sama sekali. Akibatnya, catatan stok dan arus kas sama-sama tidak bisa dijadikan pegangan saat memutuskan belanja stok berikutnya.
+
+Sekarang operasional harian tokonya berjalan di [TokoKu](/id/portfolio/retail-service-umkm-edition), aplikasi kasir dan inventaris yang kami bangun. Setiap transaksi langsung mengurangi stok, nota terkirim ke pembeli dari aplikasi yang sama, dan pengeluaran ikut tercatat. Pemilik tahu berapa uang yang aman dipakai untuk belanja stok berikutnya, dan keputusan itu berhenti jadi tebakan.
+
+## Aplikasi siap pakai atau dibuat khusus?
+
+Aplikasi stok siap pakai cocok untuk toko dengan alur standar: beli dari supplier, pajang, jual. Aplikasi yang dibuat khusus lebih masuk akal kalau alurmu punya kekhasan, misalnya barang titipan atau konsinyasi, bahan yang punya tanggal kedaluwarsa, produk rakitan atau paket, atau perlu tersambung dengan sistem lain yang sudah jalan. Untuk usaha yang juga memproduksi barangnya sendiri, kebutuhannya biasanya sudah masuk wilayah [ERP manufaktur](/id/blog/erp-manufaktur-pabrik-kecil).
+
+## Cara memilih yang tepat
+
+1. **Pastikan kasir dan stok menyatu.** Dua aplikasi yang harus disamakan manual hanya memindahkan masalah.
+2. **Coba alur opname-nya.** Minta demo proses hitung fisik dan penyesuaian, karena di situlah aplikasi stok diuji.
+3. **Cek laporannya.** Barang laris, barang mati, dan riwayat per barang harus bisa dibuka tanpa ekspor ke Excel.
+4. **Tanyakan impor data.** Daftar barang yang sudah ada di Excel sebaiknya bisa dipindahkan tanpa input ulang.
+5. **Pastikan ada yang bisa dihubungi.** Saat angka stok terasa janggal, kamu butuh orang yang paham sistemnya.
+
+## Pertanyaan yang sering diajukan
+
+### Apa bedanya aplikasi stok barang dengan aplikasi kasir?
+
+Aplikasi kasir fokus mencatat penjualan, aplikasi stok fokus mencatat pergerakan barang. Untuk toko retail, keduanya idealnya satu sistem, karena setiap penjualan adalah pergerakan barang.
+
+### Seberapa sering sebaiknya stok opname?
+
+Toko kecil umumnya cukup opname penuh sebulan sekali. Barang yang mahal atau paling sering selisih bisa dihitung lebih sering, misalnya seminggu sekali, tanpa harus menghitung seluruh toko.
+
+### Apakah perlu barcode sejak awal?
+
+Tidak wajib. Untuk puluhan barang, memilih dari daftar masih cepat. Barcode mulai terasa manfaatnya saat barang sudah ratusan atau variannya banyak.
+
+### Apakah bisa dipakai dari HP?
+
+Bisa, asalkan aplikasinya berbasis web atau punya versi mobile. Ini memudahkan pemilik mengecek stok dan laporan tanpa harus berada di toko.
+
+## Kesimpulan
+
+Stok yang tidak cocok bukan tanda pegawai tidak jujur atau pemilik kurang teliti. Biasanya itu tanda sistem pencatatannya bergantung pada ingatan. Aplikasi stok barang memindahkan beban itu ke sistem: setiap barang masuk dan keluar tercatat, selisih bisa ditelusuri, dan belanja ke supplier berbasis angka.
+
+**Ingin aplikasi stok dan kasir yang pas dengan cara kerja tokomu?** Lihat [jasa pembuatan aplikasi di Bali](/id/jasa-pembuatan-aplikasi-bali) dari Seawise, atau [konsultasi gratis lewat halaman kontak](/id/kontak).

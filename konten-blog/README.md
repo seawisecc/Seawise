@@ -46,10 +46,11 @@ excerpt dipakai langsung sebagai meta description.
 | `02-aplikasi-apotek` | aplikasi apotek | tayang |
 | `03-aplikasi-kasir-umkm` | aplikasi kasir UMKM | tayang |
 | `04-jasa-pembuatan-aplikasi-custom` | jasa pembuatan aplikasi custom | tayang |
-| `05-aplikasi-kasir-restoran` | aplikasi kasir restoran | **draft**, butuh cover |
-| `06-erp-manufaktur-pabrik-kecil` | ERP manufaktur | **draft**, butuh cover |
+| `05-aplikasi-kasir-restoran` | aplikasi kasir restoran | tayang |
+| `06-erp-manufaktur-pabrik-kecil` | ERP manufaktur | tayang |
+| `07-aplikasi-stok-barang-toko-retail` | aplikasi stok barang | **draft** di database, butuh cover |
 
-Dua draft sengaja belum tayang karena belum punya cover, dan kartu blog tanpa
+Draft sengaja belum tayang karena belum punya cover, dan kartu blog tanpa
 gambar akan tampil beda dari kartu lain. Unggah cover 16:9 lewat
 `/admin/blog`, centang Published, simpan.
 
@@ -135,6 +136,22 @@ Close-up at the counter of a small Indonesian retail shop. A shopkeeper's hand w
 Eye-level still life on a glass display counter of a small shop: an old round metal biscuit tin used as a cash box, lid off, stuffed with crumpled banknotes, coins and rubber-banded handwritten receipts. Next to it a school exercise book open to hand-ruled columns of sales figures with crossed-out totals, a pencil and a calculator. Warm daylight, softly blurred shelves of goods and a dark green wall behind. Nostalgic, honest mood. No brand markings on the tin, all writing illegible.
 ```
 
+**07, aplikasi stok barang. Konsep A, celah di rak toko:**
+
+```
+Eye-level view along a single aisle shelf in a small tidy retail shop. The shelf is neatly stocked with rows of identical plain amber and frosted glass bottles, except for one conspicuous empty gap in the middle row where a product should be, a small blank price tag still clipped under the empty space. A hand holding a clipboard with a handwritten stock count sheet hovers at the edge of the frame, pen paused. Soft afternoon daylight from the shop window, warm off-white walls, dark forest-green painted wooden shelving. All labels and handwriting blank or illegible.
+```
+
+**07, konsep B, barang mati di gudang belakang:**
+
+```
+A small cramped storeroom at the back of a retail shop, seen from the doorway. Unopened cardboard boxes stacked high against the wall, the lower ones faded and dusty, one box open showing unsold products still wrapped. A single beam of warm light from a high window falls across the stack, fine dust in the air. On a folding table in the foreground, a clipboard with a stock count sheet and a pen. Dark forest-green metal door frame, warm neutral tones. All labels and writing illegible.
+```
+
+Pilih konsep A untuk 07. Konsep B terlalu mirip komposisi rak dengan berkas
+cahaya milik 06, dan A satu-satunya yang memakai "celah kosong" sebagai
+pusat gambar.
+
 **Kombinasi yang disarankan.** Semua masalah di artikel ini pada dasarnya
 "catatan manual", jadi kalau konsepnya dipilih sembarangan, keempat kartu bisa
 sama-sama tangan memegang kertas. Kombinasi ini memberi empat komposisi yang
@@ -191,7 +208,7 @@ Dua artikel per bulan, satu kata kunci utama per artikel. Jangan membuat artikel
 yang kata kuncinya sama dengan landing page `jasa-pembuatan-website-bali` atau
 `jasa-pembuatan-aplikasi-bali`, cukup tautkan ke sana.
 
-1. Aplikasi stok barang untuk toko retail, tautkan ke TokoKu.
+1. ~~Aplikasi stok barang untuk toko retail~~, sudah ditulis sebagai 07.
 2. Website villa dan guesthouse di Bali: booking langsung tanpa komisi OTA.
 3. Biaya pembuatan aplikasi custom: apa yang menentukan harganya.
 4. Website custom, WordPress, atau website builder.

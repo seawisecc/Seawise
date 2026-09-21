@@ -34,7 +34,6 @@
   {
     "file": "05-aplikasi-kasir-restoran",
     "slug": "aplikasi-kasir-restoran",
-    "new": true,
     "title": "Aplikasi Kasir Restoran & Kafe: 7 Fitur Wajib",
     "excerpt": "Pesanan tercecer ke dapur dan modal per porsi tak terpantau? Ini 7 fitur wajib aplikasi kasir restoran dan kafe, contoh hitung HPP, dan cara memilih.",
     "title_en": "Restaurant POS Software: 7 Essential Features",
@@ -43,10 +42,18 @@
   {
     "file": "06-erp-manufaktur-pabrik-kecil",
     "slug": "erp-manufaktur-pabrik-kecil",
-    "new": true,
     "title": "ERP Manufaktur untuk Pabrik Kecil: Tanda & Fitur Wajibnya",
     "excerpt": "Stok tak cocok, HPP cuma perkiraan, bahan kedaluwarsa lolos? Tanda pabrik kecil butuh ERP manufaktur, fitur wajibnya, dan contoh hitung HPP per batch.",
     "title_en": "Manufacturing ERP for Small Factories: Signs & Features",
     "excerpt_en": "Stock that never matches and costs that are only estimates? When a small factory needs manufacturing ERP, essential features, and cost per batch."
+  },
+  {
+    "file": "07-aplikasi-stok-barang-toko-retail",
+    "slug": "aplikasi-stok-barang-toko-retail",
+    "new": true,
+    "title": "Aplikasi Stok Barang Toko Retail: Fitur & Cara Memilih",
+    "excerpt": "Stok di catatan tak pernah sama dengan isi rak? Penyebab selisih stok, fitur wajib aplikasi stok barang toko retail, dan cara menghitung kapan restock.",
+    "title_en": "Inventory Software for Retail Stores: Features & Tips",
+    "excerpt_en": "Stock records that never match the shelf? Where discrepancies come from, must-have inventory software features, and how to work out when to reorder."
   }
 ]
