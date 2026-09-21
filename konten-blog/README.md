@@ -48,11 +48,12 @@ excerpt dipakai langsung sebagai meta description.
 | `04-jasa-pembuatan-aplikasi-custom` | jasa pembuatan aplikasi custom | tayang |
 | `05-aplikasi-kasir-restoran` | aplikasi kasir restoran | tayang |
 | `06-erp-manufaktur-pabrik-kecil` | ERP manufaktur | tayang |
-| `07-aplikasi-stok-barang-toko-retail` | aplikasi stok barang | **draft** di database, butuh cover |
+| `07-aplikasi-stok-barang-toko-retail` | aplikasi stok barang | tayang |
 
-Draft sengaja belum tayang karena belum punya cover, dan kartu blog tanpa
+Artikel baru jangan ditayangkan sebelum punya cover, karena kartu blog tanpa
 gambar akan tampil beda dari kartu lain. Unggah cover 16:9 lewat
-`/admin/blog`, centang Published, simpan.
+`/admin/blog`, centang Published, simpan. Cover yang sama juga dipakai sebagai
+cover carousel Instagram, lihat `konten-instagram/README.md`.
 
 ### Prompt cover
 

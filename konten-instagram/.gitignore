@@ -1,0 +1,7 @@
+assets/
+out*/
+jpg*/
+*.png
+!foto-asli/*.png
+!foto-ai/*.png
+__pycache__/
