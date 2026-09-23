@@ -575,10 +575,20 @@ v10 posts: author_name, author_title, author_title_en, updated_at
 v11 leads: phone, source, landing_path + indeks created_at
 v12 site_settings: tabel key/value untuk saklar di /admin/pengaturan
 v13 posts.sort_order: urutan tabel admin blog, TIDAK dipakai halaman publik
+v14 grant Data API eksplisit untuk semua tabel, disamakan dengan policy RLS
 ```
 
 **v1 wajib duluan di database kosong**, karena v2 memakai
 `alter table portfolio`.
+
+**Tabel baru wajib membawa `GRANT` di migrasi yang sama.** Mulai 30 Oktober
+2026 Supabase tidak lagi otomatis memberi grant ke tabel baru di schema
+`public`. Tanpa grant, API menolak tabelnya, dan di situs ini kegagalannya
+diam: query publik mengembalikan kosong lalu section-nya hilang sendiri, form
+kontak gagal dan lead-nya hilang. Samakan grant dengan policy RLS, jangan
+disalin mentah dari template Supabase yang memberi `select` ke `anon` di semua
+tabel. Contoh: `leads` cuma `insert` untuk `anon`, `transactions` tidak ada
+grant `anon` sama sekali. Polanya ada di v14.
 
 Kalau menambah kolom di kode, pastikan ada migrasinya. Ada script verifikasi
 di riwayat: bandingkan kolom di tipe TypeScript pada `lib/queries.ts` dengan
