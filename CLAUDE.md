@@ -433,9 +433,12 @@ Yang gampang salah:
   `foto-ai/`, lalu cover blog atau mockup screenshot. Post edukasi memakai
   cover artikel blog yang topiknya sama, jadi feed dan blog terlihat satu
   keluarga.
-- **Claude tidak punya alat pembuat gambar.** Foto AI dibuat pemilik dari
-  prompt di `konten-instagram/prompt-gambar.md`. Jangan menjanjikan generate
-  foto sendiri.
+- **Claude tidak punya alat pembuat gambar maupun video.** Foto AI dibuat
+  pemilik dari prompt di `konten-instagram/prompt-gambar.md`, klip Reel dari
+  `prompt-video.md` (Kling / Google Flow, keduanya versi gratis/Plus).
+  Jangan menjanjikan generate sendiri. Yang Claude kerjakan: merangkai klip
+  jadi Reel lewat `render_reels.py` (ffmpeg), lihat bagian Reel di README
+  folder itu.
 - Brand kit satu-satunya di Canva milik Damar Indonesia, bukan Seawise.
   Jangan dipakai untuk konten Seawise.
 

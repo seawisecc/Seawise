@@ -1,9 +1,11 @@
 # Konten Instagram
 
-Carousel dan Story `@seawise.id`, dijadwalkan lewat Zernio (akun IG
-`6ab0df208d284ffb21252deb`). Carousel: Senin, Rabu, Jumat pukul 19.00 WITA.
-Story: Selasa, Kamis, Sabtu pukul 19.00 WITA, mengisi hari kosong di antara
-carousel.
+Carousel, Story, dan Reel `@seawise.id`, dijadwalkan lewat Zernio (akun IG
+`6ab0df208d284ffb21252deb`). Semuanya pukul 19.00 WITA, satu jenis per hari:
+
+- Carousel: Senin, Rabu, Jumat.
+- Story: Selasa, Kamis, Sabtu, mengisi hari kosong di antara carousel.
+- Reel: Minggu, seminggu sekali, dan hanya kalau ada klip AI baru.
 
 - `posts.py`: isi slide per carousel. File yang diubah untuk batch berikutnya.
 - `captions.json`: caption per carousel, dipisah supaya mengubah slide tidak
@@ -19,6 +21,38 @@ carousel.
 - `foto-asli/`: foto asli dari pemilik. Lihat README di dalamnya.
 - `prompt-gambar.md` dan `foto-ai/`: prompt foto untuk batch berikutnya dan
   hasil generate-nya.
+- `render_reels.py`: daftar `REELS`, render frame 1080x1920 lalu dirangkai
+  jadi `.mp4` pakai ffmpeg (`brew install ffmpeg`). Lihat bagian Reel.
+- `prompt-video.md` dan `video-ai/`: prompt klip video (Kling / Google Flow)
+  dan hasil generate-nya dari pemilik.
+
+## Reel
+
+Claude tidak bisa membuat video. Klip dibuat pemilik dari
+`prompt-video.md`, ditaruh di `video-ai/`, lalu `render_reels.py` merangkai
+satu reel sekitar 10 detik:
+
+1. **Frame `clip`**, 4 detik: klip AI dengan judul hook ditumpuk di atasnya
+   (overlay PNG transparan, dirender Chrome dengan
+   `--default-background-color=00000000`).
+2. **Dua frame `text`** dan **satu `cta`**, masing-masing 2,2 detik.
+
+Yang kelihatan seperti kelalaian tapi bukan:
+
+- **Kartu teks dan CTA sengaja diam, tanpa zoom.** Versi pertama memberi
+  zoom pelan ke semua frame. Judulnya jadi membesar sekitar 7% dan makin
+  mepet ke tepi kiri dalam 2 detik, dan itu terasa janggal. Zoom cuma
+  dipakai di frame `photo`.
+- **Ada track audio hening.** Reel-nya memang tanpa musik, tapi sebagian
+  jalur ingest Instagram menolak video yang sama sekali tidak punya stream
+  audio. Audio asli klip AI dibuang.
+- **Klip disamakan ke 25fps.** Klip dari generator 24fps. Kalau dibiarkan,
+  concat `-c copy` menyambung dua timebase berbeda dan sambungannya patah.
+
+Unggah ke `media/instagram/<periode>/reels/` dengan `Content-Type:
+video/mp4`, lalu `posts_create_post` Zernio dengan satu `media_items` tipe
+`video` tanpa `contentType`: satu video otomatis jadi Reel dan ikut tampil di
+grid feed. Caption-nya ada di `captions.json` dengan id reel.
 
 ## Cover
 
@@ -92,18 +126,21 @@ bisnis.
 | 24 Sep | Story: tip follow awal | |
 | 25 Sep | 02 tanda Excel (carousel) | artikel 03 |
 | 26 Sep | Story: tip tanda Excel | |
+| 27 Sep | Reel r01 kasir | klip `kasir-scan-cepat` |
 | 28 Sep | 03 studi TokoKu (carousel) | |
 | 29 Sep | Story: tip studi TokoKu | |
 | 30 Sep | 04 HPP kopi (carousel) | artikel 05 |
 | 1 Okt | Story: tip HPP kopi | |
 | 2 Okt | 05 studi Resto & Cafe (carousel) | |
 | 3 Okt | Story: tip studi Resto & Cafe | |
+| 4 Okt | Reel r03 rak | klip `rak-toko-tenang`, teaser carousel 06 |
 | 5 Okt | 06 kebocoran stok (carousel) | artikel 07 |
 | 6 Okt | Story: tip bocor stok | |
 | 7 Okt | 07 rumus restock (carousel) | artikel 07 |
 | 8 Okt | Story: tip rumus restock | |
 | 9 Okt | 08 tanda apotek (carousel) | artikel 02 |
 | 10 Okt | Story: tip tanda apotek | |
+| 11 Okt | Reel r02 catatan | klip `catatan-ke-cloud` |
 | 12 Okt | 09 studi Sehatera (carousel) | |
 | 13 Okt | Story: tip studi Sehatera | |
 | 14 Okt | 10 harga website (carousel) | harga dari tabel `pricing` 21 Sep 2026 |
