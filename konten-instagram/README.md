@@ -67,6 +67,13 @@ prioritas foto sama seperti carousel (`real` di `foto-asli/` > `ai` di
 Zernio dipanggil tanpa `content`, cukup `media_items` satu gambar dan
 `platformSpecificData: {"contentType": "story"}` di entri platform-nya.
 
+Periode 23 Sep – 19 Okt 2026 tidak punya foto khusus per post (foto-ai baru
+ada mulai periode berikutnya), jadi semua Story-nya `type: "tip"`, ditandai
+prefix `p1-` di `STORIES`. Sebagian isinya menunjuk balik ke carousel yang
+baru tayang lewat CTA teks ("Baca lengkapnya di feed", "Baca studi kasusnya
+di feed") walau tanpa foto repost, dan diunggah ke folder periode carousel-nya
+sendiri, `media/instagram/2026-q4-v2/stories/`, bukan folder periode terbaru.
+
 ## Aturan isi
 
 Sama dengan situs publik: tanpa em-dash, tanpa testimoni atau angka karangan,
@@ -81,21 +88,33 @@ bisnis.
 
 | Tanggal | Post | Catatan |
 |---|---|---|
-| 23 Sep | 01 kenalan | |
-| 25 Sep | 02 tanda Excel | artikel 03 |
-| 28 Sep | 03 studi TokoKu | |
-| 30 Sep | 04 HPP kopi | artikel 05 |
-| 2 Okt | 05 studi Resto & Cafe | |
-| 5 Okt | 06 kebocoran stok | artikel 07 |
-| 7 Okt | 07 rumus restock | artikel 07 |
-| 9 Okt | 08 tanda apotek | artikel 02 |
-| 12 Okt | 09 studi Sehatera | |
-| 14 Okt | 10 harga website | harga dari tabel `pricing` 21 Sep 2026 |
-| 16 Okt | 11 tanda ERP | artikel 06 |
-| 19 Okt | 12 studi Industry Management | |
+| 23 Sep | 01 kenalan (carousel) | |
+| 24 Sep | Story: tip follow awal | |
+| 25 Sep | 02 tanda Excel (carousel) | artikel 03 |
+| 26 Sep | Story: tip tanda Excel | |
+| 28 Sep | 03 studi TokoKu (carousel) | |
+| 29 Sep | Story: tip studi TokoKu | |
+| 30 Sep | 04 HPP kopi (carousel) | artikel 05 |
+| 1 Okt | Story: tip HPP kopi | |
+| 2 Okt | 05 studi Resto & Cafe (carousel) | |
+| 3 Okt | Story: tip studi Resto & Cafe | |
+| 5 Okt | 06 kebocoran stok (carousel) | artikel 07 |
+| 6 Okt | Story: tip bocor stok | |
+| 7 Okt | 07 rumus restock (carousel) | artikel 07 |
+| 8 Okt | Story: tip rumus restock | |
+| 9 Okt | 08 tanda apotek (carousel) | artikel 02 |
+| 10 Okt | Story: tip tanda apotek | |
+| 12 Okt | 09 studi Sehatera (carousel) | |
+| 13 Okt | Story: tip studi Sehatera | |
+| 14 Okt | 10 harga website (carousel) | harga dari tabel `pricing` 21 Sep 2026 |
+| 15 Okt | Story: tip harga website | |
+| 16 Okt | 11 tanda ERP (carousel) | artikel 06 |
+| 17 Okt | Story: tip tanda ERP | |
+| 19 Okt | 12 studi Industry Management (carousel) | |
+| 20 Okt | Story: tip studi IMS | |
 
-Tidak ada Story di periode ini, formatnya belum ada. Story baru mulai
-periode berikutnya.
+Story periode ini dibuat belakangan (23 Sep 2026), dijadwalkan mulai 24 Sep
+karena post pertama sudah tayang hari itu juga.
 
 ## Periode 21 Okt – 19 Nov 2026
 

@@ -101,6 +101,33 @@ STORIES = [
    "eyebrow": "Baru di feed", "title": "Reservasi tercecer di WA, DM, dan buku catatan.", "cta": "Baca lengkapnya di feed"},
   {"id": "s13-tip-follow", "date": "2026-11-19", "type": "tip", "eyebrow": "Tiap minggu",
    "title": "Follow buat tips digitalisasi usaha tiap minggu.", "sub": "Senin, Rabu, Jumat kami bahas topik baru di feed.", "cta": "@seawise.id"},
+
+  # Periode 23 Sep - 19 Okt 2026 (dibuat belakangan, mengisi lubang, semua
+  # "tip" karena posting periode ini tidak punya foto-ai untuk direpost).
+  {"id": "p1-s01-tip-follow-awal", "date": "2026-09-24", "type": "tip", "eyebrow": "Baru mulai",
+   "title": "Follow buat tips digitalisasi usaha, Senin, Rabu, Jumat di feed.", "sub": "Kami bahas kasir, stok, sampai ERP, dari masalah yang beneran dialami UMKM.", "cta": "@seawise.id"},
+  {"id": "p1-s02-tanda-excel", "date": "2026-09-26", "type": "tip", "eyebrow": "Baru di feed",
+   "title": "6 tanda usahamu sudah kebesaran buat Excel.", "cta": "Baca lengkapnya di feed"},
+  {"id": "p1-s03-studi-tokoku", "date": "2026-09-29", "type": "tip", "eyebrow": "Studi kasus baru",
+   "title": "Dari nota tulis tangan ke arus kas yang bisa dicek kapan saja.", "cta": "Baca studi kasusnya di feed"},
+  {"id": "p1-s04-hpp-kopi", "date": "2026-10-01", "type": "tip", "eyebrow": "Reminder",
+   "title": "Modal segelas es kopi susu aren kamu berapa?", "sub": "Kalau belum pernah dihitung, margin bisa turun diam-diam.", "cta": "seawise.id"},
+  {"id": "p1-s05-studi-resto", "date": "2026-10-03", "type": "tip", "eyebrow": "Studi kasus baru",
+   "title": "Pesanan nggak lagi tercecer antara kasir dan dapur.", "cta": "Baca studi kasusnya di feed"},
+  {"id": "p1-s06-bocor-stok", "date": "2026-10-06", "type": "tip", "eyebrow": "Tau nggak",
+   "title": "Selisih stok jarang dari satu kesalahan besar.", "sub": "Biasanya numpuk dari 5 kebocoran kecil yang nggak kerasa.", "cta": "seawise.id"},
+  {"id": "p1-s07-rumus-restock", "date": "2026-10-08", "type": "tip", "eyebrow": "Baru di feed",
+   "title": "Kapan harus restock? Jangan ditebak, dihitung.", "cta": "Baca rumusnya di feed"},
+  {"id": "p1-s08-tanda-apotek", "date": "2026-10-10", "type": "tip", "eyebrow": "Buat pemilik apotek",
+   "title": "5 tanda apotekmu sudah butuh aplikasi.", "cta": "Baca lengkapnya di feed"},
+  {"id": "p1-s09-studi-sehatera", "date": "2026-10-13", "type": "tip", "eyebrow": "Studi kasus baru",
+   "title": "Apotek yang berhenti kehilangan margin diam-diam.", "cta": "Baca studi kasusnya di feed"},
+  {"id": "p1-s10-harga-website", "date": "2026-10-15", "type": "tip", "eyebrow": "Harga terbuka",
+   "title": "Berapa sih biaya bikin website? Ini harga paket kami.", "cta": "Lihat harganya di feed"},
+  {"id": "p1-s11-tanda-erp", "date": "2026-10-17", "type": "tip", "eyebrow": "Buat pemilik pabrik kecil",
+   "title": "6 tanda pabrikmu sudah melampaui spreadsheet.", "cta": "Baca lengkapnya di feed"},
+  {"id": "p1-s12-studi-ims", "date": "2026-10-20", "type": "tip", "eyebrow": "Studi kasus baru",
+   "title": "Dari spreadsheet terpisah ke satu sumber data produksi.", "cta": "Baca studi kasusnya di feed"},
 ]
 
 def main(only=None):
