@@ -43,9 +43,14 @@ Yang kelihatan seperti kelalaian tapi bukan:
   zoom pelan ke semua frame. Judulnya jadi membesar sekitar 7% dan makin
   mepet ke tepi kiri dalam 2 detik, dan itu terasa janggal. Zoom cuma
   dipakai di frame `photo`.
-- **Ada track audio hening.** Reel-nya memang tanpa musik, tapi sebagian
-  jalur ingest Instagram menolak video yang sama sekali tidak punya stream
-  audio. Audio asli klip AI dibuang.
+- **Suaranya dari klip AI itu sendiri, bukan musik.** Klip dari generator
+  sudah membawa suara ambient, dan panjangnya 10 detik, pas dengan reel.
+  Suara itu diputar dari awal sampai akhir, termasuk di bawah kartu teks,
+  dengan fade-out di ujung. Aslinya sangat pelan (-28 sampai -35 LUFS),
+  jadi dinaikkan dengan `loudnorm` ke sekitar -16. Claude tidak bisa
+  mendengar audio, jadi isinya dicek pemilik dengan memutar klip di
+  `video-ai/` sebelum dipakai. Reel tanpa klip tetap dapat track hening,
+  karena sebagian jalur ingest Instagram menolak video tanpa stream audio.
 - **Klip disamakan ke 25fps.** Klip dari generator 24fps. Kalau dibiarkan,
   concat `-c copy` menyambung dua timebase berbeda dan sambungannya patah.
 
@@ -53,6 +58,12 @@ Unggah ke `media/instagram/<periode>/reels/` dengan `Content-Type:
 video/mp4`, lalu `posts_create_post` Zernio dengan satu `media_items` tipe
 `video` tanpa `contentType`: satu video otomatis jadi Reel dan ikut tampil di
 grid feed. Caption-nya ada di `captions.json` dengan id reel.
+
+Mengganti video Reel yang sudah terjadwal sama seperti mengganti gambar:
+unggah dengan nama file baru (misalnya `r01-kasir-v2.mp4`), buat post baru,
+baru hapus yang lama. Ketiga reel periode ini sudah memakai versi `-v2`,
+yaitu versi bersuara. File tanpa `-v2` di bucket adalah versi hening yang
+sudah tidak dipakai.
 
 ## Cover
 

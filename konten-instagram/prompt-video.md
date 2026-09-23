@@ -27,6 +27,10 @@ watermark.
    prompt.
 4. Kalau tangan atau wajah terlihat janggal, generate ulang. Sama seperti
    foto AI, ini titik lemah generator.
+5. **Suara klip ikut dipakai** sebagai audio seluruh reel. Putar dulu
+   sebelum ditaruh: yang dicari suara ambient (bunyi scanner, kertas,
+   suasana toko). Kalau ada suara orang bicara atau musik, generate ulang
+   atau bilang ke Claude supaya reel itu dibuat hening.
 
 ## Aturan supaya senada dengan carousel dan foto yang sudah ada
 

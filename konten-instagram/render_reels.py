@@ -15,8 +15,9 @@ assemble [id ...]` to re-run ffmpeg without re-rendering the PNGs.
 
 A reel is a short sequence of 3-5 frames telling one beat (hook, problem,
 insight, CTA), each held ~2.2s, hard cut between frames.
-No music: the final file carries a silent audio track only (see
-prompt-video.md for why there is no music).
+No music. Sound is the clip's own ambient audio from the generator,
+loudness-normalised, running under the whole reel. A reel without a clip
+gets a silent track.
 
 Requires ffmpeg (`brew install ffmpeg`) and Chrome, same as render.py.
 """
@@ -155,12 +156,26 @@ def assemble(only=None):
         video = os.path.join(OUT, f'{r["id"]}-video.mp4')
         subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", listfile, "-c", "copy", video],
                         capture_output=True, cwd=OUT)
-        # Silent AAC track: the reel is meant to be quiet, but some Instagram
-        # ingest paths reject a video with no audio stream at all.
         final = os.path.join(OUT, f'{r["id"]}.mp4')
-        subprocess.run(["ffmpeg", "-y", "-i", video, "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
-                        "-shortest", "-c:v", "copy", "-c:a", "aac", "-b:a", "64k", "-movflags", "+faststart", final],
-                        capture_output=True)
+        dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", video],
+                                   capture_output=True, text=True).stdout)
+        clips = [f["clip"] for f in r["frames"] if f["type"] == "clip"]
+        if clips:
+            # The clip's own ambient sound runs under the whole reel, text cards
+            # included, from the clip's start so it stays in sync with its picture.
+            # Generator audio comes in around -30 LUFS, far below the ~-16 that
+            # social feeds play at, hence loudnorm.
+            af = (f"[1:a]atrim=0:{dur},asetpts=N/SR/TB,apad=whole_dur={dur},"
+                  f"loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000,"
+                  f"afade=t=in:d=0.1,afade=t=out:st={dur - 0.6:.2f}:d=0.6[a]")
+            cmd = ["ffmpeg", "-y", "-i", video, "-i", os.path.join(VIDEO_AI, clips[0]), "-filter_complex", af,
+                   "-map", "0:v", "-map", "[a]"]
+        else:
+            # No clip, no sound: a silent track still matters, some Instagram
+            # ingest paths reject a video with no audio stream at all.
+            cmd = ["ffmpeg", "-y", "-i", video, "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo"]
+        subprocess.run(cmd + ["-t", f"{dur}", "-c:v", "copy", "-c:a", "aac", "-b:a", "128k",
+                              "-movflags", "+faststart", final], capture_output=True)
         print(final, os.path.exists(final))
 
 # Frame "photo" belum dipakai reel mana pun; contohnya:
