@@ -410,16 +410,39 @@ Kalau harga di `/admin/pricing` berubah, tiga tempat ikut diubah:
 `fallbackPricing` (en dan id), artikel `01-biaya-bikin-website` (file dan
 database), dan post harga di `konten-instagram/` yang belum tayang.
 
-### Instagram `@seawise.id` lewat Zernio
+### Instagram `@seawise.id` dan Google Bisnis lewat Zernio
 
-Carousel dibuat di `konten-instagram/` dan dijadwalkan lewat MCP Zernio (akun
-IG `6ab0df208d284ffb21252deb`), Senin, Rabu, dan Jumat pukul 19.00 WITA.
+Konten dibuat di `konten-instagram/` dan dijadwalkan lewat MCP Zernio (akun
+IG `6ab0df208d284ffb21252deb`), satu jenis per hari, semuanya 19.00 WITA:
+carousel Senin/Rabu/Jumat, Story Selasa/Kamis/Sabtu, Reel Minggu (hanya kalau
+pemilik menyediakan klip baru). Slot akun kedua Zernio (paket gratis, maksimal
+2 akun) dipakai untuk **Google Business Profile**, bukan Facebook: satu post
+per Kamis 10.00 WITA, lihat `konten-google-bisnis/README.md`. Per 23 Sep 2026
+semuanya terjadwal sampai 19 Nov 2026. Detail tiap pipeline ada di README
+`konten-instagram/`.
+
 Aturan teks publik tetap berlaku di slide dan caption: tanpa em-dash, tanpa
 angka atau testimoni karangan, angka contoh diberi label "Angka ilustrasi",
 screenshot diberi label "Tampilan dengan data demo". Caption santai, tapi
 tetap rapi karena pembacanya pemilik bisnis.
 
 Yang gampang salah:
+
+- **`posts_create` Zernio tidak bisa membuat Story, carousel dengan banyak
+  gambar, atau post Google Bisnis dengan tombol.** Tool itu cuma menerima
+  teks dan URL media. Pakai `call_tool` dengan nama `posts_create_post`, yang
+  menerima `platforms[].platformSpecificData` (misalnya
+  `{"contentType": "story"}` atau `callToAction` Google Bisnis) dan
+  `media_items`. Satu video tanpa `contentType` otomatis jadi Reel.
+- **Jangan serahkan aksi produksi ke subagent.** Tulis database dengan
+  service role key, upload ke Storage, dan penjadwalan Zernio dikerjakan di
+  thread utama. Pada 23 Sep 2026 dua subagent yang cuma disuruh menulis
+  artikel ternyata sendiri memasukkan draft ke tabel `posts`, mengunggah
+  gambar, dan hampir menjadwalkan post. Kalau subagent dipakai untuk menulis,
+  cek `git status`, Supabase, dan Zernio sesudahnya.
+- Zernio menerima post bukan berarti platformnya menerima. Google Bisnis dan
+  Instagram baru memvalidasi saat tayang, jadi cek `posts_list_failed` sesudah
+  post pertama dari format baru lewat jadwalnya.
 
 - **Zernio tidak bisa mengganti gambar post yang sudah terjadwal.**
   `posts_update` hanya mengubah teks dan jadwal. Untuk mengganti slide: unggah
@@ -466,8 +489,14 @@ components/admin/ReorderHandle.tsx gagang seret di kolom Urutan
 components/admin/postContentWarnings.ts peringatan isi artikel di editor blog
 konten-blog/             naskah artikel .txt + meta.json, lihat README-nya
 konten-instagram/        template carousel IG, jadwal, caption, prompt foto
+  render.py              carousel 1080x1350
+  render_stories.py      Story 1080x1920
+  render_reels.py        Reel .mp4 lewat ffmpeg (brew install ffmpeg)
+  upload.js              unggah hasil render ke Storage + catat URL publik
   foto-asli/             foto asli dari pemilik, otomatis jadi cover
   foto-ai/               hasil generate dari prompt-gambar.md
+  video-ai/              klip Reel dari pemilik, hasil prompt-video.md
+konten-google-bisnis/    teks dan jadwal post Google Business Profile
 lib/i18n/dictionaries.ts seluruh teks publik, en sumber kebenaran
 lib/seo.ts               canonical, hreflang, OG, breadcrumb
 lib/queries.ts           baca Supabase untuk halaman publik
@@ -593,9 +622,16 @@ seluruh file `.sql`.
   lewat `/admin/blog`. `SUPABASE_SERVICE_ROLE_KEY` di `.env.local` bisa menulis
   langsung melewati RLS, dan itu dipakai 11 September 2026 atas permintaan
   pemilik, lalu 21 September 2026 untuk memasukkan artikel 07 sebagai draft
-  dan membetulkan harga di artikel 01. Kalau dipakai lagi: minta izin dulu, backup barisnya sebelum
+  dan membetulkan harga di artikel 01. Pada 23 September 2026 subagent
+  memakainya **tanpa izin** untuk memasukkan artikel 08–12 sebagai draft
+  bercover. Pemilik memutuskan barisnya dipertahankan untuk direview. Kalau
+  dipakai lagi: minta izin dulu, backup barisnya sebelum
   menimpa, isi `updated_at`, dan ingat route revalidate butuh cookie sesi
   admin, jadi halaman baru segar setelah siklus ISR 120 detik.
+- **Artikel 08–12 masih draft** dan menunggu review pemilik. Carousel IG yang
+  mengarah ke artikel-artikel itu mulai tayang 23 Okt 2026, jadi sebaiknya
+  sudah di-Publish sebelum tanggal itu. Post Google Bisnis sengaja belum
+  memakainya, karena artikel draft menghasilkan 404.
 
 ---
 
@@ -610,5 +646,5 @@ seluruh file `.sql`.
 | `KONTEN-SIAP-TEMPEL.md` | langkah mengisi konten yang butuh login admin |
 | `panduan-isi-portfolio-testimoni.md` | panduan mengisi portfolio & testimoni |
 | `konten-blog/` | naskah artikel blog `.txt` dua bahasa, metadata, dan urutan artikel berikutnya |
-| `konten-instagram/` | carousel Instagram: cara render, jadwal per periode, folder foto, prompt gambar |
+| `konten-instagram/` | carousel, Story, dan Reel Instagram: cara render, jadwal per periode, folder foto dan video, prompt |
 | `konten-google-bisnis/` | post mingguan ke Google Business Profile lewat Zernio, aturan format dan tombol |
