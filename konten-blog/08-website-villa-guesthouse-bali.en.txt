@@ -1,0 +1,50 @@
+Two guests book the same room on the same date, and the owner only finds out when one of them shows up with a suitcase. This happens more often than small villas and guesthouses in Bali would like to admit. A **direct booking website** is a website with its own availability calendar and reservation system, separate from OTAs (Online Travel Agents) like Booking.com or Airbnb. This article covers why double bookings and OTA commissions keep eating into small accommodation businesses, and how a direct booking website helps.
+
+## Two problems often treated as normal
+
+### Double bookings
+
+The calendar on an OTA and the internal calendar (a notebook, a spreadsheet, or a whiteboard at reception) are rarely truly in sync. Once a room is booked through an OTA but has not yet been crossed off the internal record, or the other way around, the risk of two guests being promised the same room on the same night becomes real. For a small property with limited rooms, one double booking is enough to damage the guest experience and the reputation.
+
+### OTA commissions that eat into margin
+
+Every OTA booking gets a commission deducted, and the figure can range from the low teens to well over that depending on the platform and the agreement. For a property already running on thin margins, that commission stings, especially for a guest who already knows and trusts the place, such as a returning guest or someone who arrives on a friend's recommendation.
+
+Another problem that often goes unnoticed: guests who actually want to book directly often have no way to do it besides sending a WhatsApp message and waiting back and forth for availability, pricing, and payment details.
+
+## Why a direct booking website helps
+
+- **One source of availability data.** The booking calendar on the website becomes the single reference, reducing the risk of two records falling out of sync.
+- **Guests can see open slots themselves.** No need to wait for a chat reply just to know which room is free on a given date.
+- **Direct bookings without the OTA cut.** Especially useful for returning guests or referrals, where the property can offer a better price since there is no platform commission to cover.
+- **Photos and descriptions update themselves.** Through an admin panel, the owner can change room photos, seasonal pricing, or amenity details without contacting a developer every time something changes.
+
+## Being realistic: a website does not replace OTAs
+
+A direct booking website does not mean abandoning OTAs entirely. OTAs still play an important role in exposure, especially for reaching new guests who have never heard of the property before. A direct booking website is better understood as an additional channel with better margins, and a place where guests who already trust you can book directly.
+
+On double bookings, a website does not automatically remove the risk if the OTA calendar and the website calendar are still managed separately without the discipline of checking both regularly. But having one clear, easy to access internal calendar already cuts out a lot of the mistakes that come from relying on a notebook or memory.
+
+## Which package fits?
+
+A website with a booking calendar and an admin panel for updating prices and photos usually falls into the company profile tier and above, roughly the Reef or Current package in [Seawise's website pricing](/en/blog/biaya-bikin-website), depending on how much customisation and reservation functionality is needed. If your booking flow has something specific, such as many room types with different seasonal pricing or a need to connect to a particular payment system, the requirement can move into Trench territory. The exact figure depends on requirement mapping, not a number that can be guessed from the outside.
+
+## Frequently asked questions
+
+### Does this website replace Booking.com or Airbnb?
+
+Not entirely. A direct booking website is an additional channel with better margins, while OTAs remain useful for reaching new guests who discover the property through search on those platforms.
+
+### Can the website calendar connect to an existing OTA calendar?
+
+It depends on the complexity and the OTA system in use. This can be discussed in more detail during requirement mapping, since every OTA has a different way of integrating.
+
+### How long does it take to build?
+
+It depends on the scope. A website with a booking calendar and admin panel usually takes longer than a simple company profile, since a reservation flow needs to be designed and tested.
+
+## Conclusion
+
+Double bookings and OTA commissions are not a fixed cost small villas and guesthouses simply have to accept. A website with its own booking calendar gives one clear source of data and a direct booking channel with better margins, without having to leave OTAs behind entirely.
+
+**Want a direct booking website for your villa or guesthouse?** See Seawise's [website development services in Bali](/en/jasa-pembuatan-website-bali), or [book a free consultation on our contact page](/en/kontak).

@@ -55,5 +55,50 @@
     "excerpt": "Stok di catatan tak pernah sama dengan isi rak? Penyebab selisih stok, fitur wajib aplikasi stok barang toko retail, dan cara menghitung kapan restock.",
     "title_en": "Inventory Software for Retail Stores: Features & Tips",
     "excerpt_en": "Stock records that never match the shelf? Where discrepancies come from, must-have inventory software features, and how to work out when to reorder."
+  },
+  {
+    "file": "08-website-villa-guesthouse-bali",
+    "slug": "website-villa-guesthouse-bali",
+    "new": true,
+    "title": "Website Villa dan Guesthouse Bali: Kurangi Double Booking",
+    "excerpt": "Double booking dan komisi OTA menggerus villa kecil di Bali? Ini kenapa website booking langsung membantu, dan level kebutuhan mana yang cocok.",
+    "title_en": "Villa & Guesthouse Website in Bali: Stop Double Bookings",
+    "excerpt_en": "OTA commissions and double bookings eating into your Bali villa? Why a direct booking website helps, and which level of setup fits your property."
+  },
+  {
+    "file": "09-pemetaan-kebutuhan-aplikasi-custom",
+    "slug": "pemetaan-kebutuhan-aplikasi-custom",
+    "new": true,
+    "title": "Pemetaan Kebutuhan Aplikasi Custom: Kenapa Penting",
+    "excerpt": "Banyak proyek aplikasi custom melar karena lompat ke coding tanpa memahami alur kerja. Apa itu pemetaan kebutuhan, kenapa penting, dan apa hasilnya.",
+    "title_en": "Requirement Mapping for Custom Apps: Why It Matters",
+    "excerpt_en": "Many custom app projects run over budget because coding starts before the real workflow is understood. What requirement mapping is, and why it matters."
+  },
+  {
+    "file": "10-website-custom-wordpress-atau-builder",
+    "slug": "website-custom-wordpress-atau-builder",
+    "new": true,
+    "title": "Website Custom, WordPress, atau Builder: Pilih Mana?",
+    "excerpt": "Bingung pilih fondasi website: builder, WordPress, atau custom? Perbandingan jujur biaya, kecepatan, kontrol desain, dan kapan masing-masing cocok.",
+    "title_en": "Custom Website vs WordPress vs Builder: How to Choose",
+    "excerpt_en": "Confused which website foundation to pick? An honest comparison of cost, speed, and design control for builders, WordPress, and custom websites."
+  },
+  {
+    "file": "11-laporan-sipnap-apotek-otomatis",
+    "slug": "laporan-sipnap-apotek-otomatis",
+    "new": true,
+    "title": "Laporan SIPNAP Apotek: Dari Manual ke Otomatis",
+    "excerpt": "Rekap SIPNAP apotek makan waktu berjam-jam tiap akhir bulan? Ini kenapa cara manual berisiko, dan bagaimana aplikasi apotek membuatnya otomatis.",
+    "title_en": "SIPNAP Reporting for Pharmacies: Manual to Automatic",
+    "excerpt_en": "Does compiling the SIPNAP report take hours every month end? Why manual reporting is risky, and how pharmacy software makes it automatic."
+  },
+  {
+    "file": "12-website-reservasi-restoran-bali",
+    "slug": "website-reservasi-restoran-bali",
+    "new": true,
+    "title": "Website Reservasi Restoran Bali: Stop Dobel Booking",
+    "excerpt": "Reservasi restoran atau beach club tercecer di WhatsApp dan buku catatan? Ini yang dibutuhkan website reservasi, dan kapan cukup yang sederhana.",
+    "title_en": "Restaurant Reservation Website Bali: Stop Double Bookings",
+    "excerpt_en": "Reservations scattered across WhatsApp and a paper book? What a restaurant reservation website needs, and when a simple setup is enough."
   }
 ]

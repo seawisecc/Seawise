@@ -1,0 +1,54 @@
+In many pharmacies, the end of the month means one thing: compiling the narcotics and psychotropics report from a pile of receipts and notebooks. **SIPNAP reporting** is the periodic narcotics and psychotropics usage report every pharmacy in Indonesia must submit. This article covers why that report feels punishing when done by hand, and how pharmacy software can turn it into a matter of minutes instead of hours.
+
+## Why these drug categories are watched more closely
+
+Narcotics, psychotropics, and precursor drugs carry a far higher risk of misuse than ordinary medicine. That is why pharmacies are required to record and report every movement of them through SIPNAP on a regular schedule. When the reported data is inaccurate or late, a pharmacy can face a warning, and more importantly, messy records make it hard to account for where those drugs actually went.
+
+This is not just paperwork. A clean report is proof that a pharmacy handles high-risk medicine responsibly, not just sells it and hopes the numbers line up later.
+
+## The problem with doing it by hand
+
+In pharmacies still relying on handwritten notes or Excel, reporting these drug categories usually looks like this:
+
+- **Transactions recorded separately from regular sales.** Every time a narcotic or psychotropic is sold or restocked, the pharmacist has to write it down again in a separate book or file, outside the normal point of sale record.
+- **The recap only gets built at month end.** All those separate entries get gathered up as the reporting deadline approaches, added up one by one from receipts or notebooks.
+- **Prone to miscounts.** Recapping dozens or hundreds of transactions from handwritten records under time pressure opens plenty of room for a wrong total or a misread entry.
+- **Missed transactions only surface at month end.** If one early-month transaction never made it into the separate book, it only becomes apparent during the recap, by which point it is hard to trace exactly what happened and when.
+
+The result is that month end is always a heavy day, with a lingering worry over whether the numbers actually add up.
+
+## How pharmacy software helps
+
+Good pharmacy software handles this far more simply: a drug category is flagged once in the product data, when the medicine is first registered in the system. After that, every time it is sold at the counter or received through a supplier purchase, the system automatically logs it to a dedicated journal for that category, with no double entry from the pharmacist.
+
+The immediate benefits:
+
+- **No duplicate entry.** The same transaction is recorded once at the counter, and automatically flows into the right category journal.
+- **The SIPNAP recap is ready.** When the reporting deadline arrives, the data just needs to be pulled, checked, and submitted, not built from scratch out of a pile of receipts.
+- **History can be traced anytime.** If a question comes up about a specific transaction, the record can be pulled up directly, instead of searched for in an old notebook.
+
+The side benefit shows up outside reporting season too. Because every transaction is recorded properly from the start rather than recapped later, a pharmacy is also better prepared for an inspection or audit whenever it happens, since the history can be opened at any time, not just tidied up right before a reporting deadline.
+
+## Example: a pharmacy that stopped racing the deadline
+
+Sehatera, the pharmacy system we built, used to spend hours every month compiling its SIPNAP report by hand, alongside stock and supplier debt scattered across separate records. Now every medicine is tracked by batch with early expiry warnings, and the report that used to be done manually is now compiled automatically from daily transactions. The full system is covered in the [Sehatera case study](/en/portfolio/pharmacy-store-management-psm).
+
+## Frequently asked questions
+
+### What is the difference between manual and automatic SIPNAP reporting?
+
+Manual means every transaction is recorded twice, once at the counter and once in a separate book, then added up again when it is time to report. Automatic means the category journal fills itself in the moment a transaction happens at the counter, so when the SIPNAP deadline arrives, the data is ready to pull.
+
+### Is this suited to a small pharmacy just starting out?
+
+Yes. The earlier record keeping is set up properly, the smaller the chance of a transaction slipping through as the pharmacy grows and transaction volume increases.
+
+### Can old records be moved into the new system?
+
+Yes, depending on how organised the old data is. Existing transaction and stock history can usually be audited and migrated in stages, so the pharmacy does not lose track of its previous records.
+
+## Conclusion
+
+SIPNAP reporting should not be work that gets rebuilt from a pile of receipts every month end. With recording that happens automatically as each transaction occurs, a pharmacy stops racing the deadline and has records it can account for at any time. This feature is part of a more complete pharmacy system, covered in full in our [pharmacy software guide](/en/blog/aplikasi-apotek).
+
+**Want SIPNAP reporting and drug category records at your pharmacy to run automatically?** See Seawise's [app development services in Bali](/en/jasa-pembuatan-aplikasi-bali), or [book a free consultation on our contact page](/en/kontak).

@@ -5,3 +5,4 @@ jpg*/
 !foto-asli/*.png
 !foto-ai/*.png
 __pycache__/
+.urls-*.json

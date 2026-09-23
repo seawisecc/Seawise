@@ -1,0 +1,57 @@
+Mau bikin website, dan pilihan pertama yang muncul bukan soal desain, tapi soal fondasi: pakai website builder yang tinggal drag and drop, WordPress, atau website custom yang dibangun dari nol. **Website builder** adalah platform drag-and-drop seperti Wix atau Squarespace, sementara WordPress adalah sistem manajemen konten open-source dengan tema dan plugin, dan website custom dibangun sesuai kebutuhan spesifik. Artikel ini membahas ketiganya secara jujur, karena masing-masing memang cocok untuk situasi yang berbeda.
+
+## Website builder: cepat jalan, terbatas berkembang
+
+Kelebihan website builder seperti Wix atau Squarespace ada di kecepatan dan biaya awal. Tinggal pilih template, ganti teks dan foto, dan website sudah bisa online dalam hitungan hari. Cocok untuk personal branding, portofolio pribadi, atau bisnis yang baru mulai dan cuma butuh kehadiran online sederhana.
+
+Kekurangannya muncul begitu kebutuhan mulai spesifik. Desainnya terbatas ke template yang tersedia, jadi sulit membuat tampilan yang benar-benar beda dari kompetitor yang mungkin pakai template serupa. Fitur khusus di luar yang disediakan platform sulit ditambahkan. Dan kalau suatu saat mau upgrade ke sistem lain, memindahkan konten keluar dari platform builder biasanya merepotkan karena formatnya terkunci ke platform itu.
+
+## WordPress: fleksibel, tapi butuh yang mengurus
+
+WordPress punya ekosistem plugin yang sangat luas, dan platformnya sendiri gratis, meski tetap butuh hosting dan biasanya jasa setup. Ini membuatnya cocok untuk website dengan konten yang sering bertambah, seperti blog aktif, atau bisnis yang butuh banyak fitur siap pakai lewat plugin tanpa membangun dari nol.
+
+Kekurangannya, WordPress butuh maintenance rutin. Plugin dan tema perlu diupdate, dan kalau dibiarkan usang, celah keamanannya jadi risiko nyata. Performa juga bisa melambat kalau plugin menumpuk tanpa dikelola dengan baik. Dan kalau memakai tema siap pakai tanpa kustomisasi desain, tampilannya sering terasa generik, mirip dengan ribuan website lain yang pakai tema yang sama.
+
+## Website custom: sesuai kebutuhan, butuh waktu dan biaya lebih
+
+Website custom dibangun dari nol mengikuti kebutuhan spesifik bisnis, bukan menyesuaikan diri ke template atau plugin yang tersedia. Kelebihannya: desain dan fitur benar-benar sesuai alur kerja, performa lebih terjaga karena tidak dibebani plugin yang tidak perlu, dan sistemnya bisa tumbuh sesuai kebutuhan jangka panjang, misalnya admin panel dengan alur kerja spesifik atau integrasi dengan sistem lain yang sudah dipakai bisnis.
+
+Kekurangannya jelas: biaya awal lebih tinggi dan waktu pembuatan lebih lama dibanding builder atau WordPress, karena semuanya dirancang dan dibangun dari awal, bukan dirakit dari komponen siap pakai.
+
+## Perbandingan singkat
+
+| Aspek | Website builder | WordPress | Website custom |
+|---|---|---|---|
+| Kecepatan mulai | Tercepat, hitungan hari | Sedang, butuh setup awal | Lebih lama, perlu desain dan pengembangan |
+| Biaya awal | Paling rendah | Rendah sampai sedang | Lebih tinggi |
+| Fleksibilitas desain | Terbatas ke template | Sedang, tergantung tema/plugin | Penuh, sesuai kebutuhan |
+| Maintenance | Ditangani platform | Perlu update rutin plugin dan tema | Tergantung penyedia, biasanya lebih stabil |
+| Skalabilitas jangka panjang | Terbatas | Sedang, tergantung arsitektur plugin | Bisa tumbuh sesuai kebutuhan |
+
+## Cara memilih berdasarkan kebutuhan, bukan cuma bujet
+
+- **Pilih website builder** kalau kamu butuh kehadiran online sederhana dan cepat, kontennya jarang berubah, dan tidak butuh fitur khusus di luar yang disediakan platform.
+- **Pilih WordPress** kalau kontenmu sering bertambah, misalnya blog aktif, dan ada yang bersedia mengurus maintenance rutinnya, atau kamu sudah punya tim yang familiar dengan platform ini.
+- **Pilih website custom** kalau bisnismu butuh admin panel yang benar-benar sesuai alur kerja, tampilan yang beda dari kompetitor, atau punya rencana berkembang jangka panjang yang sulit diwadahi template siap pakai.
+
+Bujet tetap jadi pertimbangan, tapi memilih semata dari biaya awal yang paling murah sering berujung migrasi ulang beberapa tahun kemudian, begitu kebutuhan sudah melampaui platformnya.
+
+## Pertanyaan yang sering diajukan
+
+### Apakah WordPress termasuk website custom?
+
+Tidak sepenuhnya. WordPress adalah platform siap pakai dengan tema dan plugin, meski bisa dikustomisasi cukup jauh. Website custom dibangun dari nol tanpa terikat struktur platform tertentu.
+
+### Bisakah pindah dari website builder ke custom nanti?
+
+Bisa, tapi kontennya biasanya perlu dipindahkan manual karena formatnya terkunci ke platform builder. Semakin cepat memutuskan pindah setelah kebutuhan berkembang, semakin sedikit konten yang perlu dipindahkan.
+
+### Berapa biaya website custom dibanding WordPress?
+
+Website custom biasanya punya biaya awal lebih tinggi. Rincian paket dan harga website custom Seawise ada di [panduan biaya bikin website](/id/blog/biaya-bikin-website).
+
+## Kesimpulan
+
+Tidak ada satu jawaban benar untuk semua bisnis. Website builder untuk kecepatan dan kesederhanaan, WordPress untuk fleksibilitas konten dengan biaya sedang, dan website custom untuk bisnis yang butuh sistem benar-benar sesuai kebutuhan dan siap tumbuh jangka panjang. Pilih berdasarkan ke mana bisnismu menuju, bukan cuma angka termurah di depan.
+
+**Butuh bantuan menentukan fondasi yang tepat untuk website bisnismu?** Lihat [jasa pembuatan website di Bali](/id/jasa-pembuatan-website-bali) dari Seawise, atau [konsultasi gratis lewat halaman kontak](/id/kontak).

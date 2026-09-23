@@ -1,0 +1,54 @@
+Di banyak apotek, akhir bulan berarti satu hal: menyusun laporan narkotika dan psikotropika dari tumpukan nota dan buku catatan. **Laporan SIPNAP** adalah laporan pemakaian obat golongan narkotika dan psikotropika yang wajib disetorkan apotek secara berkala. Artikel ini membahas kenapa laporan ini terasa menyiksa kalau dikerjakan manual, dan bagaimana aplikasi apotek bisa mengubahnya jadi urusan beberapa menit, bukan berjam-jam.
+
+## Kenapa obat golongan ini diawasi lebih ketat
+
+Obat narkotika, psikotropika, dan prekursor punya risiko penyalahgunaan yang jauh lebih besar dibanding obat biasa. Karena itu apotek wajib mencatat dan melaporkan setiap pergerakannya lewat SIPNAP secara berkala, sesuai jadwal yang ditetapkan. Kalau data yang dilaporkan tidak akurat atau terlambat, apotek bisa kena teguran, dan yang lebih penting, catatan yang berantakan membuat apotek kesulitan menjelaskan ke mana obat-obat itu benar-benar pergi.
+
+Ini bukan sekadar formalitas administratif. Laporan yang rapi adalah bukti bahwa apotek mengelola obat berisiko tinggi dengan tanggung jawab, bukan cuma menjual dan berharap catatannya cocok belakangan.
+
+## Masalah cara manual
+
+Di apotek yang masih mengandalkan catatan tulisan tangan atau Excel, pelaporan obat golongan ini biasanya berjalan seperti ini:
+
+- **Transaksi dicatat terpisah dari penjualan biasa.** Setiap kali obat golongan narkotika atau psikotropika terjual atau masuk stok, apoteker harus mencatatnya lagi secara manual di buku atau file terpisah, di luar pencatatan kasir biasa.
+- **Rekap baru disusun di akhir bulan.** Semua catatan terpisah itu dikumpulkan ulang menjelang tenggat laporan, dijumlahkan satu per satu dari nota atau buku.
+- **Rawan salah hitung.** Merekap puluhan atau ratusan transaksi dari catatan tulisan tangan dalam waktu terbatas membuka banyak celah untuk salah jumlah atau salah baca tulisan sendiri.
+- **Transaksi yang lolos baru ketahuan di akhir bulan.** Kalau ada satu transaksi awal bulan yang lupa dicatat di buku terpisah, itu baru terasa saat rekap, ketika sudah sulit dilacak ulang persisnya kapan dan berapa.
+
+Hasilnya, akhir bulan selalu jadi hari yang berat, dan tetap ada rasa was-was apakah angkanya benar-benar cocok.
+
+## Bagaimana aplikasi apotek membantu
+
+Aplikasi apotek yang baik menangani ini dengan cara yang jauh lebih sederhana: golongan obat ditandai sekali di data produk, saat pertama kali obat itu didaftarkan ke sistem. Setelah itu, setiap kali obat tersebut terjual di kasir atau masuk lewat pembelian dari supplier, sistem otomatis mencatatnya ke jurnal khusus golongan tertentu, tanpa apoteker perlu mencatat dua kali.
+
+Beberapa manfaat langsungnya:
+
+- **Tidak ada pencatatan ganda.** Transaksi yang sama tercatat sekali di kasir, dan otomatis masuk ke jurnal golongan obat yang tepat.
+- **Rekap SIPNAP sudah siap.** Saat tenggat laporan tiba, datanya tinggal ditarik, diperiksa, lalu dilaporkan, bukan disusun dari nol dari tumpukan nota.
+- **Riwayat bisa ditelusuri kapan saja.** Kalau ada pertanyaan soal satu transaksi tertentu, catatannya bisa dibuka langsung, bukan dicari-cari di buku lama.
+
+Manfaat sampingannya juga terasa di luar musim laporan. Karena setiap transaksi tercatat rapi sejak awal, bukan direkap belakangan, apotek jadi lebih siap kalau sewaktu-waktu ada pemeriksaan atau audit. Riwayatnya bisa dibuka kapan saja, bukan cuma dibereskan menjelang tanggal laporan.
+
+## Contoh: apotek yang berhenti mengejar tenggat
+
+Sehatera, apotek yang sistemnya kami bangun, dulu mengerjakan laporan SIPNAP-nya secara manual sampai berjam-jam setiap bulan, di samping masalah stok dan hutang supplier yang tercecer di banyak catatan. Sekarang setiap obat dilacak per batch dengan peringatan dini menjelang kedaluwarsa, dan laporan SIPNAP yang tadinya dikerjakan manual sudah tersusun otomatis dari transaksi harian. Detail lengkap sistemnya ada di [studi kasus Sehatera](/id/portfolio/pharmacy-store-management-psm).
+
+## Pertanyaan yang sering diajukan
+
+### Apa bedanya pelaporan SIPNAP manual dan otomatis?
+
+Manual berarti setiap transaksi dicatat dua kali, di kasir dan di buku terpisah, lalu dijumlahkan ulang saat mau lapor. Otomatis berarti pencatatan ke jurnal golongan obat berjalan sendiri begitu transaksi terjadi di kasir, jadi saat tenggat SIPNAP tiba, datanya tinggal ditarik.
+
+### Apakah aplikasi ini cocok untuk apotek yang baru mulai kecil?
+
+Cocok. Justru semakin awal pencatatan dirapikan, semakin kecil kemungkinan ada transaksi yang lolos saat apotek mulai berkembang dan transaksinya bertambah banyak.
+
+### Apakah catatan lama bisa dipindahkan ke sistem baru?
+
+Bisa, tergantung rapinya data lama. Riwayat transaksi dan stok yang sudah ada biasanya bisa diaudit dan dipindahkan bertahap, supaya apotek tidak kehilangan jejak catatan sebelumnya.
+
+## Kesimpulan
+
+Laporan SIPNAP bukan pekerjaan yang seharusnya dikerjakan ulang setiap akhir bulan dari tumpukan nota. Dengan pencatatan yang otomatis sejak transaksi terjadi, apotek berhenti mengejar tenggat dan punya catatan yang bisa dipertanggungjawabkan kapan saja. Fitur ini adalah bagian dari sistem apotek yang lebih lengkap, dibahas selengkapnya di [panduan aplikasi apotek](/id/blog/aplikasi-apotek).
+
+**Ingin laporan SIPNAP dan pencatatan obat golongan tertentu di apotekmu berjalan otomatis?** Lihat [jasa pembuatan aplikasi di Bali](/id/jasa-pembuatan-aplikasi-bali) dari Seawise, atau [konsultasi gratis lewat halaman kontak](/id/kontak).

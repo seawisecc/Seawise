@@ -1,0 +1,61 @@
+Many custom app projects fail not because the team cannot write code, but because the code starts before anyone truly knows what needs to be built. **Requirement mapping** is the process of observing and discussing the real workflow before a single line of code gets written. This article covers why this stage often gets skipped, what should actually happen during it, and the signs a vendor is skipping it.
+
+## Why apps built without mapping often fail
+
+Without serious requirement mapping, three things tend to happen:
+
+- **Features get built that never get used.** Something that looked important on paper, but never gets used in practice because it does not match how the team actually works day to day.
+- **The imagined workflow differs from what happens on the ground.** The owner describes the ideal process, but what actually happens at the counter or in the warehouse already has shortcuts and exceptions that were never mentioned.
+- **New requirements keep surfacing mid-project.** Because they were never uncovered early, every newly discovered requirement means rework, pushing the project past its schedule and budget.
+
+The end result is an app that technically works, but feels forced onto the workflow rather than built around it.
+
+## What actually happens during requirement mapping
+
+Requirement mapping is not just asking a business owner "what should the app look like" in a single meeting. The process usually involves:
+
+- **Observing the current workflow**, including the parts still done manually, through spreadsheets, or on paper.
+- **Talking to the people who actually run the process**, not just the owner or management. Cashiers, pharmacists, or warehouse staff know exactly where a process tends to break down, gets worked around, or needs an extra step that never made it into the official procedure.
+- **Mapping exceptions, not just the normal flow.** What happens when stock runs out mid-transaction, when there is a return, when there is a special discount. These exceptions are often the most overlooked yet the most common.
+
+## Why involving the people on the ground matters
+
+Business owners usually describe the ideal version of the workflow, how the process is supposed to work. But the staff who run it every day know exactly where that ideal flow has already been worked around manually, because the current system does not support it. If requirement mapping only talks to the owner, the resulting app follows the process as it is supposed to be, not as it actually happens, and that gap only surfaces after the app is built and put into use.
+
+## What comes out of requirement mapping
+
+Good mapping produces:
+
+1. **A written scope document**, listing what will be built and its boundaries, agreed before development starts.
+2. **A list of features that are truly needed**, separated from features that merely sound interesting but are not essential to the mapped workflow.
+3. **A more accurate price estimate**, based on real, uncovered requirements rather than a guess from a short description upfront.
+
+With this document, both the vendor and the business owner have a shared reference for what is actually being built, so mid-project surprises become far less common.
+
+## Signs a vendor is skipping this stage
+
+- **Naming a price at first contact**, without asking much about the workflow or who will actually use the app.
+- **Offering a generic feature proposal**, as if every business in the same industry has exactly the same needs.
+- **Starting development without ever talking to the people who use it daily**, relying only on a brief explanation from the owner or management.
+
+If any of these signs show up early in a discussion, it is worth asking directly how their requirement mapping process works before agreeing to anything.
+
+## Frequently asked questions
+
+### How long does requirement mapping usually take?
+
+It depends on how complex the business is. A relatively simple workflow can be mapped in a few days, while a system with many modules and several branches takes longer because more people need to be involved in the discussion.
+
+### Is requirement mapping a paid service?
+
+At Seawise, requirement mapping is done together with the people who run the process every day, at no charge, because this stage is what determines the scope and price we offer.
+
+### What happens if requirements change after mapping is done?
+
+Small changes are normal and can usually be accommodated. Larger changes outside the agreed scope are typically discussed again as a scope and price adjustment, so both sides stay clear on where things stand.
+
+## Conclusion
+
+A good custom app starts with understanding the real workflow, not assumptions. Serious requirement mapping, done with the people who actually run the process, is what separates an app that genuinely gets used from one that only looks good in a demo. The full custom app development process, including the stages after mapping, is covered in our [custom app development guide](/en/blog/jasa-pembuatan-aplikasi-custom).
+
+**Have a workflow that off-the-shelf software has not been able to fit?** See Seawise's [app development services in Bali](/en/jasa-pembuatan-aplikasi-bali), or [tell us about your needs on our contact page](/en/kontak). We map it out before you decide anything.

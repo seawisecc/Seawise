@@ -1,0 +1,50 @@
+Dua tamu memesan kamar yang sama di tanggal yang sama, dan pemilik baru sadar setelah salah satunya datang membawa koper. Ini kejadian yang sering dialami villa dan guesthouse kecil di Bali. **Website booking langsung** adalah website yang punya kalender ketersediaan dan sistem reservasi sendiri, terpisah dari OTA (Online Travel Agent) seperti Booking.com atau Airbnb. Artikel ini membahas kenapa double booking dan komisi OTA terus menggerus bisnis penginapan kecil, dan bagaimana website booking langsung membantu.
+
+## Dua masalah yang sering dianggap biasa
+
+### Double booking
+
+Kalender di OTA dan kalender internal (buku, spreadsheet, atau papan tulis di resepsionis) jarang benar-benar sinkron. Begitu satu kamar dipesan lewat OTA tapi belum sempat dicoret di catatan internal, atau sebaliknya, risiko dua tamu dijanjikan kamar yang sama di malam yang sama jadi nyata. Untuk penginapan kecil dengan kamar terbatas, satu kejadian double booking saja sudah cukup merusak pengalaman tamu dan reputasi.
+
+### Komisi OTA yang menggerus margin
+
+Setiap booking lewat OTA dipotong komisi, dan angkanya bisa mencapai belasan hingga puluhan persen tergantung platform dan perjanjiannya. Untuk penginapan dengan margin yang sudah tipis, komisi ini terasa berat, apalagi untuk tamu yang sebenarnya sudah kenal dan percaya dengan penginapannya, seperti tamu yang pernah menginap sebelumnya atau datang dari rekomendasi teman.
+
+Masalah lain yang jarang disadari: tamu yang sebenarnya ingin booking langsung sering tidak tahu caranya, selain mengirim pesan WhatsApp dan menunggu balasan bolak-balik soal ketersediaan, harga, dan cara pembayaran.
+
+## Kenapa website booking langsung membantu
+
+- **Satu sumber data ketersediaan.** Kalender booking di website jadi acuan tunggal, mengurangi risiko dua sumber catatan yang tidak sinkron.
+- **Tamu bisa lihat sendiri slot yang tersedia.** Tidak perlu menunggu balasan chat untuk sekadar tahu kamar mana yang kosong di tanggal tertentu.
+- **Booking langsung tanpa potongan komisi OTA.** Terutama bermanfaat untuk tamu berulang atau yang datang dari referral, di mana penginapan bisa menawarkan harga lebih baik karena tidak perlu menanggung komisi platform.
+- **Foto dan deskripsi bisa diupdate sendiri.** Lewat admin panel, pemilik bisa mengubah foto kamar, harga musiman, atau info fasilitas tanpa menghubungi developer setiap kali ada perubahan.
+
+## Realistis: website bukan pengganti OTA
+
+Website booking langsung bukan berarti meninggalkan OTA sepenuhnya. OTA tetap punya peran penting untuk exposure, terutama menjangkau tamu baru yang belum pernah dengar nama penginapanmu. Website booking langsung lebih tepat dilihat sebagai kanal tambahan dengan margin yang lebih baik, sekaligus tempat tamu yang sudah percaya bisa memesan langsung.
+
+Soal double booking, website tidak otomatis menghilangkan risikonya kalau kalender OTA dan website tetap dikelola terpisah tanpa disiplin mengecek keduanya secara rutin. Tapi punya satu kalender internal yang jelas dan mudah diakses sudah mengurangi banyak kesalahan dibanding mengandalkan buku catatan atau ingatan.
+
+## Paket mana yang cocok?
+
+Website dengan kalender booking dan admin panel untuk mengubah harga serta foto sendiri biasanya masuk kategori company profile ke atas, setara paket Reef atau Current di [paket harga website Seawise](/id/blog/biaya-bikin-website), tergantung seberapa banyak kustomisasi dan fitur reservasi yang dibutuhkan. Kalau alur bookingmu punya kekhasan tertentu, seperti banyak tipe kamar dengan harga musiman berbeda atau perlu terhubung ke sistem pembayaran khusus, kebutuhannya bisa masuk kategori Trench. Rincian pasti tergantung pemetaan kebutuhan, bukan angka yang bisa ditebak dari luar.
+
+## Pertanyaan yang sering diajukan
+
+### Apakah website ini menggantikan Booking.com atau Airbnb?
+
+Tidak sepenuhnya. Website booking langsung adalah kanal tambahan dengan margin lebih baik, sementara OTA tetap berguna untuk menjangkau tamu baru yang menemukan penginapanmu lewat pencarian di platform tersebut.
+
+### Bisakah kalender website terhubung ke kalender OTA yang sudah ada?
+
+Tergantung kompleksitas dan sistem OTA yang dipakai. Ini bisa didiskusikan lebih detail saat pemetaan kebutuhan, karena setiap OTA punya cara integrasi yang berbeda.
+
+### Berapa lama proses pembuatannya?
+
+Tergantung cakupan fitur. Website dengan kalender booking dan admin panel biasanya butuh waktu lebih lama dibanding company profile sederhana, karena ada alur reservasi yang perlu dirancang dan diuji.
+
+## Kesimpulan
+
+Double booking dan komisi OTA bukan biaya tetap yang harus diterima begitu saja oleh villa dan guesthouse kecil. Website dengan kalender booking sendiri memberi satu sumber data yang jelas dan kanal booking langsung yang marginnya lebih baik, tanpa harus meninggalkan OTA sepenuhnya.
+
+**Ingin website booking langsung untuk villa atau guesthouse-mu?** Lihat [jasa pembuatan website di Bali](/id/jasa-pembuatan-website-bali) dari Seawise, atau [konsultasi gratis lewat halaman kontak](/id/kontak).

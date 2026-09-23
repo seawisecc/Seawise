@@ -49,6 +49,11 @@ excerpt dipakai langsung sebagai meta description.
 | `05-aplikasi-kasir-restoran` | aplikasi kasir restoran | tayang |
 | `06-erp-manufaktur-pabrik-kecil` | ERP manufaktur | tayang |
 | `07-aplikasi-stok-barang-toko-retail` | aplikasi stok barang | tayang |
+| `08-website-villa-guesthouse-bali` | website villa Bali | draft di database, cover terpasang |
+| `09-pemetaan-kebutuhan-aplikasi-custom` | pemetaan kebutuhan aplikasi | draft di database, cover terpasang |
+| `10-website-custom-wordpress-atau-builder` | website custom vs WordPress | draft di database, cover terpasang |
+| `11-laporan-sipnap-apotek-otomatis` | laporan SIPNAP apotek | draft di database, cover terpasang |
+| `12-website-reservasi-restoran-bali` | website reservasi restoran Bali | draft di database, cover terpasang |
 
 Artikel baru jangan ditayangkan sebelum punya cover, karena kartu blog tanpa
 gambar akan tampil beda dari kartu lain. Unggah cover 16:9 lewat

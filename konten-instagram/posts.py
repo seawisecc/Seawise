@@ -250,6 +250,180 @@ POSTS = [
    "body": ["Rekap yang tadinya manual sekarang otomatis, tanpa hitung ulang.",
             "Tim produksi dan pembelian **bekerja dari satu sumber data** yang sama."]},
   CTA_TALK]},
+
+# Periode 21 Okt – 18 Nov 2026 ══════════════════
+
+# 13 ────────────────────────────────────────────
+{"id": "13-nota-basah", "date": "2026-10-21", "tag": "Edukasi", "slides": [
+  {"type": "photocover", "ai": "nota-hilang-basah", "eyebrow": "Risiko yang sering diremehkan",
+   "title": "Kertas bisa basah, hilang, atau tulisannya pudar. Datamu?"},
+  {"type": "text", "eyebrow": "Kejadian yang sering dianggap sial", "title": "Padahal ini risiko sistem, bukan nasib buruk.",
+   "body": ["Bocor di atap, kopi tumpah, atau nota yang terselip saat beres-beres bisa **menghapus catatan sebulan** dalam sekejap.",
+            "Selama catatan cuma ada di kertas, satu kejadian kecil bisa jadi masalah besar."]},
+  {"type": "list", "title": "Yang ikut hilang", "items": [
+    {"icon": "receipt", "t": "Riwayat transaksi", "d": "Nggak ada cadangan, sekali rusak ya hilang."},
+    {"icon": "banknote", "t": "Catatan hutang piutang", "d": "Siapa belum bayar, siapa belum ditagih."},
+    {"icon": "file-text", "t": "Bukti pembelian dari supplier", "d": "Susah diklaim ulang kalau ada masalah barang."}]},
+  {"type": "text", "eyebrow": "Solusinya", "title": "Data yang tersimpan di server, bukan di laci.",
+   "body": ["Aplikasi kasir dan stok menyimpan setiap transaksi ke cloud, bukan ke kertas yang bisa basah atau hilang.",
+            "Kejadian fisik apa pun di toko **nggak akan menghapus catatan usahamu**."]},
+  CTA_TALK]},
+
+# 14 ────────────────────────────────────────────
+{"id": "14-villa-double-booking", "date": "2026-10-23", "tag": "Untuk pemilik villa", "slides": [
+  {"type": "photocover", "ai": "villa-double-booking", "eyebrow": "Buat pemilik villa & guesthouse",
+   "title": "Dua tamu, satu kamar, tanggal yang sama."},
+  {"type": "text", "eyebrow": "Kejadian yang bikin sport jantung", "title": "Kalender OTA dan kalender internal jarang benar-benar sinkron.",
+   "body": ["Satu kamar bisa dipesan dua kali kalau kalendernya tersebar di OTA, buku, dan WhatsApp yang nggak saling tahu.",
+            "Tamu yang datang belakangan yang kena getahnya."]},
+  {"type": "compare", "eyebrow": "Bedanya", "title": "Booking langsung vs lewat OTA.",
+   "cells": [{"l": "Komisi lewat OTA", "v": "~20%"}, {"l": "Komisi booking langsung", "v": "0%", "hl": True}],
+   "body": ["Buat tamu yang sudah percaya sama penginapanmu, **kenapa harus lewat OTA lagi**?"], "note": "Angka ilustrasi, kisaran umum industri"},
+  {"type": "text", "eyebrow": "Realistis", "title": "Website booking langsung bukan pengganti OTA.",
+   "body": ["OTA tetap penting buat jangkau tamu baru. Website booking langsung adalah **kanal tambahan** dengan margin yang lebih baik."]},
+  CTA_BLOG("Panduan website booking langsung untuk villa.", "Kenapa double booking terjadi, dan cara website booking langsung membantu.")]},
+
+# 15 ────────────────────────────────────────────
+{"id": "15-kasir-jam-ramai", "date": "2026-10-26", "tag": "Edukasi", "slides": [
+  {"type": "photocover", "ai": "kasir-jam-ramai", "eyebrow": "Buat pemilik kafe & resto",
+   "title": "Kenapa kasir selalu jadi titik lemah saat ramai?"},
+  {"type": "list", "title": "Penyebabnya", "items": [
+    {"icon": "search", "t": "Cari produk manual", "d": "Scroll atau ketik nama satu-satu di antrean panjang."},
+    {"icon": "calculator", "t": "Hitung kembalian manual", "d": "Rawan salah pas kepala lagi penuh."},
+    {"icon": "users-round", "t": "Antrean menumpuk", "d": "Satu transaksi lambat, semua ikut nunggu."}]},
+  {"type": "text", "eyebrow": "Solusinya", "title": "Kasir yang bisa scan dan cari produk dalam hitungan detik.",
+   "body": ["Barcode dan pencarian cepat memangkas waktu transaksi, jadi antrean nggak menumpuk cuma gara-gara **cari satu produk**.",
+            "Kembalian dihitung otomatis, jadi nggak ada lagi salah kembalian saat ramai."]},
+  CTA_TALK]},
+
+# 16 ────────────────────────────────────────────
+{"id": "16-pemetaan-kebutuhan", "date": "2026-10-28", "tag": "Sebelum kode ditulis", "slides": [
+  {"type": "photocover", "ai": "aplikasi-custom-pemetaan", "eyebrow": "Sebelum kode pertama ditulis",
+   "title": "Aplikasi custom yang gagal, biasanya gagal di sini."},
+  {"type": "list", "title": "Tanda vendor melewatkan tahap ini", "items": [
+    {"icon": "circle-help", "t": "Langsung kasih harga", "d": "Tanpa tanya banyak soal alur kerjamu."},
+    {"icon": "layout-list", "t": "Proposal fitur generik", "d": "Sama persis untuk semua klien di industri yang sama."},
+    {"icon": "users-round", "t": "Nggak pernah tanya ke pengguna lapangan", "d": "Cuma ngobrol sama pemilik atau manajemen."}]},
+  {"type": "text", "eyebrow": "Yang seharusnya terjadi", "title": "Ngobrol dulu dengan yang benar-benar pakai.",
+   "body": ["Pemilik menggambarkan alur ideal. Staf yang kerja tiap hari tahu **di mana alur itu sebenarnya macet**.",
+            "Dari situ baru keluar cakupan dan harga yang akurat, bukan tebakan."]},
+  CTA_BLOG("Kenapa pemetaan kebutuhan menentukan semuanya.", "Apa yang terjadi kalau tahap ini dilewatkan, dan apa yang dihasilkan kalau dikerjakan benar.")]},
+
+# 17 ────────────────────────────────────────────
+{"id": "17-studio-sketsa", "date": "2026-10-30", "tag": "Di balik layar", "slides": [
+  {"type": "photocover", "ai": "studio-sketsa", "eyebrow": "Sebelum baris kode pertama",
+   "title": "Merancang alur dulu, baru menulis kode."},
+  {"type": "text", "eyebrow": "Kenapa mulai dari sketsa", "title": "Kesalahan di kertas jauh lebih murah dari kesalahan di kode.",
+   "body": ["Sebelum desain dan pengembangan dimulai, alur pengguna digambar dulu di atas kertas: kotak, panah, urutan layar.",
+            "Kalau ada yang terasa janggal, gampang diubah di tahap ini, **sebelum jadi kode yang harus dibongkar ulang**."]},
+  {"type": "list", "title": "Yang kami pastikan di tahap ini", "items": [
+    {"icon": "route", "t": "Alur logis dari langkah pertama sampai selesai"},
+    {"icon": "eye", "t": "Nggak ada langkah yang membingungkan pengguna"},
+    {"icon": "puzzle", "t": "Semua kebutuhan dari pemetaan sudah terwadahi"}]},
+  CTA_TALK]},
+
+# 18 ────────────────────────────────────────────
+{"id": "18-faktur-supplier", "date": "2026-11-02", "tag": "Edukasi", "slides": [
+  {"type": "photocover", "ai": "faktur-supplier-menumpuk", "eyebrow": "Buat pemilik toko & resto",
+   "title": "Faktur numpuk di meja, hutang supplier jadi tebakan."},
+  {"type": "list", "title": "Yang sering kejadian", "items": [
+    {"icon": "calendar-x", "t": "Lupa tanggal jatuh tempo", "d": "Baru sadar pas supplier telepon."},
+    {"icon": "banknote", "t": "Salah hitung total hutang", "d": "Faktur tercecer, ada yang kehitung dua kali atau kelewat."},
+    {"icon": "clock", "t": "Telat bayar jadi kebiasaan", "d": "Bukan karena nggak ada uang, tapi karena nggak ada yang ingetin."}]},
+  {"type": "text", "eyebrow": "Solusinya", "title": "Hutang supplier dan jatuh tempo, tercatat otomatis.",
+   "body": ["Setiap faktur masuk tercatat begitu barang diterima, lengkap dengan tanggal jatuh temponya.",
+            "Sistem yang **mengingatkan**, bukan kamu yang harus ingat semuanya."]},
+  CTA_TALK]},
+
+# 19 ────────────────────────────────────────────
+{"id": "19-website-fondasi", "date": "2026-11-04", "tag": "Sebelum bikin website", "slides": [
+  {"type": "photocover", "ai": "website-pilihan-fondasi", "eyebrow": "Sebelum bikin website",
+   "title": "Builder, WordPress, atau custom? Bukan soal mahal-murahan."},
+  {"type": "list", "title": "Tiga jalur, tiga karakter", "items": [
+    {"icon": "layout-template", "t": "Website builder", "d": "Cepat jalan, tapi desainnya terbatas ke template."},
+    {"icon": "wrench", "t": "WordPress", "d": "Fleksibel lewat plugin, tapi butuh maintenance rutin."},
+    {"icon": "sparkles", "t": "Website custom", "d": "Sesuai kebutuhan penuh, investasi awal lebih besar."}]},
+  {"type": "text", "eyebrow": "Cara memilih", "title": "Bukan soal termurah, tapi ke mana bisnismu menuju.",
+   "body": ["Builder cocok buat kehadiran online sederhana. WordPress cocok buat konten yang sering bertambah.",
+            "Custom cocok kalau kamu butuh **admin panel yang benar-benar sesuai alur kerja**."]},
+  CTA_BLOG("Panduan lengkap: custom, WordPress, atau builder.", "Kelebihan-kekurangan tiap pilihan, tabel perbandingan, dan cara memilih berdasarkan kebutuhan.")]},
+
+# 20 ────────────────────────────────────────────
+{"id": "20-banyak-cabang", "date": "2026-11-06", "tag": "Edukasi", "slides": [
+  {"type": "photocover", "ai": "banyak-cabang", "eyebrow": "Buat pemilik lebih dari satu toko",
+   "title": "Tiga cabang, tiga catatan berbeda. Mana yang benar?"},
+  {"type": "list", "title": "Masalahnya", "items": [
+    {"icon": "map-pin", "t": "Rekap manual per cabang", "d": "Digabung satu-satu tiap akhir bulan."},
+    {"icon": "scale", "t": "Susah bandingkan performa", "d": "Format catatan beda-beda antar cabang."},
+    {"icon": "package-x", "t": "Stok antar cabang nggak sinkron", "d": "Satu cabang kehabisan, satu cabang menumpuk."}]},
+  {"type": "text", "eyebrow": "Solusinya", "title": "Satu dashboard untuk semua cabang.",
+   "body": ["Semua transaksi dari tiap cabang masuk ke satu sistem, jadi kamu bisa **bandingkan performa** tanpa rekap manual.",
+            "Stok antar cabang juga kelihatan, jadi transfer barang bisa lebih terencana."]},
+  CTA_TALK]},
+
+# 21 ────────────────────────────────────────────
+{"id": "21-sipnap", "date": "2026-11-09", "tag": "Untuk pemilik apotek", "slides": [
+  {"type": "photocover", "ai": "sipnap-akhir-bulan", "eyebrow": "Buat pemilik apotek",
+   "title": "Rekap SIPNAP akhir bulan bikin begadang?"},
+  {"type": "list", "title": "Masalah cara manual", "items": [
+    {"icon": "copy", "t": "Transaksi dicatat dua kali", "d": "Di kasir, lalu di buku terpisah lagi."},
+    {"icon": "clock", "t": "Rekap ulang dari nota", "d": "Dikerjakan dari nol menjelang tenggat."},
+    {"icon": "calendar-x", "t": "Transaksi lolos baru ketahuan telat", "d": "Susah dilacak ulang kapan persisnya."}]},
+  {"type": "text", "eyebrow": "Solusinya", "title": "Jurnal golongan obat yang terisi sendiri.",
+   "body": ["Begitu obat golongan tertentu terjual, sistem otomatis mencatatnya ke jurnal terpisah.",
+            "Saat tenggat SIPNAP tiba, **rekapnya tinggal ditarik**, bukan disusun dari nol."]},
+  CTA_BLOG("Panduan laporan SIPNAP otomatis.", "Kenapa cara manual berisiko, dan bagaimana aplikasi apotek membuatnya otomatis.")]},
+
+# 22 ────────────────────────────────────────────
+{"id": "22-konsultasi-kopi", "date": "2026-11-11", "tag": "Konsultasi gratis", "slides": [
+  {"type": "photocover", "ai": "konsultasi-kopi", "eyebrow": "Sebelum sepakat kerja sama",
+   "title": "Ngobrol dulu soal alur bisnismu. Gratis, tanpa kewajiban."},
+  {"type": "list", "title": "Yang kami tanyakan", "items": [
+    {"icon": "messages-square", "t": "Alur kerja harian", "d": "Dari transaksi pertama sampai tutup toko."},
+    {"icon": "circle-help", "t": "Masalah yang paling sering muncul", "d": "Yang bikin capek diulang tiap hari."},
+    {"icon": "layers", "t": "Sistem yang sudah dipakai sekarang", "d": "Excel, buku, atau aplikasi lain."}]},
+  {"type": "text", "eyebrow": "Nggak ada kewajiban", "title": "Ngobrol dulu, baru diputuskan lanjut atau tidak.",
+   "body": ["Dari obrolan ini kami bisa kasih gambaran solusi dan estimasi harga, **tanpa kamu harus komit apa pun** di awal."]},
+  CTA_TALK]},
+
+# 23 ────────────────────────────────────────────
+{"id": "23-stok-kedaluwarsa", "date": "2026-11-13", "tag": "Edukasi", "slides": [
+  {"type": "photocover", "ai": "stok-kedaluwarsa-rak", "eyebrow": "Buat pemilik toko & apotek",
+   "title": "Barang kedaluwarsa di rak belakang itu modal yang hilang."},
+  {"type": "list", "title": "Kenapa sering kelewat", "items": [
+    {"icon": "bell-off", "t": "Nggak ada peringatan otomatis", "d": "Harus inget sendiri kapan tanggalnya."},
+    {"icon": "eye-off", "t": "Rak belakang jarang dicek", "d": "Yang di depan mata duluan yang keurus."},
+    {"icon": "trash-2", "t": "Baru ketahuan pas mau dibuang", "d": "Modalnya sudah hilang duluan."}]},
+  {"type": "text", "eyebrow": "Solusinya", "title": "Peringatan dini, jauh sebelum tanggalnya lewat.",
+   "body": ["Setiap barang yang punya tanggal kedaluwarsa dilacak per batch, dan sistem **mengingatkan lebih awal**.",
+            "Barang masih bisa dijual diskon atau diretur, bukan langsung jadi kerugian penuh."]},
+  CTA_TALK]},
+
+# 24 ────────────────────────────────────────────
+{"id": "24-beach-club-reservasi", "date": "2026-11-16", "tag": "Untuk pemilik resto & beach club", "slides": [
+  {"type": "photocover", "ai": "beach-club-reservasi", "eyebrow": "Buat pemilik resto & beach club",
+   "title": "Reservasi tercecer di WA, DM, dan buku catatan."},
+  {"type": "list", "title": "Masalahnya saat ramai", "items": [
+    {"icon": "book-open", "t": "Staf bolak-balik cek meja kosong", "d": "Buku reservasi dibuka-tutup terus."},
+    {"icon": "copy", "t": "Reservasi ganda", "d": "Dua tamu dijanjikan meja yang sama."},
+    {"icon": "message-circle", "t": "Pesan gampang terlewat", "d": "DM dan chat numpuk pas jam sibuk."}]},
+  {"type": "text", "eyebrow": "Solusinya", "title": "Satu sumber data untuk semua reservasi.",
+   "body": ["Tamu bisa lihat sendiri slot yang tersedia lewat website, tanpa harus nunggu balasan chat.",
+            "Tim bisa fokus melayani tamu yang **sudah datang**, bukan terus-terusan balas reservasi."]},
+  CTA_BLOG("Panduan website reservasi restoran & beach club.", "Kenapa reservasi manual berisiko, dan kapan website reservasi mulai perlu.")]},
+
+# 25 ────────────────────────────────────────────
+{"id": "25-pendampingan", "date": "2026-11-18", "tag": "Setelah live", "slides": [
+  {"type": "photocover", "ai": "pendampingan-toko", "eyebrow": "Bukan cuma serah terima",
+   "title": "Live itu awal, bukan akhir."},
+  {"type": "text", "eyebrow": "Yang sering terlewat", "title": "Aplikasi tanpa pendampingan sering terbengkalai.",
+   "body": ["Tim yang belum terbiasa dengan sistem baru gampang balik lagi ke cara lama begitu ada kendala kecil.",
+            "Pendampingan setelah live yang memastikan itu **nggak terjadi**."]},
+  {"type": "list", "title": "Yang kami lakukan", "items": [
+    {"icon": "graduation-cap", "t": "Tim dilatih sampai terbiasa", "d": "Bukan cuma sesi training sekali lalu ditinggal."},
+    {"icon": "phone-call", "t": "Tetap bisa dihubungi", "d": "Kalau ada kendala setelah live."},
+    {"icon": "life-buoy", "t": "Dibantu sampai benar-benar dipakai", "d": "Bukan cuma sampai aplikasinya jalan."}]},
+  CTA_TALK]},
 ]
 
 for _p in POSTS:
