@@ -1,0 +1,44 @@
+[
+  {
+    "id": "g01-kasir-umkm",
+    "date": "2026-09-24",
+    "slug": "aplikasi-kasir-umkm",
+    "summary": "Masih mencatat penjualan di Excel atau buku? Itu wajar di awal usaha. Tapi ada tanda Excel mulai membatasi: stok baru ketahuan setelah dicek ke rak, rekap harian makan waktu dan sering meleset dari uang di laci, atau kasir sudah lebih dari satu.\n\nArtikel ini membahas kapan UMKM perlu pindah ke aplikasi kasir, bedanya dengan Excel, fitur yang wajib ada, dan cara memilih yang pas.\n\nSeawise Studio, studio pembuatan website dan aplikasi di Bali, membangun aplikasi kasir dan stok untuk UMKM. Konsultasi awal gratis."
+  },
+  {
+    "id": "g02-kasir-restoran",
+    "date": "2026-10-01",
+    "slug": "aplikasi-kasir-restoran",
+    "summary": "Pesanan tercecer antara kasir dan dapur, dan modal per porsi tidak pernah benar-benar dihitung? Dua masalah ini paling sering muncul di restoran dan kafe saat jam ramai.\n\nKami rangkum 7 fitur wajib aplikasi kasir restoran, dari layar dapur, QR order, sampai HPP per porsi yang ikut berubah saat harga bahan naik, lengkap dengan contoh hitungannya.\n\nSeawise Studio, studio pembuatan website dan aplikasi di Bali, membangun sistem kasir untuk restoran, kafe, dan bar. Konsultasi awal gratis."
+  },
+  {
+    "id": "g03-stok-retail",
+    "date": "2026-10-08",
+    "slug": "aplikasi-stok-barang-toko-retail",
+    "summary": "Catatan bilang barang masih ada, tapi raknya sudah kosong? Selisih stok jarang datang dari satu kesalahan besar. Biasanya menumpuk dari kebocoran kecil: penjualan yang tidak sempat dicatat, barang masuk yang telat diinput, retur yang lupa dikurangi.\n\nArtikel ini membahas penyebab selisih stok, fitur wajib aplikasi stok barang untuk toko retail, dan rumus sederhana untuk menentukan kapan harus restock.\n\nSeawise Studio, studio pembuatan website dan aplikasi di Bali, membangun aplikasi kasir dan stok untuk toko. Konsultasi awal gratis."
+  },
+  {
+    "id": "g04-biaya-website",
+    "date": "2026-10-15",
+    "slug": "biaya-bikin-website",
+    "summary": "Berapa biaya bikin website? Kami menulis harga paket kami secara terbuka, tanpa \"hubungi untuk harga\".\n\nPanduan ini membahas kisaran harga landing page, company profile, sampai website full custom, faktor yang membuat harganya berbeda, dan cara memilih paket yang sesuai tujuan bisnis Anda.\n\nSeawise Studio adalah studio pembuatan website dan aplikasi di Bali. Konsultasi awal gratis."
+  },
+  {
+    "id": "g05-erp-manufaktur",
+    "date": "2026-10-22",
+    "slug": "erp-manufaktur-pabrik-kecil",
+    "summary": "Stok gudang tidak cocok dengan catatan, HPP cuma dihitung sebulan sekali, dan tiap tim punya angka sendiri? Itu tanda pabrik mulai melampaui spreadsheet.\n\nKami bahas kapan pabrik kecil butuh ERP manufaktur, fitur wajibnya, dan contoh menghitung HPP per batch dari harga lot bahan yang benar-benar terpakai.\n\nSeawise Studio, studio pembuatan website dan aplikasi di Bali, membangun sistem ERP untuk usaha produksi. Konsultasi awal gratis."
+  },
+  {
+    "id": "g06-aplikasi-custom",
+    "date": "2026-10-29",
+    "slug": "jasa-pembuatan-aplikasi-custom",
+    "summary": "Proses bisnis Anda tidak terwadahi aplikasi yang ada di pasaran? Di situ aplikasi custom masuk akal: software yang mengikuti alur kerja bisnis, bukan sebaliknya.\n\nArtikel ini membahas kapan bisnis butuh aplikasi custom, tahapannya dari pemetaan kebutuhan sampai pendampingan setelah live, apa yang menentukan biayanya, dan cara memilih jasa yang tepat.\n\nSeawise Studio, studio pembuatan website dan aplikasi di Bali, membangun aplikasi custom untuk ritel, apotek, restoran, dan manufaktur. Pemetaan kebutuhan di awal gratis."
+  },
+  {
+    "id": "g07-aplikasi-apotek",
+    "date": "2026-11-05",
+    "slug": "aplikasi-apotek",
+    "summary": "Obat kedaluwarsa lolos pantauan, stok fisik tidak cocok dengan catatan, dan laporan regulasi masih dikerjakan manual? Kebocoran seperti ini sering tidak kelihatan di kasir.\n\nKami rangkum fitur wajib aplikasi apotek: pelacakan batch dan kedaluwarsa, stok real time, pencatatan resep, sampai laporan otomatis, plus cara memilih yang tepat.\n\nSeawise Studio, studio pembuatan website dan aplikasi di Bali, membangun sistem apotek terpadu. Konsultasi awal gratis."
+  }
+]

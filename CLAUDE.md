@@ -611,3 +611,4 @@ seluruh file `.sql`.
 | `panduan-isi-portfolio-testimoni.md` | panduan mengisi portfolio & testimoni |
 | `konten-blog/` | naskah artikel blog `.txt` dua bahasa, metadata, dan urutan artikel berikutnya |
 | `konten-instagram/` | carousel Instagram: cara render, jadwal per periode, folder foto, prompt gambar |
+| `konten-google-bisnis/` | post mingguan ke Google Business Profile lewat Zernio, aturan format dan tombol |
