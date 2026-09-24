@@ -119,6 +119,40 @@ baru tayang lewat CTA teks ("Baca lengkapnya di feed", "Baca studi kasusnya
 di feed") walau tanpa foto repost, dan diunggah ke folder periode carousel-nya
 sendiri, `media/instagram/2026-q4-v2/stories/`, bukan folder periode terbaru.
 
+## Highlight
+
+Tujuh Highlight permanen di profil: Website, Aplikasi, IMS, TokoKu, Sehatera,
+RCM, Hari Baik. Isi dan cover ada di `HIGHLIGHTS` pada `render_highlights.py`,
+lima slide per highlight, semua isinya diambil dari deskripsi portfolio dan
+tabel `pricing`.
+
+- Render: `python3 render_highlights.py` (atau per key, misalnya
+  `python3 render_highlights.py ims`), konversi ke JPG di
+  `jpg_out_highlights/`, lalu `node konten-instagram/upload_highlights.js`
+  untuk unggah ke `media/instagram/highlights/`.
+- Tayang sebagai Story biasa, satu highlight per hari, pukul 14.30, 15.30,
+  16.30, 17.30, 18.30 WITA, supaya tidak menabrak slot 19.00.
+  Terjadwal 24 sampai 30 Sep 2026, urutan sama dengan daftar di atas.
+- Cover ikut tayang sebagai Story pembuka pukul 14.00, jadi di highlight
+  cover bisa dipilih langsung dari Story itu. Diunggah sebagai
+  `covers/cover-<n>-<key>-v2.jpg`: nama baru supaya cache CDN versi pertama
+  tidak ikut terambil. Pengecualian 24 Sep: slide 1 Website sudah tayang
+  14.30 sebelum cover dibuat ulang, jadi cover tayang 14.45 dan slide 1
+  diposting ulang 14.55 sebagai `hl1-website-1-r.jpg` (Zernio menolak gambar
+  yang sama persis dalam 24 jam). Slide 1 jam 14.30 dilewati saat menyusun
+  highlight.
+- **Instagram tidak mengizinkan API membuat Highlight atau memasang cover.**
+  Pemilik mengumpulkan kelima Story hari itu jadi Highlight dari aplikasi,
+  lalu Edit cover memilih `cover-<n>-<key>.jpg` dari galeri HP. Story yang
+  sudah lewat 24 jam tetap ada di Arsip, jadi bisa dikerjakan belakangan.
+- Cover cuma berisi satu ikon tebal di tengah, tanpa teks. Di profil
+  lingkarannya sekitar 60px, dan versi pertama yang memuat nama plus satu
+  baris penjelasan jadi titik-titik tak terbaca di ukuran itu. Nama highlight
+  sudah ditulis Instagram di bawah lingkaran, penjelasan panjangnya ada di
+  slide 1 tiap highlight.
+- Harga di slide 2 highlight Website ikut aturan harga: kalau `pricing`
+  berubah, render ulang dan ganti Story-nya di highlight.
+
 ## Aturan isi
 
 Sama dengan situs publik: tanpa em-dash, tanpa testimoni atau angka karangan,

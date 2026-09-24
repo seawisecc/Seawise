@@ -408,7 +408,11 @@ ikut menyalin angka basi itu. Dibetulkan 21 September 2026.
 
 Kalau harga di `/admin/pricing` berubah, tiga tempat ikut diubah:
 `fallbackPricing` (en dan id), artikel `01-biaya-bikin-website` (file dan
-database), dan post harga di `konten-instagram/` yang belum tayang.
+database), dan post harga di `konten-instagram/` yang belum tayang. Highlight
+Instagram "Website" juga memuat harga paket (slide 2 di
+`render_highlights.py`), dan karena highlight permanen, slide itu ikut diganti.
+Google Bisnis juga: Layanan (lewat Zernio) dan produk kategori "Paket Website"
+(lewat Chrome), lihat `konten-google-bisnis/README.md`.
 
 ### Instagram `@seawise.id` dan Google Bisnis lewat Zernio
 
