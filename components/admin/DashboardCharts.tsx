@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
+import { useEffect, useId, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 
 /**
  * Hand-rolled SVG charts for the admin dashboard.
@@ -46,6 +46,12 @@ function niceTicks(max: number, count = 4): number[] {
   for (let v = 0; v <= max + step * 0.001; v += step) ticks.push(v);
   if (ticks[ticks.length - 1] < max) ticks.push(ticks[ticks.length - 1] + step);
   return ticks;
+}
+
+/** Show every nth x label, n picked so the widest label plus a gap fits. */
+function everyNth(labels: string[], slot: number): number {
+  const widest = Math.max(0, ...labels.map((l) => l.length)) * 6.2 + 14;
+  return Math.max(1, Math.ceil(widest / Math.max(1, slot)));
 }
 
 /**
@@ -132,15 +138,19 @@ export function AreaChart({
   format,
   formatAxis,
   height = 240,
+  unit = "bulan",
 }: {
   data: SeriesPoint[];
   series: Series[];
   format: (n: number) => string;
   formatAxis: (n: number) => string;
   height?: number;
+  /** Used in the screen reader label, "per bulan" or "per hari". */
+  unit?: string;
 }) {
   const [ref, width] = useWidth<HTMLDivElement>();
   const [active, setActive] = useState<number | null>(null);
+  const gid = useId().replace(/:/g, "");
 
   const pad = { top: 12, right: 12, bottom: 28, left: 56 };
   const innerW = Math.max(0, width - pad.left - pad.right);
@@ -151,8 +161,9 @@ export function AreaChart({
   const n = data.length;
   const xAt = (i: number) => pad.left + (n <= 1 ? innerW / 2 : (i / (n - 1)) * innerW);
   const yAt = (v: number) => pad.top + innerH - (v / top) * innerH;
-  // On narrow screens every other month label is dropped so they never collide.
-  const labelEvery = innerW / Math.max(1, n) < 44 ? 2 : 1;
+  // Thin the x labels by their measured width so they never collide, whether
+  // they are six months on a laptop or thirty days on a phone.
+  const labelEvery = everyNth(data.map((d) => d.label), innerW / Math.max(1, n - 1));
 
   function onMove(e: PointerEvent<SVGRectElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -189,7 +200,7 @@ export function AreaChart({
       style={{ height }}
       tabIndex={0}
       role="img"
-      aria-label={`Grafik ${series.map((s) => s.name).join(" dan ")} per bulan. Gunakan panah kiri kanan untuk melihat nilai.`}
+      aria-label={`Grafik ${series.map((s) => s.name).join(" dan ")} per ${unit}. Gunakan panah kiri kanan untuk melihat nilai.`}
       onKeyDown={onKey}
       onBlur={() => setActive(null)}
     >
@@ -197,7 +208,7 @@ export function AreaChart({
         <svg width={width} height={height} className="block overflow-visible">
           <defs>
             {series.map((s, si) => (
-              <linearGradient key={s.name} id={`area-fill-${si}`} x1="0" x2="0" y1="0" y2="1">
+              <linearGradient key={s.name} id={`${gid}-fill-${si}`} x1="0" x2="0" y1="0" y2="1">
                 <stop offset="0%" stopColor={s.color} stopOpacity={0.22} />
                 <stop offset="100%" stopColor={s.color} stopOpacity={0} />
               </linearGradient>
@@ -229,7 +240,7 @@ export function AreaChart({
               : "";
             return (
               <g key={s.name}>
-                <path d={area} fill={`url(#area-fill-${si})`} className="dash-fade" />
+                <path d={area} fill={`url(#${gid}-fill-${si})`} className="dash-fade" />
                 <path
                   d={line}
                   fill="none"
@@ -314,7 +325,7 @@ export function ColumnChart({
   const slot = innerW / Math.max(1, n);
   const barW = Math.min(36, Math.max(6, slot - 8));
   const yAt = (v: number) => pad.top + innerH - (v / top) * innerH;
-  const labelEvery = slot < 40 ? 2 : 1;
+  const labelEvery = everyNth(data.map((d) => d.label), slot);
 
   return (
     <div ref={ref} className="relative" style={{ height }}>
@@ -413,4 +424,24 @@ export function ShareBars({
       ))}
     </ul>
   );
+}
+
+/** Entry animations for the charts. Scoped to class names only the dashboard uses,
+ *  and switched off for people who asked their OS for less motion. */
+const DASH_CSS = `
+.dash-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: dash-draw 1.1s cubic-bezier(.33,1,.68,1) forwards; }
+.dash-fade { opacity: 0; animation: dash-fade .9s ease-out .25s forwards; }
+.dash-grow { transform-box: view-box; transform: scaleY(0); animation: dash-grow .7s cubic-bezier(.33,1,.68,1) forwards; }
+.dash-grow-x { transform-origin: left; transform: scaleX(0); animation: dash-grow-x .8s cubic-bezier(.33,1,.68,1) forwards; }
+@keyframes dash-draw { to { stroke-dashoffset: 0; } }
+@keyframes dash-fade { to { opacity: 1; } }
+@keyframes dash-grow { to { transform: scaleY(1); } }
+@keyframes dash-grow-x { to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .dash-draw, .dash-fade, .dash-grow, .dash-grow-x { animation: none; opacity: 1; transform: none; stroke-dashoffset: 0; }
+}
+`;
+
+export function ChartStyles() {
+  return <style>{DASH_CSS}</style>;
 }

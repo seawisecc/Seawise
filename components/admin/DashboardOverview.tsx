@@ -5,7 +5,8 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { SkeletonBar } from "./AdminSkeleton";
 import { HOME_FEATURED_LIMIT } from "./PortfolioManager";
-import { AreaChart, ColumnChart, ShareBars, CHART_COLORS } from "./DashboardCharts";
+import { AreaChart, ColumnChart, ShareBars, ChartStyles, CHART_COLORS } from "./DashboardCharts";
+import { rp, rpShort, monthKeyOf, monthLabel, lastMonths, pctChange } from "./financeFormat";
 import {
   WalletIcon,
   TrendUpIcon,
@@ -44,37 +45,10 @@ type Data = {
   posts: Post[];
 };
 
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
 const RANGES = [
   { months: 6, label: "6 bulan" },
   { months: 12, label: "12 bulan" },
 ];
-
-const rp = (n: number) => (n < 0 ? "−" : "") + "Rp" + Math.round(Math.abs(n)).toLocaleString("id-ID");
-
-/** Axis labels: "Rp12 jt", "Rp500 rb". Full figures live in the tooltip and table. */
-function rpShort(n: number) {
-  if (n >= 1e9) return `Rp${+(n / 1e9).toFixed(1)} M`;
-  if (n >= 1e6) return `Rp${+(n / 1e6).toFixed(1)} jt`;
-  if (n >= 1e3) return `Rp${Math.round(n / 1e3)} rb`;
-  return `Rp${n}`;
-}
-
-/** Local-time YYYY-MM, so a lead at 01.00 WITA on the 1st lands in the new month. */
-function monthKeyOf(d: Date) {
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
-}
-function monthLabel(key: string, withYear = false) {
-  const [y, m] = key.split("-");
-  return `${MONTHS[Number(m) - 1]}${withYear ? ` ${y}` : ` ${y.slice(2)}`}`;
-}
-/** The last `n` month keys ending with the current month, empty months included. */
-function lastMonths(n: number): string[] {
-  const now = new Date();
-  const out: string[] = [];
-  for (let i = n - 1; i >= 0; i--) out.push(monthKeyOf(new Date(now.getFullYear(), now.getMonth() - i, 1)));
-  return out;
-}
 
 function relTime(iso: string) {
   const diff = (Date.now() - new Date(iso).getTime()) / 1000;
@@ -83,12 +57,6 @@ function relTime(iso: string) {
   if (diff < 86400) return `${Math.floor(diff / 3600)} jam lalu`;
   if (diff < 86400 * 7) return `${Math.floor(diff / 86400)} hari lalu`;
   return new Date(iso).toLocaleDateString("id-ID", { day: "numeric", month: "short" });
-}
-
-/** Percentage change, null when there is nothing to compare against. */
-function pctChange(cur: number, prev: number): number | null {
-  if (prev === 0) return null;
-  return ((cur - prev) / prev) * 100;
 }
 
 export default function DashboardOverview({ lang }: { lang: string }) {
@@ -218,7 +186,7 @@ export default function DashboardOverview({ lang }: { lang: string }) {
 
   return (
     <div>
-      <style>{DASH_CSS}</style>
+      <ChartStyles />
 
       {/* Header */}
       <div className="flex flex-wrap items-end justify-between gap-3">
@@ -768,19 +736,3 @@ function ListSkeleton() {
     </>
   );
 }
-
-/** Entry animations for the charts. Scoped to class names only the dashboard uses,
- *  and switched off for people who asked their OS for less motion. */
-const DASH_CSS = `
-.dash-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: dash-draw 1.1s cubic-bezier(.33,1,.68,1) forwards; }
-.dash-fade { opacity: 0; animation: dash-fade .9s ease-out .25s forwards; }
-.dash-grow { transform-box: view-box; transform: scaleY(0); animation: dash-grow .7s cubic-bezier(.33,1,.68,1) forwards; }
-.dash-grow-x { transform-origin: left; transform: scaleX(0); animation: dash-grow-x .8s cubic-bezier(.33,1,.68,1) forwards; }
-@keyframes dash-draw { to { stroke-dashoffset: 0; } }
-@keyframes dash-fade { to { opacity: 1; } }
-@keyframes dash-grow { to { transform: scaleY(1); } }
-@keyframes dash-grow-x { to { transform: scaleX(1); } }
-@media (prefers-reduced-motion: reduce) {
-  .dash-draw, .dash-fade, .dash-grow, .dash-grow-x { animation: none; opacity: 1; transform: none; stroke-dashoffset: 0; }
-}
-`;

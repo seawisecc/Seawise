@@ -6,9 +6,10 @@
  * fill both gaps so the layout stays put and only the content fades in.
  */
 
+/** A span, not a div, so it can sit inside the <p> that will hold the value. */
 export function SkeletonBar({ className = "" }: { className?: string }) {
   return (
-    <div className={`animate-pulse rounded bg-warm-neutral/70 ${className}`} />
+    <span className={`block animate-pulse rounded bg-warm-neutral/70 ${className}`} />
   );
 }
 
