@@ -1,0 +1,74 @@
+In many small businesses, the right way to do things lives only in the owner's head. While the owner is around, everything runs. The moment the owner is ill, on leave, or opening a second location, quality drops and the same questions come up again and again. An **SOP (Standard Operating Procedure)** moves that knowledge from someone's head onto paper, so the work runs just as well whoever is on shift. This article covers what a good SOP contains, one example you can copy straight away, and how to write your own.
+
+## Why small businesses need SOPs the most
+
+Large companies have a manager in every department. A small business usually has the owner and a few staff, so every employee who leaves takes their way of working with them. Signs your business already needs SOPs:
+
+- **New staff take weeks before they can work alone**, because everything is taught verbally and depends on who is teaching.
+- **Results change depending on who is working.** Portions, service, or how the till is closed are never quite the same from one shift to the next.
+- **The same mistakes keep happening**, such as cash that does not match or stock that never gets recorded, and each time the only fix is a warning.
+- **You cannot take a day off without your phone ringing.**
+
+SOPs do not make a business rigid. They make routine work run on its own, so your attention goes to the things that genuinely need a decision.
+
+## What a good SOP contains
+
+The SOPs that get used are short and clear. They do not need to be long, but they should cover these six parts:
+
+1. **Title and purpose.** One sentence on what this procedure achieves.
+2. **Scope.** When the procedure applies, and when it does not.
+3. **Responsibility.** Who carries it out and who checks it.
+4. **Steps.** In order, numbered, one action per step, each starting with a verb.
+5. **Exceptions.** What to do when something does not go as normal.
+6. **Records and forms.** The checklist or form that has to be filled in as proof.
+
+The part people forget most often is **exceptions**. Everyone usually understands the normal flow. The confusion comes when the cash does not match, goods arrive damaged, or a customer asks for a return.
+
+## Example SOP: daily till closing
+
+Here is a simple SOP for a small shop or cafe. Adjust it to how your business works.
+
+**Purpose:** make sure the cash in the drawer matches the day's sales, so any difference is caught immediately.
+
+**Scope:** carried out every day at closing time by the cashier on the last shift.
+
+**Responsibility:** the last-shift cashier carries it out, the owner or shop lead checks it the next morning.
+
+**Steps:**
+
+1. Stop taking new transactions and put up the closed sign.
+2. Print or write down today's sales summary, split into cash and non-cash.
+3. Count the cash in the drawer, then subtract the opening float.
+4. Compare the result with the cash sales in the summary.
+5. Fill in the till closing form: date, cashier name, cash sales, cash counted, difference.
+6. Put the money into an envelope or safe, leaving the float for tomorrow.
+7. Sign the form and file it in the till closing folder.
+
+**Exceptions:** if the difference is larger than the agreed limit, do not cover it from your own pocket. Write the difference on the form as it is and tell the owner the same day.
+
+Notice that every step can be checked. "Count the money carefully" is not a step, because nobody can confirm it was done. "Fill in the till closing form" can be confirmed.
+
+## How to write your own SOP
+
+You can start without any outside help. The safest order:
+
+1. **Pick the one process that goes wrong most often.** Do not try to write every SOP at once. Start with the one that causes the most losses or questions.
+2. **Watch the person who does the work**, rather than writing from memory. How you imagine the work happens is often different from how it really happens.
+3. **Write a short draft**, then ask another employee to follow it without asking questions. Every time they get stuck, a step is unclear.
+4. **Revise, then finalise.** Keep the final version in one place everyone knows, such as a single Google Drive folder, and print the ones used every day.
+5. **Review regularly.** An SOP that is never updated gets quietly abandoned the moment the work changes.
+
+## Common mistakes
+
+- **Too long.** A ten-page SOP will not be read during a rush. Split it into several short ones.
+- **Written from the ideal process** instead of the real one. The result looks tidy but is never followed.
+- **Nobody checks.** Without someone responsible for checking, the SOP slowly becomes a document in a drawer.
+- **Stored in too many places.** An old version on one phone, a new one on another laptop. Decide on one official location.
+
+## From SOP to system
+
+A clear SOP is also the best starting point if you ever need an application. The till closing example above is exactly what a point of sale app does automatically: the cash and non-cash summary, the difference, and a history per cashier. We built that flow into [TokoKu, a point of sale app for small businesses](/en/portfolio/retail-service-umkm-edition), and we cover it in our article on [point of sale apps for small businesses](/en/blog/aplikasi-kasir-umkm). If the process has grown too complex for paper, see our [custom app development in Bali](/en/jasa-pembuatan-aplikasi-bali).
+
+## When to get help
+
+Writing one or two SOPs yourself is very achievable. Help becomes useful when there are many processes, several departments are involved, or the documents and financial records are messy too. We write SOPs from how your team really works, organise your document archive, and tidy transaction records so they are ready for your accountant. The details are on our [SOP writing and business documentation](/en/jasa-pembuatan-sop) page, and the first conversation is free.

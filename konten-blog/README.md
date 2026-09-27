@@ -54,6 +54,8 @@ excerpt dipakai langsung sebagai meta description.
 | `10-website-custom-wordpress-atau-builder` | website custom vs WordPress | draft di database, cover terpasang |
 | `11-laporan-sipnap-apotek-otomatis` | laporan SIPNAP apotek | draft di database, cover terpasang |
 | `12-website-reservasi-restoran-bali` | website reservasi restoran Bali | draft di database, cover terpasang |
+| `13-contoh-sop-usaha-kecil` | contoh SOP usaha kecil | naskah, belum di database, belum ada cover |
+| `14-analisis-data-penjualan-umkm` | analisis data penjualan UMKM | naskah, belum di database, belum ada cover |
 
 Artikel baru jangan ditayangkan sebelum punya cover, karena kartu blog tanpa
 gambar akan tampil beda dari kartu lain. Unggah cover 16:9 lewat
@@ -158,6 +160,30 @@ Pilih konsep A untuk 07. Konsep B terlalu mirip komposisi rak dengan berkas
 cahaya milik 06, dan A satu-satunya yang memakai "celah kosong" sebagai
 pusat gambar.
 
+**13, contoh SOP usaha kecil. Konsep A, catatan instruksi yang tercecer:**
+
+```
+A small shop back-room corkboard and wall crowded with scattered handwritten sticky notes, torn notebook pages and taped paper instructions layered over each other, some curled and faded, one note half fallen. A hand pins yet another new note on top of the pile. Soft daylight from a side window, warm off-white wall, dark forest-green wooden shelf below with a small plant. Mood of well-meant chaos. All handwriting illegible.
+```
+
+**13, konsep B, map SOP yang rapi di antara kekacauan:**
+
+```
+Top-down flat lay on a worn wooden counter: on one side a messy pile of loose handwritten notes, receipts and sticky notes; on the other side a single neat dark forest-green ring binder lying open, its pages blank with clean ruled lines and tidy tab dividers. A hand slides one loose note from the pile toward the binder. Warm late-afternoon light, soft shadows. All writing illegible.
+```
+
+**14, analisis data penjualan. Konsep A, tumpukan nota tanpa jawaban:**
+
+```
+Close-up of a small cafe counter after closing: a long curled cash register receipt roll spilling across the counter, a stack of printed sales reports with coffee rings, a calculator, and a pencil. A hand holds a highlighter hovering over the paper as if unsure where to start. Softly blurred background of stacked chairs and a dark forest-green tiled wall, single warm pendant light. All printed and handwritten text illegible.
+```
+
+**14, konsep B, papan tulis angka di ruang belakang:**
+
+```
+A small shop back office wall with a whiteboard covered in hand-drawn bar charts and scribbled tallies, partly erased and redrawn, sticky notes stuck around the edges. In the foreground on a wooden desk, a paper ledger and a mug. A hand holding a marker is paused mid-stroke, drawing a new bar. Soft daylight, warm off-white walls, dark forest-green accents. All numbers and writing illegible, no screens.
+```
+
 **Kombinasi yang disarankan.** Semua masalah di artikel ini pada dasarnya
 "catatan manual", jadi kalau konsepnya dipilih sembarangan, keempat kartu bisa
 sama-sama tangan memegang kertas. Kombinasi ini memberi empat komposisi yang
@@ -212,7 +238,9 @@ mengecil lewat parameter kualitas, lihat jebakan `og:image` di `CLAUDE.md`.
 
 Dua artikel per bulan, satu kata kunci utama per artikel. Jangan membuat artikel
 yang kata kuncinya sama dengan landing page `jasa-pembuatan-website-bali` atau
-`jasa-pembuatan-aplikasi-bali`, cukup tautkan ke sana.
+`jasa-pembuatan-aplikasi-bali`, cukup tautkan ke sana. Sama untuk
+`jasa-analisis-data` dan `jasa-pembuatan-sop`: 13 dan 14 sengaja memakai kata
+kunci informasional (contoh SOP, analisis data penjualan) yang menaut ke sana.
 
 1. ~~Aplikasi stok barang untuk toko retail~~, sudah ditulis sebagai 07.
 2. Website villa dan guesthouse di Bali: booking langsung tanpa komisi OTA.

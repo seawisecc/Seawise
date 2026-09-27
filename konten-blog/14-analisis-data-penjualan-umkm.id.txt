@@ -1,0 +1,62 @@
+Hampir setiap usaha sudah mencatat penjualannya, entah di aplikasi kasir, Excel, atau buku. Masalahnya, catatan itu jarang dibaca. Angka menumpuk setiap hari, tapi keputusan tetap diambil berdasarkan perasaan: produk mana yang laku, kapan perlu tambah karyawan, barang apa yang sebaiknya berhenti dijual. **Analisis data penjualan** adalah kebiasaan membaca catatan itu secara teratur untuk menjawab pertanyaan-pertanyaan tersebut. Kabar baiknya, kamu tidak butuh aplikasi mahal untuk memulai. Artikel ini membahas angka apa saja yang perlu dilihat, cara menyiapkan datanya, dan kapan saatnya beralih ke dashboard.
+
+## Mulai dari pertanyaan, bukan dari grafik
+
+Kesalahan paling umum adalah membuka data lalu membuat grafik sebanyak mungkin. Hasilnya grafik yang bagus dilihat tapi tidak mengubah apa-apa. Mulailah dari keputusan yang benar-benar perlu kamu ambil, misalnya:
+
+- Produk mana yang sebaiknya dipromosikan, dan mana yang sebaiknya dihentikan?
+- Hari dan jam apa yang paling ramai, supaya jadwal karyawan pas?
+- Apakah omzet naik karena lebih banyak pelanggan, atau karena harga naik?
+- Berapa banyak modal yang tertahan di stok yang tidak bergerak?
+
+Setiap pertanyaan menentukan data mana yang perlu dilihat. Data yang tidak menjawab pertanyaan apa pun boleh diabaikan dulu.
+
+## Lima angka yang paling berguna untuk UMKM
+
+1. **Omzet per produk.** Siapa penyumbang penjualan terbesar. Biasanya sebagian kecil produk menyumbang sebagian besar omzet.
+2. **Margin per produk.** Omzet besar belum tentu untung besar. Produk yang paling laku kadang justru yang marginnya paling tipis.
+3. **Produk yang lambat bergerak.** Barang yang hampir tidak terjual dalam beberapa bulan terakhir adalah modal yang diam di rak.
+4. **Pola hari dan jam.** Kapan transaksi paling banyak dan paling sepi. Ini dasar untuk jadwal shift dan waktu promosi.
+5. **Nilai rata-rata per transaksi.** Kalau angka ini naik, pelanggan membeli lebih banyak dalam satu kunjungan. Kalau turun, perlu dicari tahu kenapa.
+
+## Contoh membaca angka
+
+Berikut contoh sederhana. Semua angka di bagian ini adalah **angka ilustrasi**, bukan data klien.
+
+Sebuah kafe mencatat omzet bulan lalu Rp60 juta. Kopi susu menyumbang Rp18 juta, terbanyak dari semua menu. Tapi setelah dihitung dengan biaya bahannya, margin kopi susu hanya sekitar 45%, sementara teh buah yang omzetnya Rp9 juta punya margin sekitar 70%. Artinya, setiap rupiah penjualan teh buah menyumbang laba jauh lebih besar. Keputusan yang masuk akal bukan menghentikan kopi susu, tapi menawarkan teh buah lebih sering, misalnya lewat paket atau rekomendasi kasir.
+
+Tanpa melihat margin, pemilik kafe ini hanya akan tahu bahwa kopi susu paling laku, dan terus mempromosikan produk yang labanya paling tipis.
+
+## Cara menyiapkan data di Excel atau Google Sheets
+
+Analisis yang bagus butuh data yang rapi. Beberapa aturan dasar:
+
+- **Satu baris untuk satu transaksi atau satu item terjual**, jangan digabung.
+- **Kolom yang konsisten**: tanggal, jam, nama produk, jumlah, harga jual, dan kalau ada, harga pokok.
+- **Nama produk ditulis sama persis setiap kali.** "Kopi Susu", "kopi susu", dan "Kopsu" akan dihitung sebagai tiga produk berbeda.
+- **Tanggal dalam format tanggal**, bukan teks, supaya bisa dikelompokkan per hari, minggu, atau bulan.
+
+Setelah data rapi, fitur **pivot table** di Excel atau Google Sheets sudah cukup untuk menjawab sebagian besar pertanyaan di atas: omzet per produk, per hari, atau per jam, hanya dengan beberapa klik.
+
+Kalau kamu memakai aplikasi kasir, sebagian besar aplikasi bisa mengekspor laporan penjualan ke Excel. Itu titik awal yang bagus.
+
+## Jebakan yang sering terjadi
+
+- **Menyamakan omzet dengan laba.** Omzet naik bisa saja diiringi laba turun kalau biaya bahan atau diskon ikut naik.
+- **Membandingkan periode yang tidak setara.** Bulan dengan libur panjang tidak bisa langsung dibandingkan dengan bulan biasa.
+- **Data yang tercecer.** Penjualan online di satu file, penjualan toko di aplikasi kasir, pengeluaran di buku. Selama belum disatukan, gambarannya tidak pernah utuh.
+- **Hanya dilihat sekali.** Analisis yang berguna adalah yang dilihat rutin, misalnya setiap Senin pagi, bukan sekali setahun saat tutup buku.
+
+## Kapan perlu dashboard
+
+Spreadsheet cukup untuk memulai. Dashboard mulai masuk akal kalau:
+
+- Data datang dari beberapa sumber, dan menyatukannya secara manual memakan waktu berjam-jam setiap minggu.
+- Beberapa orang perlu melihat angka yang sama, misalnya pemilik dan kepala toko di cabang berbeda.
+- Laporan yang sama dibuat berulang setiap minggu atau bulan dengan cara menyalin angka antar file.
+
+Dashboard yang baik tidak menampilkan semua hal. Dashboard menampilkan angka yang menjawab pertanyaanmu, di satu layar, selalu terbarui. Kalau pencatatannya sendiri yang masih bermasalah, misalnya stok tidak pernah cocok, sering kali yang dibutuhkan adalah sistem pencatatan yang lebih baik dulu. Kami membahasnya di artikel [aplikasi stok barang untuk toko retail](/id/blog/aplikasi-stok-barang-toko-retail), dan contoh laporan HPP per porsi yang otomatis ada di [RCM, sistem resto dan kafe](/id/portfolio/resto-cafe-management-rcm).
+
+## Butuh bantuan membaca datamu
+
+Kalau datamu sudah ada tapi belum sempat dirapikan, atau kamu ingin dashboard yang langsung menjawab pertanyaan di atas, kami bisa membantu. Kami membersihkan dan menyatukan data dari Excel, Google Sheets, atau aplikasi kasir, lalu membuat dashboard dan laporan berkala disertai pembacaan temuannya. Detailnya ada di halaman [jasa analisis data dan dashboard bisnis](/id/jasa-analisis-data), dan kalau yang dibutuhkan ternyata sistem baru, lihat [jasa pembuatan aplikasi di Bali](/id/jasa-pembuatan-aplikasi-bali). Diskusi pertamanya gratis.

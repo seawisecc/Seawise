@@ -49,7 +49,9 @@ vendor). Temanya mengikuti tema carousel IG minggu yang sama.
 **Layanan** diatur lewat API Zernio (`gmb_services_update_google_business_services`,
 akun `6ab376528d284ffb2132b05c`). Isinya penggantian penuh, jadi selalu kirim
 seluruh daftar: 4 paket website dengan harga dari tabel `pricing`, maintenance,
-5 layanan aplikasi tanpa harga, migrasi spreadsheet, dan 3 item bawaan Google.
+5 layanan aplikasi tanpa harga, migrasi spreadsheet, analisis data dan
+dashboard, pembuatan SOP dan penataan dokumen (keduanya tanpa harga, ditambah
+27 Sep 2026), dan 3 item bawaan Google. Total 16 item.
 
 **Produk** tidak punya API, jadi diedit di Chrome lewat panel "Edit products"
 di hasil pencarian Google. Pemilihan gambar membuka file picker Mac, jadi

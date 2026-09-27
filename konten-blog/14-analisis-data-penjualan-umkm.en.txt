@@ -1,0 +1,62 @@
+Almost every business already records its sales, whether in a point of sale app, Excel, or a notebook. The trouble is that those records are rarely read. Numbers pile up every day, but decisions are still made on gut feeling: which products sell, when to add staff, which items to stop stocking. **Sales data analysis** is the habit of reading those records regularly to answer exactly those questions. The good news is that you do not need expensive software to start. This article covers which numbers to look at, how to prepare the data, and when it is time to move to a dashboard.
+
+## Start from questions, not charts
+
+The most common mistake is opening the data and making as many charts as possible. The result looks impressive but changes nothing. Start from the decisions you actually need to make, for example:
+
+- Which products should be promoted, and which should be dropped?
+- Which days and hours are busiest, so staff schedules fit?
+- Is revenue rising because there are more customers, or because prices went up?
+- How much capital is tied up in stock that is not moving?
+
+Each question decides which data you need to look at. Data that answers none of them can be ignored for now.
+
+## Five numbers that matter most for small businesses
+
+1. **Revenue per product.** Who contributes the most sales. Usually a small share of products brings in most of the revenue.
+2. **Margin per product.** High revenue does not always mean high profit. The best seller is sometimes the product with the thinnest margin.
+3. **Slow-moving products.** Items that have barely sold in recent months are capital sitting on a shelf.
+4. **Day and hour patterns.** When transactions peak and when it is quiet. This is the basis for shift schedules and promotion timing.
+5. **Average transaction value.** If it rises, customers are buying more per visit. If it falls, it is worth finding out why.
+
+## An example of reading the numbers
+
+Here is a simple example. Every figure in this section is an **illustrative number**, not client data.
+
+A cafe records Rp60 million in revenue last month. Iced milk coffee brings in Rp18 million, more than any other item. But once ingredient costs are counted, its margin is only about 45%, while fruit tea, with Rp9 million in revenue, has a margin of about 70%. So every rupiah of fruit tea sales contributes far more profit. The sensible move is not to drop the milk coffee, but to offer the fruit tea more often, for example through bundles or cashier recommendations.
+
+Without looking at margin, this cafe owner would only know that milk coffee sells best, and would keep promoting the product with the thinnest profit.
+
+## Preparing the data in Excel or Google Sheets
+
+Good analysis needs tidy data. A few basic rules:
+
+- **One row per transaction or per item sold**, never merged.
+- **Consistent columns**: date, time, product name, quantity, selling price, and cost price if you have it.
+- **Product names written exactly the same every time.** "Milk Coffee", "milk coffee", and "Milk Cof" will be counted as three different products.
+- **Dates stored as dates**, not text, so they can be grouped by day, week, or month.
+
+Once the data is tidy, the **pivot table** feature in Excel or Google Sheets is enough to answer most of the questions above: revenue per product, per day, or per hour, in a few clicks.
+
+If you use a point of sale app, most can export sales reports to Excel. That is a good starting point.
+
+## Common traps
+
+- **Treating revenue as profit.** Revenue can rise while profit falls if ingredient costs or discounts rise too.
+- **Comparing periods that are not alike.** A month with long holidays cannot be compared directly with an ordinary month.
+- **Scattered data.** Online sales in one file, shop sales in the POS app, expenses in a notebook. Until they are combined, the picture is never complete.
+- **Looking only once.** Useful analysis is read on a routine, for example every Monday morning, not once a year at year-end.
+
+## When a dashboard makes sense
+
+A spreadsheet is enough to start. A dashboard starts to make sense when:
+
+- Data comes from several sources, and combining it by hand takes hours every week.
+- Several people need to see the same numbers, such as the owner and store leads at different branches.
+- The same report is rebuilt every week or month by copying figures between files.
+
+A good dashboard does not show everything. It shows the numbers that answer your questions, on one screen, always up to date. If the recording itself is still the problem, for example stock never matches, what you often need first is a better recording system. We cover that in our article on [stock management apps for retail shops](/en/blog/aplikasi-stok-barang-toko-retail), and an example of automatic cost per portion reporting is in [RCM, our restaurant and cafe system](/en/portfolio/resto-cafe-management-rcm).
+
+## Need help reading your data
+
+If your data already exists but has never been tidied, or you want a dashboard that answers the questions above directly, we can help. We clean and combine data from Excel, Google Sheets, or your POS, then build dashboards and periodic reports along with a reading of what they show. The details are on our [data analysis and business dashboard](/en/jasa-analisis-data) page, and if what you need turns out to be a new system, see our [custom app development in Bali](/en/jasa-pembuatan-aplikasi-bali). The first conversation is free.
