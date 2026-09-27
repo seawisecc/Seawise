@@ -9,6 +9,7 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { SITE_URL } from "@/lib/siteUrl";
 import { pageAlternates, breadcrumbJsonLd, clampDescription, ogImageUrl } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
+import { ArrowLeft, ArrowUpRight } from "@/components/ArrowIcons";
 
 export const revalidate = 120;
 
@@ -78,7 +79,8 @@ export default async function PortfolioDetail({
       <JsonLd data={jsonLd} />
       <JsonLd data={breadcrumb} />
       <div className="mx-auto max-w-3xl px-5 pb-20 pt-16 md:px-8 md:pt-24">
-        <Link href={`/${lang}/portfolio`} className="text-sm font-medium text-sea-foam hover:underline">
+        <Link href={`/${lang}/portfolio`} className="group inline-flex items-center gap-1.5 text-sm font-medium text-sea-foam hover:underline">
+          <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
           {t.detailBack}
         </Link>
 
@@ -116,6 +118,7 @@ export default async function PortfolioDetail({
             className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-forest-dark px-6 py-3 text-sm font-medium text-off-white transition-colors hover:bg-sea-foam"
           >
             {t.liveButton}
+            <ArrowUpRight className="h-4 w-4" />
           </a>
         )}
 

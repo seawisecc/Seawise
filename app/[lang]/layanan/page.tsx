@@ -5,6 +5,7 @@ import Reveal from "@/components/Reveal";
 import { WebsiteIcon, AppIcon, DataIcon, DocsIcon } from "@/components/ServiceIcons";
 import FaqSection, { faqJsonLd } from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
+import { ArrowRight } from "@/components/ArrowIcons";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { pageSeo, breadcrumbJsonLd, servicesJsonLd } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
@@ -26,8 +27,8 @@ export const revalidate = 120;
 
 /** `servicesList` entries shown in the data & administration group, in order. */
 const DATA_SERVICES = [
-  { slug: "analisis-data", Icon: DataIcon },
-  { slug: "penataan-dokumen", Icon: DocsIcon },
+  { slug: "analisis-data", Icon: DataIcon, href: "jasa-analisis-data" },
+  { slug: "penataan-dokumen", Icon: DocsIcon, href: "jasa-pembuatan-sop" },
 ];
 
 export default async function LayananPage({
@@ -39,9 +40,9 @@ export default async function LayananPage({
   const dict = getDictionary(lang);
   const t = dict.services;
   const pricing = await getPricing(lang);
-  const dataServices = DATA_SERVICES.flatMap(({ slug, Icon }) => {
+  const dataServices = DATA_SERVICES.flatMap(({ slug, Icon, href }) => {
     const s = dict.servicesList.find((x) => x.slug === slug);
-    return s ? [{ ...s, Icon }] : [];
+    return s ? [{ ...s, Icon, href }] : [];
   });
 
   return (
@@ -225,12 +226,21 @@ export default async function LayananPage({
                         </li>
                       ))}
                     </ul>
-                    <Link
-                      href={`/${lang}/kontak`}
-                      className="mt-6 inline-block w-fit rounded-full bg-forest-dark px-5 py-2.5 text-sm font-medium text-off-white transition-colors hover:bg-sea-foam"
-                    >
-                      {t.ctaButton}
-                    </Link>
+                    <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+                      <Link
+                        href={`/${lang}/kontak`}
+                        className="inline-block rounded-full bg-forest-dark px-5 py-2.5 text-sm font-medium text-off-white transition-colors hover:bg-sea-foam"
+                      >
+                        {t.ctaButton}
+                      </Link>
+                      <Link
+                        href={`/${lang}/${s.href}`}
+                        className="group inline-flex items-center gap-1.5 text-sm font-medium text-sea-foam hover:underline"
+                      >
+                        {t.learnMore}
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                      </Link>
+                    </div>
                   </div>
                 </Reveal>
               ))}

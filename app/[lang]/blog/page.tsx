@@ -8,6 +8,7 @@ import JsonLd from "@/components/JsonLd";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { pageSeo, breadcrumbJsonLd } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
+import { ArrowRight } from "@/components/ArrowIcons";
 
 export async function generateMetadata({
   params,
@@ -64,7 +65,7 @@ export default async function BlogPage({
                 <Reveal key={p.id} delay={(i % 3) * 0.06} className="h-full">
                   <Link
                     href={`/${lang}/blog/${p.slug}`}
-                    className="flex h-full flex-col overflow-hidden rounded-2xl border border-warm-neutral bg-white/60 transition-colors hover:border-sea-foam"
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-warm-neutral bg-white/60 transition-colors hover:border-sea-foam"
                   >
                     <div className="relative aspect-[16/9] w-full overflow-hidden bg-warm-neutral">
                       {p.cover_url && (
@@ -89,8 +90,9 @@ export default async function BlogPage({
                           {p.excerpt}
                         </p>
                       )}
-                      <span className="mt-auto pt-5 text-sm font-medium text-sea-foam">
-                        {t.readMore} →
+                      <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-medium text-sea-foam">
+                        {t.readMore}
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                       </span>
                     </div>
                   </Link>

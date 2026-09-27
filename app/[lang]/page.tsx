@@ -6,6 +6,7 @@ import PartnerMarquee from "@/components/PartnerMarquee";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/lib/i18n/config";
 import { getPortfolio, getTestimonials, getPartners } from "@/lib/queries";
+import { ArrowRight, ArrowUpRight } from "@/components/ArrowIcons";
 
 export const revalidate = 120;
 
@@ -109,9 +110,10 @@ export default async function Home({
           <Reveal delay={0.1}>
             <Link
               href={`/${lang}/layanan`}
-              className="mt-8 inline-block text-sm font-medium text-sea-foam hover:underline"
+              className="group mt-8 inline-flex items-center gap-1.5 text-sm font-medium text-sea-foam hover:underline"
             >
               {t.servicesLink}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </Reveal>
         </div>
@@ -167,6 +169,7 @@ export default async function Home({
                           className="inline-flex w-fit items-center gap-1.5 rounded-full bg-sea-foam px-4 py-2 text-sm font-medium text-near-black transition-colors hover:bg-off-white"
                         >
                           {dict.portfolio.liveButton}
+                          <ArrowUpRight className="h-4 w-4" />
                         </a>
                       )}
                     </div>
@@ -179,9 +182,10 @@ export default async function Home({
           <Reveal delay={0.1}>
             <Link
               href={`/${lang}/portfolio`}
-              className="mt-8 inline-block text-sm font-medium text-sea-foam hover:underline"
+              className="group mt-8 inline-flex items-center gap-1.5 text-sm font-medium text-sea-foam hover:underline"
             >
               {t.featuredLink}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </Reveal>
         </div>

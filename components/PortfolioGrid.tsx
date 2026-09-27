@@ -6,6 +6,7 @@ import Link from "next/link";
 import Reveal from "./Reveal";
 import WhaleMark from "./WhaleMark";
 import type { PortfolioRow } from "@/lib/queries";
+import { ArrowUpRight } from "@/components/ArrowIcons";
 
 const MAX_TAGS = 6;
 
@@ -148,9 +149,10 @@ export default function PortfolioGrid({
                         href={p.live_url!}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm font-medium text-sea-foam hover:underline"
+                        className="inline-flex items-center gap-1 text-sm font-medium text-sea-foam hover:underline"
                       >
                         {labels.liveButton}
+                        <ArrowUpRight className="h-3.5 w-3.5" />
                       </a>
                     ) : (
                       !detailHref && (

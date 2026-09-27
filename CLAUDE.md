@@ -479,6 +479,8 @@ app/[lang]/admin/        panel admin
   layout.tsx             AdminShell + viewport-fit=cover
   loading.tsx            skeleton saat navigasi
   pengaturan/            saklar situs, baca/tulis site_settings
+app/[lang]/jasa-*/       halaman keyword SEO: website-bali, aplikasi-bali, analisis-data,
+                         pembuatan-sop. Semua lewat LandingPage + dict.landing.*
 app/[lang]/promo/        landing page iklan website, noindex, di luar sitemap
 app/[lang]/promo-aplikasi/ landing page iklan aplikasi, noindex, di luar sitemap
 app/api/revalidate/      purge cache ISR on-demand, dipanggil manager admin
@@ -503,6 +505,7 @@ konten-instagram/        template carousel IG, jadwal, caption, prompt foto
 konten-google-bisnis/    teks dan jadwal post Google Business Profile
 lib/i18n/dictionaries.ts seluruh teks publik, en sumber kebenaran
 lib/seo.ts               canonical, hreflang, OG, breadcrumb
+components/ArrowIcons.tsx panah tautan situs publik. Jangan taruh → ← ↗ di dictionary
 lib/queries.ts           baca Supabase untuk halaman publik
 lib/supabase/public.ts   client cookieless, dipakai halaman publik
 lib/supabase/client.ts   client browser, dipakai admin

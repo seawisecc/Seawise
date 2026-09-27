@@ -8,6 +8,8 @@ const paths = [
   "/layanan",
   "/jasa-pembuatan-website-bali",
   "/jasa-pembuatan-aplikasi-bali",
+  "/jasa-analisis-data",
+  "/jasa-pembuatan-sop",
   "/portfolio",
   "/testimoni",
   "/blog",
@@ -29,7 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority:
           path === ""
             ? 1
-            : path === "/kontak" || path.includes("jasa-pembuatan")
+            : path === "/kontak" || path.startsWith("/jasa-")
               ? 0.8
               : 0.7,
         alternates: {

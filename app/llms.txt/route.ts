@@ -77,6 +77,8 @@ ${faq}
 ${page("layanan", dict.seo.layanan.title, dict.seo.layanan.description)}
 ${page("jasa-pembuatan-website-bali", dict.seo.websiteBali.title, dict.seo.websiteBali.description)}
 ${page("jasa-pembuatan-aplikasi-bali", dict.seo.appBali.title, dict.seo.appBali.description)}
+${page("jasa-analisis-data", dict.seo.dataService.title, dict.seo.dataService.description)}
+${page("jasa-pembuatan-sop", dict.seo.sopService.title, dict.seo.sopService.description)}
 ${page("portfolio", dict.seo.portfolio.title, dict.seo.portfolio.description)}
 ${page("blog", dict.seo.blog.title, dict.seo.blog.description)}
 ${page("tentang", dict.seo.tentang.title, dict.seo.tentang.description)}

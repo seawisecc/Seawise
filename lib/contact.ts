@@ -95,6 +95,14 @@ const WHATSAPP_MESSAGES: Record<string, { en: string; id: string }> = {
     en: "Hi Seawise Studio, I need a custom app for my business and would like to ask about the process and pricing.",
     id: "Halo Seawise Studio, saya butuh aplikasi khusus untuk usaha saya dan mau tanya proses serta biayanya.",
   },
+  "jasa-analisis-data": {
+    en: "Hi Seawise Studio, I would like to ask about data analysis and a dashboard for my business.",
+    id: "Halo Seawise Studio, saya mau tanya soal analisis data dan pembuatan dashboard untuk usaha saya.",
+  },
+  "jasa-pembuatan-sop": {
+    en: "Hi Seawise Studio, I would like to ask about SOP writing and organising documents for my business.",
+    id: "Halo Seawise Studio, saya mau tanya soal pembuatan SOP dan penataan dokumen untuk usaha saya.",
+  },
   portfolio: {
     en: "Hi Seawise Studio, I was looking at your portfolio and would like something similar for my business.",
     id: "Halo Seawise Studio, saya lihat portfolio kalian dan mau yang serupa untuk usaha saya.",

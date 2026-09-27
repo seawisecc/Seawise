@@ -15,6 +15,7 @@ import {
   STUDIO_ID,
 } from "@/lib/seo";
 import type { Locale } from "@/lib/i18n/config";
+import { ArrowLeft } from "@/components/ArrowIcons";
 
 export const revalidate = 120;
 
@@ -120,8 +121,9 @@ export default async function ArticlePage({
       <div className="mx-auto max-w-3xl px-5 pb-20 pt-16 md:px-8 md:pt-24">
         <Link
           href={`/${lang}/blog`}
-          className="text-sm font-medium text-sea-foam hover:underline"
+          className="group inline-flex items-center gap-1.5 text-sm font-medium text-sea-foam hover:underline"
         >
+          <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
           {t.back}
         </Link>
 

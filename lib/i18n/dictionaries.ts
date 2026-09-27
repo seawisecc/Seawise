@@ -60,6 +60,16 @@ const en = {
       description:
         "Custom application development from Bali: ERP, point of sale, small business apps, and migration off spreadsheets, built around how your team already works.",
     },
+    dataService: {
+      title: "Data Analysis & Business Dashboard Services",
+      description:
+        "Data analysis and business dashboards for companies in Bali and across Indonesia. Sales, stock, and finance data turned into reports your team can read at a glance.",
+    },
+    sopService: {
+      title: "SOP Writing & Business Documentation Services",
+      description:
+        "SOP writing, digital document management, and tidy financial and transaction records for businesses in Bali and across Indonesia, so work runs the same every day.",
+    },
     promo: {
       title: "Business Website from Rp2 Million",
       description:
@@ -261,6 +271,154 @@ const en = {
       ctaTitle: "Tell us where the time goes.",
       ctaBody:
         "Walk us through your process and we will help map what a system should actually take off your plate.",
+      ctaButton: "Start a conversation",
+    },
+    data: {
+      eyebrow: "Data Analysis & Dashboards",
+      title: "Data analysis and business dashboards, from the data you already have.",
+      intro:
+        "Most businesses already hold the answers in their sales, stock, and finance records. We clean and combine that data, then build dashboards and reports your team can read at a glance, for companies in Bali and across Indonesia.",
+      pointsTitle: "What you get",
+      points: [
+        {
+          title: "Messy data made usable",
+          body: "Spreadsheets from different people, exports from a POS or accounting tool, and manual notes are cleaned, matched, and combined into one consistent source.",
+        },
+        {
+          title: "A dashboard your team actually opens",
+          body: "The numbers that matter to your business on one screen: sales, margins, stock movement, cash flow. Built around the questions you ask every week, not a generic template.",
+        },
+        {
+          title: "Periodic reports without the manual work",
+          body: "Weekly or monthly reports that no longer depend on someone spending a day copying figures between files.",
+        },
+        {
+          title: "A reading, not just charts",
+          body: "Every dashboard comes with a plain explanation of what the data shows, where the business is leaking, and which figures deserve your attention.",
+        },
+      ],
+      stepsTitle: "How it works",
+      steps: [
+        {
+          title: "Questions first",
+          body: "We start from the decisions you need to make, then work out which data answers them. This first conversation is free.",
+        },
+        {
+          title: "Data audit",
+          body: "We review what you already record, where it lives, and how reliable it is, and tell you plainly if something is missing.",
+        },
+        {
+          title: "Cleaning and dashboard",
+          body: "The data is tidied and combined, then the dashboard and reports are built and checked against figures you already trust.",
+        },
+        {
+          title: "Handover and reading",
+          body: "We walk your team through the dashboard and the findings, and agree how it stays up to date afterwards.",
+        },
+      ],
+      faqTitle: "Frequently asked questions",
+      faq: [
+        {
+          q: "How much does data analysis or a dashboard cost?",
+          a: "It is quoted per project, because the work depends on how many data sources you have and how tidy they are. We confirm the figure after a short review of your data, and the first conversation is free.",
+        },
+        {
+          q: "My data is still in Excel or Google Sheets. Is that enough?",
+          a: "Yes. Most projects start from spreadsheets and exports from existing tools. Part of the work is cleaning and combining them, so you do not need to tidy anything first.",
+        },
+        {
+          q: "Do I need a new application first?",
+          a: "No. A dashboard can read from the data you already keep. If the analysis shows that your recording process itself is the problem, we will say so, and building a system can be discussed separately.",
+        },
+        {
+          q: "How is my business data kept safe?",
+          a: "Access is limited to what the project needs, and how the data is shared with us is agreed at the start. A confidentiality agreement can be part of the scope if you need one.",
+        },
+        {
+          q: "Do you work with businesses outside Bali?",
+          a: "Yes. We are based in Bali and work with clients across Indonesia, and the whole process can run online.",
+        },
+      ],
+      relatedTitle: "Keep reading",
+      relatedPortfolio: "See the systems we have built",
+      relatedServices: "See all our services",
+      ctaTitle: "Tell us which numbers you wish you could see.",
+      ctaBody:
+        "Describe the decisions you make every week and the data you already keep, and we will tell you what a dashboard could show.",
+      ctaButton: "Start a conversation",
+    },
+    sop: {
+      eyebrow: "SOP & Business Documentation",
+      title: "SOP writing and business documentation, so work runs the same every day.",
+      intro:
+        "We write clear SOPs, set up an orderly digital archive, and tidy your financial and transaction records, for businesses in Bali and across Indonesia that have outgrown keeping everything in the owner's head.",
+      pointsTitle: "What you get",
+      points: [
+        {
+          title: "SOPs written from how work really happens",
+          body: "We interview the people who do the job, then write procedures in plain language that a new hire can follow on day one.",
+        },
+        {
+          title: "An archive you can search",
+          body: "Contracts, invoices, permits, and internal documents organised into a clear folder structure and naming convention, so nothing lives only in someone's inbox.",
+        },
+        {
+          title: "Financial and transaction records in order",
+          body: "Scattered notes, receipts, and spreadsheets tidied into a consistent record of money in and out that is ready to hand to your accountant.",
+        },
+        {
+          title: "Templates your team keeps using",
+          body: "Forms, checklists, and report templates that keep the new order in place after we finish.",
+        },
+      ],
+      stepsTitle: "How it works",
+      steps: [
+        {
+          title: "Mapping the work",
+          body: "We learn how the business runs today and which processes or documents cause the most trouble. This first conversation is free.",
+        },
+        {
+          title: "Scope and priorities",
+          body: "You get a written list of the SOPs, archive structure, and records to be tidied, with a price, before the work starts.",
+        },
+        {
+          title: "Writing and organising",
+          body: "SOPs are drafted and reviewed with your team, and documents and records are sorted into the agreed structure.",
+        },
+        {
+          title: "Handover",
+          body: "We walk your team through the new SOPs and archive, and hand over templates so the order holds.",
+        },
+      ],
+      faqTitle: "Frequently asked questions",
+      faq: [
+        {
+          q: "How much does SOP writing cost?",
+          a: "It is quoted per project, based on how many processes need an SOP and how much documentation needs sorting. We confirm the figure after mapping your needs, and the first conversation is free.",
+        },
+        {
+          q: "Do I need an SOP if my business is still small?",
+          a: "Small businesses benefit the most. An SOP lets you hand work to staff without the quality depending on who is on shift, and makes it far easier to train someone new.",
+        },
+        {
+          q: "Does this include bookkeeping or tax reporting?",
+          a: "No. We tidy and structure your financial and transaction records so they are complete and consistent. Bookkeeping and tax reporting stay with your accountant, who will find the records much easier to work with.",
+        },
+        {
+          q: "Can the documents stay in Google Drive or the tools we already use?",
+          a: "Yes. The archive is organised in the storage you already use, so your team does not have to learn a new tool just to find a file.",
+        },
+        {
+          q: "Can SOPs later become an application?",
+          a: "Yes. A clear SOP is the best starting point for building a system, because the workflow is already written down. That step can be discussed separately if you need it.",
+        },
+      ],
+      relatedTitle: "Keep reading",
+      relatedPortfolio: "See the systems we have built",
+      relatedServices: "See all our services",
+      ctaTitle: "Tell us which process always goes wrong.",
+      ctaBody:
+        "Walk us through the work that only runs smoothly when you are there, and we will help turn it into something the team can follow.",
       ctaButton: "Start a conversation",
     },
   },
@@ -478,7 +636,7 @@ const en = {
     intro: "Practical guides and insights from our work building custom systems.",
     readMore: "Read",
     empty: "No articles yet. Check back soon.",
-    back: "← All articles",
+    back: "All articles",
     publishedOn: "Published",
   },
   hero: {
@@ -502,10 +660,10 @@ const en = {
       "We map the real process first, build a system that follows it, then support you until it's genuinely used every day.",
     servicesEyebrow: "Services",
     servicesTitle: "Six ways we help your business run cleaner.",
-    servicesLink: "See service details →",
+    servicesLink: "See service details",
     featuredEyebrow: "Our Apps",
     featuredTitle: "Not mockups, systems that are live and you can open.",
-    featuredLink: "See all projects →",
+    featuredLink: "See all projects",
     showcaseEyebrow: "Product Showcase",
     showcaseTitle: "A closer look at what we've shipped.",
     showcaseIntro:
@@ -558,6 +716,7 @@ const en = {
       "See the apps we've already built, or consult us to develop a custom one: ERP, SMB apps, and system migration.",
     appCtaWork: "See Our Apps",
     appCtaConsult: "Consult Us",
+    learnMore: "Learn more",
     dataTitle: "Data & Administration",
     dataIntro:
       "Not every problem needs a new app. Sometimes the first step is reading the data you already have, or putting the paperwork in order.",
@@ -599,13 +758,13 @@ const en = {
     title: "Not mockups, real apps and websites you can open.",
     intro:
       "Every project below links straight to the live app or site. Give it a try.",
-    liveButton: "View Live ↗",
+    liveButton: "View Live",
     comingSoon: "Coming soon",
     filterAll: "All",
     filterApp: "Apps",
     filterWebsite: "Websites",
     viewDetail: "View details",
-    detailBack: "← All work",
+    detailBack: "All work",
     detailCtaTitle: "Want something like this for your business?",
     detailCtaButton: "Discuss a Project",
   },
@@ -803,6 +962,16 @@ const id: Dictionary = {
       title: "Jasa Pembuatan Aplikasi Bali",
       description:
         "Jasa pembuatan aplikasi custom dari Bali: ERP, kasir, aplikasi UMKM, dan migrasi dari spreadsheet, dibangun mengikuti alur kerja tim kamu yang sekarang.",
+    },
+    dataService: {
+      title: "Jasa Analisis Data & Pembuatan Dashboard Bisnis",
+      description:
+        "Jasa analisis data dan pembuatan dashboard bisnis untuk UMKM dan perusahaan. Data penjualan, stok, dan keuangan dirapikan jadi laporan yang mudah dibaca.",
+    },
+    sopService: {
+      title: "Jasa Pembuatan SOP & Penataan Dokumen Bisnis",
+      description:
+        "Jasa pembuatan dan penyusunan SOP, arsip dokumen digital, serta penataan data keuangan dan transaksi untuk usaha di Bali dan seluruh Indonesia.",
     },
     promo: {
       title: "Website Bisnis Mulai Rp2 Juta",
@@ -1005,6 +1174,154 @@ const id: Dictionary = {
         "Jelaskan prosesmu, kami bantu memetakan apa yang seharusnya bisa diambil alih oleh sistem.",
       ctaButton: "Mulai diskusi",
     },
+    data: {
+      eyebrow: "Analisis Data & Dashboard",
+      title: "Jasa analisis data dan dashboard bisnis, dari data yang sudah kamu punya.",
+      intro:
+        "Sebagian besar usaha sebenarnya sudah menyimpan jawabannya di data penjualan, stok, dan keuangan. Kami merapikan dan menyatukan data itu, lalu membuat dashboard dan laporan yang langsung terbaca, untuk usaha di Bali dan seluruh Indonesia.",
+      pointsTitle: "Yang kamu dapat",
+      points: [
+        {
+          title: "Data berantakan jadi bisa dipakai",
+          body: "Spreadsheet dari beberapa orang, export dari aplikasi kasir atau akuntansi, dan catatan manual dibersihkan, dicocokkan, dan disatukan jadi satu sumber yang konsisten.",
+        },
+        {
+          title: "Dashboard yang benar-benar dibuka tim",
+          body: "Angka yang penting untuk usahamu dalam satu layar: penjualan, margin, pergerakan stok, arus kas. Disusun dari pertanyaan yang kamu ajukan tiap minggu, bukan template umum.",
+        },
+        {
+          title: "Laporan berkala tanpa kerja manual",
+          body: "Laporan mingguan atau bulanan yang tidak lagi bergantung pada seseorang yang menghabiskan sehari menyalin angka antar file.",
+        },
+        {
+          title: "Pembacaan, bukan sekadar grafik",
+          body: "Setiap dashboard disertai penjelasan sederhana tentang apa yang ditunjukkan data, di mana usaha bocor, dan angka mana yang perlu kamu perhatikan.",
+        },
+      ],
+      stepsTitle: "Cara kerjanya",
+      steps: [
+        {
+          title: "Mulai dari pertanyaan",
+          body: "Kami mulai dari keputusan yang perlu kamu ambil, lalu menentukan data mana yang bisa menjawabnya. Diskusi pertama ini gratis.",
+        },
+        {
+          title: "Audit data",
+          body: "Kami periksa apa saja yang sudah kamu catat, di mana tersimpannya, dan seberapa bisa diandalkan, lalu bilang terus terang kalau ada yang kurang.",
+        },
+        {
+          title: "Pembersihan dan dashboard",
+          body: "Data dirapikan dan disatukan, lalu dashboard dan laporannya dibangun dan dicocokkan dengan angka yang sudah kamu percaya.",
+        },
+        {
+          title: "Serah terima dan pembacaan",
+          body: "Kami ajak tim kamu membaca dashboard dan temuannya, lalu sepakati cara menjaganya tetap terbarui setelahnya.",
+        },
+      ],
+      faqTitle: "Pertanyaan yang sering diajukan",
+      faq: [
+        {
+          q: "Berapa biaya jasa analisis data atau pembuatan dashboard?",
+          a: "Biayanya dihitung per proyek, karena pekerjaannya tergantung berapa sumber data yang kamu punya dan seberapa rapi datanya. Angkanya kami konfirmasi setelah meninjau datamu sebentar, dan diskusi pertama gratis.",
+        },
+        {
+          q: "Data saya masih di Excel atau Google Sheets. Cukup?",
+          a: "Cukup. Sebagian besar proyek memang dimulai dari spreadsheet dan export dari aplikasi yang sudah ada. Merapikan dan menyatukannya adalah bagian dari pekerjaan kami, jadi kamu tidak perlu membereskannya dulu.",
+        },
+        {
+          q: "Apakah saya harus punya aplikasi baru dulu?",
+          a: "Tidak. Dashboard bisa membaca data yang sudah kamu simpan. Kalau dari analisis ternyata cara pencatatannya yang bermasalah, kami akan bilang, dan pembuatan sistem bisa dibahas terpisah.",
+        },
+        {
+          q: "Bagaimana keamanan data usaha saya?",
+          a: "Akses dibatasi sesuai kebutuhan proyek, dan cara data dibagikan ke kami disepakati di awal. Perjanjian kerahasiaan bisa dimasukkan ke dalam cakupan kalau kamu membutuhkannya.",
+        },
+        {
+          q: "Apakah melayani usaha di luar Bali?",
+          a: "Ya. Kami berbasis di Bali dan melayani klien di seluruh Indonesia, dan seluruh prosesnya bisa berjalan online.",
+        },
+      ],
+      relatedTitle: "Baca juga",
+      relatedPortfolio: "Lihat sistem yang sudah kami bangun",
+      relatedServices: "Lihat semua layanan kami",
+      ctaTitle: "Ceritakan angka apa yang ingin kamu lihat.",
+      ctaBody:
+        "Jelaskan keputusan yang kamu ambil tiap minggu dan data yang sudah kamu simpan, kami bantu petakan apa yang bisa ditunjukkan sebuah dashboard.",
+      ctaButton: "Mulai diskusi",
+    },
+    sop: {
+      eyebrow: "SOP & Dokumen Bisnis",
+      title: "Jasa pembuatan SOP dan penataan dokumen, supaya kerja berjalan sama setiap hari.",
+      intro:
+        "Kami menyusun SOP yang jelas, menata arsip dokumen digital, dan merapikan data keuangan serta transaksi, untuk usaha di Bali dan seluruh Indonesia yang sudah tidak bisa lagi mengandalkan semuanya tersimpan di kepala pemilik.",
+      pointsTitle: "Yang kamu dapat",
+      points: [
+        {
+          title: "SOP yang ditulis dari cara kerja sebenarnya",
+          body: "Kami berbicara dengan orang yang menjalankan pekerjaannya, lalu menulis prosedur dalam bahasa sederhana yang bisa diikuti karyawan baru sejak hari pertama.",
+        },
+        {
+          title: "Arsip yang bisa dicari",
+          body: "Kontrak, invoice, perizinan, dan dokumen internal ditata dalam struktur folder dan aturan penamaan yang jelas, jadi tidak ada lagi dokumen yang hanya ada di inbox seseorang.",
+        },
+        {
+          title: "Data keuangan dan transaksi yang rapi",
+          body: "Catatan, nota, dan spreadsheet yang tercecer dirapikan jadi pencatatan uang masuk dan keluar yang konsisten dan siap diserahkan ke akuntan kamu.",
+        },
+        {
+          title: "Template yang terus dipakai tim",
+          body: "Formulir, checklist, dan template laporan yang menjaga kerapian baru ini tetap berjalan setelah pekerjaan kami selesai.",
+        },
+      ],
+      stepsTitle: "Cara kerjanya",
+      steps: [
+        {
+          title: "Memetakan pekerjaan",
+          body: "Kami pelajari bagaimana usaha berjalan hari ini, dan proses atau dokumen mana yang paling sering bermasalah. Diskusi pertama ini gratis.",
+        },
+        {
+          title: "Cakupan dan prioritas",
+          body: "Kamu mendapat daftar tertulis SOP yang akan disusun, struktur arsip, dan data yang akan dirapikan, lengkap dengan harga, sebelum pekerjaan dimulai.",
+        },
+        {
+          title: "Menyusun dan menata",
+          body: "SOP disusun dan ditinjau bersama tim kamu, sementara dokumen dan data ditata ke struktur yang sudah disepakati.",
+        },
+        {
+          title: "Serah terima",
+          body: "Kami ajak tim kamu memahami SOP dan arsip yang baru, lalu menyerahkan template supaya kerapiannya bertahan.",
+        },
+      ],
+      faqTitle: "Pertanyaan yang sering diajukan",
+      faq: [
+        {
+          q: "Berapa biaya jasa pembuatan SOP?",
+          a: "Biayanya dihitung per proyek, tergantung berapa proses yang perlu dibuatkan SOP dan seberapa banyak dokumen yang perlu ditata. Angkanya kami konfirmasi setelah memetakan kebutuhanmu, dan diskusi pertama gratis.",
+        },
+        {
+          q: "Apakah usaha kecil juga perlu SOP?",
+          a: "Justru usaha kecil yang paling merasakan manfaatnya. Dengan SOP, pekerjaan bisa diserahkan ke karyawan tanpa kualitasnya bergantung pada siapa yang sedang bertugas, dan melatih orang baru jadi jauh lebih mudah.",
+        },
+        {
+          q: "Apakah termasuk pembukuan atau laporan pajak?",
+          a: "Tidak. Kami merapikan dan menyusun struktur data keuangan dan transaksi supaya lengkap dan konsisten. Pembukuan dan pelaporan pajak tetap dikerjakan akuntan kamu, yang akan jauh lebih mudah bekerja dengan data yang sudah rapi.",
+        },
+        {
+          q: "Apakah dokumennya bisa tetap di Google Drive atau aplikasi yang sudah kami pakai?",
+          a: "Bisa. Arsipnya ditata di penyimpanan yang sudah kamu gunakan, jadi tim tidak perlu belajar aplikasi baru hanya untuk mencari file.",
+        },
+        {
+          q: "Apakah SOP bisa dijadikan aplikasi nantinya?",
+          a: "Bisa. SOP yang jelas adalah titik awal terbaik untuk membangun sistem, karena alur kerjanya sudah tertulis. Langkah itu bisa dibahas terpisah kalau kamu membutuhkannya.",
+        },
+      ],
+      relatedTitle: "Baca juga",
+      relatedPortfolio: "Lihat sistem yang sudah kami bangun",
+      relatedServices: "Lihat semua layanan kami",
+      ctaTitle: "Ceritakan proses mana yang selalu bermasalah.",
+      ctaBody:
+        "Jelaskan pekerjaan yang hanya lancar kalau kamu ada di tempat, kami bantu mengubahnya jadi sesuatu yang bisa diikuti tim.",
+      ctaButton: "Mulai diskusi",
+    },
   },
   promo: {
     eyebrow: "Jasa Pembuatan Website, Bali",
@@ -1202,7 +1519,7 @@ const id: Dictionary = {
     intro: "Panduan praktis dan insight dari pengalaman kami membangun sistem custom.",
     readMore: "Baca",
     empty: "Belum ada artikel. Nantikan segera.",
-    back: "← Semua artikel",
+    back: "Semua artikel",
     publishedOn: "Terbit",
   },
   hero: {
@@ -1226,10 +1543,10 @@ const id: Dictionary = {
       "Kami petakan proses nyata dulu, bangun sistem yang mengikuti itu, lalu dampingi sampai benar-benar dipakai sehari-hari.",
     servicesEyebrow: "Layanan",
     servicesTitle: "Enam cara kami bantu bisnis kamu jalan lebih rapi.",
-    servicesLink: "Lihat detail layanan →",
+    servicesLink: "Lihat detail layanan",
     featuredEyebrow: "Aplikasi Kami",
     featuredTitle: "Bukan mockup, sistem yang sudah jalan dan bisa kamu buka.",
-    featuredLink: "Lihat semua proyek →",
+    featuredLink: "Lihat semua proyek",
     showcaseEyebrow: "Cuplikan Layar",
     showcaseTitle: "Lihat lebih dekat karya yang sudah kami rilis.",
     showcaseIntro:
@@ -1282,6 +1599,7 @@ const id: Dictionary = {
       "Lihat aplikasi yang sudah kami kembangkan, atau konsultasi untuk develop aplikasi custom: ERP, aplikasi UMKM, dan migrasi sistem.",
     appCtaWork: "Lihat Aplikasi Kami",
     appCtaConsult: "Konsultasi Develop",
+    learnMore: "Selengkapnya",
     dataTitle: "Data & Administrasi",
     dataIntro:
       "Tidak semua masalah butuh aplikasi baru. Kadang langkah pertamanya adalah membaca data yang sudah ada, atau merapikan administrasinya dulu.",
@@ -1323,13 +1641,13 @@ const id: Dictionary = {
     title: "Bukan mockup, aplikasi & website yang sudah jalan dan bisa kamu buka.",
     intro:
       "Setiap proyek punya link langsung ke aplikasi atau website live. Silakan dicoba.",
-    liveButton: "Lihat Live ↗",
+    liveButton: "Lihat Live",
     comingSoon: "Segera hadir",
     filterAll: "Semua",
     filterApp: "Aplikasi",
     filterWebsite: "Website",
     viewDetail: "Lihat detail",
-    detailBack: "← Semua karya",
+    detailBack: "Semua karya",
     detailCtaTitle: "Mau yang seperti ini untuk bisnismu?",
     detailCtaButton: "Diskusi Proyek",
   },
