@@ -460,10 +460,13 @@ Yang gampang salah:
   `foto-ai/`, lalu cover blog atau mockup screenshot. Post edukasi memakai
   cover artikel blog yang topiknya sama, jadi feed dan blog terlihat satu
   keluarga.
-- **Claude tidak punya alat pembuat gambar maupun video.** Foto AI dibuat
-  pemilik dari prompt di `konten-instagram/prompt-gambar.md`, klip Reel dari
-  `prompt-video.md` (Kling / Google Flow, keduanya versi gratis/Plus).
-  Jangan menjanjikan generate sendiri. Yang Claude kerjakan: merangkai klip
+- **Gambar bisa di-generate lewat MCP Canva, video tidak.** `generate-image`
+  hanya mengembalikan thumbnail 199px. Untuk resolusi penuh: taruh media-nya
+  full-bleed di desain 1920x1080 lewat `edit-design` (`insert_fill`), commit,
+  lalu `export-design` JPG lebar 1600. Cover artikel 13 dan 14 dibuat begini
+  pada 27 Sep 2026, desain wadahnya `DAHWZulrpPc`. Periksa tangan dan teks di
+  resolusi penuh sebelum dipakai. Klip Reel tetap dari pemilik lewat
+  `prompt-video.md` (Kling / Google Flow). Yang Claude kerjakan: merangkai klip
   jadi Reel lewat `render_reels.py` (ffmpeg), lihat bagian Reel di README
   folder itu.
 - Brand kit satu-satunya di Canva milik Damar Indonesia, bukan Seawise.

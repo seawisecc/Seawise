@@ -54,8 +54,8 @@ excerpt dipakai langsung sebagai meta description.
 | `10-website-custom-wordpress-atau-builder` | website custom vs WordPress | draft di database, cover terpasang |
 | `11-laporan-sipnap-apotek-otomatis` | laporan SIPNAP apotek | draft di database, cover terpasang |
 | `12-website-reservasi-restoran-bali` | website reservasi restoran Bali | draft di database, cover terpasang |
-| `13-contoh-sop-usaha-kecil` | contoh SOP usaha kecil | naskah, belum di database, belum ada cover |
-| `14-analisis-data-penjualan-umkm` | analisis data penjualan UMKM | naskah, belum di database, belum ada cover |
+| `13-contoh-sop-usaha-kecil` | contoh SOP usaha kecil | draft di database, cover terpasang (Canva, 27 Sep 2026) |
+| `14-analisis-data-penjualan-umkm` | analisis data penjualan UMKM | draft di database, cover terpasang (Canva, 27 Sep 2026) |
 
 Artikel baru jangan ditayangkan sebelum punya cover, karena kartu blog tanpa
 gambar akan tampil beda dari kartu lain. Unggah cover 16:9 lewat
