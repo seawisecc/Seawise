@@ -10,7 +10,7 @@ import { useRowReorder, nextSortOrder } from "./useRowReorder";
 import ReorderHandle from "./ReorderHandle";
 
 /** Homepage renders only the first three featured rows (see app/[lang]/page.tsx). */
-const HOME_FEATURED_LIMIT = 3;
+export const HOME_FEATURED_LIMIT = 3;
 
 type Row = {
   id: string;
