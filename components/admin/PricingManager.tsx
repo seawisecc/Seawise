@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { SkeletonRows } from "./AdminSkeleton";
 import { revalidatePublicPages } from "@/lib/revalidate";
+import { PlusIcon } from "./AdminIcons";
 
 type Row = {
   id: string;
@@ -125,9 +126,10 @@ export default function PricingManager() {
         <h1 className="font-display text-3xl font-bold text-forest-dark">Price List</h1>
         <button
           onClick={() => start(null)}
-          className="rounded-full bg-forest-dark px-5 py-2.5 text-sm font-medium text-off-white hover:bg-sea-foam"
+          className="inline-flex items-center gap-2 rounded-full bg-forest-dark px-5 py-2.5 text-sm font-medium text-off-white hover:bg-sea-foam"
         >
-          + Tambah
+          <PlusIcon className="h-4 w-4" />
+          Tambah
         </button>
       </div>
       <p className="mt-1.5 text-forest-dark/60">Paket pengembangan website (tampil di halaman Layanan).</p>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { MoreIcon } from "./AdminIcons";
+import { MoreIcon, ExternalIcon, LogoutIcon } from "./AdminIcons";
 import InstallAppButton from "./InstallAppButton";
 import {
   PRIMARY_SECTIONS,
@@ -130,21 +130,23 @@ export default function AdminBottomNav({
                 <Link
                   href={`/${lang}`}
                   onClick={() => setSheetOpen(false)}
-                  className="rounded-lg px-3 py-2.5 text-xs font-medium text-forest-dark/60 hover:bg-warm-neutral"
+                  className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-forest-dark/60 hover:bg-warm-neutral"
                 >
-                  ← Lihat website
+                  <ExternalIcon className="h-[18px] w-[18px] shrink-0" />
+                  Lihat website
                 </Link>
                 {/* Di ponsel inilah pemasangan paling berguna. Komponennya
                     menyembunyikan diri kalau panel sudah terpasang. */}
-                <InstallAppButton className="text-[0.75rem]" />
+                <InstallAppButton />
                 <button
                   type="button"
                   onClick={() => {
                     setSheetOpen(false);
                     onSignOut();
                   }}
-                  className="rounded-lg px-3 py-2.5 text-left text-xs font-medium text-red-700 hover:bg-red-50"
+                  className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium text-red-700 hover:bg-red-50"
                 >
+                  <LogoutIcon className="h-[18px] w-[18px] shrink-0" />
                   Keluar
                 </button>
               </div>

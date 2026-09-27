@@ -8,6 +8,7 @@ import { uploadImage } from "@/lib/uploadImage";
 import { revalidatePublicPages } from "@/lib/revalidate";
 import { useRowReorder, nextSortOrder } from "./useRowReorder";
 import ReorderHandle from "./ReorderHandle";
+import { PlusIcon, CloseIcon } from "./AdminIcons";
 
 /** Homepage renders only the first three featured rows (see app/[lang]/page.tsx). */
 export const HOME_FEATURED_LIMIT = 3;
@@ -282,9 +283,10 @@ export default function PortfolioManager() {
         <h1 className="font-display text-3xl font-bold text-forest-dark">Portfolio</h1>
         <button
           onClick={startNew}
-          className="rounded-full bg-forest-dark px-5 py-2.5 text-sm font-medium text-off-white hover:bg-sea-foam"
+          className="inline-flex items-center gap-2 rounded-full bg-forest-dark px-5 py-2.5 text-sm font-medium text-off-white hover:bg-sea-foam"
         >
-          + Tambah
+          <PlusIcon className="h-4 w-4" />
+          Tambah
         </button>
       </div>
 
@@ -548,9 +550,10 @@ export default function PortfolioManager() {
                     <button
                       type="button"
                       onClick={() => setEditing({ ...editing, cover_url: "" })}
-                      className="absolute right-1 top-1 rounded-full bg-black/60 px-1.5 text-xs text-white"
+                      aria-label="Hapus gambar"
+                      className="absolute right-1.5 top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-black/60 text-white transition-colors hover:bg-black/80"
                     >
-                      ✕
+                      <CloseIcon className="h-3.5 w-3.5" />
                     </button>
                   </div>
                 )}
@@ -575,9 +578,10 @@ export default function PortfolioManager() {
                         <button
                           type="button"
                           onClick={() => setEditing({ ...editing, screenshot_url: "" })}
-                          className="absolute right-1 top-1 rounded-full bg-black/60 px-1.5 text-xs text-white"
+                          aria-label="Hapus gambar"
+                      className="absolute right-1.5 top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-black/60 text-white transition-colors hover:bg-black/80"
                         >
-                          ✕
+                          <CloseIcon className="h-3.5 w-3.5" />
                         </button>
                       </div>
                     )}
@@ -593,9 +597,10 @@ export default function PortfolioManager() {
                         <button
                           type="button"
                           onClick={() => setEditing({ ...editing, mobile_url: "" })}
-                          className="absolute right-1 top-1 rounded-full bg-black/60 px-1.5 text-xs text-white"
+                          aria-label="Hapus gambar"
+                      className="absolute right-1.5 top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-black/60 text-white transition-colors hover:bg-black/80"
                         >
-                          ✕
+                          <CloseIcon className="h-3.5 w-3.5" />
                         </button>
                       </div>
                     )}
@@ -616,9 +621,10 @@ export default function PortfolioManager() {
                         <button
                           type="button"
                           onClick={() => removeGalleryImage(g)}
-                          className="absolute right-1 top-1 rounded-full bg-black/60 px-1.5 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100"
+                          aria-label="Hapus gambar"
+                          className="absolute right-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100"
                         >
-                          ✕
+                          <CloseIcon className="h-3.5 w-3.5" />
                         </button>
                       </div>
                     ))}

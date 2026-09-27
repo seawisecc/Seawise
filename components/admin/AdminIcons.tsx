@@ -1,4 +1,6 @@
 /** Minimal line icons for the admin UI. All use currentColor. */
+import type { ReactNode } from "react";
+
 type P = { className?: string };
 const base = "h-5 w-5";
 
@@ -104,4 +106,69 @@ export function MoreIcon({ className = base }: P) {
       <circle cx="19" cy="12" r="1.4" fill="currentColor" stroke="none" />
     </svg>
   );
+}
+
+/* ── Small UI glyphs. Same 1.7 stroke as the menu icons, so text arrows and
+   symbols never have to stand in for them. ─────────────────────────────── */
+
+function Glyph({ className = "h-4 w-4", children }: P & { children: ReactNode }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {children}
+    </svg>
+  );
+}
+export function PlusIcon({ className }: P) {
+  return <Glyph className={className}><path d="M12 5v14M5 12h14" /></Glyph>;
+}
+export function ChevronRightIcon({ className }: P) {
+  return <Glyph className={className}><path d="M9 6l6 6-6 6" /></Glyph>;
+}
+export function ExternalIcon({ className }: P) {
+  return (
+    <Glyph className={className}>
+      <path d="M14 4h6v6" />
+      <path d="M20 4l-9 9" />
+      <path d="M18 14v4a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h4" />
+    </Glyph>
+  );
+}
+export function LogoutIcon({ className }: P) {
+  return (
+    <Glyph className={className}>
+      <path d="M15 4h3a2 2 0 012 2v12a2 2 0 01-2 2h-3" />
+      <path d="M10 8l-4 4 4 4" />
+      <path d="M6 12h10" />
+    </Glyph>
+  );
+}
+export function DownloadIcon({ className }: P) {
+  return (
+    <Glyph className={className}>
+      <path d="M12 4v11" />
+      <path d="M7 10l5 5 5-5" />
+      <path d="M5 20h14" />
+    </Glyph>
+  );
+}
+export function CloseIcon({ className }: P) {
+  return <Glyph className={className}><path d="M6 6l12 12M18 6L6 18" /></Glyph>;
+}
+export function CheckIcon({ className }: P) {
+  return <Glyph className={className}><path d="M5 12.5l4.5 4.5L19 7" /></Glyph>;
+}
+export function AlertIcon({ className }: P) {
+  return (
+    <Glyph className={className}>
+      <path d="M12 3.5l9.5 16.5h-19L12 3.5z" />
+      <path d="M12 10v4" />
+      <circle cx="12" cy="17" r="0.9" fill="currentColor" stroke="none" />
+    </Glyph>
+  );
+}
+export function ArrowUpIcon({ className }: P) {
+  return <Glyph className={className}><path d="M12 19V5M6 11l6-6 6 6" /></Glyph>;
+}
+export function ArrowDownIcon({ className }: P) {
+  return <Glyph className={className}><path d="M12 5v14M6 13l6 6 6-6" /></Glyph>;
 }

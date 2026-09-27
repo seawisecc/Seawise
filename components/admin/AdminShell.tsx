@@ -8,6 +8,7 @@ import Logo from "@/components/Logo";
 import Wordmark from "@/components/Wordmark";
 import AdminBottomNav from "./AdminBottomNav";
 import InstallAppButton from "./InstallAppButton";
+import { ExternalIcon, LogoutIcon } from "./AdminIcons";
 import {
   ADMIN_SECTIONS,
   activeSectionLabel,
@@ -51,46 +52,54 @@ export default function AdminShell({
         </span>
       </div>
 
-      {/* Sidebar, desktop only. */}
-      <aside className="hidden w-56 flex-col border-r border-warm-neutral bg-white/60 p-5 md:flex">
-        <Link href={base} className="mb-8 flex items-center gap-2.5 text-forest-dark">
+      {/* Sidebar, desktop only. Sticky and exactly one screen tall, so the
+          footer actions stay on screen however long the page is. It used to
+          stretch with the content and push "Keluar" below the fold. */}
+      <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-warm-neutral bg-white/60 p-4 md:flex">
+        <Link href={base} className="mb-6 flex items-center gap-2.5 px-2 pt-1 text-forest-dark">
           <Logo className="h-7 w-7" colorClass="text-forest-dark" />
           <Wordmark className="text-lg" />
         </Link>
 
-        <nav className="flex flex-1 flex-col gap-1">
-          {ADMIN_SECTIONS.map(({ slug, label }) => {
+        <nav className="-mx-1 flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto px-1">
+          {ADMIN_SECTIONS.map(({ slug, label, Icon }) => {
             const active = isSectionActive(pathname, base, slug);
             return (
               <Link
                 key={slug || "dashboard"}
                 href={sectionHref(base, slug)}
-                className={`rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                aria-current={active ? "page" : undefined}
+                className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
                   active
                     ? "bg-forest-dark text-off-white"
-                    : "text-forest-dark/75 hover:bg-warm-neutral"
+                    : "text-forest-dark/70 hover:bg-warm-neutral/70 hover:text-forest-dark"
                 }`}
               >
+                <Icon className={`h-[18px] w-[18px] shrink-0 ${active ? "text-off-white" : "text-forest-dark/50"}`} />
                 {label}
               </Link>
             );
           })}
         </nav>
 
-        <div className="mt-4 flex flex-col gap-2 border-t border-warm-neutral pt-4">
+        <div className="mt-3 flex flex-col gap-0.5 border-t border-warm-neutral pt-3">
           <Link
             href={`/${lang}`}
-            className="rounded-lg px-3 py-2 text-xs font-medium text-forest-dark/60 hover:bg-warm-neutral"
+            target="_blank"
+            rel="noopener"
+            className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-forest-dark/60 transition-colors hover:bg-warm-neutral/70 hover:text-forest-dark"
           >
-            ← Lihat website
+            <ExternalIcon className="h-[18px] w-[18px] shrink-0" />
+            Lihat website
           </Link>
           {/* Hilang sendiri kalau panel sudah terpasang atau browser tidak
               mendukung. Sengaja hanya di admin, situs publik tidak disentuh. */}
           <InstallAppButton />
           <button
             onClick={signOut}
-            className="rounded-lg px-3 py-2 text-left text-xs font-medium text-red-700 hover:bg-red-50"
+            className="flex items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-medium text-red-700 transition-colors hover:bg-red-50"
           >
+            <LogoutIcon className="h-[18px] w-[18px] shrink-0" />
             Keluar
           </button>
         </div>

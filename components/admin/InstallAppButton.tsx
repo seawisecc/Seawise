@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { DownloadIcon } from "./AdminIcons";
 
 /**
  * "Pasang aplikasi" untuk panel admin.
@@ -67,8 +68,9 @@ export default function InstallAppButton({ className = "" }: { className?: strin
       <div className={className}>
         <button
           onClick={() => setPetunjuk((v) => !v)}
-          className="w-full rounded-lg px-3 py-2 text-left text-xs font-medium text-forest-dark/60 hover:bg-warm-neutral"
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-medium text-forest-dark/60 transition-colors hover:bg-warm-neutral/70 hover:text-forest-dark"
         >
+          <DownloadIcon className="h-[18px] w-[18px] shrink-0" />
           Pasang aplikasi
         </button>
         {petunjuk && (
@@ -90,8 +92,9 @@ export default function InstallAppButton({ className = "" }: { className?: strin
         // Event pemasangan hanya sekali pakai, apa pun jawabannya.
         setPrompt(null);
       }}
-      className={`rounded-lg px-3 py-2 text-left text-xs font-medium text-forest-dark/60 hover:bg-warm-neutral ${className}`}
+      className={`flex items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-medium text-forest-dark/60 transition-colors hover:bg-warm-neutral/70 hover:text-forest-dark ${className}`}
     >
+      <DownloadIcon className="h-[18px] w-[18px] shrink-0" />
       Pasang aplikasi
     </button>
   );

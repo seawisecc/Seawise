@@ -8,6 +8,7 @@ import { uploadImage } from "@/lib/uploadImage";
 import { revalidatePublicPages } from "@/lib/revalidate";
 import { useRowReorder, nextSortOrder } from "./useRowReorder";
 import ReorderHandle from "./ReorderHandle";
+import { PlusIcon } from "./AdminIcons";
 
 type Row = {
   id: string;
@@ -135,9 +136,10 @@ export default function PartnerManager() {
         <h1 className="font-display text-3xl font-bold text-forest-dark">Partner</h1>
         <button
           onClick={() => { setEditing({ ...empty }); setMsg(""); }}
-          className="rounded-full bg-forest-dark px-5 py-2.5 text-sm font-medium text-off-white hover:bg-sea-foam"
+          className="inline-flex items-center gap-2 rounded-full bg-forest-dark px-5 py-2.5 text-sm font-medium text-off-white hover:bg-sea-foam"
         >
-          + Tambah
+          <PlusIcon className="h-4 w-4" />
+          Tambah
         </button>
       </div>
 

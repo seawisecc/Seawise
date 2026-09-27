@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { SkeletonBar } from "./AdminSkeleton";
-import { WalletIcon, TrendUpIcon, TrendDownIcon } from "./AdminIcons";
+import { WalletIcon, TrendUpIcon, TrendDownIcon, PlusIcon, DownloadIcon, ArrowUpIcon, ArrowDownIcon } from "./AdminIcons";
 import { AreaChart, ShareBars, ChartStyles, CHART_COLORS } from "./DashboardCharts";
 import {
   MONTHS,
@@ -318,8 +318,9 @@ export default function FinanceManager() {
             type="button"
             onClick={exportCsv}
             disabled={!listed.length}
-            className="rounded-full border border-warm-neutral px-4 py-2 text-sm font-medium text-forest-dark hover:border-sea-foam disabled:opacity-40"
+            className="inline-flex items-center gap-1.5 rounded-full border border-warm-neutral px-4 py-2 text-sm font-medium text-forest-dark hover:border-sea-foam disabled:opacity-40"
           >
+            <DownloadIcon className="h-4 w-4" />
             Export CSV
           </button>
           <button
@@ -328,9 +329,10 @@ export default function FinanceManager() {
               setFormMsg("");
               setEditing(emptyDraft());
             }}
-            className="rounded-full bg-forest-dark px-4 py-2 text-sm font-medium text-off-white hover:bg-sea-foam"
+            className="inline-flex items-center gap-1.5 rounded-full bg-forest-dark px-4 py-2 text-sm font-medium text-off-white hover:bg-sea-foam"
           >
-            + Transaksi
+            <PlusIcon className="h-4 w-4" />
+            Transaksi
           </button>
         </div>
       </div>
@@ -837,8 +839,9 @@ function Stat({
       <p className="mt-1 truncate text-xs text-forest-dark/50">
         {hasDelta ? (
           <>
-            <span className={`font-medium ${good ? "text-emerald-700" : "text-red-700"}`}>
-              {up ? "▲" : "▼"} {Math.abs(Math.round(delta!))}%
+            <span className={`inline-flex items-center gap-0.5 align-bottom font-medium ${good ? "text-emerald-700" : "text-red-700"}`}>
+              {up ? <ArrowUpIcon className="h-3.5 w-3.5" /> : <ArrowDownIcon className="h-3.5 w-3.5" />}
+              {Math.abs(Math.round(delta!))}%
             </span>{" "}
             vs periode sebelumnya
           </>

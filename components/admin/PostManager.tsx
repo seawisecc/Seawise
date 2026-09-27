@@ -10,6 +10,7 @@ import { revalidatePublicPages } from "@/lib/revalidate";
 import { useRowReorder, nextSortOrder } from "./useRowReorder";
 import ReorderHandle from "./ReorderHandle";
 import { postContentWarnings } from "./postContentWarnings";
+import { PlusIcon } from "./AdminIcons";
 
 type Row = {
   id: string;
@@ -225,9 +226,10 @@ export default function PostManager() {
         <h1 className="font-display text-3xl font-bold text-forest-dark">Blog</h1>
         <button
           onClick={() => { setEditing({ ...empty }); setMsg(""); }}
-          className="rounded-full bg-forest-dark px-5 py-2.5 text-sm font-medium text-off-white hover:bg-sea-foam"
+          className="inline-flex items-center gap-2 rounded-full bg-forest-dark px-5 py-2.5 text-sm font-medium text-off-white hover:bg-sea-foam"
         >
-          + Tulis Artikel
+          <PlusIcon className="h-4 w-4" />
+          Tulis Artikel
         </button>
       </div>
       <p className="mt-1.5 text-forest-dark/60">Artikel tampil di halaman /blog dan diindeks Google.</p>

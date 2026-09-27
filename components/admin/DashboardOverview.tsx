@@ -16,6 +16,12 @@ import {
   UsersIcon,
   InboxIcon,
   ArticleIcon,
+  PlusIcon,
+  ChevronRightIcon,
+  CheckIcon,
+  AlertIcon,
+  ArrowUpIcon,
+  ArrowDownIcon,
 } from "./AdminIcons";
 
 type Tx = {
@@ -195,11 +201,13 @@ export default function DashboardOverview({ lang }: { lang: string }) {
           <h1 className="mt-1 font-display text-3xl font-bold text-forest-dark">Dashboard</h1>
         </div>
         <div className="flex gap-2">
-          <Link href={admin("blog")} className="rounded-full bg-forest-dark px-4 py-2 text-sm font-medium text-off-white hover:bg-sea-foam">
-            + Artikel
+          <Link href={admin("blog")} className="inline-flex items-center gap-1.5 rounded-full bg-forest-dark px-4 py-2 text-sm font-medium text-off-white hover:bg-sea-foam">
+            <PlusIcon className="h-4 w-4" />
+            Artikel
           </Link>
-          <Link href={admin("keuangan")} className="rounded-full border border-warm-neutral px-4 py-2 text-sm font-medium text-forest-dark hover:border-sea-foam">
-            + Transaksi
+          <Link href={admin("keuangan")} className="inline-flex items-center gap-1.5 rounded-full border border-warm-neutral px-4 py-2 text-sm font-medium text-forest-dark hover:border-sea-foam">
+            <PlusIcon className="h-4 w-4" />
+            Transaksi
           </Link>
         </div>
       </div>
@@ -422,8 +430,9 @@ export default function DashboardOverview({ lang }: { lang: string }) {
         <Card>
           <div className="flex items-center justify-between">
             <CardTitle>Pesan terbaru</CardTitle>
-            <Link href={admin("leads")} className="text-sm font-medium text-sea-foam hover:underline">
-              Semua →
+            <Link href={admin("leads")} className="inline-flex items-center gap-0.5 text-sm font-medium text-sea-foam hover:underline">
+              Semua
+              <ChevronRightIcon className="h-4 w-4" />
             </Link>
           </div>
           <ul className="mt-3 divide-y divide-warm-neutral/70">
@@ -440,11 +449,16 @@ export default function DashboardOverview({ lang }: { lang: string }) {
                   </p>
                 </div>
                 <span
-                  className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-medium ${
+                  className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${
                     l.status === "new" ? "bg-amber-100 text-amber-800" : "bg-warm-neutral text-forest-dark/60"
                   }`}
                 >
-                  {l.status === "new" ? "● Baru" : "✓ Dibalas"}
+                  {l.status === "new" ? (
+                    <span className="h-1.5 w-1.5 rounded-full bg-amber-600" />
+                  ) : (
+                    <CheckIcon className="h-3.5 w-3.5" />
+                  )}
+                  {l.status === "new" ? "Baru" : "Dibalas"}
                 </span>
               </li>
             ))}
@@ -456,8 +470,9 @@ export default function DashboardOverview({ lang }: { lang: string }) {
         <Card>
           <div className="flex items-center justify-between">
             <CardTitle>Transaksi terbaru</CardTitle>
-            <Link href={admin("keuangan")} className="text-sm font-medium text-sea-foam hover:underline">
-              Semua →
+            <Link href={admin("keuangan")} className="inline-flex items-center gap-0.5 text-sm font-medium text-sea-foam hover:underline">
+              Semua
+              <ChevronRightIcon className="h-4 w-4" />
             </Link>
           </div>
           <ul className="mt-3 divide-y divide-warm-neutral/70">
@@ -528,8 +543,9 @@ export default function DashboardOverview({ lang }: { lang: string }) {
         <Card className="mt-3 sm:mt-4">
           <div className="flex items-center justify-between">
             <CardTitle>Draft artikel</CardTitle>
-            <Link href={admin("blog")} className="text-sm font-medium text-sea-foam hover:underline">
-              Buka blog →
+            <Link href={admin("blog")} className="inline-flex items-center gap-0.5 text-sm font-medium text-sea-foam hover:underline">
+              Buka blog
+              <ChevronRightIcon className="h-4 w-4" />
             </Link>
           </div>
           <ul className="mt-3 flex flex-wrap gap-2">
@@ -641,8 +657,9 @@ function Kpi({
       <p className="mt-1 truncate text-xs text-forest-dark/50">
         {hasDelta ? (
           <>
-            <span className={good ? "font-medium text-emerald-700" : "font-medium text-red-700"}>
-              {up ? "▲" : "▼"} {Math.abs(Math.round(delta!))}%
+            <span className={`inline-flex items-center gap-0.5 align-bottom font-medium ${good ? "text-emerald-700" : "text-red-700"}`}>
+              {up ? <ArrowUpIcon className="h-3.5 w-3.5" /> : <ArrowDownIcon className="h-3.5 w-3.5" />}
+              {Math.abs(Math.round(delta!))}%
             </span>{" "}
             vs bulan lalu
           </>
@@ -691,9 +708,9 @@ function ContentCard({
         <div className="dash-grow-x h-full rounded-full bg-sea-foam" style={{ width: `${pct}%` }} />
       </div>
       {note && (
-        <p className={`mt-2.5 text-xs leading-snug ${warn ? "text-amber-800" : "text-forest-dark/50"}`}>
-          {warn ? "⚠ " : ""}
-          {note}
+        <p className={`mt-2.5 flex items-start gap-1.5 text-xs leading-snug ${warn ? "text-amber-800" : "text-forest-dark/50"}`}>
+          {warn && <AlertIcon className="mt-px h-3.5 w-3.5 shrink-0" />}
+          <span>{note}</span>
         </p>
       )}
     </Link>
