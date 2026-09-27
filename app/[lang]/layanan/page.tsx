@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
-import { WebsiteIcon, AppIcon } from "@/components/ServiceIcons";
+import { WebsiteIcon, AppIcon, DataIcon, DocsIcon } from "@/components/ServiceIcons";
 import FaqSection, { faqJsonLd } from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -24,6 +24,12 @@ export async function generateMetadata({
 
 export const revalidate = 120;
 
+/** `servicesList` entries shown in the data & administration group, in order. */
+const DATA_SERVICES = [
+  { slug: "analisis-data", Icon: DataIcon },
+  { slug: "penataan-dokumen", Icon: DocsIcon },
+];
+
 export default async function LayananPage({
   params,
 }: {
@@ -33,6 +39,10 @@ export default async function LayananPage({
   const dict = getDictionary(lang);
   const t = dict.services;
   const pricing = await getPricing(lang);
+  const dataServices = DATA_SERVICES.flatMap(({ slug, Icon }) => {
+    const s = dict.servicesList.find((x) => x.slug === slug);
+    return s ? [{ ...s, Icon }] : [];
+  });
 
   return (
     <>
@@ -178,6 +188,56 @@ export default async function LayananPage({
           </Reveal>
         </div>
       </section>
+
+      {/* ── Data & administration group ─────────────────────────── */}
+      {dataServices.length > 0 && (
+        <section className="bg-off-white">
+          <div className="mx-auto max-w-content px-5 pb-16 pt-6 md:px-8">
+            <Reveal>
+              <h2 className="font-display text-2xl font-bold text-forest-dark md:text-3xl">
+                {t.dataTitle}
+              </h2>
+              <p className="mt-1.5 max-w-2xl leading-relaxed text-forest-dark/70">
+                {t.dataIntro}
+              </p>
+            </Reveal>
+
+            <div className="mt-10 grid gap-5 md:grid-cols-2">
+              {dataServices.map((s, i) => (
+                <Reveal key={s.slug} delay={i * 0.08} className="h-full">
+                  <div className="flex h-full flex-col rounded-2xl border border-warm-neutral bg-white/60 p-7 transition-colors hover:border-sea-foam">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-warm-neutral text-forest-dark">
+                      <s.Icon className="h-6 w-6" />
+                    </span>
+                    <h3 className="mt-5 font-display text-xl font-bold text-forest-dark">
+                      {s.title}
+                    </h3>
+                    <p className="mt-3 flex-1 leading-relaxed text-forest-dark/70">
+                      {s.summary}
+                    </p>
+                    <ul className="mt-5 flex flex-wrap gap-2">
+                      {s.points.map((p) => (
+                        <li
+                          key={p}
+                          className="rounded-full bg-warm-neutral px-3 py-1 text-xs font-medium text-forest-dark/80"
+                        >
+                          {p}
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      href={`/${lang}/kontak`}
+                      className="mt-6 inline-block w-fit rounded-full bg-forest-dark px-5 py-2.5 text-sm font-medium text-off-white transition-colors hover:bg-sea-foam"
+                    >
+                      {t.ctaButton}
+                    </Link>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <FaqSection title={dict.faq.title} items={dict.faq.items} />
     </>

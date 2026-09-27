@@ -23,7 +23,7 @@ const en = {
     layanan: {
       title: "Website & App Development Services",
       description:
-        "Custom website and application development from Seawise Studio in Bali. ERP, business apps, and company profile sites, built from how your team actually works.",
+        "Custom websites and apps, data analysis dashboards, and SOP and admin documentation from Seawise Studio in Bali, built from how your team actually works.",
     },
     portfolio: {
       title: "Website & App Project Portfolio",
@@ -501,7 +501,7 @@ const en = {
     solutionBody:
       "We map the real process first, build a system that follows it, then support you until it's genuinely used every day.",
     servicesEyebrow: "Services",
-    servicesTitle: "Four ways we help your business run cleaner.",
+    servicesTitle: "Six ways we help your business run cleaner.",
     servicesLink: "See service details →",
     featuredEyebrow: "Our Apps",
     featuredTitle: "Not mockups, systems that are live and you can open.",
@@ -543,7 +543,7 @@ const en = {
   },
   services: {
     eyebrow: "Services",
-    title: "Four ways we help your business run cleaner.",
+    title: "Six ways we help your business run cleaner.",
     intro:
       "Every service is built from your team's real workflow, not a forced template.",
     pricingEyebrow: "Pricing",
@@ -558,6 +558,9 @@ const en = {
       "See the apps we've already built, or consult us to develop a custom one: ERP, SMB apps, and system migration.",
     appCtaWork: "See Our Apps",
     appCtaConsult: "Consult Us",
+    dataTitle: "Data & Administration",
+    dataIntro:
+      "Not every problem needs a new app. Sometimes the first step is reading the data you already have, or putting the paperwork in order.",
     perProject: "/ project",
     popular: "Popular",
     ctaTitle: "Not sure which one fits your business?",
@@ -632,6 +635,8 @@ const en = {
       "Apps for growing small businesses",
       "Migration from spreadsheets / legacy software",
       "Websites & web apps",
+      "Data analysis & business dashboards",
+      "SOPs & business documentation",
     ],
     form: {
       name: "Name",
@@ -697,6 +702,20 @@ const en = {
         "Fast, modern, easy-to-manage websites and web apps, from company profiles to internal portals.",
       points: ["Fast & modern", "Connected to your system", "SEO & performance"],
     },
+    {
+      slug: "analisis-data",
+      title: "Data Analysis & Business Dashboards",
+      summary:
+        "Turn the sales, stock, and finance data you already have into dashboards and reports your team can read at a glance, so decisions stop being guesswork.",
+      points: ["Data cleaning & consolidation", "Business dashboards", "Periodic reports"],
+    },
+    {
+      slug: "penataan-dokumen",
+      title: "Business Documentation & Admin Setup",
+      summary:
+        "Clear SOPs, an orderly digital archive, and tidy financial and transaction records, so the business runs the same way no matter who is on shift.",
+      points: ["SOP writing", "Digital document management", "Financial & transaction records"],
+    },
   ],
   fallbackPricing: [
     {
@@ -748,7 +767,7 @@ const id: Dictionary = {
     layanan: {
       title: "Layanan Pembuatan Website & Aplikasi",
       description:
-        "Jasa pembuatan website dan aplikasi custom dari Seawise Studio di Bali. ERP, aplikasi bisnis, dan company profile, dibangun dari alur kerja tim kamu.",
+        "Jasa pembuatan website dan aplikasi custom, analisis data dan dashboard, serta penyusunan SOP dan administrasi dari Seawise Studio di Bali.",
     },
     portfolio: {
       title: "Portfolio Proyek Website & Aplikasi",
@@ -1206,7 +1225,7 @@ const id: Dictionary = {
     solutionBody:
       "Kami petakan proses nyata dulu, bangun sistem yang mengikuti itu, lalu dampingi sampai benar-benar dipakai sehari-hari.",
     servicesEyebrow: "Layanan",
-    servicesTitle: "Empat cara kami bantu bisnis kamu jalan lebih rapi.",
+    servicesTitle: "Enam cara kami bantu bisnis kamu jalan lebih rapi.",
     servicesLink: "Lihat detail layanan →",
     featuredEyebrow: "Aplikasi Kami",
     featuredTitle: "Bukan mockup, sistem yang sudah jalan dan bisa kamu buka.",
@@ -1248,7 +1267,7 @@ const id: Dictionary = {
   },
   services: {
     eyebrow: "Layanan",
-    title: "Empat cara kami bantu bisnis kamu jalan lebih rapi.",
+    title: "Enam cara kami bantu bisnis kamu jalan lebih rapi.",
     intro:
       "Setiap layanan dibangun dari alur kerja nyata tim kamu, bukan template yang dipaksakan.",
     pricingEyebrow: "Harga",
@@ -1263,6 +1282,9 @@ const id: Dictionary = {
       "Lihat aplikasi yang sudah kami kembangkan, atau konsultasi untuk develop aplikasi custom: ERP, aplikasi UMKM, dan migrasi sistem.",
     appCtaWork: "Lihat Aplikasi Kami",
     appCtaConsult: "Konsultasi Develop",
+    dataTitle: "Data & Administrasi",
+    dataIntro:
+      "Tidak semua masalah butuh aplikasi baru. Kadang langkah pertamanya adalah membaca data yang sudah ada, atau merapikan administrasinya dulu.",
     perProject: "/ proyek",
     popular: "Populer",
     ctaTitle: "Belum yakin mana yang cocok untuk bisnis kamu?",
@@ -1337,6 +1359,8 @@ const id: Dictionary = {
       "Aplikasi untuk UMKM berkembang",
       "Migrasi dari spreadsheet / software lama",
       "Website & web app",
+      "Analisis data & dashboard bisnis",
+      "Penyusunan SOP & dokumen bisnis",
     ],
     form: {
       name: "Nama",
@@ -1401,6 +1425,20 @@ const id: Dictionary = {
       summary:
         "Website dan web app cepat, modern, dan mudah dikelola, company profile sampai portal internal.",
       points: ["Cepat & modern", "Terhubung ke sistem", "SEO & performa"],
+    },
+    {
+      slug: "analisis-data",
+      title: "Analisis Data & Dashboard Bisnis",
+      summary:
+        "Ubah data penjualan, stok, dan keuangan yang sudah kamu punya jadi dashboard dan laporan yang langsung terbaca, supaya keputusan tidak lagi berdasarkan tebakan.",
+      points: ["Pembersihan & penyatuan data", "Dashboard bisnis", "Laporan berkala"],
+    },
+    {
+      slug: "penataan-dokumen",
+      title: "Penataan Dokumen & Administrasi Bisnis",
+      summary:
+        "SOP yang jelas, arsip digital yang tertata, dan pencatatan keuangan serta transaksi yang rapi, supaya usaha berjalan sama baiknya siapa pun yang sedang bertugas.",
+      points: ["Penyusunan SOP", "Manajemen dokumen digital", "Penataan data keuangan & transaksi"],
     },
   ],
   fallbackPricing: [
