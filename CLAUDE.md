@@ -465,12 +465,73 @@ Yang gampang salah:
   full-bleed di desain 1920x1080 lewat `edit-design` (`insert_fill`), commit,
   lalu `export-design` JPG lebar 1600. Cover artikel 13 dan 14 dibuat begini
   pada 27 Sep 2026, desain wadahnya `DAHWZulrpPc`. Periksa tangan dan teks di
-  resolusi penuh sebelum dipakai. Klip Reel tetap dari pemilik lewat
-  `prompt-video.md` (Kling / Google Flow). Yang Claude kerjakan: merangkai klip
-  jadi Reel lewat `render_reels.py` (ffmpeg), lihat bagian Reel di README
-  folder itu.
+  resolusi penuh sebelum dipakai. Video dibuat lewat Grok CLI, lihat bagian
+  di bawah. Klip b-roll dari pemilik lewat `prompt-video.md` (Kling / Google
+  Flow) tetap dirangkai `render_reels.py`.
 - Brand kit satu-satunya di Canva milik Damar Indonesia, bukan Seawise.
   Jangan dipakai untuk konten Seawise.
+
+### Reel berkarakter lewat Grok CLI
+
+Sejak 29 Sep 2026 Claude bisa membuat video sendiri lewat Grok Build CLI
+(`~/.grok/bin/grok`), login `seawise.cc@gmail.com` dengan langganan
+SuperGrok. **Tanpa API key dan tanpa tagihan per video**, kuotanya jatah
+mingguan langganan yang dipakai bersama Chat dan Imagine. Hasil pertama:
+reel proses Seawise (43 detik) di `konten-instagram/out_reels/proses-seawise-ai/`
+dan reel Mayaloka Digital (58 detik) di `~/Downloads/Reel-Mayaloka-Digital-Marketing/`.
+Tanpa watermark.
+
+Alurnya tiga tahap, dan urutannya bukan pilihan:
+
+1. **Character sheet**: `image_edit` dari foto wajah + logo, seluruh badan
+   9:16, kostum ditulis lengkap. Ini acuan semua scene.
+2. **Frame pertama per scene**: `image_edit` dengan character sheet + foto
+   wajah. Dicek dulu sebelum kuota video terpakai.
+3. **Video per scene**: `reference_to_video` dengan `first_frame` scene itu,
+   `images: [charsheet]`, `voices: ["eve"]`, 9:16, 10 detik, 720p, dialog di
+   dalam prompt.
+
+Lalu dirangkai: potong ke bagian bicara, overlay PNG dari Chrome (pill
+brand, label langkah, subtitle), crossfade 0,35 detik, kartu CTA, `loudnorm`
+-16. Skripnya (`frame.sh`, `video.sh`, `compile.py`) ada di folder `tools/`
+tiap reel. **`out_reels/` di-gitignore**, jadi skrip itu belum ada di repo.
+
+Yang sudah pernah menggigit:
+
+- **Harus Opt in di `/privacy` Grok.** Dengan Opt out, video ditolak
+  `unavailable under zero data retention`, gambar tetap jalan. Akibatnya xAI
+  boleh menyimpan dan melatih dari sesi CLI, jadi **jangan jalankan `grok` di
+  dalam folder repo**. Selalu dari scratchpad.
+- **Selalu `-p` dengan `--tools` yang sempit** (`image_edit`,
+  `reference_to_video`, dst) plus `--permission-mode bypassPermissions`. Tanpa
+  `--tools`, itu agent tanpa batas dan classifier Claude Code memblokirnya.
+- **Video tidak bisa dari teks saja.** `reference_to_video` menolak tanpa
+  `images`/`first_frame`. `image_to_video` cuma 6 atau 10 detik tanpa pilihan
+  rasio.
+- **`voices` hanya menerima ID bawaan** (`eve`, `ara`, `luna`, dst), bukan
+  file audio. Tanpa `voices` suaranya acak per klip, jadi scene 1 yang sudah
+  bagus harus dibuat ulang begitu ID dipilih. Pemilik memilih `eve`. Suara
+  custom butuh API berbayar.
+- **Maksimal 3 video paralel.** Tujuh sekaligus gagal semua di
+  `Video poll request failed`, padahal permintaannya sudah terkirim.
+- **Detail kostum ditulis di setiap frame**, bukan cuma di character sheet.
+  Scene terakhir reel Seawise keluar dengan kaos tidak dimasukkan ke rok dan
+  harus dibuat ulang.
+- **Domain ditulis fonetis di dialog**: `see-wise dot eye-dee` plus catatan
+  pelafalan Inggris. "seawise titik id" terdengar janggal. Subtitle tetap
+  `seawise.id`, **tanpa titik di belakangnya**.
+- **Subtitle tanpa kotak**: teks putih tebal dengan outline gelap. **Tidak ada
+  tulisan "dibuat dengan AI" di dalam video**, pemilik menghapusnya. Gantinya
+  toggle "AI info" saat posting di Instagram.
+- File hasil ada di `~/.grok/sessions/<cwd>/<sesi>/images|videos/N.*`, CLI
+  mengembalikan path absolutnya. Klip 720x1280 24fps dengan AAC plus stream
+  mjpeg cover, jadi ambil `0:v:0`. Dialog biasanya selesai di detik 6–8, sisa
+  heningnya dipotong dari `silencedetect`.
+- ffmpeg lokal tidak punya `drawtext` maupun `subtitles`, makanya teks lewat
+  PNG Chrome seperti `render_reels.py`.
+- Klaim di dialog cuma dari dictionary situs atau situs klien. Di reel
+  Mayaloka, "10% hilang", harga, dan "500+ klien" sengaja tidak dipakai.
+  Lokasi netral, bukan kantor atau gedung besar yang tidak ada.
 
 ---
 
