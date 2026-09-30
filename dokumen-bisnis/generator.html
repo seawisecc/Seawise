@@ -781,16 +781,22 @@ function sampleDoc(type) {
 }
 
 // data/dokumen-seed.js (kalau ada) mengisi window.SEED_DOCS. Tiap dokumen seed
-// dimasukkan sekali saja, jadi yang sudah dihapus di browser tidak muncul lagi.
+// dimasukkan sekali per rev: yang sudah dihapus tidak muncul lagi, kecuali seed-nya direvisi.
 (function mergeSeed() {
   const seed = window.SEED_DOCS || [];
   if (!seed.length) return;
-  const done = new Set(readJSON("sw-docs-seeded-v1", []));
-  const docs = allDocs(), ids = new Set(docs.map(d => d.id));
-  const fresh = seed.filter(d => !done.has(d.id) && !ids.has(d.id));
-  if (!fresh.length) return;
-  writeJSON(LS_DOCS, fresh.concat(docs));
-  writeJSON("sw-docs-seeded-v1", [...done, ...fresh.map(d => d.id)]);
+  // Catatan: id -> rev. Versi lama menyimpan array id, dianggap rev 1.
+  let done = readJSON("sw-docs-seeded-v1", {});
+  if (Array.isArray(done)) done = Object.fromEntries(done.map(id => [id, 1]));
+  let docs = allDocs(), changed = false;
+  for (const d of seed) {
+    const rev = d.rev || 1;
+    if (done[d.id] >= rev) continue;
+    const i = docs.findIndex(x => x.id === d.id);
+    if (i >= 0) docs[i] = d; else docs.unshift(d);
+    done[d.id] = rev; changed = true;
+  }
+  if (changed) { writeJSON(LS_DOCS, docs); writeJSON("sw-docs-seeded-v1", done); }
 })();
 
 const params = new URLSearchParams(location.search);
