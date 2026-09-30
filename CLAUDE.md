@@ -549,6 +549,19 @@ Yang sudah pernah menggigit:
   file audio. Tanpa `voices` suaranya acak per klip, jadi scene 1 yang sudah
   bagus harus dibuat ulang begitu ID dipilih. Pemilik memilih `eve`. Suara
   custom butuh API berbayar.
+- **Opt in bisa kembali ke Opt out sendiri.** 30 Sep 2026 video ditolak lagi
+  dengan pesan ZDR padahal sebelumnya sudah Opt in. Pemilik yang mengubahnya
+  lewat `/privacy`, jangan diubah dari sini. Untuk materi klien, ingatkan bahwa
+  footage klien ikut terkirim dengan status itu.
+- **Suara yang dikenal skema: `ara`, `eve`, `leo`, `rex`.** `eve` dipakai
+  karakter Seawise, `ara` dipakai karakter klien CV Candi Bali.
+- **Video klien dengan footage asli sebagai latar:** `image_edit` dengan
+  `[charsheet, frame footage]` dan perintah menjaga latar persis, lalu di
+  rangkaian akhir selipkan potongan footage asli di tengah kalimat supaya
+  detail workshop tetap asli. Contoh lengkap: `Video Generate/CV Candi Bali/`
+  di SSD (reel 36 detik, skrip di `tools/`).
+- Transkrip untuk cek pelafalan dan waktu subtitle: `faster-whisper` model
+  `small` (sudah terpasang di `pip --user`).
 - **Maksimal 3 video paralel.** Tujuh sekaligus gagal semua di
   `Video poll request failed`, padahal permintaannya sudah terkirim.
 - **Detail kostum ditulis di setiap frame**, bukan cuma di character sheet.
