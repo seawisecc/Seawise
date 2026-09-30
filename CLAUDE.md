@@ -607,6 +607,50 @@ Yang sudah pernah menggigit:
   Mayaloka, "10% hilang", harga, dan "500+ klien" sengaja tidak dipakai.
   Lokasi netral, bukan kantor atau gedung besar yang tidak ada.
 
+**Video klien dikerjakan dari folder lain.** Sejak 30 Sep 2026 reel untuk
+klien dibuat dengan membuka Claude dari
+`/Volumes/SSD Mobile/SEAWISE STUDIO/Video Generate`, yang punya CLAUDE.md
+sendiri. Repo ini hanya untuk reel Seawise. Pelajaran baru dari video klien
+dicatat di sana.
+
+### Suara Indonesia lewat ElevenLabs Voice Changer
+
+Empat suara Grok bukan suara Indonesia, jadi logatnya tidak natural. Sejak 30
+Sep 2026 suara klip bisa diganti lewat Voice Changer ElevenLabs
+(speech-to-speech) di akun pemilik, lewat Chrome. **Video tidak dibuat ulang**:
+hasil konversi mengikuti tempo audio asli, waktu tiap kata bergeser paling
+banyak sekitar 0,04 detik, jadi gerak bibir dan subtitle tetap cocok. Grok
+tetap dipanggil dengan `voices`, karena suara itu yang menentukan tempo.
+
+1. Ambil audio klip 10 detik utuh, jangan dipotong dulu:
+   `ffmpeg -i scene.mp4 -map 0:a:0 -ar 44100 -ac 1 s.mp3`.
+2. Di `elevenlabs.io/app/speech-synthesis/speech-to-speech`: model **Eleven
+   Multilingual v2** (bawaannya English v2, itu salah), suara dengan filter
+   Language Indonesian.
+3. Unduh MP3, tempel ke video dengan `-map 0:v:0 -map 1:a:0 -c:v copy`, lalu
+   rangkai seperti biasa.
+4. Transkrip ulang dan bandingkan waktu katanya dengan audio asli.
+
+Dipakai pertama kali di reel klien CV Candi Bali dengan suara **Nilasari -
+Natural, Clear and Inviting**, pilihan pemilik dari tes tiga klip. **Reel
+Seawise belum diganti**, masih `eve`. Suara untuk karakter Seawise dipilih
+pemilik dengan mendengar klip pembanding, jangan dipilihkan.
+
+- **Paket Free tidak boleh dipakai komersial.** Konten yang tayang butuh
+  minimal Starter ($6/bulan, 30 menit). Berlangganan termasuk aturan 7: beri
+  tahu dan tunggu persetujuan.
+- 1.000 kredit per menit audio, jadi 167 kredit per klip 10 detik.
+- **Satu file per sekali generate**, muat ulang halaman di antaranya.
+  Mengunggah banyak file sekaligus hanya memproses yang pertama lalu macet.
+- **Tombol Generate bergeser** begitu player bawah muncul. Screenshot dulu
+  sebelum klik. Klik yang meleset diam saja, kreditnya tidak berkurang.
+- **Unduh lewat ikon di player bawah**: klik baris di tab History, pause, klik
+  ikon unduh. Klik baris memutar audionya di speaker pemilik.
+- Audio ikut terunggah ke ElevenLabs, sama seperti ke Grok.
+
+Catatan lengkap dan tabel suara per klien ada di CLAUDE.md folder
+Video Generate.
+
 ---
 
 ## Struktur
