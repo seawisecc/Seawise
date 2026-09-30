@@ -83,7 +83,8 @@ export default function DocumentSheet({ doc, studio }: { doc: Doc; studio: Studi
   const terms = (b.terms || "").split("\n").map((x) => x.trim()).filter(Boolean);
   const items = b.items.filter((it) => it.title || num(it.price));
   const appx = parseAppendix(b.appendix);
-  const creds = CREDENTIALS.filter((x) => b.credentials.includes(x.id));
+  // Urutan mengikuti pilihan di dokumen, supaya yang paling relevan bisa di depan.
+  const creds = b.credentials.map((id) => CREDENTIALS.find((x) => x.id === id)).filter((x) => !!x) as typeof CREDENTIALS;
   const hasPage2 = !!b.appendix.trim() || creds.length > 0;
 
   useLayoutEffect(() => {
