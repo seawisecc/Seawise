@@ -344,10 +344,34 @@ safety assessment PERKOSMI, jadi CPSR Part B memang ditandatangani sendiri.
 
 Sertifikat pemilik ada di `components/admin/documents/credentials.ts` dan
 dipilih per dokumen (bagian Kredensial di editor), dicetak di halaman 2 sebagai
-"Kualifikasi penanggung jawab". Isinya hanya yang tertulis di sertifikat asli
-(`~/Documents/CERTIFICATE/Important`): judul, penerbit, tanggal, nomor. Jangan
-menaikkan "workshop" atau "peserta" jadi "bersertifikat" atau "ahli". Yang di luar lingkup di penawaran kosmetik EU
-hanya EU Responsible Person dan pengajuan CPNP, karena wajib pihak di EU.
+"Kualifikasi Penanggung Jawab", urut sesuai pilihan di dokumen. Isinya hanya
+yang tertulis di sertifikat asli (`~/Documents/CERTIFICATE/Important`): judul,
+penerbit, tanggal, nomor. Judul pakai huruf kapital proper dan tanpa keterangan
+"lulus" atau "asesmen akhir", atas permintaan pemilik. Jangan menaikkan
+"workshop" atau "peserta" jadi "bersertifikat" atau "ahli".
+
+Yang di luar lingkup di penawaran kosmetik EU hanya EU Responsible Person dan
+pengajuan CPNP, karena keduanya wajib pihak yang berkedudukan di EU.
+
+Editor ada di `components/admin/documents/DocumentEditor.tsx`, dibagi 5 tab
+(Info, Rincian, Syarat, Kredensial, Lampiran). Semua isian lewat `formUi.tsx`
+supaya tinggi dan ukuran hurufnya seragam; select dan input tanggal bawaan
+browser punya ukuran sendiri, jadi jangan pakai elemen mentah di editor.
+
+**Izin tulis langsung (30 Sep 2026):** pemilik mengizinkan Claude menambah
+dokumen baru berstatus Draft dan memperbaiki dokumen yang masih Draft langsung
+ke tabel `documents` lewat service role, tanpa file impor. Backup baris ke
+`dokumen-bisnis/data/` sebelum mengubah, PATCH dengan penjaga
+`updated_at=eq.<lama>` supaya editan pemilik di editor tidak tertimpa, dan isi
+`updated_at`. Dokumen berstatus selain Draft, penghapusan, dan
+`document_settings` tetap harus tanya dulu.
+
+Status per 30 Sep 2026: v15 sudah dijalankan di produksi, Data studio
+(rekening) sudah diisi pemilik. Isi tabel: `QUO/SW/2026/09/001` PT. Cantika
+Zest Bali (dokumen kepatuhan kosmetik EU, Rp20.750.000) dan
+`QUO/SW/2026/09/002` PT Pandu Bali Rucita (AI Training 2 jam, Rp5.250.000),
+keduanya Draft. Untuk mengetes tampilan editor tanpa login, render
+`DocumentManager` di route sementara lalu hapus lagi; jangan ikut di-commit.
 
 ### Urutan tabel admin diseret, bukan diketik
 
@@ -603,12 +627,12 @@ lib/revalidate.ts        helper pemanggil route di atas
 lib/inboundEmail.ts      verifikasi Svix + teruskan mail masuk ke Gmail
 components/              komponen publik (22)
 components/PartnerMarquee.tsx  deret logo partner, auto slide kalau banyak
-components/admin/        komponen admin (14)
+components/admin/        komponen admin
 components/admin/useRowReorder.ts  drag urutan baris, dipakai 4 manager
 components/admin/ReorderHandle.tsx gagang seret di kolom Urutan
 components/admin/postContentWarnings.ts peringatan isi artikel di editor blog
 components/admin/DocumentManager.tsx    quotation/proforma/invoice: daftar, editor, cetak
-components/admin/documents/            model (hitungan, terbilang, nomor, QR) dan tampilan A4
+components/admin/documents/            model, tampilan A4, editor per tab, formUi, credentials
 konten-blog/             naskah artikel .txt + meta.json, lihat README-nya
 konten-instagram/        template carousel IG, jadwal, caption, prompt foto
   render.py              carousel 1080x1350
@@ -701,7 +725,7 @@ v11 leads: phone, source, landing_path + indeks created_at
 v12 site_settings: tabel key/value untuk saklar di /admin/pengaturan
 v13 posts.sort_order: urutan tabel admin blog, TIDAK dipakai halaman publik
 v14 grant Data API eksplisit untuk semua tabel, disamakan dengan policy RLS
-v15 documents + document_settings: quotation/proforma/invoice di /admin/dokumen, admin saja
+v15 documents + document_settings: quotation/proforma/invoice di /admin/dokumen, admin saja (sudah jalan di produksi 30 Sep 2026)
 ```
 
 **v1 wajib duluan di database kosong**, karena v2 memakai
