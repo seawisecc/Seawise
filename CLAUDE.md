@@ -319,6 +319,15 @@ ada di kolom jsonb `data`, kolom lain (`total`, `amount_due`, `client_name`,
 `doc_date`) cuma salinan untuk daftar dan ringkasan, ditulis ulang tiap simpan.
 Jadi menambah isian di editor tidak butuh migrasi.
 
+Tagline dokumen "Systems & Software Studio" dan deretan empat layanan di
+footer (`T.*.services` di `docModel.ts`) disamakan dengan halaman `jasa-*`.
+Kalau layanan di situs bertambah, tambahkan juga di situ.
+
+Mode padat halaman pertama mengukur tinggi isi **alami** (min-height dilepas
+sebentar) dengan cadangan 10mm, dan diukur ulang sesudah font web dimuat.
+Tanpa itu pengukuran jalan dengan font cadangan dan footer terlempar ke
+halaman kedua.
+
 Rekening dan NPWP ada di `document_settings`, **jangan dipindah ke
 `site_settings`**: tabel itu bisa dibaca anon.
 

@@ -106,7 +106,9 @@ export function statusLabel(type: DocType, s: DocStatus): string {
 export const T = {
   id: {
     quotation: "Quotation", proforma: "Proforma Invoice", invoice: "Invoice",
-    tagline: "Studio aplikasi & website di Bali",
+    tagline: "Systems & Software Studio, Bali",
+    // Sama dengan empat layanan di halaman Layanan situs (halaman jasa-*).
+    services: ["Aplikasi & ERP", "Website", "Analisis data & dashboard", "SOP & dokumentasi bisnis"],
     to: { quotation: "Ditujukan kepada", proforma: "Ditagihkan kepada", invoice: "Ditagihkan kepada" },
     project: "Proyek", date: "Tanggal", ref: "Referensi",
     until: { quotation: "Berlaku sampai", proforma: "Jatuh tempo", invoice: "Jatuh tempo" },
@@ -123,7 +125,8 @@ export const T = {
   },
   en: {
     quotation: "Quotation", proforma: "Proforma Invoice", invoice: "Invoice",
-    tagline: "App & website studio in Bali",
+    tagline: "Systems & Software Studio, Bali",
+    services: ["Apps & ERP", "Websites", "Data analysis & dashboards", "SOPs & business documentation"],
     to: { quotation: "Prepared for", proforma: "Bill to", invoice: "Bill to" },
     project: "Project", date: "Date", ref: "Reference",
     until: { quotation: "Valid until", proforma: "Due date", invoice: "Due date" },

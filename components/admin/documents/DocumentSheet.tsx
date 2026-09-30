@@ -16,8 +16,12 @@ import {
   type Studio,
 } from "./docModel";
 
-/** Satu halaman A4 dalam piksel CSS, dipakai untuk memutuskan mode padat. */
-const A4_PX = (296 * 96) / 25.4;
+/**
+ * Batas tinggi isi halaman pertama sebelum mode padat dipasang. A4 296mm
+ * dikurangi 10mm cadangan: saat dicetak, margin @page dan pembulatan baris
+ * membuat ruangnya sedikit lebih sempit daripada di layar.
+ */
+const FIT_PX = ((296 - 10) * 96) / 25.4;
 
 function Bold({ text }: { text: string }) {
   const parts = text.split(/\*\*(.+?)\*\*/g);
@@ -41,15 +45,22 @@ function QrSvg({ text }: { text: string }) {
   );
 }
 
-function Foot({ studio, tagline }: { studio: Studio; tagline: string }) {
+function Foot({ studio, tagline, services }: { studio: Studio; tagline: string; services: string[] }) {
   return (
     <div className="swd-foot">
+      <div className="swd-services">
+        {services.map((x, i) => (
+          <span key={i}>{x}</span>
+        ))}
+      </div>
+      <div className="swd-footrow">
       <span>
         <b>Seawise Studio</b>&nbsp; {tagline}
       </span>
       <span>
         {studio.web} &nbsp;|&nbsp; {studio.email} &nbsp;|&nbsp; {studio.phone}
       </span>
+      </div>
     </div>
   );
 }
@@ -75,8 +86,26 @@ export default function DocumentSheet({ doc, studio }: { doc: Doc; studio: Studi
   useLayoutEffect(() => {
     const el = first.current;
     if (!el) return;
-    el.removeAttribute("data-dense");
-    if (el.scrollHeight > A4_PX + 2) el.setAttribute("data-dense", "");
+    // Tinggi isi alami, tanpa min-height yang selalu memenuhi satu A4.
+    const fit = () => {
+      el.removeAttribute("data-dense");
+      el.style.minHeight = "0";
+      const h = el.scrollHeight;
+      el.style.minHeight = "";
+      if (h > FIT_PX) el.setAttribute("data-dense", "");
+    };
+    fit();
+    // Ukur ulang saat font web selesai dimuat (tinggi teks berubah) dan saat
+    // isi berubah ukuran. Hasil fit() deterministik, jadi observer berhenti
+    // sendiri sesudah satu putaran.
+    let alive = true;
+    document.fonts?.ready.then(() => alive && fit());
+    const ro = new ResizeObserver(fit);
+    ro.observe(el);
+    return () => {
+      alive = false;
+      ro.disconnect();
+    };
   });
 
   const sumRows: ReactNode[] = [];
@@ -221,7 +250,7 @@ export default function DocumentSheet({ doc, studio }: { doc: Doc; studio: Studi
           <div className="swd-bottom"><div>{payBox}{termBox}</div><div>{sign}</div></div>
         )}
         <div className="swd-grow" />
-        <Foot studio={studio} tagline={t.tagline} />
+        <Foot studio={studio} tagline={t.tagline} services={t.services} />
       </div>
 
       {b.appendix.trim() && (
@@ -244,7 +273,7 @@ export default function DocumentSheet({ doc, studio }: { doc: Doc; studio: Studi
             )}
           </div>
           <div className="swd-grow" />
-          <Foot studio={studio} tagline={t.tagline} />
+          <Foot studio={studio} tagline={t.tagline} services={t.services} />
         </div>
       )}
     </div>
@@ -325,7 +354,10 @@ const CSS = `
 .swd-accept { text-align: center; font-size: 11px; }
 .swd-space { height: 27mm; border-bottom: 1px solid var(--f); margin: 6px 10mm 5px; }
 .swd-grow { flex: 1; min-height: 5mm; }
-.swd-foot { border-top: 1px solid var(--warm); padding-top: 4mm; display: flex; justify-content: space-between; font-size: 9.5px; color: var(--muted); }
+.swd-foot { border-top: 1px solid var(--warm); padding-top: 3mm; font-size: 9.5px; color: var(--muted); }
+.swd-footrow { display: flex; justify-content: space-between; }
+.swd-services { display: flex; justify-content: center; flex-wrap: wrap; gap: 0 5mm; margin-bottom: 2.5mm; font-size: 8.8px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--foam); }
+.swd-services span + span::before { content: ""; display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: var(--warm); margin-right: 5mm; vertical-align: middle; position: relative; top: -1px; }
 .swd-foot b { color: var(--f); font-weight: 600; }
 .swd-stamp { position: absolute; top: 88mm; right: 22mm; transform: rotate(-12deg); border: 3px solid var(--foam); color: var(--foam); font-weight: 700; font-size: 28px; letter-spacing: .18em; padding: 5px 16px; border-radius: 8px; opacity: .85; }
 .swd-stamp small { display: block; font-size: 9px; letter-spacing: .1em; text-align: center; font-family: var(--font-inter), Inter, sans-serif; font-weight: 600; }
@@ -344,8 +376,8 @@ const CSS = `
 .swd-terms { list-style: decimal; }
 
 /* Mode padat, dipasang otomatis kalau halaman pertama melebihi A4. */
-[data-dense] .swd-rule { margin-top: 5mm; }
-[data-dense] .swd-meta { margin-top: 4mm; }
+[data-dense] .swd-rule { margin-top: 4mm; }
+[data-dense] .swd-meta { margin-top: 3.5mm; }
 [data-dense] .swd-items { margin-top: 5mm; }
 [data-dense] .swd-items td { padding: 5px 9px; }
 [data-dense] .swd-dt { margin-top: 1px; line-height: 1.4; }
@@ -361,4 +393,12 @@ const CSS = `
 [data-dense] .swd-space { height: 19mm; }
 [data-dense] .swd-qr { width: 23mm; height: 23mm; margin: 4px auto 3px; }
 [data-dense] .swd-ver { margin-top: 3px; }
+[data-dense] .swd-company { margin-top: 6px; }
+[data-dense] .swd-meta p { font-size: 10.5px; line-height: 1.45; }
+[data-dense] .swd-items td { padding: 4px 9px; }
+[data-dense] .swd-terms { font-size: 10px; line-height: 1.45; }
+[data-dense] .swd-qr { width: 21mm; height: 21mm; }
+[data-dense] .swd-space { height: 16mm; }
+[data-dense] .swd-foot { padding-top: 2mm; }
+[data-dense] .swd-services { margin-bottom: 1.5mm; }
 `;
