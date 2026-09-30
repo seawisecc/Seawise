@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { SkeletonBar } from "./AdminSkeleton";
 import { PlusIcon, DownloadIcon, CloseIcon, ArrowUpIcon, ArrowDownIcon, FileIcon, SettingsIcon } from "./AdminIcons";
 import DocumentSheet from "./documents/DocumentSheet";
+import { CREDENTIALS, CRED_GROUPS, type CredGroup } from "./documents/credentials";
 import {
   DEFAULT_STUDIO,
   DEFAULT_TERMS,
@@ -856,6 +857,53 @@ function Editor(p: EditorProps) {
             </button>
           </Section>
 
+          <Section title="Kredensial">
+            <p className="text-xs text-forest-dark/55">
+              Sertifikat yang dicetak di halaman 2 sebagai &quot;Kualifikasi penanggung jawab&quot;. Pilih yang relevan dengan penawaran.
+            </p>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {CRED_GROUPS.map((g) => (
+                <button
+                  key={g.key}
+                  type="button"
+                  onClick={() => setBody("credentials", toggleGroup(b.credentials, g.key))}
+                  className="rounded-full border border-warm-neutral px-2.5 py-1 text-xs font-medium text-forest-dark hover:border-sea-foam"
+                >
+                  {g.label}
+                </button>
+              ))}
+              {b.credentials.length > 0 && (
+                <button type="button" onClick={() => setBody("credentials", [])} className="rounded-full px-2.5 py-1 text-xs font-medium text-red-700 hover:bg-red-50">
+                  Kosongkan
+                </button>
+              )}
+            </div>
+            {CRED_GROUPS.map((g) => (
+              <div key={g.key} className="mt-3">
+                <p className="text-[11px] font-semibold uppercase tracking-wider text-forest-dark/45">{g.label}</p>
+                {CREDENTIALS.filter((x) => x.group === g.key).map((x) => (
+                  <label key={x.id} className="mt-1.5 flex items-start gap-2 text-sm text-forest-dark">
+                    <input
+                      type="checkbox"
+                      className="mt-1"
+                      checked={b.credentials.includes(x.id)}
+                      onChange={(e) =>
+                        setBody(
+                          "credentials",
+                          e.target.checked ? [...b.credentials, x.id] : b.credentials.filter((id) => id !== x.id)
+                        )
+                      }
+                    />
+                    <span>
+                      {x.title.id}
+                      <span className="block text-xs text-forest-dark/50">{[x.issuer, x.date.id].filter(Boolean).join(", ")}</span>
+                    </span>
+                  </label>
+                ))}
+              </div>
+            ))}
+          </Section>
+
           <Section title="Lampiran (halaman tambahan)">
             <L label="Judul lampiran"><input value={b.appendixTitle} onChange={(e) => setBody("appendixTitle", e.target.value)} placeholder="Kosongkan kalau tidak perlu" className={field} /></L>
             <L label="Isi"><textarea rows={8} value={b.appendix} onChange={(e) => setBody("appendix", e.target.value)} className={`${field} font-mono text-xs`} /></L>
@@ -881,6 +929,14 @@ function Editor(p: EditorProps) {
       </div>
     </div>
   );
+}
+
+/** Kalau semua di grup sudah terpilih, grup itu dilepas. Kalau belum, grup ditambahkan. Urutan ikut daftar CREDENTIALS. */
+function toggleGroup(selected: string[], group: CredGroup): string[] {
+  const ids = CREDENTIALS.filter((x) => x.group === group).map((x) => x.id);
+  const all = ids.every((id) => selected.includes(id));
+  const next = all ? selected.filter((id) => !ids.includes(id)) : Array.from(new Set([...selected, ...ids]));
+  return CREDENTIALS.map((x) => x.id).filter((id) => next.includes(id));
 }
 
 function move<T>(arr: T[], i: number, dir: number): T[] {

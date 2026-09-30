@@ -15,6 +15,7 @@ import {
   type Doc,
   type Studio,
 } from "./docModel";
+import { CREDENTIALS, CRED_HOLDER, CRED_TITLE } from "./credentials";
 
 /**
  * Batas tinggi isi halaman pertama sebelum mode padat dipasang. A4 296mm
@@ -82,6 +83,8 @@ export default function DocumentSheet({ doc, studio }: { doc: Doc; studio: Studi
   const terms = (b.terms || "").split("\n").map((x) => x.trim()).filter(Boolean);
   const items = b.items.filter((it) => it.title || num(it.price));
   const appx = parseAppendix(b.appendix);
+  const creds = CREDENTIALS.filter((x) => b.credentials.includes(x.id));
+  const hasPage2 = !!b.appendix.trim() || creds.length > 0;
 
   useLayoutEffect(() => {
     const el = first.current;
@@ -253,7 +256,7 @@ export default function DocumentSheet({ doc, studio }: { doc: Doc; studio: Studi
         <Foot studio={studio} tagline={t.tagline} services={t.services} />
       </div>
 
-      {b.appendix.trim() && (
+      {hasPage2 && (
         <div className="swd-sheet swd-page2">
           <div className="swd-minihead">
             <div className="swd-brand">
@@ -263,6 +266,23 @@ export default function DocumentSheet({ doc, studio }: { doc: Doc; studio: Studi
             </div>
             <div className="swd-no">{t[doc.type]} {doc.number}<br />{cl.name}</div>
           </div>
+          {creds.length > 0 && (
+            <div className="swd-creds">
+              <h4>{CRED_TITLE[b.lang]}</h4>
+              <div className="swd-credwho">
+                <b>{CRED_HOLDER.name}</b>
+                <span>{CRED_HOLDER.role[b.lang]}</span>
+              </div>
+              <ul>
+                {creds.map((x) => (
+                  <li key={x.id}>
+                    <b>{x.title[b.lang]}</b>
+                    <span>{[x.issuer, x.date[b.lang], x.number && `No. ${x.number}`].filter(Boolean).join(" | ")}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           <div className="swd-appx">
             {b.appendixTitle && <h1>{b.appendixTitle}</h1>}
             {appx.map((blk, i) =>
@@ -374,6 +394,16 @@ const CSS = `
 .swd-callout { background: var(--f); color: #FAFAF8; border-radius: 7px; padding: 8px 11px; font-size: 10.3px; line-height: 1.5; margin: 3mm 0; }
 .swd-callout b { color: #CFE3DB; }
 .swd-terms { list-style: decimal; }
+.swd-creds { border: 1px solid var(--warm); border-radius: 8px; padding: 10px 12px; margin-bottom: 6mm; break-inside: avoid; }
+.swd-creds h4 { margin: 0 0 6px; font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--foam); font-weight: 700; }
+.swd-credwho { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding-bottom: 6px; margin-bottom: 6px; border-bottom: 1px solid var(--warm); }
+.swd-credwho b { font-size: 12.5px; }
+.swd-credwho span { font-size: 10.3px; color: var(--muted); }
+.swd-creds ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 5px 8mm; }
+.swd-creds li { font-size: 10px; line-height: 1.4; padding-left: 9px; position: relative; break-inside: avoid; }
+.swd-creds li::before { content: ""; position: absolute; left: 0; top: 5px; width: 4px; height: 4px; border-radius: 50%; background: var(--foam); }
+.swd-creds li b { display: block; font-weight: 600; }
+.swd-creds li span { color: var(--muted); font-size: 9.3px; }
 
 /* Mode padat, dipasang otomatis kalau halaman pertama melebihi A4. */
 [data-dense] .swd-rule { margin-top: 4mm; }

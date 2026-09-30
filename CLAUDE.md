@@ -338,8 +338,15 @@ elemen tersembunyi tingginya 0. CSS dokumen masuk lewat
 `dangerouslySetInnerHTML`: sebagai children biasa, tanda kutip di
 `font-family` di-escape saat SSR dan deklarasinya dibuang browser.
 
-Pemilik seorang apoteker dan safety assessor bersertifikat, jadi CPSR Part B
-memang ditandatangani sendiri. Yang di luar lingkup di penawaran kosmetik EU
+Pemilik seorang apoteker (apt., S.Farm.), dan itu yang memenuhi kualifikasi
+safety assessor Pasal 10(2) Reg. 1223/2009, ditambah sertifikat workshop
+safety assessment PERKOSMI, jadi CPSR Part B memang ditandatangani sendiri.
+
+Sertifikat pemilik ada di `components/admin/documents/credentials.ts` dan
+dipilih per dokumen (bagian Kredensial di editor), dicetak di halaman 2 sebagai
+"Kualifikasi penanggung jawab". Isinya hanya yang tertulis di sertifikat asli
+(`~/Documents/CERTIFICATE/Important`): judul, penerbit, tanggal, nomor. Jangan
+menaikkan "workshop" atau "peserta" jadi "bersertifikat" atau "ahli". Yang di luar lingkup di penawaran kosmetik EU
 hanya EU Responsible Person dan pengajuan CPNP, karena wajib pihak di EU.
 
 ### Urutan tabel admin diseret, bukan diketik

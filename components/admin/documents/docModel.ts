@@ -31,6 +31,8 @@ export type DocBody = {
   terms: string;
   appendixTitle: string;
   appendix: string;
+  /** id dari CREDENTIALS di credentials.ts yang dicetak di halaman 2. */
+  credentials: string[];
 };
 
 export type Doc = {
@@ -213,6 +215,7 @@ export function blankBody(type: DocType, lang: Lang = "id"): DocBody {
     terms: DEFAULT_TERMS[lang][type],
     appendixTitle: "",
     appendix: "",
+    credentials: [],
   };
 }
 
@@ -221,6 +224,7 @@ export function normalizeBody(type: DocType, data: Partial<DocBody> | null | und
   const base = blankBody(type, data?.lang === "en" ? "en" : "id");
   const b = { ...base, ...(data ?? {}) } as DocBody;
   b.client = { ...base.client, ...(data?.client ?? {}) };
+  b.credentials = Array.isArray(data?.credentials) ? data.credentials : [];
   b.items = (data?.items?.length ? data.items : base.items).map((it) => ({
     title: it.title ?? "",
     detail: it.detail ?? "",
