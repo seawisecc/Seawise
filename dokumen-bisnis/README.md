@@ -1,62 +1,33 @@
 # Dokumen bisnis: Quotation, Proforma Invoice, Invoice
 
-Buka `generator.html` di Chrome (klik dua kali). Isi form di kiri, dokumen A4
-di kanan ikut berubah. **Cetak / Simpan PDF** lalu pilih "Save as PDF",
-ukuran A4, margin "Default" atau "None", centang "Background graphics".
+Sejak 30 September 2026 dokumen dibuat di panel admin, **`/admin/dokumen`**,
+dan tersimpan di tabel `documents` Supabase (migrasi v15). Generator HTML
+lokal yang dulu ada di folder ini sudah dihapus.
 
-Contoh hasil ada di `contoh/`. Angka di sana ilustrasi, bukan harga resmi.
-Untuk membuatnya ulang: `generator.html?contoh=quotation|proforma|invoice`.
+- Kode: `components/admin/DocumentManager.tsx` (daftar, editor, cetak) dan
+  `components/admin/documents/` (model dan tampilan A4).
+- `contoh/`: contoh PDF dari format yang sama. Angkanya ilustrasi.
+- `data/` (tidak di-commit): file klien, termasuk `impor-cantika-zest.json`
+  yang bisa dimasukkan lewat tombol **Impor JSON** di `/admin/dokumen`.
 
 ## Alur
 
-1. **Quotation** ke calon klien. Ada kolom "Disetujui oleh" untuk tanda tangan klien.
-2. Klien setuju: tombol **Jadikan Proforma**. Isi, klien, dan nilai terbawa,
-   nomor quotation masuk ke Referensi. Termin default 50%.
-3. Pembayaran termin masuk, pekerjaan selesai: **Jadikan Invoice**. Nilai
-   proforma otomatis masuk ke "Sudah dibayar", jadi yang tertagih sisa saja.
-4. Sudah dibayar lunas: centang **Tandai LUNAS**, cetak ulang sebagai kuitansi.
+1. **Quotation** ke calon klien. Rekening tidak tampil secara bawaan.
+2. Disetujui: buka quotation, **Buat proforma dari ini**. Termin default 50%.
+3. **Buat invoice dari ini**. Semua proforma dari quotation yang sama (kecuali
+   berstatus Batal) otomatis masuk ke "Sudah dibayar".
+4. Status **Lunas** di invoice memasang cap LUNAS.
 
-Untuk proforma dan invoice, **Ambil data dari dokumen tersimpan** di bagian
-Dokumen memilih quotation (atau proforma) sumbernya. Klien, proyek, rincian,
-dan harga disalin. Invoice otomatis mengurangkan semua proforma yang sudah
-dibuat dari quotation yang sama. Simpan dulu quotation-nya supaya muncul di pilihan.
-
-Rekening bank hanya tampil kalau **Tampilkan rekening di dokumen ini**
-dicentang: mati bawaan untuk quotation, nyala untuk proforma dan invoice.
-
-**Lampiran** membuat halaman tambahan sesudah dokumen utama, misalnya daftar
-kebutuhan dari klien. Formatnya `## ` subjudul, `- ` poin, `> ` kotak sorotan,
-`**teks**` tebal. Kalau halaman pertama melebihi A4, jarak dan QR otomatis
-dipadatkan.
-
-Nomor otomatis `QUO|PRO|INV/SW/<tahun>/<bulan>/<urut>`, urutan dihitung dari
-dokumen yang tersimpan. Nomor tetap bisa diketik manual.
+Nomor otomatis `QUO|PRO|INV/SW/<tahun>/<bulan>/<urut>`, unik di database.
 
 ## Tanda tangan QR
 
-QR berisi teks yang bisa dibaca kamera HP mana pun tanpa internet: penanda
-tangan, jenis dan nomor dokumen, tanggal, klien, nilai, dan **kode verifikasi**.
-Kodenya hash dari nomor, tanggal, klien, dan nilai. Kalau salah satunya diubah
-sesudah dokumen dikirim, kodenya tidak cocok lagi dengan salinan di studio.
+QR berisi penanda tangan, jenis dan nomor dokumen, tanggal, klien, nilai, dan
+kode verifikasi (hash dari isi pokok). Kalau isi pokok diubah sesudah dikirim,
+kodenya tidak cocok lagi dengan arsip di admin.
 
-Ini tanda tangan elektronik sederhana, cukup untuk quotation dan invoice
-sehari-hari. Untuk kontrak yang butuh kekuatan hukum penuh, pakai layanan
-tanda tangan elektronik tersertifikasi (PSrE).
+## Data studio
 
-## Yang perlu diisi sekali
-
-Bagian **Data studio** di bawah form: rekening bank (bank, nomor, atas nama)
-dan NPWP kalau ada. Selama rekening kosong, proforma dan invoice menulis
-"Detail rekening dikirim terpisah". Pajak (PPN) default 0% dan barisnya
-tersembunyi. Isi hanya kalau Seawise sudah PKP.
-
-## Penyimpanan
-
-`data/` (tidak di-commit) untuk dokumen klien yang disiapkan di luar browser:
-`data/dokumen-seed.js` berisi `window.SEED_DOCS`, dimuat sekali per dokumen ke
-penyimpanan browser saat generator dibuka. PDF klien juga disimpan di sini.
-Buka dokumen tertentu langsung dengan `generator.html?buka=<id>`.
-
-Semua dokumen tersimpan di **browser ini saja** (localStorage), tidak ke
-server dan tidak ke repo. Pakai **Backup JSON** berkala, dan **Impor** untuk
-memindahkan ke komputer lain. Jangan commit file backup, isinya data klien.
+Nama penanda tangan, kontak, NPWP, dan rekening disimpan di tabel
+`document_settings`, **bukan** `site_settings`, karena `site_settings` bisa
+dibaca publik.

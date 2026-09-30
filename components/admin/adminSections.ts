@@ -9,6 +9,7 @@ import {
   ArticleIcon,
   InboxIcon,
   SettingsIcon,
+  FileIcon,
 } from "./AdminIcons";
 
 /**
@@ -27,6 +28,7 @@ export type AdminSection = {
 export const ADMIN_SECTIONS: AdminSection[] = [
   { slug: "", label: "Dashboard", Icon: GridIcon },
   { slug: "keuangan", label: "Keuangan", Icon: WalletIcon },
+  { slug: "dokumen", label: "Dokumen", Icon: FileIcon },
   { slug: "portfolio", label: "Portfolio", Icon: LayersIcon },
   { slug: "pricing", label: "Price List", Icon: TagIcon },
   { slug: "testimonials", label: "Testimoni", Icon: QuoteIcon },

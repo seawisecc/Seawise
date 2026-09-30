@@ -312,6 +312,27 @@ Sampai itu dilakukan, balasan keluar dari Gmail studio. Bukan masalah besar:
 email yang diteruskan sudah membawa `reply_to` pengirim asli, jadi threading di
 sisi klien tetap benar.
 
+### Dokumen penagihan di `/admin/dokumen`
+
+Quotation, proforma invoice, dan invoice (migrasi v15). Isi lengkap dokumen
+ada di kolom jsonb `data`, kolom lain (`total`, `amount_due`, `client_name`,
+`doc_date`) cuma salinan untuk daftar dan ringkasan, ditulis ulang tiap simpan.
+Jadi menambah isian di editor tidak butuh migrasi.
+
+Rekening dan NPWP ada di `document_settings`, **jangan dipindah ke
+`site_settings`**: tabel itu bisa dibaca anon.
+
+Cetak memakai portal ke `document.body` berisi salinan dokumen, dan CSS print
+menyembunyikan semua anak `body` lainnya. Salinan itu diletakkan di luar layar,
+bukan `display: none`, karena mode padat mengukur tinggi halaman pertama dan
+elemen tersembunyi tingginya 0. CSS dokumen masuk lewat
+`dangerouslySetInnerHTML`: sebagai children biasa, tanda kutip di
+`font-family` di-escape saat SSR dan deklarasinya dibuang browser.
+
+Pemilik seorang apoteker dan safety assessor bersertifikat, jadi CPSR Part B
+memang ditandatangani sendiri. Yang di luar lingkup di penawaran kosmetik EU
+hanya EU Responsible Person dan pengajuan CPNP, karena wajib pihak di EU.
+
 ### Urutan tabel admin diseret, bukan diketik
 
 Portfolio, testimoni, partner, dan blog urutannya diatur dengan menyeret baris
@@ -557,6 +578,8 @@ components/admin/        komponen admin (14)
 components/admin/useRowReorder.ts  drag urutan baris, dipakai 4 manager
 components/admin/ReorderHandle.tsx gagang seret di kolom Urutan
 components/admin/postContentWarnings.ts peringatan isi artikel di editor blog
+components/admin/DocumentManager.tsx    quotation/proforma/invoice: daftar, editor, cetak
+components/admin/documents/            model (hitungan, terbilang, nomor, QR) dan tampilan A4
 konten-blog/             naskah artikel .txt + meta.json, lihat README-nya
 konten-instagram/        template carousel IG, jadwal, caption, prompt foto
   render.py              carousel 1080x1350
@@ -568,7 +591,7 @@ konten-instagram/        template carousel IG, jadwal, caption, prompt foto
   video-ai/              klip Reel dari pemilik, hasil prompt-video.md
   out_reels/<id>/        satu folder per reel: <id>.mp4 hasil akhir, bahan/ frame dan segmen
 konten-google-bisnis/    teks dan jadwal post Google Business Profile
-dokumen-bisnis/          generator Quotation, Proforma, Invoice (HTML ke PDF, ttd QR), lihat README-nya
+dokumen-bisnis/          contoh PDF dan data klien lokal; dokumennya sendiri dibuat di /admin/dokumen
 lib/i18n/dictionaries.ts seluruh teks publik, en sumber kebenaran
 lib/seo.ts               canonical, hreflang, OG, breadcrumb
 components/ArrowIcons.tsx panah tautan situs publik. Jangan taruh → ← ↗ di dictionary
@@ -649,6 +672,7 @@ v11 leads: phone, source, landing_path + indeks created_at
 v12 site_settings: tabel key/value untuk saklar di /admin/pengaturan
 v13 posts.sort_order: urutan tabel admin blog, TIDAK dipakai halaman publik
 v14 grant Data API eksplisit untuk semua tabel, disamakan dengan policy RLS
+v15 documents + document_settings: quotation/proforma/invoice di /admin/dokumen, admin saja
 ```
 
 **v1 wajib duluan di database kosong**, karena v2 memakai
