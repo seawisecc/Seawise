@@ -40,7 +40,7 @@ export const CREDENTIALS: Credential[] = [
     group: "kosmetik",
     title: {
       id: "Apoteker (apt.) dan Sarjana Farmasi (S.Farm.)",
-      en: "Registered pharmacist (apt.), Bachelor of Pharmacy (S.Farm.)",
+      en: "Registered Pharmacist (apt.), Bachelor of Pharmacy (S.Farm.)",
     },
     issuer: "",
     date: { id: "", en: "" },
@@ -49,8 +49,8 @@ export const CREDENTIALS: Credential[] = [
     id: "incharge-pif",
     group: "kosmetik",
     title: {
-      id: "INCHARGE: Intensive and Collaborative Training for Cosmetic Product Information File (lulus)",
-      en: "INCHARGE: Intensive and Collaborative Training for Cosmetic Product Information File (passed)",
+      id: "INCHARGE: Intensive and Collaborative Training for Cosmetic Product Information File",
+      en: "INCHARGE: Intensive and Collaborative Training for Cosmetic Product Information File",
     },
     issuer: "Badan POM RI, Direktorat Registrasi OT, SK, dan Kosmetik",
     date: { id: "26 Maret 2026, Denpasar", en: "26 March 2026, Denpasar" },
@@ -69,7 +69,7 @@ export const CREDENTIALS: Credential[] = [
   {
     id: "safety-assessment",
     group: "kosmetik",
-    title: { id: "Safety Assessment Workshop (kosmetik)", en: "Cosmetic Safety Assessment Workshop" },
+    title: { id: "Cosmetic Safety Assessment Workshop", en: "Cosmetic Safety Assessment Workshop" },
     issuer: "Persatuan Perusahaan Kosmetika Indonesia (PERKOSMI) Bali",
     date: { id: "21–22 Maret 2024, Denpasar", en: "21–22 March 2024, Denpasar" },
   },
@@ -77,8 +77,8 @@ export const CREDENTIALS: Credential[] = [
     id: "tot-cpkb",
     group: "kosmetik",
     title: {
-      id: "Training of Trainer CPKB, Akselerasi Pelayanan Publik CPKB",
-      en: "Training of Trainer, Cosmetic GMP (CPKB)",
+      id: "Training of Trainer CPKB: Akselerasi Pelayanan Publik CPKB",
+      en: "Training of Trainer: Cosmetic GMP (CPKB)",
     },
     issuer: "Badan POM RI, Deputi Pengawasan OT, SK, dan Kosmetik",
     date: { id: "16 Februari 2024, Jakarta", en: "16 February 2024, Jakarta" },
@@ -88,8 +88,8 @@ export const CREDENTIALS: Credential[] = [
     id: "cpkb-key-personnel",
     group: "kosmetik",
     title: {
-      id: "Pelatihan CPKB bagi Key Personnel Industri Kosmetik (lulus, 8 SKP IAI)",
-      en: "Cosmetic GMP (CPKB) Training for Key Personnel (passed, 8 IAI credits)",
+      id: "Pelatihan CPKB bagi Key Personnel Industri Kosmetik",
+      en: "Cosmetic GMP (CPKB) Training for Key Personnel",
     },
     issuer: "Badan POM RI",
     date: { id: "1–3 Agustus 2022", en: "1–3 August 2022" },
@@ -106,7 +106,7 @@ export const CREDENTIALS: Credential[] = [
   {
     id: "keamanan-pangan",
     group: "kosmetik",
-    title: { id: "Pelatihan Penyuluh Keamanan Pangan Tingkat Pertama", en: "Food Safety Educator Training, First Level" },
+    title: { id: "Pelatihan Penyuluh Keamanan Pangan Tingkat Pertama", en: "Food Safety Educator Training: First Level" },
     issuer: "Badan POM RI",
     date: { id: "22–25 Februari 2021", en: "22–25 February 2021" },
     number: "KP.82/82.I/184.A/III/2021.01590",
@@ -130,8 +130,8 @@ export const CREDENTIALS: Credential[] = [
     id: "gci-tokyo",
     group: "data",
     title: {
-      id: "GCI World: teori dan implementasi data science (lulus asesmen akhir)",
-      en: "GCI World: data science theory and implementation (passed final assessment)",
+      id: "GCI World: Teori dan Implementasi Data Science",
+      en: "GCI World: Data Science Theory and Implementation",
     },
     issuer: "Matsuo-Iwasawa Laboratory, Graduate School of Engineering, The University of Tokyo",
     date: { id: "31 Agustus 2026", en: "31 August 2026" },
@@ -164,6 +164,6 @@ export const CREDENTIALS: Credential[] = [
 ];
 
 export const CRED_TITLE: Record<Lang, string> = {
-  id: "Kualifikasi penanggung jawab",
-  en: "Qualifications of the person in charge",
+  id: "Kualifikasi Penanggung Jawab",
+  en: "Qualifications of the Person in Charge",
 };
