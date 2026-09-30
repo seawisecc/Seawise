@@ -566,7 +566,9 @@ konten-instagram/        template carousel IG, jadwal, caption, prompt foto
   foto-asli/             foto asli dari pemilik, otomatis jadi cover
   foto-ai/               hasil generate dari prompt-gambar.md
   video-ai/              klip Reel dari pemilik, hasil prompt-video.md
+  out_reels/<id>/        satu folder per reel: <id>.mp4 hasil akhir, bahan/ frame dan segmen
 konten-google-bisnis/    teks dan jadwal post Google Business Profile
+dokumen-bisnis/          generator Quotation, Proforma, Invoice (HTML ke PDF, ttd QR), lihat README-nya
 lib/i18n/dictionaries.ts seluruh teks publik, en sumber kebenaran
 lib/seo.ts               canonical, hreflang, OG, breadcrumb
 components/ArrowIcons.tsx panah tautan situs publik. Jangan taruh → ← ↗ di dictionary

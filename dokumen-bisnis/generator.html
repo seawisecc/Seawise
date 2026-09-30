@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dokumen Seawise Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="qrcode.min.js"></script>
+<style>
+  :root {
+    --forest: #132A22; --black: #0A1712; --white: #FAFAF8;
+    --foam: #5C8577; --foam-soft: #E3ECE8; --warm: #E8E4D9; --warm-soft: #F4F2EC;
+    --muted: #5B6B64; --line: #D9D5CA;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #E9E7E1; color: var(--forest); font-family: Inter, system-ui, sans-serif; font-size: 13px; }
+  h1, h2, h3, .display { font-family: "Space Grotesk", Inter, system-ui, sans-serif; }
+
+  /* ---------- editor (layar saja) ---------- */
+  .app { display: grid; grid-template-columns: 420px 1fr; min-height: 100vh; }
+  .panel { background: var(--white); border-right: 1px solid var(--line); height: 100vh; overflow-y: auto; position: sticky; top: 0; }
+  .panel header { padding: 18px 20px 12px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--white); z-index: 5; }
+  .panel header h1 { margin: 0 0 10px; font-size: 17px; display: flex; align-items: center; gap: 8px; }
+  .panel header h1 img { width: 26px; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 6px; }
+  .panel section { padding: 14px 20px; border-bottom: 1px solid var(--line); }
+  .panel h2 { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--foam); margin: 0 0 10px; }
+  label { display: block; font-size: 11.5px; color: var(--muted); margin: 8px 0 3px; font-weight: 500; }
+  input, select, textarea { width: 100%; font: inherit; color: var(--forest); background: #fff; border: 1px solid var(--line); border-radius: 7px; padding: 7px 9px; }
+  textarea { resize: vertical; min-height: 54px; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--foam); outline-offset: -1px; border-color: var(--foam); }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  button { font: inherit; font-weight: 600; font-size: 12px; border-radius: 7px; padding: 7px 11px; cursor: pointer; border: 1px solid var(--forest); background: var(--forest); color: var(--white); }
+  button.ghost { background: transparent; color: var(--forest); border-color: var(--line); }
+  button.ghost:hover { border-color: var(--forest); }
+  button.danger { background: transparent; color: #A0452E; border-color: #E2C4BA; }
+  .item-edit { border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px 10px; margin-bottom: 8px; background: var(--warm-soft); }
+  .item-edit .head { display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 12px; }
+  .item-edit .head div { display: flex; gap: 4px; }
+  .item-edit .head button { padding: 2px 8px; }
+  .check { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12.5px; color: var(--forest); }
+  .check input { width: auto; }
+  .hint { font-size: 11.5px; color: var(--muted); margin: 6px 0 0; line-height: 1.45; }
+  .warn { background: #FBEFE9; color: #8A3B26; border-radius: 7px; padding: 8px 10px; font-size: 12px; margin-top: 8px; }
+  .toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--forest); color: var(--white); padding: 9px 16px; border-radius: 99px; font-size: 12.5px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 99; }
+  .toast.show { opacity: 1; }
+  .stage { padding: 32px 24px 60px; overflow-x: auto; }
+
+  /* ---------- dokumen A4 ---------- */
+  .sheet { width: 210mm; min-height: 296mm; margin: 0 auto; background: #fff; padding: 15mm 16mm 12mm; box-shadow: 0 10px 40px rgba(10,23,18,.12); display: flex; flex-direction: column; position: relative; }
+  .d-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10mm; }
+  .brand { display: flex; gap: 11px; align-items: center; }
+  .brand img { width: 46px; }
+  .brand .name { font-family: "Space Grotesk"; font-weight: 700; font-size: 20px; letter-spacing: -.01em; }
+  .brand .tag { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--foam); font-weight: 600; margin-top: 2px; }
+  .company { font-size: 10.5px; color: var(--muted); line-height: 1.55; margin-top: 10px; }
+  .doc-title { text-align: right; }
+  .doc-title h2 { margin: 0; font-size: 26px; letter-spacing: .06em; font-weight: 700; text-transform: uppercase; line-height: 1.05; }
+  .doc-title .no { margin-top: 7px; font-size: 11.5px; font-weight: 600; color: var(--foam); letter-spacing: .02em; }
+  .rule { height: 3px; background: var(--forest); margin: 7mm 0 0; border-radius: 2px; position: relative; }
+  .rule::after { content: ""; position: absolute; right: 0; top: 0; height: 3px; width: 34%; background: var(--foam); border-radius: 2px; }
+
+  .meta { display: grid; grid-template-columns: 1.1fr 1fr 1.05fr; gap: 7mm; margin-top: 7mm; }
+  .meta h4 { margin: 0 0 5px; font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--foam); font-weight: 700; }
+  .meta .big { font-weight: 700; font-size: 13px; }
+  .meta p { margin: 0; font-size: 11px; line-height: 1.55; color: var(--forest); white-space: pre-line; }
+  .meta .muted { color: var(--muted); }
+  .kv { display: grid; grid-template-columns: auto 1fr; column-gap: 10px; row-gap: 3px; font-size: 11px; }
+  .kv dt { color: var(--muted); }
+  .kv dt, .kv dd { white-space: nowrap; }
+  .kv dd { margin: 0; text-align: right; font-weight: 600; }
+
+  table.items { width: 100%; border-collapse: collapse; margin-top: 8mm; font-size: 11px; }
+  table.items th { background: var(--forest); color: var(--white); text-align: left; font-weight: 600; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; padding: 8px 9px; }
+  table.items th:first-child { border-radius: 6px 0 0 6px; width: 28px; }
+  table.items th:last-child { border-radius: 0 6px 6px 0; }
+  table.items td { padding: 9px; border-bottom: 1px solid var(--warm); vertical-align: top; }
+  table.items tbody tr { break-inside: avoid; }
+  table.items .num { text-align: right; white-space: nowrap; }
+  table.items .c { text-align: center; }
+  table.items .t { font-weight: 600; }
+  table.items .dt { color: var(--muted); font-size: 10.3px; margin-top: 3px; white-space: pre-line; line-height: 1.5; }
+  table.items .idx { color: var(--foam); font-weight: 600; }
+
+  .sum-wrap { display: grid; grid-template-columns: 1fr 78mm; gap: 8mm; margin-top: 5mm; break-inside: avoid; }
+  .words { font-size: 10.5px; color: var(--muted); align-self: end; line-height: 1.5; }
+  .words b { color: var(--forest); font-weight: 600; font-style: italic; display: block; margin-top: 2px; }
+  .sum { font-size: 11.5px; }
+  .sum .l { display: flex; justify-content: space-between; padding: 5px 10px; }
+  .sum .l span:last-child { font-weight: 600; }
+  .sum .total { background: var(--warm-soft); border-radius: 6px; font-weight: 700; margin-top: 3px; }
+  .sum .due { background: var(--forest); color: var(--white); border-radius: 6px; font-size: 13px; padding: 9px 10px; margin-top: 4px; }
+  .sum .due span:first-child { font-weight: 600; }
+  .sum .due span:last-child { font-family: "Space Grotesk"; font-weight: 700; font-size: 15px; }
+
+  .bottom { display: grid; grid-template-columns: 1fr 64mm; gap: 9mm; margin-top: 9mm; break-inside: avoid; }
+  .box { border: 1px solid var(--warm); border-radius: 8px; padding: 10px 12px; }
+  .box h4 { margin: 0 0 6px; font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--foam); font-weight: 700; }
+  .bank { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: 11px; }
+  .bank dt { color: var(--muted); }
+  .bank dd { margin: 0; font-weight: 600; }
+  .bank dd.acc { font-family: "Space Grotesk"; font-size: 13px; letter-spacing: .03em; }
+  .terms { margin: 0; padding-left: 15px; font-size: 10.3px; line-height: 1.55; color: var(--forest); }
+  .terms li { margin-bottom: 2px; }
+  .box + .box { margin-top: 4mm; }
+  .sign { text-align: center; font-size: 11px; }
+  .sign .place { color: var(--muted); }
+  .sign .qr { width: 28mm; height: 28mm; margin: 6px auto 5px; padding: 2mm; border: 1px solid var(--warm); border-radius: 8px; background: #fff; }
+  .sign .qr svg, .sign .qr img { width: 100%; height: 100%; display: block; }
+  .sign .who { font-weight: 700; font-size: 12px; margin-top: 3px; }
+  .sign .role { color: var(--muted); font-size: 10.5px; }
+  .sign .ver { margin-top: 6px; font-size: 8.8px; color: var(--foam); line-height: 1.4; letter-spacing: .02em; }
+  .sign .ver code { font-family: "Space Grotesk"; font-weight: 700; letter-spacing: .08em; }
+  .signs { display: grid; grid-template-columns: 1fr 1fr; gap: 20mm; margin-top: 5mm; break-inside: avoid; }
+  .accept { text-align: center; font-size: 11px; }
+  .accept .space { height: 27mm; border-bottom: 1px solid var(--forest); margin: 6px 10mm 5px; }
+  .accept .muted { color: var(--muted); font-size: 10px; }
+
+  .grow { flex: 1; min-height: 5mm; }
+  .d-foot { border-top: 1px solid var(--warm); padding-top: 4mm; display: flex; justify-content: space-between; font-size: 9.5px; color: var(--muted); }
+  .d-foot b { color: var(--forest); font-weight: 600; }
+  .stamp { position: absolute; top: 88mm; right: 22mm; transform: rotate(-12deg); border: 3px solid var(--foam); color: var(--foam); font-family: "Space Grotesk"; font-weight: 700; font-size: 28px; letter-spacing: .18em; padding: 5px 16px; border-radius: 8px; opacity: .85; }
+  .stamp small { display: block; font-size: 9px; letter-spacing: .1em; text-align: center; font-family: Inter; font-weight: 600; }
+  .notes-line { margin-top: 5mm; font-size: 10.5px; line-height: 1.55; white-space: pre-line; background: var(--warm-soft); border-radius: 6px; padding: 8px 11px; }
+  .notes-line b { font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--foam); display: block; margin-bottom: 2px; }
+
+  @media (max-width: 1000px) {
+    .app { grid-template-columns: 1fr; }
+    .panel { position: static; height: auto; }
+    .stage { padding: 16px 0; }
+  }
+  @page { size: A4; margin: 0; }
+  @media print {
+    body { background: #fff; }
+    .panel, .toast { display: none !important; }
+    .app { display: block; }
+    .stage { padding: 0; }
+    .sheet { box-shadow: none; margin: 0; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="panel">
+    <header>
+      <h1><img src="logo.png" alt="">Dokumen Seawise</h1>
+      <div class="toolbar">
+        <button onclick="window.print()">Cetak / Simpan PDF</button>
+        <button class="ghost" onclick="saveDoc()">Simpan</button>
+        <button class="ghost" onclick="newDoc(state.type)">Baru</button>
+      </div>
+    </header>
+
+    <section>
+      <h2>Dokumen</h2>
+      <div class="row">
+        <div><label>Jenis</label>
+          <select id="f-type" onchange="changeType(this.value)">
+            <option value="quotation">Quotation</option>
+            <option value="proforma">Proforma Invoice</option>
+            <option value="invoice">Invoice</option>
+          </select></div>
+        <div><label>Bahasa dokumen</label>
+          <select data-k="lang"><option value="id">Indonesia</option><option value="en">English</option></select></div>
+      </div>
+      <label>Nomor</label><input data-k="number">
+      <div class="row">
+        <div><label>Tanggal</label><input type="date" data-k="date"></div>
+        <div><label id="l-until">Berlaku sampai</label><input type="date" data-k="until"></div>
+      </div>
+      <label>Referensi (mis. nomor quotation atau PO klien)</label><input data-k="ref" placeholder="Opsional">
+      <div class="toolbar" style="margin-top:10px" id="convert"></div>
+    </section>
+
+    <section>
+      <h2>Klien</h2>
+      <label>Nama</label><input data-k="client.name" placeholder="Nama PIC">
+      <label>Perusahaan / usaha</label><input data-k="client.company" placeholder="Opsional">
+      <label>Alamat</label><textarea data-k="client.address" rows="2" placeholder="Opsional"></textarea>
+      <div class="row">
+        <div><label>Telepon / WA</label><input data-k="client.phone"></div>
+        <div><label>Email</label><input data-k="client.email"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Proyek</h2>
+      <label>Nama proyek</label><input data-k="project" placeholder="mis. Website company profile">
+      <label>Keterangan singkat</label><textarea data-k="projectNote" rows="2" placeholder="Opsional"></textarea>
+    </section>
+
+    <section>
+      <h2>Rincian pekerjaan</h2>
+      <div id="items"></div>
+      <button class="ghost" onclick="addItem()">+ Tambah baris</button>
+    </section>
+
+    <section>
+      <h2>Harga</h2>
+      <div class="row">
+        <div><label>Diskon</label><input type="number" min="0" data-k="discount" data-num></div>
+        <div><label>Satuan diskon</label><select data-k="discountType"><option value="pct">Persen (%)</option><option value="amt">Rupiah</option></select></div>
+      </div>
+      <div class="row">
+        <div><label>Nama pajak</label><input data-k="taxLabel" placeholder="PPN"></div>
+        <div><label>Pajak (%)</label><input type="number" min="0" step="0.01" data-k="taxPct" data-num></div>
+      </div>
+      <p class="hint">Isi pajak hanya kalau Seawise sudah PKP. Nilai 0 menyembunyikan barisnya.</p>
+      <div id="opt-proforma">
+        <div class="row">
+          <div><label>Termin yang ditagih (%)</label><input type="number" min="1" max="100" data-k="termPct" data-num></div>
+          <div><label>Nama termin</label><input data-k="termLabel" placeholder="Uang muka"></div>
+        </div>
+      </div>
+      <div id="opt-invoice">
+        <label>Sudah dibayar sebelumnya (Rp)</label><input type="number" min="0" data-k="paid" data-num>
+        <p class="hint">Mis. DP dari proforma. Dikurangkan dari total untuk menghitung sisa tagihan.</p>
+        <label class="check"><input type="checkbox" data-k="lunas"> Tandai LUNAS (cap di dokumen)</label>
+      </div>
+    </section>
+
+    <section>
+      <h2>Catatan &amp; syarat</h2>
+      <label>Catatan untuk klien</label><textarea data-k="notes" rows="2" placeholder="Opsional, tampil di atas syarat"></textarea>
+      <label>Syarat &amp; ketentuan (satu per baris)</label><textarea data-k="terms" rows="6"></textarea>
+      <button class="ghost" style="margin-top:6px" onclick="resetTerms()">Pakai syarat bawaan</button>
+    </section>
+
+    <section>
+      <h2>Tersimpan</h2>
+      <select id="saved" onchange="loadDoc(this.value)"></select>
+      <div class="toolbar" style="margin-top:8px">
+        <button class="ghost" onclick="exportAll()">Backup JSON</button>
+        <button class="ghost" onclick="document.getElementById('imp').click()">Impor</button>
+        <button class="danger" onclick="deleteDoc()">Hapus dokumen ini</button>
+        <input type="file" id="imp" accept="application/json" hidden onchange="importAll(this.files[0])">
+      </div>
+      <p class="hint">Dokumen disimpan di browser ini saja. Ambil backup JSON secara berkala.</p>
+    </section>
+
+    <section>
+      <h2>Data studio</h2>
+      <label>Nama penandatangan</label><input data-s="signer">
+      <label>Jabatan</label><input data-s="signerRole">
+      <label>Alamat</label><input data-s="address">
+      <div class="row">
+        <div><label>Telepon</label><input data-s="phone"></div>
+        <div><label>Email</label><input data-s="email"></div>
+      </div>
+      <label>Website</label><input data-s="web">
+      <label>NPWP</label><input data-s="npwp" placeholder="Opsional">
+      <h2 style="margin-top:14px">Rekening</h2>
+      <label>Bank</label><input data-s="bank" placeholder="mis. BCA">
+      <div class="row">
+        <div><label>Nomor rekening</label><input data-s="account"></div>
+        <div><label>Atas nama</label><input data-s="holder"></div>
+      </div>
+      <div id="bank-warn"></div>
+      <p class="hint">Data studio berlaku untuk semua dokumen dan tersimpan di browser ini.</p>
+    </section>
+  </aside>
+
+  <main class="stage"><div class="sheet" id="sheet"></div></main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const LS_DOCS = "sw-docs-v1", LS_SET = "sw-docs-settings-v1";
+const PREFIX = { quotation: "QUO", proforma: "PRO", invoice: "INV" };
+
+const DEFAULT_SETTINGS = {
+  signer: "I Putu Agus Yulyastrawan", signerRole: "Founder & Developer",
+  address: "Bali, Indonesia", phone: "+62 812-3759-7759", email: "hello@seawise.id",
+  web: "www.seawise.id", npwp: "", bank: "", account: "", holder: "",
+};
+
+const T = {
+  id: {
+    quotation: "Quotation", proforma: "Proforma Invoice", invoice: "Invoice",
+    tagline: "Studio aplikasi & website di Bali",
+    to: { quotation: "Ditujukan kepada", proforma: "Ditagihkan kepada", invoice: "Ditagihkan kepada" },
+    project: "Proyek", date: "Tanggal", ref: "Referensi",
+    until: { quotation: "Berlaku sampai", proforma: "Jatuh tempo", invoice: "Jatuh tempo" },
+    no: "No", desc: "Deskripsi", qty: "Qty", unit: "Satuan", price: "Harga", amount: "Jumlah",
+    subtotal: "Subtotal", discount: "Diskon", total: "Total", totalProject: "Total nilai proyek",
+    paid: "Sudah dibayar", balance: "Sisa tagihan", due: "Jumlah ditagih", estimate: "Total penawaran",
+    words: "Terbilang", pay: "Pembayaran", bank: "Bank", acc: "No. rekening", holder: "Atas nama",
+    payNote: "Cantumkan nomor dokumen pada berita transfer.",
+    bankMissing: "Detail rekening dikirim terpisah.",
+    terms: "Syarat & ketentuan", notes: "Catatan",
+    regards: "Hormat kami,", accepted: "Disetujui oleh,", acceptNote: "Nama, tanda tangan, dan tanggal",
+    signed: "Ditandatangani secara digital", code: "Kode verifikasi",
+    lunas: "LUNAS", paidOn: "Terima kasih",
+    npwp: "NPWP",
+  },
+  en: {
+    quotation: "Quotation", proforma: "Proforma Invoice", invoice: "Invoice",
+    tagline: "App & website studio in Bali",
+    to: { quotation: "Prepared for", proforma: "Bill to", invoice: "Bill to" },
+    project: "Project", date: "Date", ref: "Reference",
+    until: { quotation: "Valid until", proforma: "Due date", invoice: "Due date" },
+    no: "No", desc: "Description", qty: "Qty", unit: "Unit", price: "Price", amount: "Amount",
+    subtotal: "Subtotal", discount: "Discount", total: "Total", totalProject: "Total project value",
+    paid: "Paid to date", balance: "Balance due", due: "Amount due", estimate: "Quoted total",
+    words: "Amount in words", pay: "Payment", bank: "Bank", acc: "Account no.", holder: "Account name",
+    payNote: "Please quote the document number in your transfer reference.",
+    bankMissing: "Bank details are sent separately.",
+    terms: "Terms & conditions", notes: "Notes",
+    regards: "Sincerely,", accepted: "Accepted by,", acceptNote: "Name, signature, and date",
+    signed: "Digitally signed", code: "Verification code",
+    lunas: "PAID", paidOn: "Thank you",
+    npwp: "Tax ID (NPWP)",
+  },
+};
+
+const DEFAULT_TERMS = {
+  id: {
+    quotation: "Penawaran berlaku sampai tanggal yang tertera di atas.\nPembayaran: uang muka 50% sebelum pengerjaan dimulai, pelunasan 50% saat serah terima.\nPekerjaan di luar rincian di atas dihitung terpisah setelah disepakati bersama.\nJadwal pengerjaan dimulai setelah uang muka diterima dan materi dari klien lengkap.",
+    proforma: "Proforma invoice ini adalah permintaan pembayaran, bukan bukti pembayaran.\nInvoice resmi diterbitkan setelah pembayaran diterima.\nPengerjaan dimulai setelah pembayaran termin ini masuk.",
+    invoice: "Mohon lakukan pembayaran paling lambat pada tanggal jatuh tempo.\nKirim bukti transfer ke WhatsApp atau email di bawah untuk konfirmasi.",
+  },
+  en: {
+    quotation: "This quotation is valid until the date stated above.\nPayment: 50% down payment before work starts, 50% on handover.\nWork outside the scope above is quoted separately once agreed.\nThe schedule starts once the down payment is received and client materials are complete.",
+    proforma: "This proforma invoice is a payment request, not a receipt.\nThe official invoice is issued once payment is received.\nWork starts once this instalment is paid.",
+    invoice: "Please settle this invoice by the due date.\nSend the transfer receipt via WhatsApp or email below for confirmation.",
+  },
+};
+
+let settings = loadSettings();
+let state;
+
+function $(s) { return document.querySelector(s); }
+function esc(s) { return String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+function rp(n) { return "Rp" + Math.round(n || 0).toLocaleString("id-ID"); }
+function num(v) { const n = parseFloat(v); return isFinite(n) ? n : 0; }
+function today() { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 10); }
+function addDays(iso, n) { const d = new Date(iso + "T00:00:00"); d.setDate(d.getDate() + n); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 10); }
+function fmtDate(iso, lang) {
+  if (!iso) return "";
+  return new Date(iso + "T00:00:00").toLocaleDateString(lang === "en" ? "en-GB" : "id-ID", { day: "numeric", month: "long", year: "numeric" });
+}
+function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 1800); }
+
+function readJSON(k, fb) { try { const v = JSON.parse(localStorage.getItem(k)); return v ?? fb; } catch { return fb; } }
+function writeJSON(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch { toast("Browser menolak menyimpan"); return false; } }
+function loadSettings() { return { ...DEFAULT_SETTINGS, ...readJSON(LS_SET, {}) }; }
+function allDocs() { return readJSON(LS_DOCS, []); }
+
+function nextNumber(type, iso) {
+  const [y, m] = (iso || today()).split("-");
+  const base = `${PREFIX[type]}/SW/${y}/${m}/`;
+  const used = allDocs().map(d => d.number).filter(n => n && n.startsWith(base)).map(n => parseInt(n.slice(base.length), 10) || 0);
+  return base + String((used.length ? Math.max(...used) : 0) + 1).padStart(3, "0");
+}
+
+function blankDoc(type, lang = "id") {
+  const date = today();
+  return {
+    id: "d" + Date.now().toString(36), type, lang, number: nextNumber(type, date), date,
+    until: addDays(date, 14), ref: "",
+    client: { name: "", company: "", address: "", phone: "", email: "" },
+    project: "", projectNote: "",
+    items: [{ title: "", detail: "", qty: 1, unit: "paket", price: 0 }],
+    discount: 0, discountType: "pct", taxLabel: "PPN", taxPct: 0,
+    termPct: 50, termLabel: lang === "en" ? "Down payment" : "Uang muka", paid: 0, lunas: false,
+    notes: "", terms: DEFAULT_TERMS[lang][type],
+  };
+}
+
+/* ---------- hitungan ---------- */
+function calc(d) {
+  const subtotal = d.items.reduce((s, it) => s + num(it.qty) * num(it.price), 0);
+  const disc = d.discountType === "pct" ? subtotal * num(d.discount) / 100 : num(d.discount);
+  const after = Math.max(0, subtotal - disc);
+  const tax = after * num(d.taxPct) / 100;
+  const total = Math.round(after + tax);
+  let due = total;
+  if (d.type === "proforma") due = Math.round(total * num(d.termPct) / 100);
+  if (d.type === "invoice") due = Math.max(0, total - num(d.paid));
+  return { subtotal, disc, tax, total, due };
+}
+
+/* ---------- terbilang ---------- */
+function terbilangID(n) {
+  const s = ["", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas"];
+  n = Math.floor(n);
+  if (n < 12) return s[n];
+  if (n < 20) return terbilangID(n - 10) + " belas";
+  if (n < 100) return terbilangID(Math.floor(n / 10)) + " puluh " + terbilangID(n % 10);
+  if (n < 200) return "seratus " + terbilangID(n - 100);
+  if (n < 1000) return terbilangID(Math.floor(n / 100)) + " ratus " + terbilangID(n % 100);
+  if (n < 2000) return "seribu " + terbilangID(n - 1000);
+  if (n < 1e6) return terbilangID(Math.floor(n / 1000)) + " ribu " + terbilangID(n % 1000);
+  if (n < 1e9) return terbilangID(Math.floor(n / 1e6)) + " juta " + terbilangID(n % 1e6);
+  if (n < 1e12) return terbilangID(Math.floor(n / 1e9)) + " miliar " + terbilangID(n % 1e9);
+  return terbilangID(Math.floor(n / 1e12)) + " triliun " + terbilangID(n % 1e12);
+}
+function wordsEN(n) {
+  const a = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+  const b = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+  n = Math.floor(n);
+  if (n < 20) return a[n];
+  if (n < 100) return b[Math.floor(n / 10)] + (n % 10 ? "-" + a[n % 10] : "");
+  if (n < 1000) return a[Math.floor(n / 100)] + " hundred" + (n % 100 ? " and " + wordsEN(n % 100) : "");
+  for (const [v, w] of [[1e12, "trillion"], [1e9, "billion"], [1e6, "million"], [1e3, "thousand"]])
+    if (n >= v) return wordsEN(Math.floor(n / v)) + " " + w + (n % v ? (n % v < 100 ? " and " : " ") + wordsEN(n % v) : "");
+}
+function inWords(n, lang) {
+  if (!n) return lang === "en" ? "Zero rupiah" : "Nol rupiah";
+  const w = (lang === "en" ? wordsEN(n) + " rupiah" : terbilangID(n) + " rupiah").replace(/\s+/g, " ").trim();
+  return w.charAt(0).toUpperCase() + w.slice(1);
+}
+
+/* ---------- tanda tangan QR ---------- */
+// Kode verifikasi = hash isi pokok dokumen. Kalau nomor, tanggal, klien, atau
+// nilai diubah sesudah dikirim, kodenya ikut berubah dan tidak cocok lagi
+// dengan salinan yang tersimpan di studio.
+function cyrb53(str, seed = 0x5ea) {
+  let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+  for (let i = 0; i < str.length; i++) { const ch = str.charCodeAt(i); h1 = Math.imul(h1 ^ ch, 2654435761); h2 = Math.imul(h2 ^ ch, 1597334677); }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(16).toUpperCase().padStart(14, "0");
+}
+function verifyCode(d, c) {
+  const core = [d.type, d.number, d.date, d.client.name, d.client.company, c.total, c.due, settings.signer].join("|");
+  return cyrb53(core).replace(/(.{4})(?=.)/g, "$1-");
+}
+function qrPayload(d, c, code) {
+  const t = T[d.lang];
+  return [
+    "SEAWISE STUDIO",
+    `${t.signed}: ${settings.signer}, ${settings.signerRole}`,
+    `${t[d.type]} ${d.number}`,
+    `${t.date}: ${fmtDate(d.date, d.lang)}`,
+    `${t.to[d.type]}: ${[d.client.name, d.client.company].filter(Boolean).join(", ") || "-"}`,
+    `${d.type === "quotation" ? t.estimate : t.due}: ${rp(c.due)}`,
+    `${t.code}: ${code}`,
+    settings.web,
+  ].join("\n");
+}
+function qrSVG(text) {
+  if (typeof qrcode === "undefined") return "<div style='font-size:9px'>QR library gagal dimuat</div>";
+  const q = qrcode(0, "M"); q.addData(unescape(encodeURIComponent(text))); q.make();
+  const n = q.getModuleCount(); let p = "";
+  for (let r = 0; r < n; r++) for (let col = 0; col < n; col++) if (q.isDark(r, col)) p += `M${col} ${r}h1v1h-1z`;
+  return `<svg viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges"><path d="${p}" fill="#132A22"/></svg>`;
+}
+
+/* ---------- render dokumen ---------- */
+function render() {
+  const d = state, t = T[d.lang], c = calc(d), s = settings;
+  const code = verifyCode(d, c);
+  const cl = d.client;
+  const toLines = [cl.company, cl.address, cl.phone, cl.email].filter(Boolean).map(esc).join("\n");
+  const hasBank = s.bank && s.account;
+
+  const rows = d.items.filter(it => it.title || num(it.price)).map((it, i) => `
+    <tr><td class="idx">${String(i + 1).padStart(2, "0")}</td>
+      <td><div class="t">${esc(it.title)}</div>${it.detail ? `<div class="dt">${esc(it.detail)}</div>` : ""}</td>
+      <td class="c">${num(it.qty).toLocaleString("id-ID")}</td><td class="c">${esc(it.unit)}</td>
+      <td class="num">${rp(it.price)}</td><td class="num">${rp(num(it.qty) * num(it.price))}</td></tr>`).join("");
+
+  let sum = `<div class="l"><span>${t.subtotal}</span><span>${rp(c.subtotal)}</span></div>`;
+  if (c.disc) sum += `<div class="l"><span>${t.discount}${d.discountType === "pct" ? ` ${num(d.discount)}%` : ""}</span><span>-${rp(c.disc)}</span></div>`;
+  if (c.tax) sum += `<div class="l"><span>${esc(d.taxLabel || "PPN")} ${num(d.taxPct)}%</span><span>${rp(c.tax)}</span></div>`;
+  if (d.type === "quotation") {
+    sum += `<div class="l due"><span>${t.estimate}</span><span>${rp(c.total)}</span></div>`;
+  } else if (d.type === "proforma") {
+    sum += `<div class="l total"><span>${t.totalProject}</span><span>${rp(c.total)}</span></div>`;
+    sum += `<div class="l due"><span>${esc(d.termLabel)} ${num(d.termPct)}%</span><span>${rp(c.due)}</span></div>`;
+  } else {
+    sum += `<div class="l total"><span>${t.total}</span><span>${rp(c.total)}</span></div>`;
+    if (num(d.paid)) sum += `<div class="l"><span>${t.paid}</span><span>-${rp(d.paid)}</span></div>`;
+    sum += `<div class="l due"><span>${num(d.paid) ? t.balance : t.due}</span><span>${rp(c.due)}</span></div>`;
+  }
+
+  const terms = (d.terms || "").split("\n").map(x => x.trim()).filter(Boolean);
+  const bank = hasBank
+    ? `<dl class="bank"><dt>${t.bank}</dt><dd>${esc(s.bank)}</dd><dt>${t.acc}</dt><dd class="acc">${esc(s.account)}</dd><dt>${t.holder}</dt><dd>${esc(s.holder)}</dd></dl>
+       <p class="hint" style="margin-top:6px;font-size:10px">${t.payNote}</p>`
+    : `<p style="margin:0;font-size:11px">${t.bankMissing}</p>`;
+
+  $("#sheet").innerHTML = `
+    ${d.type === "invoice" && d.lunas ? `<div class="stamp">${t.lunas}<small>${t.paidOn}</small></div>` : ""}
+    <div class="d-head">
+      <div>
+        <div class="brand"><img src="logo.png" alt="Seawise Studio"><div><div class="name">Seawise Studio</div><div class="tag">${t.tagline}</div></div></div>
+        <div class="company">${esc(s.address)}<br>${esc(s.phone)} &nbsp;|&nbsp; ${esc(s.email)} &nbsp;|&nbsp; ${esc(s.web)}${s.npwp ? `<br>${t.npwp}: ${esc(s.npwp)}` : ""}</div>
+      </div>
+      <div class="doc-title"><h2>${t[d.type]}</h2><div class="no">${esc(d.number)}</div></div>
+    </div>
+    <div class="rule"></div>
+    <div class="meta">
+      <div><h4>${t.to[d.type]}</h4><div class="big">${esc(cl.name) || "&nbsp;"}</div><p class="muted">${toLines}</p></div>
+      <div><h4>${t.project}</h4><div class="big">${esc(d.project) || "&nbsp;"}</div><p class="muted">${esc(d.projectNote)}</p></div>
+      <div><dl class="kv">
+        <dt>${t.date}</dt><dd>${fmtDate(d.date, d.lang)}</dd>
+        ${d.until ? `<dt>${t.until[d.type]}</dt><dd>${fmtDate(d.until, d.lang)}</dd>` : ""}
+        ${d.ref ? `<dt>${t.ref}</dt><dd>${esc(d.ref)}</dd>` : ""}
+      </dl></div>
+    </div>
+    <table class="items">
+      <thead><tr><th>${t.no}</th><th>${t.desc}</th><th class="c">${t.qty}</th><th class="c">${t.unit}</th><th class="num">${t.price}</th><th class="num">${t.amount}</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div class="sum-wrap">
+      <div class="words">${t.words}<b>${inWords(c.due || c.total, d.lang)}</b></div>
+      <div class="sum">${sum}</div>
+    </div>
+    ${d.notes ? `<div class="notes-line"><b>${t.notes}</b>${esc(d.notes)}</div>` : ""}
+    ${(() => {
+      const sign = `<div class="sign">
+          <div class="place">${esc((s.address || "").split(",")[0])}, ${fmtDate(d.date, d.lang)}</div>
+          <div>${t.regards}</div>
+          <div class="qr">${qrSVG(qrPayload(d, c, code))}</div>
+          <div class="who">${esc(s.signer)}</div>
+          <div class="role">${esc(s.signerRole)}, Seawise Studio</div>
+          <div class="ver">${t.signed}<br>${t.code}: <code>${code}</code></div>
+        </div>`;
+      const payBox = d.type !== "quotation" || hasBank ? `<div class="box"><h4>${t.pay}</h4>${bank}</div>` : "";
+      const termBox = terms.length ? `<div class="box"><h4>${t.terms}</h4><ol class="terms">${terms.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>` : "";
+      // Quotation butuh dua tanda tangan, jadi keduanya disejajarkan di baris sendiri.
+      if (d.type === "quotation") return `<div style="margin-top:6mm">${payBox}${termBox}</div>
+        <div class="signs"><div class="accept"><div class="place" style="color:var(--muted)">&nbsp;</div>${t.accepted}<div class="space"></div><div class="who" style="font-weight:700;font-size:12px">${esc(d.client.name) || "&nbsp;"}</div><div style="color:var(--muted);font-size:10px">${t.acceptNote}</div></div>${sign}</div>`;
+      return `<div class="bottom"><div>${payBox}${termBox}</div><div>${sign}</div></div>`;
+    })()}
+    <div class="grow"></div>
+    <div class="d-foot"><span><b>Seawise Studio</b> &nbsp;${t.tagline}</span><span>${esc(s.web)} &nbsp;|&nbsp; ${esc(s.email)} &nbsp;|&nbsp; ${esc(s.phone)}</span></div>`;
+
+  document.title = `${d.number.replace(/\//g, "-")} ${cl.company || cl.name || ""}`.trim();
+  $("#bank-warn").innerHTML = hasBank ? "" : `<div class="warn">Rekening belum diisi. Proforma dan invoice akan menulis "detail rekening dikirim terpisah".</div>`;
+}
+
+/* ---------- form ---------- */
+function getPath(o, p) { return p.split(".").reduce((a, k) => a?.[k], o); }
+function setPath(o, p, v) { const ks = p.split("."); const last = ks.pop(); ks.reduce((a, k) => a[k], o)[last] = v; }
+
+function fillForm() {
+  $("#f-type").value = state.type;
+  document.querySelectorAll("[data-k]").forEach(el => {
+    const v = getPath(state, el.dataset.k);
+    if (el.type === "checkbox") el.checked = !!v; else el.value = v ?? "";
+  });
+  document.querySelectorAll("[data-s]").forEach(el => el.value = settings[el.dataset.s] ?? "");
+  $("#l-until").textContent = T.id.until[state.type];
+  $("#opt-proforma").style.display = state.type === "proforma" ? "" : "none";
+  $("#opt-invoice").style.display = state.type === "invoice" ? "" : "none";
+  const conv = { quotation: [["proforma", "Jadikan Proforma"], ["invoice", "Jadikan Invoice"]], proforma: [["invoice", "Jadikan Invoice"]], invoice: [] }[state.type];
+  $("#convert").innerHTML = conv.map(([to, l]) => `<button class="ghost" onclick="convertTo('${to}')">${l}</button>`).join("");
+  renderItems(); refreshSaved(); render();
+}
+
+function renderItems() {
+  $("#items").innerHTML = state.items.map((it, i) => `
+    <div class="item-edit">
+      <div class="head">Baris ${i + 1}<div>
+        <button class="ghost" onclick="moveItem(${i},-1)" ${i ? "" : "disabled"} aria-label="Naik">&#8593;</button>
+        <button class="ghost" onclick="moveItem(${i},1)" ${i < state.items.length - 1 ? "" : "disabled"} aria-label="Turun">&#8595;</button>
+        <button class="danger" onclick="removeItem(${i})">Hapus</button></div></div>
+      <label>Nama pekerjaan</label><input value="${esc(it.title)}" oninput="setItem(${i},'title',this.value)">
+      <label>Rincian (satu per baris)</label><textarea rows="2" oninput="setItem(${i},'detail',this.value)">${esc(it.detail)}</textarea>
+      <div class="row3">
+        <div><label>Qty</label><input type="number" min="0" step="any" value="${it.qty}" oninput="setItem(${i},'qty',this.value)"></div>
+        <div><label>Satuan</label><input value="${esc(it.unit)}" oninput="setItem(${i},'unit',this.value)"></div>
+        <div><label>Harga (Rp)</label><input type="number" min="0" value="${it.price}" oninput="setItem(${i},'price',this.value)"></div>
+      </div>
+    </div>`).join("");
+}
+function setItem(i, k, v) { state.items[i][k] = (k === "qty" || k === "price") ? num(v) : v; render(); }
+function addItem() { state.items.push({ title: "", detail: "", qty: 1, unit: state.lang === "en" ? "package" : "paket", price: 0 }); renderItems(); render(); }
+function removeItem(i) { state.items.splice(i, 1); if (!state.items.length) addItem(); renderItems(); render(); }
+function moveItem(i, dir) { const it = state.items.splice(i, 1)[0]; state.items.splice(i + dir, 0, it); renderItems(); render(); }
+
+document.addEventListener("input", e => {
+  const el = e.target;
+  if (el.dataset.k) {
+    const v = el.type === "checkbox" ? el.checked : el.hasAttribute("data-num") ? num(el.value) : el.value;
+    const prevLang = state.lang;
+    setPath(state, el.dataset.k, v);
+    if (el.dataset.k === "lang" && prevLang !== v) {
+      // Syarat bawaan ikut bahasa, syarat yang sudah diubah tangan dibiarkan.
+      if (state.terms === DEFAULT_TERMS[prevLang][state.type]) state.terms = DEFAULT_TERMS[v][state.type];
+      if (state.termLabel === (prevLang === "en" ? "Down payment" : "Uang muka")) state.termLabel = v === "en" ? "Down payment" : "Uang muka";
+      fillForm(); return;
+    }
+    render();
+  } else if (el.dataset.s) {
+    settings[el.dataset.s] = el.value; writeJSON(LS_SET, settings); render();
+  }
+});
+document.addEventListener("change", e => { if (e.target.matches("select[data-k], input[type=checkbox][data-k]")) e.target.dispatchEvent(new Event("input", { bubbles: true })); });
+
+function changeType(type) {
+  const wasDefault = state.terms === DEFAULT_TERMS[state.lang][state.type];
+  const numberWasAuto = state.number.startsWith(PREFIX[state.type] + "/");
+  state.type = type;
+  if (wasDefault) state.terms = DEFAULT_TERMS[state.lang][type];
+  if (numberWasAuto) state.number = nextNumber(type, state.date);
+  fillForm();
+}
+function resetTerms() { state.terms = DEFAULT_TERMS[state.lang][state.type]; fillForm(); }
+
+function convertTo(type) {
+  saveDoc(true);
+  const src = state;
+  const d = JSON.parse(JSON.stringify(src));
+  d.id = "d" + Date.now().toString(36); d.type = type; d.date = today();
+  d.number = nextNumber(type, d.date); d.until = addDays(d.date, 7);
+  d.ref = src.number; d.terms = DEFAULT_TERMS[d.lang][type]; d.lunas = false;
+  if (type === "invoice" && src.type === "proforma") d.paid = calc(src).due;
+  state = d; fillForm(); toast(`Dibuat dari ${src.number}, belum disimpan`);
+}
+
+/* ---------- simpan ---------- */
+function saveDoc(silent) {
+  const docs = allDocs(); const i = docs.findIndex(x => x.id === state.id);
+  state.savedAt = new Date().toISOString();
+  if (i >= 0) docs[i] = state; else docs.unshift(state);
+  if (writeJSON(LS_DOCS, docs)) { refreshSaved(); if (!silent) toast("Tersimpan"); }
+}
+function loadDoc(id) { const d = allDocs().find(x => x.id === id); if (d) { state = { ...blankDoc(d.type, d.lang), ...d }; fillForm(); } }
+function deleteDoc() {
+  const docs = allDocs(); const i = docs.findIndex(x => x.id === state.id);
+  if (i < 0) { toast("Dokumen ini belum disimpan"); return; }
+  docs.splice(i, 1); writeJSON(LS_DOCS, docs); toast("Dihapus"); newDoc(state.type);
+}
+function newDoc(type) { state = blankDoc(type || "quotation"); fillForm(); }
+function refreshSaved() {
+  const docs = allDocs();
+  $("#saved").innerHTML = `<option value="">${docs.length ? "Buka dokumen tersimpan..." : "Belum ada dokumen tersimpan"}</option>` +
+    docs.map(d => `<option value="${d.id}" ${d.id === state?.id ? "selected" : ""}>${esc(d.number)} | ${esc(d.client.company || d.client.name || "tanpa klien")}</option>`).join("");
+}
+function exportAll() {
+  const blob = new Blob([JSON.stringify({ settings, docs: allDocs() }, null, 2)], { type: "application/json" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = `backup-dokumen-seawise-${today()}.json`; a.click();
+}
+function importAll(file) {
+  if (!file) return;
+  file.text().then(txt => {
+    const data = JSON.parse(txt);
+    const cur = allDocs(), ids = new Set(cur.map(d => d.id));
+    const merged = cur.concat((data.docs || []).filter(d => !ids.has(d.id)));
+    writeJSON(LS_DOCS, merged);
+    if (data.settings) { settings = { ...DEFAULT_SETTINGS, ...data.settings }; writeJSON(LS_SET, settings); }
+    fillForm(); toast(`${merged.length - cur.length} dokumen diimpor`);
+  }).catch(() => toast("File tidak bisa dibaca"));
+}
+
+/* ---------- contoh (untuk ?contoh=quotation|proforma|invoice) ---------- */
+function sampleDoc(type) {
+  const d = blankDoc(type);
+  Object.assign(d, {
+    number: `${PREFIX[type]}/SW/2026/09/001`, date: "2026-09-30", until: type === "quotation" ? "2026-10-14" : "2026-10-07",
+    ref: type === "quotation" ? "" : "QUO/SW/2026/09/001",
+    client: { name: "Nama Klien", company: "Nama Usaha Klien", address: "Alamat klien", phone: "+62 8xx-xxxx-xxxx", email: "klien@contoh.com" },
+    project: "Website company profile", projectNote: "Contoh format. Semua isian adalah data contoh.",
+    items: [
+      { title: "Desain & pengembangan website", detail: "Hingga 5 halaman, dua bahasa (ID/EN)\nResponsif untuk HP dan desktop", qty: 1, unit: "paket", price: 10000000 },
+      { title: "Setup SEO dasar", detail: "Metadata, sitemap, Google Search Console", qty: 1, unit: "paket", price: 1500000 },
+      { title: "Maintenance bulanan", detail: "Update konten ringan dan pemantauan", qty: 3, unit: "bulan", price: 500000 },
+    ],
+    notes: type === "quotation" ? "Angka ilustrasi untuk contoh format, bukan harga resmi." : "",
+    paid: type === "invoice" ? 6500000 : 0,
+  });
+  return d;
+}
+
+const params = new URLSearchParams(location.search);
+if (params.get("contoh")) { settings = { ...DEFAULT_SETTINGS }; state = sampleDoc(params.get("contoh")); }
+else { const docs = allDocs(); state = docs.length ? { ...blankDoc(docs[0].type, docs[0].lang), ...docs[0] } : blankDoc("quotation"); }
+fillForm();
+</script>
+</body>
+</html>

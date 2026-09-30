@@ -11,3 +11,4 @@ npm-debug.log*
 next-env.d.ts
 tsconfig.verify.json
 .env*
+dokumen-bisnis/backup-*.json

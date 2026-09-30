@@ -100,6 +100,10 @@ def render_frame(f):
             f'<div style="position:relative;z-index:2"><div class="eyebrow">{e(f["eyebrow"])}</div><h1>{e(f["title"])}</h1>'
             + (f'<p class="sub">{e(f["sub"])}</p>' if f.get("sub") else "") + '</div><div class="grow"></div>')
 
+def work_dir(r):
+    """Satu folder per reel: hasil akhir di out_reels/<id>/, frame dan segmen di bahan/."""
+    return os.path.join(OUT, r["id"], "bahan")
+
 def render_pngs(only=None):
     os.makedirs(OUT, exist_ok=True)
     for r in REELS:
@@ -109,7 +113,8 @@ def render_pngs(only=None):
             clip = f["type"] == "clip"
             bg = "html,body,.s{background:transparent!important}" if clip else ""
             doc = f'<!doctype html><html><head><meta charset="utf-8"><style>{CSS}{bg}</style></head><body><div class="s">{render_frame(f)}</div></body></html>'
-            hp = os.path.join(OUT, f'{r["id"]}-{i:02d}.html')
+            os.makedirs(work_dir(r), exist_ok=True)
+            hp = os.path.join(work_dir(r), f'{r["id"]}-{i:02d}.html')
             open(hp, "w").write(doc)
             png = hp[:-5] + ".png"
             cmd = [CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=1",
@@ -128,8 +133,8 @@ def assemble(only=None):
             continue
         segs = []
         for i, f in enumerate(r["frames"], 1):
-            png = os.path.join(OUT, f'{r["id"]}-{i:02d}.png')
-            seg = os.path.join(OUT, f'{r["id"]}-{i:02d}.mp4')
+            png = os.path.join(work_dir(r), f'{r["id"]}-{i:02d}.png')
+            seg = os.path.join(work_dir(r), f'{r["id"]}-{i:02d}.mp4')
             if f["type"] == "clip":
                 src = os.path.join(VIDEO_AI, f["clip"])
                 if not os.path.exists(src):
@@ -149,14 +154,14 @@ def assemble(only=None):
                 subprocess.run(["ffmpeg", "-y", "-loop", "1", "-i", png, "-t", str(FRAME_SECONDS),
                                 "-vf", f"fps={FPS}", *ENC, seg], capture_output=True)
             segs.append(seg)
-        listfile = os.path.join(OUT, f'{r["id"]}-list.txt')
+        listfile = os.path.join(work_dir(r), f'{r["id"]}-list.txt')
         with open(listfile, "w") as fh:
             for s in segs:
                 fh.write(f"file '{os.path.basename(s)}'\n")
-        video = os.path.join(OUT, f'{r["id"]}-video.mp4')
+        video = os.path.join(work_dir(r), f'{r["id"]}-video.mp4')
         subprocess.run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", listfile, "-c", "copy", video],
-                        capture_output=True, cwd=OUT)
-        final = os.path.join(OUT, f'{r["id"]}.mp4')
+                        capture_output=True, cwd=work_dir(r))
+        final = os.path.join(OUT, r["id"], f'{r["id"]}.mp4')
         dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", video],
                                    capture_output=True, text=True).stdout)
         clips = [f["clip"] for f in r["frames"] if f["type"] == "clip"]
