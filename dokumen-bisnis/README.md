@@ -16,6 +16,19 @@ Untuk membuatnya ulang: `generator.html?contoh=quotation|proforma|invoice`.
    proforma otomatis masuk ke "Sudah dibayar", jadi yang tertagih sisa saja.
 4. Sudah dibayar lunas: centang **Tandai LUNAS**, cetak ulang sebagai kuitansi.
 
+Untuk proforma dan invoice, **Ambil data dari dokumen tersimpan** di bagian
+Dokumen memilih quotation (atau proforma) sumbernya. Klien, proyek, rincian,
+dan harga disalin. Invoice otomatis mengurangkan semua proforma yang sudah
+dibuat dari quotation yang sama. Simpan dulu quotation-nya supaya muncul di pilihan.
+
+Rekening bank hanya tampil kalau **Tampilkan rekening di dokumen ini**
+dicentang: mati bawaan untuk quotation, nyala untuk proforma dan invoice.
+
+**Lampiran** membuat halaman tambahan sesudah dokumen utama, misalnya daftar
+kebutuhan dari klien. Formatnya `## ` subjudul, `- ` poin, `> ` kotak sorotan,
+`**teks**` tebal. Kalau halaman pertama melebihi A4, jarak dan QR otomatis
+dipadatkan.
+
 Nomor otomatis `QUO|PRO|INV/SW/<tahun>/<bulan>/<urut>`, urutan dihitung dari
 dokumen yang tersimpan. Nomor tetap bisa diketik manual.
 
@@ -38,6 +51,11 @@ dan NPWP kalau ada. Selama rekening kosong, proforma dan invoice menulis
 tersembunyi. Isi hanya kalau Seawise sudah PKP.
 
 ## Penyimpanan
+
+`data/` (tidak di-commit) untuk dokumen klien yang disiapkan di luar browser:
+`data/dokumen-seed.js` berisi `window.SEED_DOCS`, dimuat sekali per dokumen ke
+penyimpanan browser saat generator dibuka. PDF klien juga disimpan di sini.
+Buka dokumen tertentu langsung dengan `generator.html?buka=<id>`.
 
 Semua dokumen tersimpan di **browser ini saja** (localStorage), tidak ke
 server dan tidak ke repo. Pakai **Backup JSON** berkala, dan **Impor** untuk

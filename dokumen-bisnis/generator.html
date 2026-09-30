@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <script src="qrcode.min.js"></script>
+<!-- Opsional dan tidak di-commit: dokumen klien yang disiapkan di luar browser. -->
+<script src="data/dokumen-seed.js" onerror="void 0"></script>
 <style>
   :root {
     --forest: #132A22; --black: #0A1712; --white: #FAFAF8;
@@ -73,8 +75,9 @@
   .kv dd { margin: 0; text-align: right; font-weight: 600; }
 
   table.items { width: 100%; border-collapse: collapse; margin-top: 8mm; font-size: 11px; }
+  table.items { table-layout: fixed; }
   table.items th { background: var(--forest); color: var(--white); text-align: left; font-weight: 600; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; padding: 8px 9px; }
-  table.items th:first-child { border-radius: 6px 0 0 6px; width: 28px; }
+  table.items th:first-child { border-radius: 6px 0 0 6px; }
   table.items th:last-child { border-radius: 0 6px 6px 0; }
   table.items td { padding: 9px; border-bottom: 1px solid var(--warm); vertical-align: top; }
   table.items tbody tr { break-inside: avoid; }
@@ -126,18 +129,52 @@
   .notes-line { margin-top: 5mm; font-size: 10.5px; line-height: 1.55; white-space: pre-line; background: var(--warm-soft); border-radius: 6px; padding: 8px 11px; }
   .notes-line b { font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--foam); display: block; margin-bottom: 2px; }
 
+  .sheet + .sheet { margin-top: 24px; }
+  .sheet[hidden] { display: none; }
+  /* Mode padat, dipasang otomatis kalau halaman pertama melebihi A4. */
+  .dense .rule { margin-top: 5mm; }
+  .dense .meta { margin-top: 4mm; }
+  .dense table.items { margin-top: 5mm; }
+  .dense table.items td { padding: 5px 9px; }
+  .dense table.items .dt { margin-top: 1px; line-height: 1.4; }
+  .dense .sum-wrap { margin-top: 3mm; }
+  .dense .sum .l { padding: 3px 10px; }
+  .dense .sum .due { padding: 7px 10px; }
+  .dense .notes-line { margin-top: 3mm; padding: 6px 11px; }
+  .dense .bottom { margin-top: 5mm; }
+  .dense .box { padding: 8px 12px; }
+  .dense .box + .box { margin-top: 3mm; }
+  .dense .terms li { margin-bottom: 1px; }
+  .dense .signs { margin-top: 3mm; }
+  .dense .accept .space { height: 19mm; }
+  .dense .sign .qr { width: 23mm; height: 23mm; margin: 4px auto 3px; }
+  .dense .sign .ver { margin-top: 3px; }
+  .mini-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 4mm; border-bottom: 2px solid var(--forest); margin-bottom: 6mm; }
+  .mini-head .brand img { width: 30px; }
+  .mini-head .brand .name { font-size: 15px; }
+  .mini-head .no { font-size: 10.5px; color: var(--foam); font-weight: 600; text-align: right; line-height: 1.5; }
+  .appx h1 { font-size: 19px; margin: 0 0 2mm; letter-spacing: -.01em; }
+  .appx h3 { font-size: 11.5px; margin: 5mm 0 2mm; color: var(--forest); letter-spacing: .02em; padding: 5px 9px; background: var(--warm-soft); border-left: 3px solid var(--foam); border-radius: 0 5px 5px 0; break-after: avoid; }
+  .appx p { font-size: 10.3px; line-height: 1.55; margin: 0 0 2mm; }
+  .appx ul { margin: 0 0 2mm; padding-left: 15px; font-size: 10.1px; line-height: 1.5; }
+  .appx li { margin-bottom: 1.2mm; break-inside: avoid; }
+  .appx b { font-weight: 600; }
+  .appx .callout { background: var(--forest); color: var(--white); border-radius: 7px; padding: 8px 11px; font-size: 10.3px; line-height: 1.5; margin: 3mm 0; }
+  .appx .callout b { color: #CFE3DB; }
   @media (max-width: 1000px) {
     .app { grid-template-columns: 1fr; }
     .panel { position: static; height: auto; }
     .stage { padding: 16px 0; }
   }
-  @page { size: A4; margin: 0; }
+  @page { size: A4; margin: 12mm 0; }
   @media print {
     body { background: #fff; }
     .panel, .toast { display: none !important; }
     .app { display: block; }
     .stage { padding: 0; }
-    .sheet { box-shadow: none; margin: 0; }
+    /* Margin atas-bawah dari @page supaya halaman lanjutan (item panjang, lampiran) tetap punya ruang. */
+    .sheet { box-shadow: none; margin: 0 !important; min-height: 272mm; padding-top: 3mm; padding-bottom: 0; }
+    .sheet + .sheet { break-before: page; }
     * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 </style>
@@ -172,6 +209,8 @@
         <div><label id="l-until">Berlaku sampai</label><input type="date" data-k="until"></div>
       </div>
       <label>Referensi (mis. nomor quotation atau PO klien)</label><input data-k="ref" placeholder="Opsional">
+      <div id="from-wrap"><label>Ambil data dari dokumen tersimpan</label><select id="from" onchange="pullFrom(this.value)"></select>
+        <p class="hint">Klien, proyek, rincian, dan harga disalin. Untuk invoice, pembayaran proforma sebelumnya otomatis masuk "Sudah dibayar".</p></div>
       <div class="toolbar" style="margin-top:10px" id="convert"></div>
     </section>
 
@@ -225,8 +264,17 @@
     <section>
       <h2>Catatan &amp; syarat</h2>
       <label>Catatan untuk klien</label><textarea data-k="notes" rows="2" placeholder="Opsional, tampil di atas syarat"></textarea>
+      <label class="check"><input type="checkbox" data-k="showBank"> Tampilkan rekening di dokumen ini</label>
+      <p class="hint">Default mati untuk quotation, nyala untuk proforma dan invoice.</p>
       <label>Syarat &amp; ketentuan (satu per baris)</label><textarea data-k="terms" rows="6"></textarea>
       <button class="ghost" style="margin-top:6px" onclick="resetTerms()">Pakai syarat bawaan</button>
+    </section>
+
+    <section>
+      <h2>Lampiran (halaman tambahan)</h2>
+      <label>Judul lampiran</label><input data-k="appendixTitle" placeholder="Kosongkan kalau tidak perlu">
+      <label>Isi</label><textarea data-k="appendix" rows="8" placeholder="## Subjudul&#10;- poin&#10;Paragraf biasa. **tebal**&#10;&gt; kotak sorotan"></textarea>
+      <p class="hint">Format: <code>## </code> subjudul, <code>- </code> poin, <code>&gt; </code> kotak sorotan, <code>**teks**</code> tebal. Kosong berarti tidak ada halaman lampiran.</p>
     </section>
 
     <section>
@@ -263,7 +311,7 @@
     </section>
   </aside>
 
-  <main class="stage"><div class="sheet" id="sheet"></div></main>
+  <main class="stage"><div class="sheet" id="sheet"></div><div class="sheet" id="sheet2" hidden></div></main>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -366,6 +414,7 @@ function blankDoc(type, lang = "id") {
     items: [{ title: "", detail: "", qty: 1, unit: "paket", price: 0 }],
     discount: 0, discountType: "pct", taxLabel: "PPN", taxPct: 0,
     termPct: 50, termLabel: lang === "en" ? "Down payment" : "Uang muka", paid: 0, lunas: false,
+    showBank: type !== "quotation", appendixTitle: "", appendix: "", sourceId: "",
     notes: "", terms: DEFAULT_TERMS[lang][type],
   };
 }
@@ -464,7 +513,7 @@ function render() {
       <td class="c">${num(it.qty).toLocaleString("id-ID")}</td><td class="c">${esc(it.unit)}</td>
       <td class="num">${rp(it.price)}</td><td class="num">${rp(num(it.qty) * num(it.price))}</td></tr>`).join("");
 
-  let sum = `<div class="l"><span>${t.subtotal}</span><span>${rp(c.subtotal)}</span></div>`;
+  let sum = c.disc || c.tax ? `<div class="l"><span>${t.subtotal}</span><span>${rp(c.subtotal)}</span></div>` : "";
   if (c.disc) sum += `<div class="l"><span>${t.discount}${d.discountType === "pct" ? ` ${num(d.discount)}%` : ""}</span><span>-${rp(c.disc)}</span></div>`;
   if (c.tax) sum += `<div class="l"><span>${esc(d.taxLabel || "PPN")} ${num(d.taxPct)}%</span><span>${rp(c.tax)}</span></div>`;
   if (d.type === "quotation") {
@@ -504,6 +553,7 @@ function render() {
       </dl></div>
     </div>
     <table class="items">
+      <colgroup><col style="width:9mm"><col><col style="width:11mm"><col style="width:19mm"><col style="width:26mm"><col style="width:27mm"></colgroup>
       <thead><tr><th>${t.no}</th><th>${t.desc}</th><th class="c">${t.qty}</th><th class="c">${t.unit}</th><th class="num">${t.price}</th><th class="num">${t.amount}</th></tr></thead>
       <tbody>${rows}</tbody>
     </table>
@@ -521,7 +571,7 @@ function render() {
           <div class="role">${esc(s.signerRole)}, Seawise Studio</div>
           <div class="ver">${t.signed}<br>${t.code}: <code>${code}</code></div>
         </div>`;
-      const payBox = d.type !== "quotation" || hasBank ? `<div class="box"><h4>${t.pay}</h4>${bank}</div>` : "";
+      const payBox = d.showBank ? `<div class="box"><h4>${t.pay}</h4>${bank}</div>` : "";
       const termBox = terms.length ? `<div class="box"><h4>${t.terms}</h4><ol class="terms">${terms.map(x => `<li>${esc(x)}</li>`).join("")}</ol></div>` : "";
       // Quotation butuh dua tanda tangan, jadi keduanya disejajarkan di baris sendiri.
       if (d.type === "quotation") return `<div style="margin-top:6mm">${payBox}${termBox}</div>
@@ -531,8 +581,39 @@ function render() {
     <div class="grow"></div>
     <div class="d-foot"><span><b>Seawise Studio</b> &nbsp;${t.tagline}</span><span>${esc(s.web)} &nbsp;|&nbsp; ${esc(s.email)} &nbsp;|&nbsp; ${esc(s.phone)}</span></div>`;
 
+  const sheet = $("#sheet");
+  sheet.classList.remove("dense");
+  if (sheet.scrollHeight > 296 * 96 / 25.4 + 2) sheet.classList.add("dense");
+  renderAppendix(d, t, s);
   document.title = `${d.number.replace(/\//g, "-")} ${cl.company || cl.name || ""}`.trim();
   $("#bank-warn").innerHTML = hasBank ? "" : `<div class="warn">Rekening belum diisi. Proforma dan invoice akan menulis "detail rekening dikirim terpisah".</div>`;
+}
+
+/* ---------- lampiran ---------- */
+function inlineMd(x) { return esc(x).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>"); }
+function mdToHtml(src) {
+  let html = "", list = false;
+  const close = () => { if (list) { html += "</ul>"; list = false; } };
+  for (const raw of (src || "").split("\n")) {
+    const l = raw.trim();
+    if (!l) { close(); continue; }
+    if (l.startsWith("## ")) { close(); html += `<h3>${inlineMd(l.slice(3))}</h3>`; }
+    else if (l.startsWith("- ")) { if (!list) { html += "<ul>"; list = true; } html += `<li>${inlineMd(l.slice(2))}</li>`; }
+    else if (l.startsWith("> ")) { close(); html += `<div class="callout">${inlineMd(l.slice(2))}</div>`; }
+    else { close(); html += `<p>${inlineMd(l)}</p>`; }
+  }
+  close(); return html;
+}
+function renderAppendix(d, t, s) {
+  const el = $("#sheet2");
+  if (!(d.appendix || "").trim()) { el.hidden = true; el.innerHTML = ""; return; }
+  el.hidden = false;
+  el.innerHTML = `
+    <div class="mini-head"><div class="brand"><img src="logo.png" alt="Seawise Studio"><div class="name">Seawise Studio</div></div>
+      <div class="no">${t[d.type]} ${esc(d.number)}<br>${esc(d.client.name)}</div></div>
+    <div class="appx">${d.appendixTitle ? `<h1>${esc(d.appendixTitle)}</h1>` : ""}${mdToHtml(d.appendix)}</div>
+    <div class="grow"></div>
+    <div class="d-foot"><span><b>Seawise Studio</b> &nbsp;${t.tagline}</span><span>${esc(s.web)} &nbsp;|&nbsp; ${esc(s.email)} &nbsp;|&nbsp; ${esc(s.phone)}</span></div>`;
 }
 
 /* ---------- form ---------- */
@@ -550,6 +631,11 @@ function fillForm() {
   $("#opt-proforma").style.display = state.type === "proforma" ? "" : "none";
   $("#opt-invoice").style.display = state.type === "invoice" ? "" : "none";
   const conv = { quotation: [["proforma", "Jadikan Proforma"], ["invoice", "Jadikan Invoice"]], proforma: [["invoice", "Jadikan Invoice"]], invoice: [] }[state.type];
+  const srcTypes = { quotation: [], proforma: ["quotation"], invoice: ["quotation", "proforma"] }[state.type];
+  $("#from-wrap").style.display = srcTypes.length ? "" : "none";
+  const cands = allDocs().filter(x => srcTypes.includes(x.type) && x.id !== state.id);
+  $("#from").innerHTML = `<option value="">${cands.length ? "Pilih quotation" + (state.type === "invoice" ? " / proforma" : "") + "..." : "Belum ada dokumen sumber tersimpan"}</option>` +
+    cands.map(x => `<option value="${x.id}" ${x.id === state.sourceId ? "selected" : ""}>${esc(x.number)} | ${esc(x.client.company || x.client.name || "tanpa klien")} | ${rp(calc(x).total)}</option>`).join("");
   $("#convert").innerHTML = conv.map(([to, l]) => `<button class="ghost" onclick="convertTo('${to}')">${l}</button>`).join("");
   renderItems(); refreshSaved(); render();
 }
@@ -598,21 +684,41 @@ function changeType(type) {
   const wasDefault = state.terms === DEFAULT_TERMS[state.lang][state.type];
   const numberWasAuto = state.number.startsWith(PREFIX[state.type] + "/");
   state.type = type;
+  state.showBank = type !== "quotation";
   if (wasDefault) state.terms = DEFAULT_TERMS[state.lang][type];
   if (numberWasAuto) state.number = nextNumber(type, state.date);
   fillForm();
 }
 function resetTerms() { state.terms = DEFAULT_TERMS[state.lang][state.type]; fillForm(); }
 
+// Salin isi dokumen sumber ke dokumen yang sedang dibuka, nomor dan tanggalnya tetap.
+function applySource(d, src) {
+  const c = JSON.parse(JSON.stringify(src));
+  Object.assign(d, {
+    lang: c.lang, client: c.client, project: c.project, projectNote: c.projectNote, items: c.items,
+    discount: c.discount, discountType: c.discountType, taxLabel: c.taxLabel, taxPct: c.taxPct,
+    ref: src.number, sourceId: src.id,
+  });
+  if (d.type === "invoice") {
+    // Yang sudah ditagih lewat proforma dari sumber yang sama dikurangkan dari invoice.
+    const rootId = src.type === "proforma" ? src.sourceId : src.id;
+    const proformas = allDocs().filter(x => x.type === "proforma" && (x.id === src.id || (rootId && x.sourceId === rootId)));
+    d.paid = proformas.reduce((sum, x) => sum + calc(x).due, 0);
+  }
+  if (d.terms === DEFAULT_TERMS[d.lang === "en" ? "id" : "en"][d.type]) d.terms = DEFAULT_TERMS[d.lang][d.type];
+  return d;
+}
+function pullFrom(id) {
+  const src = allDocs().find(x => x.id === id);
+  if (!src) return;
+  applySource(state, src); fillForm(); toast(`Data dari ${src.number} disalin, belum disimpan`);
+}
 function convertTo(type) {
   saveDoc(true);
   const src = state;
-  const d = JSON.parse(JSON.stringify(src));
-  d.id = "d" + Date.now().toString(36); d.type = type; d.date = today();
-  d.number = nextNumber(type, d.date); d.until = addDays(d.date, 7);
-  d.ref = src.number; d.terms = DEFAULT_TERMS[d.lang][type]; d.lunas = false;
-  if (type === "invoice" && src.type === "proforma") d.paid = calc(src).due;
-  state = d; fillForm(); toast(`Dibuat dari ${src.number}, belum disimpan`);
+  const d = blankDoc(type, src.lang);
+  d.until = addDays(d.date, 7);
+  state = applySource(d, src); fillForm(); toast(`Dibuat dari ${src.number}, belum disimpan`);
 }
 
 /* ---------- simpan ---------- */
@@ -631,8 +737,12 @@ function deleteDoc() {
 function newDoc(type) { state = blankDoc(type || "quotation"); fillForm(); }
 function refreshSaved() {
   const docs = allDocs();
+  const opt = d => `<option value="${d.id}" ${d.id === state?.id ? "selected" : ""}>${esc(d.number)} | ${esc(d.client.company || d.client.name || "tanpa klien")}</option>`;
   $("#saved").innerHTML = `<option value="">${docs.length ? "Buka dokumen tersimpan..." : "Belum ada dokumen tersimpan"}</option>` +
-    docs.map(d => `<option value="${d.id}" ${d.id === state?.id ? "selected" : ""}>${esc(d.number)} | ${esc(d.client.company || d.client.name || "tanpa klien")}</option>`).join("");
+    ["quotation", "proforma", "invoice"].map(ty => {
+      const g = docs.filter(d => d.type === ty);
+      return g.length ? `<optgroup label="${T.id[ty]} (${g.length})">${g.map(opt).join("")}</optgroup>` : "";
+    }).join("");
 }
 function exportAll() {
   const blob = new Blob([JSON.stringify({ settings, docs: allDocs() }, null, 2)], { type: "application/json" });
@@ -670,8 +780,22 @@ function sampleDoc(type) {
   return d;
 }
 
+// data/dokumen-seed.js (kalau ada) mengisi window.SEED_DOCS. Tiap dokumen seed
+// dimasukkan sekali saja, jadi yang sudah dihapus di browser tidak muncul lagi.
+(function mergeSeed() {
+  const seed = window.SEED_DOCS || [];
+  if (!seed.length) return;
+  const done = new Set(readJSON("sw-docs-seeded-v1", []));
+  const docs = allDocs(), ids = new Set(docs.map(d => d.id));
+  const fresh = seed.filter(d => !done.has(d.id) && !ids.has(d.id));
+  if (!fresh.length) return;
+  writeJSON(LS_DOCS, fresh.concat(docs));
+  writeJSON("sw-docs-seeded-v1", [...done, ...fresh.map(d => d.id)]);
+})();
+
 const params = new URLSearchParams(location.search);
 if (params.get("contoh")) { settings = { ...DEFAULT_SETTINGS }; state = sampleDoc(params.get("contoh")); }
+else if (params.get("buka")) { const d = allDocs().find(x => x.id === params.get("buka")); state = d ? { ...blankDoc(d.type, d.lang), ...d } : blankDoc("quotation"); }
 else { const docs = allDocs(); state = docs.length ? { ...blankDoc(docs[0].type, docs[0].lang), ...docs[0] } : blankDoc("quotation"); }
 fillForm();
 </script>
