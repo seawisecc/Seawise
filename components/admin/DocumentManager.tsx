@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { createClient } from "@/lib/supabase/client";
 import { SkeletonBar } from "./AdminSkeleton";
-import { PlusIcon, DownloadIcon, CloseIcon, ArrowUpIcon, ArrowDownIcon, FileIcon, SettingsIcon } from "./AdminIcons";
+import { PlusIcon, DownloadIcon, FileIcon, SettingsIcon } from "./AdminIcons";
 import DocumentSheet from "./documents/DocumentSheet";
-import { CREDENTIALS, CRED_GROUPS, type CredGroup } from "./documents/credentials";
+import DocumentEditor from "./documents/DocumentEditor";
+import { Field, Input, inputCls } from "./documents/formUi";
 import {
   DEFAULT_STUDIO,
   DEFAULT_TERMS,
-  STATUSES,
   TYPE_LABEL,
   addDays,
   applySource,
@@ -18,7 +18,7 @@ import {
   calc,
   fromLegacy,
   nextNumber,
-  num,
+
   rowToDoc,
   rp,
   statusLabel,
@@ -41,9 +41,6 @@ const STATUS_TONE: Record<DocStatus, string> = {
   lunas: "bg-emerald-50 text-emerald-800",
   batal: "bg-red-50 text-red-800",
 };
-
-const field =
-  "w-full rounded-xl border border-warm-neutral bg-white px-3 py-2 text-sm text-forest-dark placeholder:text-forest-dark/35 focus:border-sea-foam focus:outline-none focus:ring-2 focus:ring-sea-foam/15";
 
 function shortDate(iso: string) {
   return new Date(iso + "T00:00:00").toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" });
@@ -82,7 +79,6 @@ export default function DocumentManager() {
   const [dirty, setDirty] = useState(false);
   const [busy, setBusy] = useState(false);
   const [formMsg, setFormMsg] = useState("");
-  const [mobileTab, setMobileTab] = useState<"form" | "preview">("form");
   const [studioOpen, setStudioOpen] = useState(false);
   const [notice, setNotice] = useState("");
   const noticeTimer = useRef<ReturnType<typeof setTimeout>>();
@@ -146,7 +142,6 @@ export default function DocumentManager() {
     setDraft(JSON.parse(JSON.stringify(d)));
     setDirty(false);
     setFormMsg("");
-    setMobileTab("form");
     syncUrl(d.id);
     window.scrollTo({ top: 0 });
   }
@@ -192,12 +187,6 @@ export default function DocumentManager() {
   }
   function setClient(k: keyof DocBody["client"], v: string) {
     update((d) => ({ ...d, body: { ...d.body, client: { ...d.body.client, [k]: v } } }));
-  }
-  function setItem(i: number, k: keyof DocBody["items"][number], v: string) {
-    update((d) => {
-      const items = d.body.items.map((it, j) => (j === i ? { ...it, [k]: k === "qty" || k === "price" ? num(v) : v } : it));
-      return { ...d, body: { ...d.body, items } };
-    });
   }
   function changeType(type: DocType) {
     update((d) => {
@@ -329,17 +318,14 @@ export default function DocumentManager() {
   return (
     <div>
       {draft ? (
-        <Editor
+        <DocumentEditor
           draft={draft}
           docs={docs}
-          byId={byId}
           studio={studio}
           studioSaved={studioSaved}
           dirty={dirty}
           busy={busy}
           formMsg={formMsg}
-          mobileTab={mobileTab}
-          setMobileTab={setMobileTab}
           onClose={close}
           onSave={save}
           onPrint={print}
@@ -356,7 +342,6 @@ export default function DocumentManager() {
           update={update}
           setBody={setBody}
           setClient={setClient}
-          setItem={setItem}
           changeType={changeType}
           changeLang={changeLang}
           openStudio={() => setStudioOpen(true)}
@@ -469,7 +454,7 @@ export default function DocumentManager() {
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Cari nomor, klien, proyek"
-                className={`${field} ml-auto max-w-xs rounded-full`}
+                className={`${inputCls} ml-auto max-w-xs`}
               />
             </div>
 
@@ -559,449 +544,15 @@ export const PRINT_CSS = `
 }
 `;
 
-/* ── Editor ───────────────────────────────────────────────────────────── */
-
-type EditorProps = {
-  draft: Doc;
-  docs: Doc[];
-  byId: Map<string | undefined, Doc>;
-  studio: Studio;
-  studioSaved: boolean;
-  dirty: boolean;
-  busy: boolean;
-  formMsg: string;
-  mobileTab: "form" | "preview";
-  setMobileTab: (t: "form" | "preview") => void;
-  onClose: () => void;
-  onSave: () => Promise<Doc | null>;
-  onPrint: () => void;
-  onRemove: () => void;
-  onDuplicate: () => void;
-  onStartFrom: (type: DocType) => void;
-  onPull: (id: string) => void;
-  update: (fn: (d: Doc) => Doc) => void;
-  setBody: <K extends keyof DocBody>(k: K, v: DocBody[K]) => void;
-  setClient: (k: keyof DocBody["client"], v: string) => void;
-  setItem: (i: number, k: keyof DocBody["items"][number], v: string) => void;
-  changeType: (t: DocType) => void;
-  changeLang: (l: Lang) => void;
-  openStudio: () => void;
-};
-
-function Section({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <section className="border-b border-warm-neutral/70 px-4 py-4 last:border-0 sm:px-5">
-      <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-sea-foam">{title}</h2>
-      {children}
-    </section>
-  );
-}
-function L({ label, children, className = "" }: { label: string; children: ReactNode; className?: string }) {
-  return (
-    <label className={`mt-2 block ${className}`}>
-      <span className="mb-1 block text-xs font-medium text-forest-dark/60">{label}</span>
-      {children}
-    </label>
-  );
-}
-
-function Editor(p: EditorProps) {
-  const { draft: d, setBody, setClient } = p;
-  const b = d.body;
-  const c = calc(d.type, b);
-  const srcTypes: DocType[] = d.type === "proforma" ? ["quotation"] : d.type === "invoice" ? ["quotation", "proforma"] : [];
-  const sources = p.docs.filter((x) => srcTypes.includes(x.type) && x.id !== d.id);
-  const children = p.docs.filter((x) => d.id && x.source_id === d.id);
-  const hasBank = !!(p.studio.bank && p.studio.account);
-
-  return (
-    <div>
-      {/* Bar atas */}
-      <div className="flex flex-wrap items-center gap-2">
-        <button
-          type="button"
-          onClick={p.onClose}
-          className="rounded-full border border-warm-neutral px-3.5 py-2 text-sm font-medium text-forest-dark hover:border-sea-foam"
-        >
-          Kembali
-        </button>
-        <div className="mr-auto min-w-0">
-          <p className="truncate font-display text-lg font-bold text-forest-dark sm:text-xl">
-            {TYPE_LABEL[d.type]} <span className="text-sea-foam">{d.number}</span>
-          </p>
-          <p className="text-xs text-forest-dark/50">{p.dirty ? "Belum disimpan" : d.id ? "Tersimpan" : ""}</p>
-        </div>
-        <select
-          value={d.status}
-          onChange={(e) => p.update((x) => ({ ...x, status: e.target.value as DocStatus }))}
-          className="rounded-full border border-warm-neutral bg-white px-3 py-2 text-sm font-medium text-forest-dark"
-          aria-label="Status"
-        >
-          {STATUSES[d.type].map((s) => (
-            <option key={s} value={s}>{statusLabel(d.type, s)}</option>
-          ))}
-        </select>
-        <button
-          type="button"
-          onClick={p.onPrint}
-          className="inline-flex items-center gap-1.5 rounded-full border border-warm-neutral px-4 py-2 text-sm font-medium text-forest-dark hover:border-sea-foam"
-        >
-          <DownloadIcon className="h-4 w-4" />
-          Cetak / PDF
-        </button>
-        <button
-          type="button"
-          disabled={p.busy || (!p.dirty && !!d.id)}
-          onClick={p.onSave}
-          className="rounded-full bg-forest-dark px-5 py-2 text-sm font-medium text-off-white hover:bg-sea-foam disabled:opacity-40"
-        >
-          {p.busy ? "Menyimpan..." : "Simpan"}
-        </button>
-      </div>
-      {p.formMsg && <p className="mt-3 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800">{p.formMsg}</p>}
-
-      {/* Aksi lanjutan */}
-      {d.id && (
-        <div className="mt-3 flex flex-wrap items-center gap-2 text-sm">
-          {d.type === "quotation" && (
-            <button type="button" onClick={() => p.onStartFrom("proforma")} className="rounded-full bg-sea-foam/10 px-3 py-1.5 font-medium text-sea-foam hover:bg-sea-foam/20">
-              Buat proforma dari ini
-            </button>
-          )}
-          {d.type !== "invoice" && (
-            <button type="button" onClick={() => p.onStartFrom("invoice")} className="rounded-full bg-sea-foam/10 px-3 py-1.5 font-medium text-sea-foam hover:bg-sea-foam/20">
-              Buat invoice dari ini
-            </button>
-          )}
-          <button type="button" onClick={p.onDuplicate} className="rounded-full px-3 py-1.5 font-medium text-forest-dark/70 hover:bg-warm-neutral/50">
-            Duplikat
-          </button>
-          <button type="button" onClick={p.onRemove} className="rounded-full px-3 py-1.5 font-medium text-red-700 hover:bg-red-50">
-            Hapus
-          </button>
-          {children.length > 0 && (
-            <span className="text-xs text-forest-dark/50">Turunan: {children.map((x) => x.number).join(", ")}</span>
-          )}
-        </div>
-      )}
-
-      {/* Tab mobile */}
-      <div className="mt-4 grid grid-cols-2 gap-1 rounded-2xl bg-warm-neutral/60 p-1 lg:hidden">
-        {(["form", "preview"] as const).map((t) => (
-          <button
-            key={t}
-            type="button"
-            aria-pressed={p.mobileTab === t}
-            onClick={() => p.setMobileTab(t)}
-            className={`rounded-xl py-2 text-sm font-medium ${p.mobileTab === t ? "bg-white text-forest-dark shadow-sm" : "text-forest-dark/55"}`}
-          >
-            {t === "form" ? "Isi dokumen" : "Pratinjau"}
-          </button>
-        ))}
-      </div>
-
-      <div className="mt-4 grid gap-5 lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)]">
-        {/* Form */}
-        <div className={`overflow-hidden rounded-2xl border border-warm-neutral bg-white ${p.mobileTab === "form" ? "" : "hidden lg:block"}`}>
-          <Section title="Dokumen">
-            <div className="grid grid-cols-2 gap-2">
-              <L label="Jenis">
-                <select value={d.type} disabled={!!d.id} onChange={(e) => p.changeType(e.target.value as DocType)} className={field}>
-                  {TYPES.map((t) => <option key={t} value={t}>{TYPE_LABEL[t]}</option>)}
-                </select>
-              </L>
-              <L label="Bahasa dokumen">
-                <select value={b.lang} onChange={(e) => p.changeLang(e.target.value as Lang)} className={field}>
-                  <option value="id">Indonesia</option>
-                  <option value="en">English</option>
-                </select>
-              </L>
-            </div>
-            <L label="Nomor">
-              <input value={d.number} onChange={(e) => p.update((x) => ({ ...x, number: e.target.value }))} className={field} />
-            </L>
-            <div className="grid grid-cols-2 gap-2">
-              <L label="Tanggal">
-                <input type="date" value={b.date} onChange={(e) => setBody("date", e.target.value)} className={field} />
-              </L>
-              <L label={d.type === "quotation" ? "Berlaku sampai" : "Jatuh tempo"}>
-                <input type="date" value={b.until} onChange={(e) => setBody("until", e.target.value)} className={field} />
-              </L>
-            </div>
-            <L label="Referensi (nomor quotation atau PO klien)">
-              <input value={b.ref} onChange={(e) => setBody("ref", e.target.value)} placeholder="Opsional" className={field} />
-            </L>
-            {srcTypes.length > 0 && (
-              <L label="Ambil data dari dokumen tersimpan">
-                <select value={d.source_id ?? ""} onChange={(e) => e.target.value && p.onPull(e.target.value)} className={field}>
-                  <option value="">{sources.length ? "Pilih dokumen sumber..." : "Belum ada quotation tersimpan"}</option>
-                  {sources.map((x) => (
-                    <option key={x.id} value={x.id}>
-                      {x.number} | {x.body.client.name || x.body.client.company || "tanpa klien"} | {rp(calc(x.type, x.body).total)}
-                    </option>
-                  ))}
-                </select>
-                <span className="mt-1 block text-xs text-forest-dark/50">
-                  Klien, proyek, rincian, dan harga disalin.
-                  {d.type === "invoice" && " Proforma dari quotation yang sama otomatis masuk ke Sudah dibayar."}
-                </span>
-              </L>
-            )}
-          </Section>
-
-          <Section title="Klien">
-            <L label="Nama"><input value={b.client.name} onChange={(e) => setClient("name", e.target.value)} className={field} /></L>
-            <L label="Perusahaan / usaha"><input value={b.client.company} onChange={(e) => setClient("company", e.target.value)} placeholder="Opsional" className={field} /></L>
-            <L label="Alamat"><textarea rows={2} value={b.client.address} onChange={(e) => setClient("address", e.target.value)} className={field} /></L>
-            <div className="grid grid-cols-2 gap-2">
-              <L label="Telepon / WA"><input value={b.client.phone} onChange={(e) => setClient("phone", e.target.value)} className={field} /></L>
-              <L label="Email"><input value={b.client.email} onChange={(e) => setClient("email", e.target.value)} className={field} /></L>
-            </div>
-          </Section>
-
-          <Section title="Proyek">
-            <L label="Nama proyek"><input value={b.project} onChange={(e) => setBody("project", e.target.value)} className={field} /></L>
-            <L label="Keterangan singkat"><textarea rows={2} value={b.projectNote} onChange={(e) => setBody("projectNote", e.target.value)} className={field} /></L>
-          </Section>
-
-          <Section title="Rincian pekerjaan">
-            {b.items.map((it, i) => (
-              <div key={i} className="mb-2 rounded-xl border border-warm-neutral bg-off-white p-3">
-                <div className="flex items-center justify-between text-xs font-semibold text-forest-dark/70">
-                  Baris {i + 1}
-                  <span className="flex gap-1">
-                    <IconBtn label="Naik" disabled={!i} onClick={() => p.update((x) => ({ ...x, body: { ...x.body, items: move(x.body.items, i, -1) } }))}>
-                      <ArrowUpIcon className="h-3.5 w-3.5" />
-                    </IconBtn>
-                    <IconBtn label="Turun" disabled={i === b.items.length - 1} onClick={() => p.update((x) => ({ ...x, body: { ...x.body, items: move(x.body.items, i, 1) } }))}>
-                      <ArrowDownIcon className="h-3.5 w-3.5" />
-                    </IconBtn>
-                    <IconBtn
-                      label="Hapus baris"
-                      disabled={b.items.length === 1}
-                      onClick={() => p.update((x) => ({ ...x, body: { ...x.body, items: x.body.items.filter((_, j) => j !== i) } }))}
-                    >
-                      <CloseIcon className="h-3.5 w-3.5" />
-                    </IconBtn>
-                  </span>
-                </div>
-                <L label="Nama pekerjaan"><input value={it.title} onChange={(e) => p.setItem(i, "title", e.target.value)} className={field} /></L>
-                <L label="Rincian"><textarea rows={2} value={it.detail} onChange={(e) => p.setItem(i, "detail", e.target.value)} className={field} /></L>
-                <div className="grid grid-cols-[1fr_1.2fr_2fr] gap-2">
-                  <L label="Qty"><input type="number" min={0} step="any" value={it.qty} onChange={(e) => p.setItem(i, "qty", e.target.value)} className={field} /></L>
-                  <L label="Satuan"><input value={it.unit} onChange={(e) => p.setItem(i, "unit", e.target.value)} className={field} /></L>
-                  <L label="Harga (Rp)"><input type="number" min={0} value={it.price} onChange={(e) => p.setItem(i, "price", e.target.value)} className={field} /></L>
-                </div>
-              </div>
-            ))}
-            <button
-              type="button"
-              onClick={() =>
-                p.update((x) => ({
-                  ...x,
-                  body: { ...x.body, items: [...x.body.items, { title: "", detail: "", qty: 1, unit: b.lang === "en" ? "package" : "paket", price: 0 }] },
-                }))
-              }
-              className="inline-flex items-center gap-1.5 rounded-full border border-warm-neutral px-3.5 py-1.5 text-sm font-medium text-forest-dark hover:border-sea-foam"
-            >
-              <PlusIcon className="h-4 w-4" /> Tambah baris
-            </button>
-          </Section>
-
-          <Section title="Harga">
-            <div className="grid grid-cols-2 gap-2">
-              <L label="Diskon"><input type="number" min={0} value={b.discount} onChange={(e) => setBody("discount", num(e.target.value))} className={field} /></L>
-              <L label="Satuan diskon">
-                <select value={b.discountType} onChange={(e) => setBody("discountType", e.target.value as DocBody["discountType"])} className={field}>
-                  <option value="pct">Persen (%)</option>
-                  <option value="amt">Rupiah</option>
-                </select>
-              </L>
-              <L label="Nama pajak"><input value={b.taxLabel} onChange={(e) => setBody("taxLabel", e.target.value)} className={field} /></L>
-              <L label="Pajak (%)"><input type="number" min={0} step="0.01" value={b.taxPct} onChange={(e) => setBody("taxPct", num(e.target.value))} className={field} /></L>
-            </div>
-            <p className="mt-1 text-xs text-forest-dark/50">Isi pajak hanya kalau Seawise sudah PKP. Nilai 0 menyembunyikan barisnya.</p>
-            {d.type === "proforma" && (
-              <div className="grid grid-cols-2 gap-2">
-                <L label="Termin ditagih (%)"><input type="number" min={1} max={100} value={b.termPct} onChange={(e) => setBody("termPct", num(e.target.value))} className={field} /></L>
-                <L label="Nama termin"><input value={b.termLabel} onChange={(e) => setBody("termLabel", e.target.value)} className={field} /></L>
-              </div>
-            )}
-            {d.type === "invoice" && (
-              <L label="Sudah dibayar sebelumnya (Rp)">
-                <input type="number" min={0} value={b.paid} onChange={(e) => setBody("paid", num(e.target.value))} className={field} />
-              </L>
-            )}
-            <div className="mt-3 flex items-center justify-between rounded-xl bg-forest-dark px-3.5 py-2.5 text-off-white">
-              <span className="text-sm">{d.type === "quotation" ? "Total penawaran" : d.type === "proforma" ? "Jumlah ditagih" : "Sisa tagihan"}</span>
-              <span className="font-display font-bold tabular-nums">{rp(d.type === "quotation" ? c.total : c.due)}</span>
-            </div>
-            {d.type === "invoice" && <p className="mt-1 text-xs text-forest-dark/50">Status Lunas memasang cap LUNAS di invoice.</p>}
-          </Section>
-
-          <Section title="Catatan & syarat">
-            <L label="Catatan untuk klien"><textarea rows={2} value={b.notes} onChange={(e) => setBody("notes", e.target.value)} placeholder="Opsional" className={field} /></L>
-            <label className="mt-3 flex items-center gap-2 text-sm text-forest-dark">
-              <input type="checkbox" checked={b.showBank} onChange={(e) => setBody("showBank", e.target.checked)} />
-              Tampilkan rekening di dokumen ini
-            </label>
-            {b.showBank && !hasBank && (
-              <p className="mt-1 text-xs text-amber-800">
-                Rekening belum diisi, dokumen menulis &quot;detail rekening dikirim terpisah&quot;.{" "}
-                <button type="button" onClick={p.openStudio} className="font-semibold underline">Isi di Data studio</button>
-              </p>
-            )}
-            <L label="Syarat & ketentuan (satu per baris)"><textarea rows={6} value={b.terms} onChange={(e) => setBody("terms", e.target.value)} className={field} /></L>
-            <button type="button" onClick={() => setBody("terms", DEFAULT_TERMS[b.lang][d.type])} className="mt-2 text-xs font-medium text-sea-foam hover:underline">
-              Pakai syarat bawaan
-            </button>
-          </Section>
-
-          <Section title="Kredensial">
-            <p className="text-xs text-forest-dark/55">
-              Sertifikat yang dicetak di halaman 2 sebagai &quot;Kualifikasi penanggung jawab&quot;. Pilih yang relevan dengan penawaran.
-            </p>
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {CRED_GROUPS.map((g) => (
-                <button
-                  key={g.key}
-                  type="button"
-                  onClick={() => setBody("credentials", toggleGroup(b.credentials, g.key))}
-                  className="rounded-full border border-warm-neutral px-2.5 py-1 text-xs font-medium text-forest-dark hover:border-sea-foam"
-                >
-                  {g.label}
-                </button>
-              ))}
-              {b.credentials.length > 0 && (
-                <button type="button" onClick={() => setBody("credentials", [])} className="rounded-full px-2.5 py-1 text-xs font-medium text-red-700 hover:bg-red-50">
-                  Kosongkan
-                </button>
-              )}
-            </div>
-            {CRED_GROUPS.map((g) => (
-              <div key={g.key} className="mt-3">
-                <p className="text-[11px] font-semibold uppercase tracking-wider text-forest-dark/45">{g.label}</p>
-                {CREDENTIALS.filter((x) => x.group === g.key).map((x) => (
-                  <label key={x.id} className="mt-1.5 flex items-start gap-2 text-sm text-forest-dark">
-                    <input
-                      type="checkbox"
-                      className="mt-1"
-                      checked={b.credentials.includes(x.id)}
-                      onChange={(e) =>
-                        setBody(
-                          "credentials",
-                          e.target.checked ? [...b.credentials, x.id] : b.credentials.filter((id) => id !== x.id)
-                        )
-                      }
-                    />
-                    <span>
-                      {x.title.id}
-                      <span className="block text-xs text-forest-dark/50">{[x.issuer, x.date.id].filter(Boolean).join(", ")}</span>
-                    </span>
-                  </label>
-                ))}
-              </div>
-            ))}
-          </Section>
-
-          <Section title="Lampiran (halaman tambahan)">
-            <L label="Judul lampiran"><input value={b.appendixTitle} onChange={(e) => setBody("appendixTitle", e.target.value)} placeholder="Kosongkan kalau tidak perlu" className={field} /></L>
-            <L label="Isi"><textarea rows={8} value={b.appendix} onChange={(e) => setBody("appendix", e.target.value)} className={`${field} font-mono text-xs`} /></L>
-            <p className="mt-1 text-xs text-forest-dark/50">
-              <code>## </code> subjudul, <code>- </code> poin, <code>&gt; </code> kotak sorotan, <code>**teks**</code> tebal. Kosong berarti tanpa lampiran.
-            </p>
-          </Section>
-
-          {!p.studioSaved && (
-            <div className="border-t border-warm-neutral bg-amber-50 px-5 py-3 text-xs text-amber-900">
-              Data studio masih bawaan.{" "}
-              <button type="button" onClick={p.openStudio} className="font-semibold underline">Periksa dan simpan</button>
-            </div>
-          )}
-        </div>
-
-        {/* Pratinjau */}
-        <div className={p.mobileTab === "preview" ? "" : "hidden lg:block"}>
-          <div className="lg:sticky lg:top-6">
-            <Preview doc={d} studio={p.studio} />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/** Kalau semua di grup sudah terpilih, grup itu dilepas. Kalau belum, grup ditambahkan. Urutan ikut daftar CREDENTIALS. */
-function toggleGroup(selected: string[], group: CredGroup): string[] {
-  const ids = CREDENTIALS.filter((x) => x.group === group).map((x) => x.id);
-  const all = ids.every((id) => selected.includes(id));
-  const next = all ? selected.filter((id) => !ids.includes(id)) : Array.from(new Set([...selected, ...ids]));
-  return CREDENTIALS.map((x) => x.id).filter((id) => next.includes(id));
-}
-
-function move<T>(arr: T[], i: number, dir: number): T[] {
-  const out = arr.slice();
-  const [x] = out.splice(i, 1);
-  out.splice(i + dir, 0, x);
-  return out;
-}
-
-function IconBtn({ label, disabled, onClick, children }: { label: string; disabled?: boolean; onClick: () => void; children: ReactNode }) {
-  return (
-    <button
-      type="button"
-      aria-label={label}
-      title={label}
-      disabled={disabled}
-      onClick={onClick}
-      className="flex h-7 w-7 items-center justify-center rounded-lg border border-warm-neutral bg-white text-forest-dark/70 hover:border-sea-foam disabled:opacity-30"
-    >
-      {children}
-    </button>
-  );
-}
-
-/** Dokumen A4 diperkecil agar muat di kolomnya. Tingginya dihitung ulang karena transform tidak memengaruhi layout. */
-function Preview({ doc, studio }: { doc: Doc; studio: Studio }) {
-  const outer = useRef<HTMLDivElement>(null);
-  const inner = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(1);
-  const [height, setHeight] = useState(0);
-
-  useLayoutEffect(() => {
-    const o = outer.current;
-    const i = inner.current;
-    if (!o || !i) return;
-    const measure = () => {
-      const s = Math.min(1, o.clientWidth / i.offsetWidth);
-      setScale(s);
-      setHeight(i.offsetHeight * s);
-    };
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(o);
-    ro.observe(i);
-    return () => ro.disconnect();
-  }, []);
-
-  return (
-    <div ref={outer} className="overflow-hidden rounded-2xl bg-warm-neutral/50" style={{ height: height || undefined }}>
-      <div ref={inner} style={{ width: "210mm", transform: `scale(${scale})`, transformOrigin: "top left" }} className="[&_.swd-sheet]:shadow-[0_4px_20px_rgba(10,23,18,.08)]">
-        <DocumentSheet doc={doc} studio={studio} />
-      </div>
-    </div>
-  );
-}
-
 /* ── Data studio ──────────────────────────────────────────────────────── */
 
 function StudioModal({ initial, onClose, onSave }: { initial: Studio; onClose: () => void; onSave: (s: Studio) => void }) {
   const [s, setS] = useState<Studio>(initial);
   const [busy, setBusy] = useState(false);
   const f = (k: keyof Studio, label: string, placeholder?: string) => (
-    <L label={label}>
-      <input value={s[k]} placeholder={placeholder} onChange={(e) => setS((p) => ({ ...p, [k]: e.target.value }))} className={field} />
-    </L>
+    <Field label={label}>
+      <Input value={s[k]} placeholder={placeholder} onChange={(e) => setS((p) => ({ ...p, [k]: e.target.value }))} />
+    </Field>
   );
   return (
     <div
@@ -1022,20 +573,22 @@ function StudioModal({ initial, onClose, onSave }: { initial: Studio; onClose: (
       >
         <h2 className="font-display text-xl font-bold text-forest-dark">Data studio</h2>
         <p className="mt-1 text-sm text-forest-dark/60">Dicetak di semua dokumen. Hanya bisa dibaca admin.</p>
+        <div className="mt-5 space-y-3">
         {f("signer", "Nama penandatangan")}
         {f("signerRole", "Jabatan")}
         {f("address", "Alamat")}
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-3">
           {f("phone", "Telepon")}
           {f("email", "Email")}
         </div>
         {f("web", "Website")}
         {f("npwp", "NPWP", "Opsional")}
-        <h3 className="mt-5 text-xs font-semibold uppercase tracking-wider text-sea-foam">Rekening</h3>
+        <h3 className="pt-3 text-xs font-semibold uppercase tracking-wider text-sea-foam">Rekening</h3>
         {f("bank", "Bank", "mis. BCA")}
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-3">
           {f("account", "Nomor rekening")}
           {f("holder", "Atas nama")}
+        </div>
         </div>
         <div className="mt-6 flex justify-end gap-2">
           <button type="button" onClick={onClose} className="rounded-full px-4 py-2 text-sm font-medium text-forest-dark/70 hover:bg-warm-neutral/50">
